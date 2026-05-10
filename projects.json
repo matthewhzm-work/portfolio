@@ -1,0 +1,590 @@
+[
+  {
+    "id": "lux-inhername",
+    "title": "LUX: #InHerName",
+    "brand": "LUX",
+    "agency": "VML",
+    "tags": [
+      "Integrated Campaign",
+      "Social"
+    ],
+    "award": "Cannes Shortlist",
+    "awardType": "shortlist",
+    "featured": true,
+    "hero": {
+      "type": "vimeo",
+      "vimeoId": "76979871",
+      "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80"
+    },
+    "intro": {
+      "headline": "Reclaiming a name that was never hers to lose.",
+      "year": "2024",
+      "role": "Senior Copywriter",
+      "body": [
+        "In many parts of Asia, a woman's name disappears the moment she marries. She becomes \"Wife of\", \"Mother of\", \"Daughter-in-law of\" — her own identity quietly erased by tradition.",
+        "For International Women's Day 2024, LUX asked a simple but radical question: what if we gave those names back?",
+        "#InHerName was an integrated campaign that invited women across the region to reclaim their names publicly — through social, film, and community activations that sparked a genuine cultural conversation."
+      ]
+    },
+    "assetsLayout": "right-column",
+    "sections": [
+      {
+        "heading": "The Insight",
+        "body": "Across Southeast Asia, millions of women stop being called by their given names after marriage. It's social erosion — slow, unremarkable, almost universally accepted. That invisibility became our brief."
+      },
+      {
+        "heading": "The Idea",
+        "body": "Rather than tell women their names matter, we created a platform for them to prove it. #InHerName invited real women to share the stories behind their names — and challenged their communities to use them, out loud and in full."
+      },
+      {
+        "heading": "The Work",
+        "body": "A hero film anchored the campaign, following three women across three countries. Social content, influencer partnerships, and in-market activations extended the conversation across the region."
+      }
+    ],
+    "assets": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=1200&q=80",
+        "caption": "Campaign key visual"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=1200&q=80",
+        "caption": "Hero film still"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80",
+        "caption": "Social executions"
+      }
+    ],
+    "awards": [
+      "Cannes Lions Shortlist 2024 — Social & Influencer",
+      "Cannes Lions Shortlist 2024 — Culture & Context",
+      "Gold — Epica Awards 2024",
+      "Bronze — London International Awards 2024",
+      "Merit — The One Show 2025",
+      "Bronze — Spikes Asia 2025"
+    ]
+  },
+  {
+    "id": "hsbc-mind-athletes",
+    "title": "HSBC Mind Athletes",
+    "brand": "HSBC",
+    "agency": "VML",
+    "tags": [
+      "Experiential",
+      "Event",
+      "Gaming"
+    ],
+    "award": "Gold ×5 MEA 2025",
+    "awardType": "gold",
+    "featured": true,
+    "hero": {
+      "type": "vimeo",
+      "vimeoId": "148751763",
+      "image": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=1200&q=80"
+    },
+    "intro": {
+      "headline": "What if your finances were something you trained for?",
+      "year": "2024",
+      "role": "Senior Copywriter",
+      "body": [
+        "Most financial campaigns talk at people. HSBC wanted to talk with them — and specifically with Singapore's most analytically gifted minds.",
+        "Mind Athletes was an experiential campaign built around competitive chess, positioning HSBC Premier as a partner for people who think several moves ahead."
+      ]
+    },
+    "assetsLayout": "below",
+    "sections": [
+      {
+        "heading": "The Challenge",
+        "body": "HSBC Premier needed to resonate with high-net-worth individuals immune to generic financial messaging. We needed a platform that felt earned, not advertised."
+      },
+      {
+        "heading": "The Idea",
+        "body": "Chess players are elite strategists — deeply underserved by brands. We partnered with Singapore's chess community to create Mind Athletes: events, content, and conversations that put strategy at the centre of financial thinking."
+      }
+    ],
+    "assets": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=1200&q=80",
+        "caption": "Event photography"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=80",
+        "caption": "Campaign visuals"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80",
+        "caption": "Social content series"
+      }
+    ],
+    "awards": [
+      "Gold ×5 — Marketing Excellence Awards 2025",
+      "Gold ×3 — Marketing Excellence Awards 2024",
+      "Silver — CSR Marketing Excellence Awards 2025",
+      "Gold — MOB-EX Awards 2024"
+    ]
+  },
+  {
+    "id": "bybit-vday",
+    "title": "Bybit: Valentine's Day",
+    "brand": "Bybit",
+    "agency": "Bybit",
+    "tags": [
+      "Campaign",
+      "Social"
+    ],
+    "award": "",
+    "awardType": "",
+    "featured": false,
+    "hero": {
+      "type": "vimeo",
+      "vimeoId": "172855526",
+      "image": "https://images.unsplash.com/photo-1639762681057-408e52192e55?w=1200&q=80"
+    },
+    "intro": {
+      "headline": "Love is a long position.",
+      "year": "2022",
+      "role": "Senior Copywriter",
+      "body": [
+        "Crypto brands don't do Valentine's Day. That was exactly the point.",
+        "We leaned into the language of trading to talk about love — because for our audience, the two aren't as different as you'd think."
+      ]
+    },
+    "assetsLayout": "right-column",
+    "sections": [
+      {
+        "heading": "The Approach",
+        "body": "We wrote a campaign that treated love like a market — volatile, exhilarating, and worth the risk. Warm but sharp, blending crypto vernacular with genuine romantic sentiment."
+      }
+    ],
+    "assets": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1639762681057-408e52192e55?w=1200&q=80",
+        "caption": "Key visual"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=1200&q=80",
+        "caption": "Social executions"
+      }
+    ],
+    "awards": []
+  },
+  {
+    "id": "mercedes-benz-mmc",
+    "title": "Mercedes-Benz: MMC",
+    "brand": "Mercedes-Benz",
+    "agency": "Digitas",
+    "tags": [
+      "Integrated",
+      "Digital"
+    ],
+    "award": "",
+    "awardType": "",
+    "featured": false,
+    "hero": {
+      "type": "vimeo",
+      "vimeoId": "239830580",
+      "image": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1200&q=80"
+    },
+    "intro": {
+      "headline": "Precision, expressed.",
+      "year": "2021",
+      "role": "Senior Copywriter",
+      "body": [
+        "An integrated campaign for one of the world's most iconic automotive brands, built around the language of performance."
+      ]
+    },
+    "assetsLayout": "right-column",
+    "sections": [
+      {
+        "heading": "The Work",
+        "body": "Add your section copy here."
+      }
+    ],
+    "assets": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1200&q=80",
+        "caption": "Campaign visual"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80",
+        "caption": "Digital execution"
+      }
+    ],
+    "awards": []
+  },
+  {
+    "id": "noah",
+    "title": "Noah",
+    "brand": "Personal",
+    "agency": "",
+    "tags": [
+      "Creative",
+      "Personal"
+    ],
+    "award": "",
+    "awardType": "",
+    "featured": false,
+    "hero": {
+      "type": "vimeo",
+      "vimeoId": "169599296",
+      "image": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80"
+    },
+    "intro": {
+      "headline": "A personal project.",
+      "year": "2023",
+      "role": "Writer",
+      "body": [
+        "Add your project description here."
+      ]
+    },
+    "assetsLayout": "below",
+    "sections": [
+      {
+        "heading": "About",
+        "body": "Add your section copy here."
+      }
+    ],
+    "assets": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80",
+        "caption": "Project visual"
+      }
+    ],
+    "awards": []
+  },
+  {
+    "id": "hsbc-choose-what-you-love",
+    "title": "HSBC: Choose What You Love",
+    "brand": "HSBC",
+    "agency": "Digitas",
+    "tags": [
+      "Interactive",
+      "Digital"
+    ],
+    "award": "",
+    "awardType": "",
+    "featured": false,
+    "hero": {
+      "type": "vimeo",
+      "vimeoId": "148751763",
+      "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80"
+    },
+    "intro": {
+      "headline": "Banking that starts with what matters to you.",
+      "year": "2020",
+      "role": "Senior Copywriter",
+      "body": [
+        "Add your project description here."
+      ]
+    },
+    "assetsLayout": "right-column",
+    "sections": [
+      {
+        "heading": "The Work",
+        "body": "Add your section copy here."
+      }
+    ],
+    "assets": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80",
+        "caption": "Key visual"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80",
+        "caption": "Digital execution"
+      }
+    ],
+    "awards": []
+  },
+  {
+    "id": "hsbc-live-consciously",
+    "title": "HSBC: Live Consciously",
+    "brand": "HSBC",
+    "agency": "Digitas",
+    "tags": [
+      "Campaign",
+      "Content"
+    ],
+    "award": "",
+    "awardType": "",
+    "featured": false,
+    "hero": {
+      "type": "vimeo",
+      "vimeoId": "172855526",
+      "image": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&q=80"
+    },
+    "intro": {
+      "headline": "Small choices. Big picture.",
+      "year": "2020",
+      "role": "Senior Copywriter",
+      "body": [
+        "Add your project description here."
+      ]
+    },
+    "assetsLayout": "below",
+    "sections": [
+      {
+        "heading": "The Work",
+        "body": "Add your section copy here."
+      }
+    ],
+    "assets": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&q=80",
+        "caption": "Campaign visual"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80",
+        "caption": "Key visual"
+      }
+    ],
+    "awards": []
+  },
+  {
+    "id": "print-ads",
+    "title": "Print Ads",
+    "brand": "Various",
+    "agency": "DDB Group",
+    "tags": [
+      "Print",
+      "Craft"
+    ],
+    "award": "",
+    "awardType": "",
+    "featured": false,
+    "hero": {
+      "type": "image",
+      "vimeoId": "",
+      "image": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1200&q=80"
+    },
+    "intro": {
+      "headline": "The discipline of the single page.",
+      "year": "2018–2019",
+      "role": "Copywriter",
+      "body": [
+        "Add your project description here."
+      ]
+    },
+    "assetsLayout": "below",
+    "sections": [
+      {
+        "heading": "The Work",
+        "body": "Add your section copy here."
+      }
+    ],
+    "assets": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1200&q=80",
+        "caption": "Print execution"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80",
+        "caption": "Campaign visual"
+      }
+    ],
+    "awards": []
+  },
+  {
+    "id": "mercedesbenz-eqc",
+    "title": "Mercedes-Benz: EQC",
+    "brand": "Mercedes-Benz",
+    "agency": "Digitas",
+    "tags": [
+      "Launch",
+      "Digital"
+    ],
+    "award": "",
+    "awardType": "",
+    "featured": false,
+    "hero": {
+      "type": "vimeo",
+      "vimeoId": "239830580",
+      "image": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1200&q=80"
+    },
+    "intro": {
+      "headline": "The future, in motion.",
+      "year": "2020",
+      "role": "Senior Copywriter",
+      "body": [
+        "Add your project description here."
+      ]
+    },
+    "assetsLayout": "right-column",
+    "sections": [
+      {
+        "heading": "The Work",
+        "body": "Add your section copy here."
+      }
+    ],
+    "assets": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1200&q=80",
+        "caption": "Launch visual"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80",
+        "caption": "Digital campaign"
+      }
+    ],
+    "awards": []
+  },
+  {
+    "id": "hsbc-tapandgo",
+    "title": "HSBC: Tap and Go",
+    "brand": "HSBC",
+    "agency": "DDB Group",
+    "tags": [
+      "Campaign",
+      "Mobile"
+    ],
+    "award": "Silver Effies",
+    "awardType": "silver",
+    "featured": false,
+    "hero": {
+      "type": "vimeo",
+      "vimeoId": "148751763",
+      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&q=80"
+    },
+    "intro": {
+      "headline": "Pay with your phone. Live with less friction.",
+      "year": "2018",
+      "role": "Copywriter",
+      "body": [
+        "Add your project description here."
+      ]
+    },
+    "assetsLayout": "right-column",
+    "sections": [
+      {
+        "heading": "The Work",
+        "body": "Add your section copy here."
+      }
+    ],
+    "assets": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&q=80",
+        "caption": "Key visual"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=80",
+        "caption": "Campaign execution"
+      }
+    ],
+    "awards": [
+      "Silver — Effies Awards 2018"
+    ]
+  },
+  {
+    "id": "nea-dengue",
+    "title": "NEA: Dengue",
+    "brand": "National Environment Agency",
+    "agency": "DDB Group",
+    "tags": [
+      "Public Health",
+      "Campaign"
+    ],
+    "award": "",
+    "awardType": "",
+    "featured": false,
+    "hero": {
+      "type": "vimeo",
+      "vimeoId": "172855526",
+      "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80"
+    },
+    "intro": {
+      "headline": "Making people care about a mosquito.",
+      "year": "2018",
+      "role": "Copywriter",
+      "body": [
+        "Add your project description here."
+      ]
+    },
+    "assetsLayout": "below",
+    "sections": [
+      {
+        "heading": "The Work",
+        "body": "Add your section copy here."
+      }
+    ],
+    "assets": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80",
+        "caption": "Campaign visual"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80",
+        "caption": "Key visual"
+      }
+    ],
+    "awards": []
+  },
+  {
+    "id": "vivo-v15",
+    "title": "vivo: Strength That Holds Up",
+    "brand": "vivo",
+    "agency": "DDB Group",
+    "tags": [
+      "Launch",
+      "Digital"
+    ],
+    "award": "",
+    "awardType": "",
+    "featured": false,
+    "hero": {
+      "type": "vimeo",
+      "vimeoId": "239830580",
+      "image": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=1200&q=80"
+    },
+    "intro": {
+      "headline": "Built tough. Shot beautiful.",
+      "year": "2019",
+      "role": "Copywriter",
+      "body": [
+        "Add your project description here."
+      ]
+    },
+    "assetsLayout": "right-column",
+    "sections": [
+      {
+        "heading": "The Work",
+        "body": "Add your section copy here."
+      }
+    ],
+    "assets": [
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=1200&q=80",
+        "caption": "Launch visual"
+      },
+      {
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&q=80",
+        "caption": "Product shot"
+      }
+    ],
+    "awards": []
+  }
+]

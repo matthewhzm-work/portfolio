@@ -1,0 +1,23 @@
+[
+  {
+    "type": "image",
+    "src": "training/your-image-01.jpg",
+    "caption": "Optional caption here"
+  },
+  {
+    "type": "gif",
+    "src": "training/your-animation-01.gif",
+    "caption": ""
+  },
+  {
+    "type": "video",
+    "src": "training/your-video-01.mp4",
+    "aspect": "16/9",
+    "caption": ""
+  },
+  {
+    "type": "image",
+    "src": "training/your-image-02.jpg",
+    "caption": ""
+  }
+]

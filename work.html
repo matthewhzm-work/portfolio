@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selected Works — Matthew Ho</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #f5f0e8; --bg-alt: #ede8df; --bg-card: #e9e3d9;
+      --ink:      #1c1a17; --ink-mid: #5a554e;
+      --ink-light:rgba(28,26,23,0.35); --border: rgba(28,26,23,0.11);
+      --orange:   #c94a12;
+      --display:  'Playfair Display', Georgia, serif;
+      --sans-ui:  'Syne', system-ui, sans-serif;
+      --body:     "DM Sans", system-ui, sans-serif;
+      --mono:     "DM Mono", monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--ink); font-family:var(--body); font-weight:300; min-height:100vh; overflow-x:hidden; }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:0.025; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+    nav { position:fixed; top:0; left:0; right:0; z-index:600; display:flex; align-items:center; justify-content:space-between; padding:1.5rem 3rem; background:rgba(245,240,232,0.95); backdrop-filter:blur(8px); border-bottom:1px solid var(--border); }
+    .nav-logo { font-family:var(--sans-ui); font-size:0.8rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink); text-decoration:none; }
+    .nav-links { display:flex; align-items:center; gap:2.5rem; list-style:none; }
+    .nav-links a { font-family:var(--sans-ui); font-size:0.7rem; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-mid); text-decoration:none; transition:color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color:var(--orange); }
+    .nav-links .li-icon svg { width:15px; height:15px; fill:var(--ink-mid); transition:fill 0.2s; display:block; }
+    .nav-links .li-icon:hover svg { fill:var(--orange); }
+
+    .page-header { position:relative; z-index:1; padding:7rem 3rem 2.5rem; border-bottom:1px solid var(--border); opacity:0; animation:fadeUp 0.7s 0.1s ease forwards; }
+    .page-title { font-family:var(--display); font-size:clamp(3.5rem, 6vw, 6rem); font-weight:700; letter-spacing:-0.02em; line-height:1.0; color:var(--ink); }
+    .page-title em { font-style:italic; color:var(--orange); }
+
+    .work-layout { position:relative; z-index:1; display:grid; grid-template-columns:1fr 180px; gap:0; align-items:start; }
+
+    .grid-area { padding:2.5rem 2.5rem 6rem 3rem; border-right:1px solid var(--border); }
+
+    #proj-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+
+    .proj-card { display:block; text-decoration:none; color:inherit; position:relative; overflow:hidden; background:var(--bg-card); border-radius:12px; aspect-ratio:4/3; opacity:0; animation:fadeUp 0.5s ease forwards; }
+    .proj-card.featured { grid-column:1/-1; aspect-ratio:16/7; }
+
+    .card-img { position:absolute; inset:0; border-radius:12px; overflow:hidden; }
+    .card-img img { width:100%; height:100%; object-fit:cover; filter:brightness(0.65) saturate(0.85); transition:filter 0.3s; }
+    .proj-card:hover .card-img img { filter:brightness(0.45) saturate(0.7); }
+    .card-img::after { content:""; position:absolute; inset:0; background:rgba(201,74,18,0.5); border-radius:12px; opacity:0; transition:opacity 0.3s; }
+    .proj-card:hover .card-img::after { opacity:1; }
+
+    .card-img.no-img { background:var(--bg-card); }
+    .card-img.no-img::before { content:attr(data-brand); position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--display); font-size:4rem; font-weight:700; color:rgba(28,26,23,0.07); }
+
+    .card-info { position:absolute; bottom:0; left:0; right:0; padding:2rem 1.75rem 1.6rem; background:linear-gradient(to top,rgba(20,17,13,0.95) 0%,rgba(20,17,13,0.6) 55%,transparent 100%); border-radius:0 0 12px 12px; }
+    .card-meta { display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.4rem; }
+    .card-brand { font-family:var(--mono); font-size:0.58rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--orange); }
+    .card-year  { font-family:var(--mono); font-size:0.55rem; letter-spacing:0.1em; color:rgba(245,240,232,0.45); }
+    .card-award { font-family:var(--mono); font-size:0.52rem; letter-spacing:0.08em; text-transform:uppercase; padding:2px 7px; border-radius:2px; }
+    .card-award.gold    { background:#c9a84c; color:#1c1a17; }
+    .card-award.silver  { background:#8a96a6; color:#1c1a17; }
+    .card-award.bronze  { background:#9a7048; color:#1c1a17; }
+    .card-award.shortlist,.card-award.merit,.card-award.finalist { border:1px solid rgba(245,240,232,0.25); color:rgba(245,240,232,0.65); }
+    .card-title { font-family:var(--display); font-size:clamp(1.1rem, 2.2vw, 1.9rem); font-weight:700; letter-spacing:-0.01em; line-height:1.1; color:#f5f0e8; }
+
+    .card-tags { display:flex; gap:0.35rem; flex-wrap:wrap; margin-top:0.6rem; opacity:0; transform:translateY(5px); transition:opacity 0.25s,transform 0.25s; }
+    .proj-card:hover .card-tags { opacity:1; transform:translateY(0); }
+    .card-tag { font-family:var(--body); font-size:0.55rem; letter-spacing:0.08em; text-transform:uppercase; color:rgba(245,240,232,0.65); border:1px solid rgba(245,240,232,0.2); padding:2px 6px; border-radius:2px; }
+
+    .card-arrow { position:absolute; top:1.1rem; right:1.25rem; font-family:var(--body); font-size:0.62rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:rgba(245,240,232,0.75); opacity:0; transform:translateX(-5px); transition:opacity 0.25s,transform 0.25s; }
+    .proj-card:hover .card-arrow { opacity:1; transform:translateX(0); }
+
+    .filter-rail { padding:2.5rem 1.75rem; position:sticky; top:5rem; opacity:0; animation:fadeUp 0.7s 0.3s ease forwards; }
+    .filter-heading { font-family:var(--sans-ui); font-size:0.6rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange); margin-bottom:0.85rem; padding-bottom:0.5rem; border-bottom:1px solid rgba(201,74,18,0.2); }
+    .filter-list { list-style:none; display:flex; flex-direction:column; gap:0.1rem; }
+    .filter-btn { font-family:var(--sans-ui); font-size:0.72rem; color:var(--ink-mid); background:none; border:none; padding:0.4rem 0.6rem; text-align:left; cursor:pointer; border-radius:3px; transition:background 0.15s,color 0.15s; width:100%; }
+    .filter-btn:hover  { background:rgba(201,74,18,0.08); color:var(--orange); }
+    .filter-btn.active { color:var(--orange); font-weight:500; background:rgba(201,74,18,0.1); }
+    .filter-count { font-family:var(--mono); font-size:0.55rem; color:var(--ink-light); margin-top:1.25rem; letter-spacing:0.1em; }
+
+    footer { position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; padding:1.75rem 3rem; border-top:1px solid var(--border); gap:1rem; flex-wrap:wrap; background:var(--bg-alt); }
+    footer a { font-family:var(--body); font-size:0.8rem; color:var(--orange); text-decoration:none; }
+    footer p { font-family:var(--mono); font-size:0.62rem; color:var(--ink-light); letter-spacing:0.08em; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    @media (max-width:1000px) {
+      nav { padding:1.25rem 1.5rem; }
+      .page-header { padding:6rem 1.5rem 2rem; }
+      .work-layout { grid-template-columns:1fr; }
+      .grid-area { padding:2rem 1.5rem 5rem; border-right:none; }
+      .filter-rail { position:static; padding:1.25rem 1.5rem; border-top:1px solid var(--border); }
+      .filter-list { flex-direction:row; flex-wrap:wrap; gap:0.35rem; }
+      .filter-btn { padding:0.3rem 0.7rem; border:1px solid var(--border); border-radius:20px; width:auto; }
+      footer { padding:1.5rem; }
+    }
+    @media (max-width:600px) {
+      #proj-grid { grid-template-columns:1fr; }
+      .proj-card.featured { grid-column:1; aspect-ratio:4/3; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Matthew Ho</a>
+    <ul class="nav-links">
+      <li><a href="index.html">About</a></li>
+      <li><a href="work.html" class="active">Work</a></li>
+      <li>
+        <a href="https://www.linkedin.com/in/matthew-ho-4947016a/" target="_blank" rel="noopener" class="li-icon" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <header class="page-header">
+    <h1 class="page-title">Selected <em>Works.</em></h1>
+  </header>
+
+  <div class="work-layout">
+    <main class="grid-area">
+      <div id="proj-grid"></div>
+    </main>
+    <aside class="filter-rail">
+      <p class="filter-heading">Filter</p>
+      <ul class="filter-list" id="filter-list">
+        <li><button class="filter-btn active" data-filter="all">All</button></li>
+      </ul>
+      <p class="filter-count" id="filter-count"></p>
+    </aside>
+  </div>
+
+  <footer>
+    <a href="mailto:matthewhzm@gmail.com">matthewhzm@gmail.com</a>
+    <p>&copy; <span class="footer-year"></span> Matthew Ho</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll(".footer-year").forEach(el => el.textContent = new Date().getFullYear());
+
+function esc(s) { return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+    let allProjects = [], activeFilter = "all";
+
+    function renderGrid(projects) {
+      const grid = document.getElementById("proj-grid");
+      const visible = activeFilter === "all" ? projects : projects.filter(p => (p.tags||[]).includes(activeFilter));
+      document.getElementById("filter-count").textContent = visible.length + " project" + (visible.length !== 1 ? "s" : "");
+      grid.innerHTML = "";
+      visible.forEach((p, i) => {
+        const isFeatured = p.featured && i < 4;
+        const brandLine  = [p.brand, p.agency].filter(Boolean).join(" · ");
+        const firstImg   = (p.assets||[]).find(a => a.type === "image");
+        const heroImg    = (p.hero && p.hero.image) || (firstImg && firstImg.url) || "";
+        const tags       = (p.tags||[]).map(t => "<span class=\"card-tag\">" + esc(t) + "</span>").join("");
+        const award      = p.award ? "<span class=\"card-award " + esc(p.awardType) + "\">" + esc(p.award) + "</span>" : "";
+        const initial    = ((p.brand || p.title || "")).substring(0,1).toUpperCase();
+        const a          = document.createElement("a");
+        a.href           = "project.html?id=" + esc(p.id);
+        a.className      = "proj-card" + (isFeatured ? " featured" : "");
+        a.style.animationDelay = (0.08 + i * 0.05) + "s";
+        const imgHTML    = heroImg
+          ? "<div class=\"card-img\"><img src=\"" + esc(heroImg) + "\" alt=\"" + esc(p.title) + "\" loading=\"lazy\" /></div>"
+          : "<div class=\"card-img no-img\" data-brand=\"" + esc(initial) + "\"></div>";
+        a.innerHTML = imgHTML +
+          "<div class=\"card-info\"><div class=\"card-meta\"><span class=\"card-brand\">" + esc(brandLine) + "</span>" +
+          "<span class=\"card-year\">" + esc((p.intro && p.intro.year) || "") + "</span>" + award + "</div>" +
+          "<h2 class=\"card-title\">" + esc(p.title) + "</h2>" +
+          "<div class=\"card-tags\">" + tags + "</div></div>" +
+          "<span class=\"card-arrow\">View &rarr;</span>";
+        grid.appendChild(a);
+      });
+      if (!visible.length) grid.innerHTML = "<p style=\"grid-column:1/-1;padding:3rem 0;color:var(--ink-mid);font-size:0.85rem;\">No projects match this filter.</p>";
+    }
+
+    function buildFilters(projects) {
+      const tags = new Set();
+      projects.forEach(p => (p.tags||[]).forEach(t => tags.add(t)));
+      const ul = document.getElementById("filter-list");
+      tags.forEach(tag => {
+        const li = document.createElement("li");
+        const btn = document.createElement("button");
+        btn.className = "filter-btn"; btn.dataset.filter = tag; btn.textContent = tag;
+        btn.addEventListener("click", () => {
+          ul.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active"); activeFilter = tag; renderGrid(allProjects);
+        });
+        li.appendChild(btn); ul.appendChild(li);
+      });
+      ul.querySelector("[data-filter=\"all\"]").addEventListener("click", function() {
+        ul.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        this.classList.add("active"); activeFilter = "all"; renderGrid(allProjects);
+      });
+    }
+
+    async function load() {
+      try { allProjects = await (await fetch("projects.json")).json(); } catch { allProjects = []; }
+      buildFilters(allProjects); renderGrid(allProjects);
+    }
+    load();
+  </script>
+</body>
+</html>
