@@ -6,11 +6,12 @@
 <title>Matthew Ho — Senior Creative</title>
 <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
   :root { --bg:#F0EFEA; --black:#111111; --orange:#E85C1A; --gray-mid:#C8C7C0; --gray-dark:#555550; --white:#FFFFFF; --nav-h:72px; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior:smooth; }
   body { background:var(--bg); color:var(--black); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden; }
 
+  /* ── NAV ── */
   nav { position:fixed; top:0; left:0; right:0; height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; padding:0 48px; background:var(--bg); border-bottom:1.5px solid var(--black); z-index:100; }
   .nav-logo { font-family:'Caprasimo',cursive; font-size:26px; color:var(--black); text-decoration:none; }
   .nav-logo span { color:var(--orange); }
@@ -19,43 +20,91 @@
   .nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:var(--orange); transition:width 0.25s ease; }
   .nav-links a:hover::after { width:100%; }
 
+  /* ── HERO STRIP ── */
   .hero-strip { margin-top:var(--nav-h); padding:32px 48px 20px; display:flex; align-items:center; gap:16px; border-bottom:1px solid var(--gray-mid); flex-wrap:wrap; }
   .hero-strip .tagline { font-family:'DM Sans',sans-serif; font-size:13px; font-weight:300; letter-spacing:0.14em; text-transform:uppercase; color:var(--gray-dark); }
   .hero-strip .dot { width:7px; height:7px; border-radius:50%; background:var(--orange); flex-shrink:0; }
 
+  /* ── WORK SECTION ── */
   #work { padding:48px 48px 80px; }
   .section-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gray-dark); margin-bottom:32px; display:flex; align-items:center; gap:12px; }
   .section-label::after { content:''; flex:1; height:1px; background:var(--gray-mid); }
 
-  .project-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:20px; }
+  /* ── PROJECT GRID ──
+     Two-column responsive grid. Cards span 1 or 2 columns.
+     No fixed aspect ratios — the thumbnail image defines the height naturally.
+     The card body text sits below. Rows align to whatever height content needs. */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+    align-items: start; /* key: each card starts at top of its row, no stretching */
+  }
 
-  .project-card { border-radius:20px; overflow:hidden; cursor:pointer; position:relative; text-decoration:none; display:block; background:var(--white); }
-  .project-card.featured { grid-column:span 7; }
-  .project-card.tall     { grid-column:span 5; }
-  .project-card.half     { grid-column:span 6; }
-  .project-card.third    { grid-column:span 4; }
+  .project-card {
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    background: var(--white);
+    /* no height or aspect-ratio set here — card grows to fit its content */
+  }
+  .project-card.featured { grid-column: span 7; }
+  .project-card.tall     { grid-column: span 5; }
+  .project-card.half     { grid-column: span 6; }
+  .project-card.third    { grid-column: span 4; }
 
-  .card-visual { position:relative; overflow:hidden; }
-  .card-hover-overlay { position:absolute; inset:0; background:var(--orange); opacity:0; transition:opacity 0.3s ease; z-index:2; pointer-events:none; }
-  .project-card:hover .card-hover-overlay { opacity:0.32; }
+  /* ── THUMBNAIL AREA ── */
+  .card-visual { position:relative; overflow:hidden; background:var(--black); }
 
-  .card-placeholder { width:100%; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-  .card-placeholder.r169 { aspect-ratio:16/9; }
-  .card-placeholder.r45  { aspect-ratio:4/5; }
-  .card-placeholder.rsq  { aspect-ratio:1/1; }
-  .placeholder-brand { font-family:'Caprasimo',cursive; color:rgba(255,255,255,0.12); font-size:clamp(24px,4vw,60px); user-select:none; text-align:center; padding:20px; position:relative; z-index:1; }
+  /* The thumbnail image/gif — full width, height is natural (no forced ratio) */
+  .card-thumb {
+    width: 100%;
+    height: auto;        /* natural height from the image itself */
+    display: block;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .project-card:hover .card-thumb { transform: scale(1.03); }
+
+  /* GIF thumbnails: same treatment */
+  .card-thumb-gif {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Fallback placeholder when no thumbnail URL provided */
+  .card-placeholder-fallback {
+    width: 100%;
+    padding: 60px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    position: relative;
+    overflow: hidden;
+  }
+  .placeholder-brand { font-family:'Caprasimo',cursive; color:rgba(255,255,255,0.13); font-size:clamp(28px,4vw,64px); user-select:none; text-align:center; position:relative; z-index:1; }
   .placeholder-accent { position:absolute; bottom:-20px; right:-20px; width:110px; height:110px; border-radius:50%; background:var(--orange); opacity:0.28; }
-  .card-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
 
+  /* Orange hover overlay */
+  .card-hover-overlay { position:absolute; inset:0; background:var(--orange); opacity:0; transition:opacity 0.3s ease; z-index:2; pointer-events:none; }
+  .project-card:hover .card-hover-overlay { opacity:0.30; }
+
+  /* ── CARD TEXT BODY ── */
   .card-body { padding:20px 24px 24px; }
-  .card-meta { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; gap:8px; }
+  .card-meta { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; gap:8px; flex-wrap:wrap; }
   .card-brand { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); font-weight:500; }
   .award-badge { background:var(--black); color:var(--bg); font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:4px 10px; border-radius:100px; white-space:nowrap; flex-shrink:0; }
-  .card-title { font-size:18px; font-weight:700; line-height:1.25; color:var(--black); margin-bottom:8px; }
+  .card-title { font-size:17px; font-weight:700; line-height:1.25; color:var(--black); margin-bottom:8px; }
   .card-desc { font-size:13px; color:var(--gray-dark); line-height:1.5; font-weight:300; }
   .card-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
   .tag { font-size:11px; font-family:'DM Mono',monospace; padding:4px 10px; border-radius:100px; border:1px solid var(--gray-mid); color:var(--gray-dark); }
 
+  /* ── ABOUT ── */
   #about { border-top:1.5px solid var(--black); padding:80px 48px; background:var(--black); color:var(--bg); }
   .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
   .section-label-dark { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange); margin-bottom:32px; }
@@ -67,6 +116,7 @@
   .contact-line a:hover { letter-spacing:0.04em; }
   .contact-line a::before { content:'→'; }
 
+  /* ── EXPERIENCE ── */
   .exp-list { list-style:none; }
   .exp-item { padding:20px 0; border-bottom:1px solid rgba(200,199,192,0.15); display:grid; grid-template-columns:1fr auto; gap:16px; align-items:start; }
   .exp-item:last-child { border-bottom:none; }
@@ -75,7 +125,7 @@
   .exp-clients { font-size:12px; font-weight:300; color:#666660; margin-top:3px; }
   .exp-year { font-family:'DM Mono',monospace; font-size:11px; color:var(--orange); letter-spacing:0.06em; white-space:nowrap; padding-top:4px; }
 
-  /* AWARDS — compact text list */
+  /* ── AWARDS ── */
   .awards-section { padding:72px 48px; background:var(--bg); border-top:1.5px solid var(--black); }
   .awards-headline { font-family:'Caprasimo',cursive; font-size:clamp(26px,3vw,40px); color:var(--black); margin-bottom:40px; }
   .awards-headline span { color:var(--orange); }
@@ -93,23 +143,38 @@
   .award-info-sub { font-size:12px; color:var(--gray-dark); }
   .award-brand-pill { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--orange); white-space:nowrap; }
 
+  /* ── FOOTER ── */
   footer { background:var(--black); color:var(--gray-mid); padding:28px 48px; display:flex; align-items:center; justify-content:space-between; font-size:12px; font-family:'DM Mono',monospace; border-top:1px solid rgba(200,199,192,0.15); }
   .footer-logo { font-family:'Caprasimo',cursive; font-size:18px; color:var(--bg); }
   .footer-logo span { color:var(--orange); }
 
+  /* ── SCROLL REVEAL ── */
   .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.55s ease,transform 0.55s ease; }
   .reveal.visible { opacity:1; transform:translateY(0); }
 
-  @media(max-width:900px){
-    nav{padding:0 24px;}
-    #work,.awards-section{padding:32px 24px 60px;}
-    #about{padding:60px 24px;}
-    footer{padding:20px 24px;flex-direction:column;gap:8px;text-align:center;}
-    .project-card.featured,.project-card.tall,.project-card.half,.project-card.third{grid-column:span 12;}
-    .about-grid{grid-template-columns:1fr;gap:48px;}
-    .hero-strip{padding:20px 24px;}
-    .award-row{grid-template-columns:80px 1fr;}
-    .award-brand-pill{display:none;}
+  /* ── RESPONSIVE ── */
+  @media(max-width:1100px) {
+    .project-card.featured { grid-column:span 8; }
+    .project-card.tall     { grid-column:span 4; }
+  }
+  @media(max-width:900px) {
+    nav { padding:0 24px; }
+    #work, .awards-section { padding:32px 24px 60px; }
+    #about { padding:60px 24px; }
+    footer { padding:20px 24px; flex-direction:column; gap:8px; text-align:center; }
+    .project-card.featured,
+    .project-card.tall,
+    .project-card.half,
+    .project-card.third { grid-column:span 12; }
+    .about-grid { grid-template-columns:1fr; gap:48px; }
+    .hero-strip { padding:20px 24px; }
+    .award-row { grid-template-columns:80px 1fr; }
+    .award-brand-pill { display:none; }
+  }
+  @media(max-width:600px) {
+    .project-grid { gap:14px; }
+    .card-body { padding:16px 18px 20px; }
+    .card-title { font-size:15px; }
   }
 </style>
 </head>
@@ -167,13 +232,10 @@
 <script src="data.js"></script>
 <script>
 const D = PORTFOLIO_DATA;
-
-// Helpers
 const $ = id => document.getElementById(id);
 const tierCls = t => { const l=t.toLowerCase(); return l==='gold'?'tier-gold':l==='silver'?'tier-silver':l==='bronze'?'tier-bronze':'tier-other'; };
-const aspectMap = { featured:'r169', tall:'r45', half:'r169', third:'rsq' };
 
-// NAV / STRIP / FOOTER
+// ── NAV / STRIP / FOOTER ──
 $('nav-name').innerHTML = D.name + '<span>.</span>';
 $('hero-title').textContent = D.title + ' · ' + D.location;
 $('hero-tagline').textContent = D.tagline;
@@ -182,7 +244,7 @@ $('footer-logo').innerHTML = D.name + '<span>.</span>';
 $('footer-contact').textContent = D.title + ' · ' + D.location + ' · ' + D.email;
 $('footer-year').textContent = '© ' + new Date().getFullYear();
 
-// BIO
+// ── BIO ──
 D.bio.forEach(p => {
   const el = document.createElement('p');
   el.className = 'about-body';
@@ -190,19 +252,19 @@ D.bio.forEach(p => {
   $('about-bio').appendChild(el);
 });
 
-// CONTACT
+// ── CONTACT ──
 [
-  {href:'mailto:'+D.email, text:D.email},
-  {href:'tel:'+D.phone.replace(/\s/g,''), text:D.phone},
-  {href:'https://'+D.website, text:D.website, blank:true}
+  { href:'mailto:'+D.email, text:D.email },
+  { href:'tel:'+D.phone.replace(/\s/g,''), text:D.phone },
+  { href:'https://'+D.website, text:D.website, blank:true }
 ].forEach(c => {
   const a = document.createElement('a');
   a.href = c.href; a.textContent = c.text;
-  if(c.blank) a.target = '_blank';
+  if (c.blank) a.target = '_blank';
   $('contact-line').appendChild(a);
 });
 
-// EXPERIENCE
+// ── EXPERIENCE ──
 D.experience.forEach(e => {
   $('exp-list').innerHTML += `<li class="exp-item">
     <div>
@@ -214,19 +276,35 @@ D.experience.forEach(e => {
   </li>`;
 });
 
-// PROJECTS
+// ── PROJECTS ──
 const grid = $('project-grid');
+
 D.projects.forEach((p, i) => {
-  const asp = aspectMap[p.gridClass] || 'r169';
   const delay = (i % 3) * 0.08;
-  const firstImg = p.collaterals && p.collaterals.find(c => c.type==='image' && c.url);
-  const visual = firstImg
-    ? `<img class="card-img" src="${firstImg.url}" alt="${p.title}" loading="lazy">`
-    : `<span class="placeholder-brand">${p.brand}</span><div class="placeholder-accent"></div>`;
+  const hasThumb = p.thumbnailUrl && p.thumbnailUrl.trim() !== '';
+  const isGif = hasThumb && (p.thumbnailType === 'gif' || p.thumbnailUrl.toLowerCase().endsWith('.gif'));
+
+  let thumbHTML;
+  if (hasThumb) {
+    if (isGif) {
+      // GIF: no lazy loading (GIFs need to start immediately)
+      thumbHTML = `<img class="card-thumb-gif" src="${p.thumbnailUrl}" alt="${p.title}">`;
+    } else {
+      // Image: lazy load, natural dimensions
+      thumbHTML = `<img class="card-thumb" src="${p.thumbnailUrl}" alt="${p.title}" loading="lazy">`;
+    }
+  } else {
+    // Fallback placeholder
+    thumbHTML = `<div class="card-placeholder-fallback" style="background:${p.placeholderColor}">
+      <span class="placeholder-brand">${p.brand}</span>
+      <div class="placeholder-accent"></div>
+    </div>`;
+  }
+
   grid.innerHTML += `
     <a class="project-card ${p.gridClass} reveal" href="work.html?id=${p.id}" style="transition-delay:${delay}s">
       <div class="card-visual">
-        <div class="card-placeholder ${asp}" style="background:${p.placeholderColor}">${visual}</div>
+        ${thumbHTML}
         <div class="card-hover-overlay"></div>
       </div>
       <div class="card-body">
@@ -236,31 +314,31 @@ D.projects.forEach((p, i) => {
         </div>
         <p class="card-title">${p.title}</p>
         <p class="card-desc">${p.description}</p>
-        <div class="card-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <div class="card-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
       </div>
     </a>`;
 });
 
-// AWARDS — grouped by year desc
+// ── AWARDS ──
 const byYear = {};
-D.awards.forEach(a => { if(!byYear[a.year]) byYear[a.year]=[]; byYear[a.year].push(a); });
+D.awards.forEach(a => { if (!byYear[a.year]) byYear[a.year]=[]; byYear[a.year].push(a); });
 const awardsEl = $('awards-container');
-Object.keys(byYear).sort((a,b)=>b-a).forEach(yr => {
+Object.keys(byYear).sort((a,b) => b-a).forEach(yr => {
   const g = document.createElement('div');
   g.className = 'awards-year-group reveal';
   g.innerHTML = `<p class="awards-year-label">${yr}</p>` +
-    byYear[yr].map(a=>`<div class="award-row">
+    byYear[yr].map(a => `<div class="award-row">
       <span class="award-tier ${tierCls(a.tier)}">${a.tier}</span>
       <span class="award-info"><strong>${a.show}</strong><span class="award-info-sub"> — ${a.category}</span></span>
-      ${a.brand?`<span class="award-brand-pill">${a.brand}</span>`:'<span></span>'}
+      ${a.brand ? `<span class="award-brand-pill">${a.brand}</span>` : '<span></span>'}
     </div>`).join('');
   awardsEl.appendChild(g);
 });
 
-// REVEAL
+// ── REVEAL ──
 const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
-}, {threshold:0.08});
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.06 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
