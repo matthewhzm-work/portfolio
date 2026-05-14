@@ -820,7 +820,7 @@ const PORTFOLIO_DATA = {
       "thumbnailType": "gif",
       "description": "The Mercedes-Benz EQC launch — introducing the brand's first fully electric SUV to Southeast Asia with a campaign built around the thrill of a new kind of drive.",
       "fullDescription": "The EQC was Mercedes-Benz's declaration that electric luxury had arrived. The launch campaign balanced the rational case for electric — range, efficiency, charging — with the emotional pull that makes a Mercedes desirable. A car that didn't ask you to sacrifice anything.",
-      "projectTemplate": "editorial",
+      "projectTemplate": "writeup-then-video",
       "collaterals": [],
       "videos": [
         {
@@ -878,7 +878,7 @@ const PORTFOLIO_DATA = {
       "thumbnailType": "gif",
       "description": "An NEA campaign reframing sustainable living as something that benefits both individual Singaporeans and the environment they share.",
       "fullDescription": "Good for Me, Good for the Environment tackled the perception that sustainable choices mean sacrifice. The campaign showed that the best choices for the planet are often the best choices for you — reframing green behaviour as smart behaviour, not moral obligation.",
-      "projectTemplate": "grid",
+      "projectTemplate": "default",
       "collaterals": [
         {
           "type": "image",
@@ -920,7 +920,7 @@ const PORTFOLIO_DATA = {
       "thumbnailType": "gif",
       "description": "A Valentine's Day campaign for Bybit that found the human side of a crypto exchange — proving that even in a world of wallets and trades, love is still the strongest currency.",
       "fullDescription": "Valentine's Day is a tough brief for a crypto exchange. The work found a genuine insight — that the best thing you can give someone you love is a better future — and turned it into a campaign that was warm, witty, and completely on-brand for Bybit's irreverent personality.",
-      "projectTemplate": "grid",
+      "projectTemplate": "default",
       "collaterals": [
         {
           "type": "gif",
@@ -974,7 +974,7 @@ const PORTFOLIO_DATA = {
       "thumbnailType": "image",
       "description": "Brand and campaign work for ofnoah — Singapore's discreet digital clinic for men's health, making it easy and stigma-free to get the help you need.",
       "fullDescription": "ofnoah exists because men don't ask for help. The brand and campaign work was built around removing every barrier — the embarrassment, the inconvenience, the fear of judgement — and replacing them with a tone that was direct, warm, and completely judgment-free.",
-      "projectTemplate": "editorial",
+      "projectTemplate": "default",
       "collaterals": [
         {
           "type": "image",
@@ -1094,7 +1094,7 @@ const PORTFOLIO_DATA = {
       "thumbnailType": "gif",
       "description": "A product launch campaign for the vivo V15 — introducing its pop-up front camera to a generation for whom self-expression and content creation are a way of life.",
       "fullDescription": "The vivo V15 had a genuinely novel feature — a motorised pop-up front camera that appeared only when you needed it. The launch campaign made that mechanism feel iconic, building the product's selfie credentials with an audience for whom the front camera is the most important lens on the phone.",
-      "projectTemplate": "grid",
+      "projectTemplate": "default",
       "collaterals": [],
       "videos": [
         {
@@ -1183,7 +1183,7 @@ const PORTFOLIO_DATA = {
       "thumbnailType": "image",
       "description": "A print campaign for Volkswagen that let the idea do the driving — proving that the best automotive advertising doesn't always need to show the car.",
       "fullDescription": "Volkswagen Prints was a lesson in restraint. The campaign trusted the idea over the asset, letting a strong visual concept carry the brand message without defaulting to the usual glamour shots. Work that rewarded the people paying attention.",
-      "projectTemplate": "editorial",
+      "projectTemplate": "default",
       "collaterals": [
         {
           "type": "image",

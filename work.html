@@ -33,14 +33,7 @@ nav.scrolled{background:rgba(245,244,239,0.96);backdrop-filter:blur(14px);-webki
 .nav-back:hover .nav-back-arrow{transform:translateX(-4px)}
 
 /* ── PROJECT HEADER ── */
-/* FIX 1: mobile nav overlap — padding-top accounts for taller 2-row mobile nav */
-.work-header{
-  margin-top:var(--nav-h);
-  padding:72px var(--pad) 56px;
-}
-@media(max-width:900px){
-  .work-header{margin-top:0;padding-top:calc(var(--nav-h) + 80px)}
-}
+.work-header{margin-top:var(--nav-h);padding:72px var(--pad) 56px}
 .work-header-meta{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
 .work-brand{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--red)}
 .work-award{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:4px 11px}
@@ -49,10 +42,13 @@ nav.scrolled{background:rgba(245,244,239,0.96);backdrop-filter:blur(14px);-webki
 .work-tags{display:flex;flex-wrap:wrap;gap:7px}
 .tag{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;border:1px solid var(--light);color:#888;padding:4px 10px}
 
-/* ── SHARED LABELS ── */
+/* ── LABELS ── */
 .c-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
 
-/* ── SHARED VIDEO: centred, 25% bigger (1075px) ── */
+/* ── IMAGES: always full, never cropped ── */
+img{max-width:100%;height:auto;display:block}
+
+/* ── VIDEO: centred 1075px ── */
 .vid-section{padding:0 var(--pad) 72px}
 .vid-centred{max-width:1075px;margin:0 auto}
 .vid-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--ink)}
@@ -62,19 +58,102 @@ nav.scrolled{background:rgba(245,244,239,0.96);backdrop-filter:blur(14px);-webki
 .vid-item:last-child{margin-bottom:0}
 .vid-item-label{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:12px}
 
-/* ── SHARED WRITE-UP ── */
+/* ── WRITEUP ── */
 .writeup-section{padding:0 var(--pad) 72px}
 .writeup-inner{max-width:680px}
 .writeup-text{font-size:17px;font-weight:300;line-height:1.9;color:#222}
 
-/* ── FIX 2: all images uncropped — natural height ── */
-img{max-width:100%;height:auto;display:block}
+/* ── SPLIT ROW (video+writeup side by side) ── */
+.split-row{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 72px;align-items:start}
+.split-vid-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--ink)}
+.split-vid-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.split-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
+.split-text{font-size:16px;font-weight:300;line-height:1.9;color:#222}
+
+/* ── 3 VIDEOS IN A ROW ── */
+.three-vid-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding:0 var(--pad) 80px}
+.tvi-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+.tvi-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--ink)}
+.tvi-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+
+/* ── TWO VIDEOS SIDE BY SIDE ── */
+.two-vid-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:0 var(--pad) 56px}
+.tvi-label-sm{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+
+/* ── LUX ── */
+.lux-writeup-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;padding:72px var(--pad)}
+.lux-writeup-3col p{font-size:15px;font-weight:300;line-height:1.85;color:#333}
+.lux-grid-section{padding:0 var(--pad) 80px}
+.lux-grid-inner{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lux-img-wrap{overflow:hidden;cursor:pointer;position:relative;background:var(--ink)}
+.lux-img-wrap img{width:100%;height:auto;display:block;transition:transform 0.45s cubic-bezier(0.22,1,0.36,1)}
+.lux-img-wrap::after{content:'';position:absolute;inset:0;background:var(--red);opacity:0;transition:opacity 0.35s;pointer-events:none}
+.lux-img-wrap:hover::after{opacity:0.14}
+.lux-img-wrap:hover img{transform:scale(1.03)}
+.lux-mobile-slider{display:none;overflow:hidden}
+.lux-mobile-track{display:flex;transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
+.lux-mobile-slide{flex:0 0 100%;cursor:pointer}
+.lux-mobile-slide img{width:100%;height:auto;display:block}
+.lux-mobile-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--paper)}
+.lux-mobile-btn{font-family:var(--mono);font-size:20px;color:var(--ink);background:none;border:none;cursor:pointer;padding:4px 10px;transition:color 0.2s}
+.lux-mobile-btn:hover{color:var(--red)}
+.lux-mobile-counter{font-family:var(--mono);font-size:11px;color:var(--mid);letter-spacing:0.1em}
+
+/* ── MIND ATHLETES ── */
+.ma-quote-section{padding:80px var(--pad) 64px;display:flex;align-items:center;justify-content:center;text-align:center}
+.ma-quote{font-family:var(--display);font-size:clamp(24px,3.5vw,44px);font-weight:600;line-height:1.2;letter-spacing:-0.02em;color:var(--ink);max-width:800px}
+.ma-thumb-section{padding:0 var(--pad) 80px}
+.ma-thumb-row{display:flex;gap:8px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;padding-bottom:4px}
+.ma-thumb-row::-webkit-scrollbar{display:none}
+.ma-thumb-item{flex-shrink:0;width:160px;height:106px;overflow:hidden;background:var(--ink);cursor:pointer;position:relative}
+.ma-thumb-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1)}
+.ma-thumb-item::after{content:'';position:absolute;inset:0;background:var(--red);opacity:0;transition:opacity 0.3s;pointer-events:none}
+.ma-thumb-item:hover::after{opacity:0.18}
+.ma-thumb-item:hover img{transform:scale(1.06)}
+
+/* ── PRINTS SIDE BY SIDE (AMG) ── */
+.prints-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 var(--pad) 56px}
+.prints-row img{width:100%;height:auto;display:block;cursor:pointer}
+.prints-writeup{padding:0 var(--pad) 80px;text-align:center;max-width:640px;margin:0 auto}
+.prints-writeup p{font-size:15px;font-weight:300;line-height:1.85;color:#444}
+
+/* ── MHA 3 PORTRAIT PRINTS ── */
+.mha-prints-row{display:flex;gap:20px;padding:0 var(--pad) 80px;justify-content:center;align-items:flex-start}
+.mha-print-item{width:260px;flex-shrink:0;cursor:pointer;position:relative;overflow:hidden}
+.mha-print-item img{width:100%;height:auto;display:block;transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
+.mha-print-item::after{content:'';position:absolute;inset:0;background:var(--red);opacity:0;transition:opacity 0.3s;pointer-events:none}
+.mha-print-item:hover::after{opacity:0.12}
+.mha-print-item:hover img{transform:scale(1.03)}
+
+/* ── CWYL ── */
+.cwyl-question{padding:72px var(--pad) 48px;max-width:820px}
+.cwyl-question p{font-family:var(--display);font-size:clamp(22px,3vw,38px);font-weight:600;line-height:1.2;letter-spacing:-0.02em;color:var(--ink)}
+.cwyl-viewer{padding:0 var(--pad) 64px}
+.cwyl-viewer-img{width:100%;height:auto;display:block;cursor:pointer}
+.cwyl-viewer-nav{display:flex;align-items:center;gap:16px;margin-top:16px}
+.cwyl-btn{font-family:var(--mono);font-size:22px;background:none;border:none;cursor:pointer;color:var(--ink);padding:4px 12px;transition:color 0.2s}
+.cwyl-btn:hover{color:var(--red)}
+.cwyl-counter{font-family:var(--mono);font-size:11px;color:var(--mid);letter-spacing:0.1em}
+.cwyl-cap-text{font-family:var(--mono);font-size:11px;color:var(--mid);letter-spacing:0.06em;margin-left:auto}
+.cwyl-bottom{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 80px;align-items:start}
+.cwyl-writeup{font-size:16px;font-weight:300;line-height:1.9;color:#222}
+.cwyl-writeup-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
+
+/* ── COLLATERAL GRID (fallback/general) ── */
+.col-section{padding:0 var(--pad) 80px}
+.col-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;margin-top:16px}
+.col-item{overflow:hidden;background:var(--ink);cursor:pointer;position:relative}
+.col-item img{width:100%;height:auto;display:block;transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
+.col-item::after{content:'';position:absolute;inset:0;background:var(--red);opacity:0;transition:opacity 0.3s;pointer-events:none}
+.col-item:hover::after{opacity:0.14}
+.col-item:hover img{transform:scale(1.03)}
+.col-cap{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;color:var(--mid);margin-top:8px}
 
 /* ── PROJECT RAIL ── */
-.proj-rail{background:var(--ink);padding:32px 0 28px;position:relative}
+.proj-rail{background:var(--ink);padding:32px 0 28px}
 .proj-rail-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);padding:0 var(--pad);margin-bottom:20px}
 .proj-rail-outer{position:relative;display:flex;align-items:center}
-.rail-btn{position:absolute;z-index:10;background:none;border:none;cursor:pointer;font-size:24px;color:rgba(255,255,255,0.4);padding:10px 16px;transition:color 0.2s;flex-shrink:0}
+.rail-btn{position:absolute;z-index:10;background:none;border:none;cursor:pointer;font-size:24px;color:rgba(255,255,255,0.4);padding:10px 16px;transition:color 0.2s}
 .rail-btn:hover{color:#fff}
 .rail-btn-prev{left:calc(var(--pad) - 16px)}
 .rail-btn-next{right:calc(var(--pad) - 16px)}
@@ -88,8 +167,8 @@ img{max-width:100%;height:auto;display:block}
 .rail-thumb img{width:100%;height:100%;object-fit:cover}
 .rail-thumb-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
 .rail-thumb-ph span{font-family:var(--display);font-size:10px;font-weight:600;color:rgba(255,255,255,0.12);letter-spacing:0.06em;text-align:center;padding:4px}
-.rail-title{font-family:var(--display);font-size:11px;font-weight:500;color:rgba(255,255,255,0.65);line-height:1.3;letter-spacing:-0.01em}
 .rail-brand{font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:3px}
+.rail-title{font-family:var(--display);font-size:11px;font-weight:500;color:rgba(255,255,255,0.65);line-height:1.3;letter-spacing:-0.01em}
 
 /* ── FOOTER ── */
 footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding:22px var(--pad);display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.28)}
@@ -111,102 +190,6 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 .lb-prev:hover,.lb-next:hover{color:#fff}
 .lb-cap{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.38);text-align:center;pointer-events:none;white-space:nowrap}
 
-/* ══════════════════════════════════════════
-   TEMPLATE STYLES
-══════════════════════════════════════════ */
-
-/* ── LUX: video → header area → 3-col writeup → 2-col images ── */
-.lux-video-top{padding:0 var(--pad) 0;margin-bottom:0}
-.lux-writeup-3col{padding:72px var(--pad);display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px}
-.lux-writeup-3col p{font-size:15px;font-weight:300;line-height:1.85;color:#333}
-.lux-grid-section{padding:0 var(--pad) 80px}
-.lux-grid-inner{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.lux-img-wrap{overflow:hidden;cursor:pointer;position:relative;background:var(--ink)}
-.lux-img-wrap img{width:100%;height:auto;display:block;transition:transform 0.45s cubic-bezier(0.22,1,0.36,1)}
-.lux-img-wrap::after{content:'';position:absolute;inset:0;background:var(--red);opacity:0;transition:opacity 0.35s;pointer-events:none}
-.lux-img-wrap:hover::after{opacity:0.14}
-.lux-img-wrap:hover img{transform:scale(1.03)}
-/* mobile slider */
-.lux-mobile-slider{display:none;position:relative;overflow:hidden}
-.lux-mobile-track{display:flex;transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
-.lux-mobile-slide{flex:0 0 100%;cursor:pointer}
-.lux-mobile-slide img{width:100%;height:auto;display:block}
-.lux-mobile-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--paper)}
-.lux-mobile-btn{font-family:var(--mono);font-size:20px;color:var(--ink);background:none;border:none;cursor:pointer;padding:4px 10px;transition:color 0.2s}
-.lux-mobile-btn:hover{color:var(--red)}
-.lux-mobile-counter{font-family:var(--mono);font-size:11px;color:var(--mid);letter-spacing:0.1em}
-
-/* ── HSBC MIND ATHLETES ── */
-.ma-quote-section{padding:96px var(--pad);display:flex;align-items:center;justify-content:center;text-align:center}
-.ma-quote{font-family:var(--display);font-size:clamp(24px,3.5vw,44px);font-weight:600;line-height:1.2;letter-spacing:-0.02em;color:var(--ink);max-width:800px}
-.ma-thumb-section{padding:0 var(--pad) 80px}
-.ma-thumb-row{display:flex;gap:8px;overflow-x:auto;scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none;padding-bottom:4px}
-.ma-thumb-row::-webkit-scrollbar{display:none}
-.ma-thumb-item{flex-shrink:0;width:160px;height:106px;overflow:hidden;background:var(--ink);cursor:pointer;position:relative}
-.ma-thumb-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1)}
-.ma-thumb-item::after{content:'';position:absolute;inset:0;background:var(--red);opacity:0;transition:opacity 0.3s;pointer-events:none}
-.ma-thumb-item:hover::after{opacity:0.18}
-.ma-thumb-item:hover img{transform:scale(1.06)}
-
-/* ── SIDE-BY-SIDE VIDEO+WRITEUP (shared base) ── */
-.split-row{display:grid;gap:48px;padding:0 var(--pad) 72px;align-items:start}
-.split-row.equal{grid-template-columns:1fr 1fr}
-.split-row .split-vid-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--ink)}
-.split-row .split-vid-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-.split-writeup{font-size:16px;font-weight:300;line-height:1.9;color:#222}
-.split-writeup-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
-
-/* ── 3 VIDEOS IN A ROW ── */
-.three-vid-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding:0 var(--pad) 80px}
-.three-vid-item .vid-label-sm{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
-.three-vid-item .vid-wrap-sm{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--ink)}
-.three-vid-item .vid-wrap-sm iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-
-/* ── TWO VIDEOS SIDE BY SIDE ── */
-.two-vid-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:0 var(--pad) 56px}
-.two-vid-item .vid-label-sm{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
-.two-vid-item .vid-wrap-sm{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--ink)}
-.two-vid-item .vid-wrap-sm iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-
-/* ── PRINTS SIDE BY SIDE (AMG) ── */
-.prints-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 var(--pad) 56px}
-.prints-row img{width:100%;height:auto;display:block;cursor:pointer}
-.prints-writeup{padding:0 var(--pad) 80px;text-align:center;max-width:640px;margin:0 auto}
-.prints-writeup p{font-size:15px;font-weight:300;line-height:1.85;color:#444}
-
-/* ── MHA PRINTS ROW (3 portrait) ── */
-.mha-prints-row{display:flex;gap:20px;padding:0 var(--pad) 80px;justify-content:center;align-items:flex-start}
-.mha-print-item{width:260px;flex-shrink:0;cursor:pointer;overflow:hidden;position:relative}
-.mha-print-item img{width:100%;height:auto;display:block;transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
-.mha-print-item::after{content:'';position:absolute;inset:0;background:var(--red);opacity:0;transition:opacity 0.3s;pointer-events:none}
-.mha-print-item:hover::after{opacity:0.12}
-.mha-print-item:hover img{transform:scale(1.03)}
-
-/* ── CWYL: opening question + lightbox viewer + writeup/video ── */
-.cwyl-question{padding:80px var(--pad) 56px;max-width:780px}
-.cwyl-question p{font-family:var(--display);font-size:clamp(22px,3vw,38px);font-weight:600;line-height:1.2;letter-spacing:-0.02em;color:var(--ink)}
-.cwyl-viewer{padding:0 var(--pad) 72px}
-.cwyl-viewer-inner{position:relative;max-width:100%}
-.cwyl-viewer-img{width:100%;height:auto;display:block;cursor:pointer}
-.cwyl-viewer-nav{display:flex;align-items:center;gap:16px;margin-top:16px}
-.cwyl-viewer-btn{font-family:var(--mono);font-size:22px;background:none;border:none;cursor:pointer;color:var(--ink);padding:4px 12px;transition:color 0.2s}
-.cwyl-viewer-btn:hover{color:var(--red)}
-.cwyl-viewer-counter{font-family:var(--mono);font-size:11px;color:var(--mid);letter-spacing:0.1em}
-.cwyl-viewer-caption{font-family:var(--mono);font-size:11px;color:var(--mid);letter-spacing:0.06em;margin-left:auto}
-.cwyl-bottom{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 80px;align-items:start}
-.cwyl-bottom-writeup{font-size:16px;font-weight:300;line-height:1.9;color:#222}
-.cwyl-bottom-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
-
-/* ── SHARED COLLATERAL SECTION (film-style grid) ── */
-.col-section{padding:0 var(--pad) 80px}
-.col-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;margin-top:16px}
-.col-item{overflow:hidden;background:var(--ink);cursor:pointer;position:relative}
-.col-item img{width:100%;height:auto;display:block;transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
-.col-item::after{content:'';position:absolute;inset:0;background:var(--red);opacity:0;transition:opacity 0.3s;pointer-events:none}
-.col-item:hover::after{opacity:0.14}
-.col-item:hover img{transform:scale(1.03)}
-.col-cap{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;color:var(--mid);margin-top:8px}
-
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   :root{--pad:24px}
@@ -215,10 +198,12 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   .nav-back{padding-bottom:10px}
   .nav-meta{flex:0 0 100%;padding:7px 0 10px;border-top:1px solid rgba(10,10,10,0.07);overflow:hidden}
   .nav-meta-awards,.nav-meta-sep{display:none}
+  /* FIX: mobile header clears the 2-row nav (~112px tall) */
+  .work-header{margin-top:0;padding-top:120px}
   .lux-grid-inner{display:none}
   .lux-mobile-slider{display:block}
-  .lux-writeup-3col{grid-template-columns:1fr;gap:24px}
-  .split-row.equal{grid-template-columns:1fr}
+  .lux-writeup-3col{grid-template-columns:1fr;gap:24px;padding:48px var(--pad)}
+  .split-row{grid-template-columns:1fr;gap:32px}
   .three-vid-row{grid-template-columns:1fr;gap:24px}
   .two-vid-row{grid-template-columns:1fr}
   .prints-row{grid-template-columns:1fr}
@@ -245,8 +230,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   <a href="index.html#work" class="nav-back"><span class="nav-back-arrow">←</span> All Work</a>
 </nav>
 
-<!-- LIGHTBOX -->
-<div class="lb" id="lb" onclick="lbOut(event)">
+<div class="lb" id="lb" onclick="if(event.target===this)lbClose()">
   <span class="lb-close" onclick="lbClose()">×</span>
   <span class="lb-prev" onclick="lbNav(-1)">‹</span>
   <div class="lb-inner" id="lb-inner"></div>
@@ -256,7 +240,6 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 
 <div id="root"></div>
 
-<!-- PROJECT RAIL -->
 <div class="proj-rail" id="proj-rail" style="display:none">
   <p class="proj-rail-label">More Work</p>
   <div class="proj-rail-outer">
@@ -285,8 +268,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   $('f-left').textContent     = D.name + '  ·  ' + D.email;
   $('f-year').textContent     = '© ' + new Date().getFullYear();
 
-  window.addEventListener('scroll', () =>
-    $('main-nav').classList.toggle('scrolled', window.scrollY > 20), {passive:true});
+  window.addEventListener('scroll',()=>$('main-nav').classList.toggle('scrolled',window.scrollY>20),{passive:true});
 
   const params = new URLSearchParams(window.location.search);
   const pid    = params.get('id');
@@ -296,346 +278,307 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 
   if (!P) {
     root.innerHTML = `<div class="not-found"><h2>Not found.</h2><a href="index.html#work">← Back to work</a></div>`;
+    buildRail();
     return;
   }
 
   document.title = P.title + ' — ' + D.name;
-  const cols  = (P.collaterals || []).filter(c => c.url && c.url.trim());
-  const vids  = (P.videos || []).filter(v => v.url && v.url.trim());
-  const tmpl  = P.projectTemplate || 'film';
+  const cols = (P.collaterals||[]).filter(c=>c.url&&c.url.trim());
+  const vids = (P.videos||[]).filter(v=>v.url&&v.url.trim());
+  const tmpl = P.projectTemplate || 'default';
 
-  // ── Shared: project header ──
-  const hdr = `<div class="work-header">
-    <div class="work-header-meta">
-      <span class="work-brand">${esc(P.brand)}</span>
-      ${P.award ? `<span class="work-award">${esc(P.award)}</span>` : ''}
-    </div>
-    <h1 class="work-title">${esc(P.title)}</h1>
-    <p class="work-subtitle">${esc(P.subtitle)}</p>
-    <div class="work-tags">${(P.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
-  </div>`;
+  // ── LIGHTBOX ENGINE ──
+  // All pools stored here; onclick passes pool key + index
+  const LB_POOLS = { cols };
+  let lbPoolKey = 'cols';
+  let lbIdx = 0;
 
-  // ── Embed helper ──
-  function embedSrc(v) {
-    if (v.type==='youtube'){const m=v.url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);if(m)return'https://www.youtube.com/embed/'+m[1]+'?rel=0&modestbranding=1';}
-    if (v.type==='vimeo'){const m=v.url.match(/vimeo\.com\/(\d+)/);if(m)return'https://player.vimeo.com/video/'+m[1]+'?byline=0&portrait=0&title=0';}
+  function lbOpen(poolKey, i) {
+    lbPoolKey = poolKey; lbIdx = i;
+    lbRender();
+    $('lb').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function lbRender() {
+    const pool = LB_POOLS[lbPoolKey]||[];
+    const c = pool[lbIdx]; if(!c) return;
+    $('lb-inner').innerHTML = `<img src="${c.url}" alt="${esc(c.caption||'')}">`;
+    $('lb-cap').textContent = c.caption||'';
+  }
+  window.lbClose = () => { $('lb').classList.remove('open'); document.body.style.overflow=''; };
+  window.lbNav   = d  => {
+    const pool = LB_POOLS[lbPoolKey]||[];
+    lbIdx = (lbIdx+d+pool.length)%pool.length; lbRender();
+  };
+  // Expose so inline onclick strings can call: lbOpen('cols',0)
+  window.lbOpen = lbOpen;
+
+  // ── EMBED HELPER ──
+  function src(v) {
+    if(v.type==='youtube'){const m=v.url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);if(m)return'https://www.youtube.com/embed/'+m[1]+'?rel=0&modestbranding=1';}
+    if(v.type==='vimeo'){const m=v.url.match(/vimeo\.com\/(\d+)/);if(m)return'https://player.vimeo.com/video/'+m[1]+'?byline=0&portrait=0&title=0';}
     return null;
   }
-  function iframeHTML(v){const s=embedSrc(v);return s?`<iframe src="${s}" allowfullscreen loading="lazy"></iframe>`:'';}
+  function iframe(v){const s=src(v);return s?`<iframe src="${s}" allowfullscreen loading="lazy"></iframe>`:'';}
 
-  // ── Shared centred video block (single or multi) ──
-  function mkVideosBlock() {
-    if (!vids.length) return '';
+  // ── SHARED HTML BUILDERS ──
+  function mkHeader() {
+    return `<div class="work-header">
+      <div class="work-header-meta">
+        <span class="work-brand">${esc(P.brand)}</span>
+        ${P.award?`<span class="work-award">${esc(P.award)}</span>`:''}
+      </div>
+      <h1 class="work-title">${esc(P.title)}</h1>
+      <p class="work-subtitle">${esc(P.subtitle)}</p>
+      <div class="work-tags">${(P.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
+    </div>`;
+  }
+
+  function mkVideos() {
+    if(!vids.length) return '';
     const multi = vids.length > 1;
     const items = vids.map((v,i)=>{
-      const src = embedSrc(v); if(!src && v.type!=='file') return '';
-      const player = src ? `<div class="vid-wrap"><iframe src="${src}" allowfullscreen loading="lazy"></iframe></div>`
-                         : `<div class="vid-wrap"><video src="${v.url}" controls playsinline></video></div>`;
+      const s=src(v); if(!s && v.type!=='file') return '';
+      const player = s ? `<div class="vid-wrap">${iframe(v)}</div>`
+                       : `<div class="vid-wrap"><video src="${v.url}" controls playsinline></video></div>`;
       const lbl = multi ? `<p class="vid-item-label">${esc(v.caption||`Video ${i+1}`)}</p>` : '';
-      const cap = !multi && v.caption ? `<p class="vid-cap">${esc(v.caption)}</p>` : '';
+      const cap = !multi&&v.caption ? `<p class="vid-cap">${esc(v.caption)}</p>` : '';
       return `<div class="vid-item">${lbl}${player}${cap}</div>`;
     }).filter(Boolean).join('');
     return items ? `<div class="vid-section"><div class="vid-centred">${items}</div></div>` : '';
   }
 
-  // ── Shared writeup block ──
-  function mkWriteup(cls='') {
-    return `<div class="writeup-section${cls?' '+cls:''}"><div class="writeup-inner"><p class="c-label">About the Work</p><p class="writeup-text">${esc(P.fullDescription)}</p></div></div>`;
+  function mkWriteup() {
+    return `<div class="writeup-section"><div class="writeup-inner"><p class="c-label">About the Work</p><p class="writeup-text">${esc(P.fullDescription)}</p></div></div>`;
   }
 
-  // ── Collaterals section (shared for projects that need it) ──
-  function mkColSection(items) {
-    if (!items || !items.length) return '';
-    const html = items.map((c,i)=>`<div>
-      <div class="col-item" onclick="lbOpenPool(colPool,${i})"><img src="${c.url}" alt="${esc(c.caption||'')}" loading="lazy"></div>
+  function mkColSection(pool, poolKey) {
+    if(!pool||!pool.length) return '';
+    const html = pool.map((c,i)=>`<div>
+      <div class="col-item" onclick="lbOpen('${poolKey}',${i})"><img src="${c.url}" alt="${esc(c.caption||'')}"></div>
       ${c.caption?`<p class="col-cap">${esc(c.caption)}</p>`:''}
     </div>`).join('');
     return `<div class="col-section"><p class="c-label">Campaign Collaterals</p><div class="col-grid">${html}</div></div>`;
   }
 
-  let body = '';
-  let lbPool = cols; // default lightbox pool
-
-  // ════ TEMPLATE: LUX ════
-  if (tmpl === 'lux') {
-    // Split fullDescription into 3 roughly equal paragraphs by sentences
-    const sentences = P.fullDescription.split(/(?<=[.!?])\s+/);
-    const third = Math.ceil(sentences.length / 3);
-    const p1 = sentences.slice(0, third).join(' ');
-    const p2 = sentences.slice(third, third*2).join(' ');
-    const p3 = sentences.slice(third*2).join(' ');
-
-    const gridItems = cols.map((c,i)=>`<div class="lux-img-wrap" onclick="lbOpenPool(cols,${i})"><img src="${c.url}" alt="${esc(c.caption||'')}" loading="lazy"></div>`).join('');
-    const slideItems = cols.map((c,i)=>`<div class="lux-mobile-slide" onclick="lbOpenPool(cols,${i})"><img src="${c.url}" alt="${esc(c.caption||'')}" loading="lazy"></div>`).join('');
-
-    body = `<div class="lux-video-top">${mkVideosBlock()}</div>`
-      + `<div class="lux-writeup-3col"><p>${esc(p1)}</p><p>${esc(p2)||'&nbsp;'}</p><p>${esc(p3)||'&nbsp;'}</p></div>`
-      + `<div class="lux-grid-section">
-          <p class="c-label" style="padding:0 var(--pad);margin-bottom:20px">Supporting Images</p>
-          <div class="lux-grid-inner">${gridItems}</div>
-          <div class="lux-mobile-slider">
-            <div class="lux-mobile-track" id="lux-track">${slideItems}</div>
-            <div class="lux-mobile-nav">
-              <button class="lux-mobile-btn" onclick="luxSlide(-1)">←</button>
-              <span class="lux-mobile-counter" id="lux-counter">1 / ${cols.length}</span>
-              <button class="lux-mobile-btn" onclick="luxSlide(1)">→</button>
-            </div>
-          </div>
-        </div>`;
+  // LUX shared grid/slider
+  function mkLuxGrid(poolKey) {
+    const pool = LB_POOLS[poolKey]||[];
+    const gridItems = pool.map((c,i)=>`<div class="lux-img-wrap" onclick="lbOpen('${poolKey}',${i})"><img src="${c.url}" alt="${esc(c.caption||'')}" loading="lazy"></div>`).join('');
+    const slideItems = pool.map((c,i)=>`<div class="lux-mobile-slide" onclick="lbOpen('${poolKey}',${i})"><img src="${c.url}" alt="${esc(c.caption||'')}" loading="lazy"></div>`).join('');
+    return `<div class="lux-grid-section">
+      <p class="c-label" style="padding:0 var(--pad);margin-bottom:20px">Supporting Images</p>
+      <div class="lux-grid-inner">${gridItems}</div>
+      <div class="lux-mobile-slider">
+        <div class="lux-mobile-track" id="lux-track">${slideItems}</div>
+        <div class="lux-mobile-nav">
+          <button class="lux-mobile-btn" onclick="luxSlide(-1)">←</button>
+          <span class="lux-mobile-counter" id="lux-counter">1 / ${pool.length}</span>
+          <button class="lux-mobile-btn" onclick="luxSlide(1)">→</button>
+        </div>
+      </div>
+    </div>`;
   }
 
-  // ════ TEMPLATE: HSBC MIND ATHLETES ════
+  // ── BUILD BODY ──
+  let body = '';
+
+  /* LUX: video → 3-col writeup → 2-col images */
+  if (tmpl === 'lux') {
+    const sentences = P.fullDescription.split(/(?<=[.!?])\s+/);
+    const t = Math.ceil(sentences.length/3);
+    const [p1,p2,p3] = [sentences.slice(0,t).join(' '), sentences.slice(t,t*2).join(' '), sentences.slice(t*2).join(' ')];
+    body = mkVideos()
+      + `<div class="lux-writeup-3col"><p>${esc(p1)}</p><p>${esc(p2)||'&nbsp;'}</p><p>${esc(p3)||'&nbsp;'}</p></div>`
+      + mkLuxGrid('cols');
+  }
+
+  /* HSBC MIND ATHLETES: quote → video → writeup → 2-col images → thumb gallery */
   else if (tmpl === 'hsbc-mind-athletes') {
     const thumbs = (P.thumbnails||[]).filter(t=>t.url&&t.url.trim()&&t.active!==false);
-    const thumbPool = [...thumbs];
-    const gridItems = cols.map((c,i)=>`<div class="lux-img-wrap" onclick="lbOpenPool(cols,${i})"><img src="${c.url}" alt="${esc(c.caption||'')}" loading="lazy"></div>`).join('');
-    const slideItems = cols.map((c,i)=>`<div class="lux-mobile-slide" onclick="lbOpenPool(cols,${i})"><img src="${c.url}" alt="${esc(c.caption||'')}" loading="lazy"></div>`).join('');
-    const thumbItems = thumbs.map((t,i)=>`<div class="ma-thumb-item" onclick="lbOpenPool(thumbPool,${i})"><img src="${t.url}" alt="${esc(t.caption||'')}" loading="lazy"></div>`).join('');
-
+    LB_POOLS['thumbs'] = thumbs;
+    const thumbItems = thumbs.map((t,i)=>`<div class="ma-thumb-item" onclick="lbOpen('thumbs',${i})"><img src="${t.url}" alt="${esc(t.caption||'')}" loading="lazy"></div>`).join('');
     body = `<div class="ma-quote-section"><p class="ma-quote">${esc(P.quote||'')}</p></div>`
-      + mkVideosBlock()
+      + mkVideos()
       + mkWriteup()
-      + `<div class="lux-grid-section">
-          <p class="c-label" style="padding:0 var(--pad);margin-bottom:20px">Supporting Images</p>
-          <div class="lux-grid-inner">${gridItems}</div>
-          <div class="lux-mobile-slider">
-            <div class="lux-mobile-track" id="lux-track">${slideItems}</div>
-            <div class="lux-mobile-nav">
-              <button class="lux-mobile-btn" onclick="luxSlide(-1)">←</button>
-              <span class="lux-mobile-counter" id="lux-counter">1 / ${cols.length}</span>
-              <button class="lux-mobile-btn" onclick="luxSlide(1)">→</button>
-            </div>
-          </div>
-        </div>`
+      + mkLuxGrid('cols')
       + (thumbItems ? `<div class="ma-thumb-section"><p class="c-label" style="margin-bottom:16px">Campaign Gallery</p><div class="ma-thumb-row">${thumbItems}</div></div>` : '');
-
-    // expose thumbPool for lightbox
-    window.thumbPool = thumbPool;
   }
 
-  // ════ TEMPLATE: WRITEUP-THEN-VIDEO ════
+  /* WRITEUP THEN VIDEO */
   else if (tmpl === 'writeup-then-video') {
-    body = mkWriteup() + mkVideosBlock();
+    body = mkWriteup() + mkVideos();
   }
 
-  // ════ TEMPLATE: WRITEUP-LEFT / VIDEO-RIGHT ════
+  /* WRITEUP LEFT / VIDEO RIGHT */
   else if (tmpl === 'writeup-left-video-right') {
-    const v = vids[0]; const src = v ? embedSrc(v) : null;
-    const vidHTML = src ? `<div class="split-vid-wrap"><iframe src="${src}" allowfullscreen loading="lazy"></iframe></div>` : '';
-    body = `<div class="split-row equal">
-      <div>
-        <p class="split-writeup-label">About the Work</p>
-        <p class="split-writeup">${esc(P.fullDescription)}</p>
-      </div>
-      <div>${vidHTML}</div>
+    const v = vids[0]; const s = v ? src(v) : null;
+    body = `<div class="split-row">
+      <div><p class="split-label">About the Work</p><p class="split-text">${esc(P.fullDescription)}</p></div>
+      <div>${s?`<div class="split-vid-wrap">${iframe(v)}</div>`:''}</div>
     </div>`;
   }
 
-  // ════ TEMPLATE: VIDEO-LEFT / WRITEUP-RIGHT ════
+  /* VIDEO LEFT / WRITEUP RIGHT */
   else if (tmpl === 'video-left-writeup-right') {
-    const v = vids[0]; const src = v ? embedSrc(v) : null;
-    const vidHTML = src ? `<div class="split-vid-wrap"><iframe src="${src}" allowfullscreen loading="lazy"></iframe></div>` : '';
-    body = `<div class="split-row equal">
-      <div>${vidHTML}</div>
-      <div>
-        <p class="split-writeup-label">About the Work</p>
-        <p class="split-writeup">${esc(P.fullDescription)}</p>
-      </div>
+    const v = vids[0]; const s = v ? src(v) : null;
+    body = `<div class="split-row">
+      <div>${s?`<div class="split-vid-wrap">${iframe(v)}</div>`:''}</div>
+      <div><p class="split-label">About the Work</p><p class="split-text">${esc(P.fullDescription)}</p></div>
     </div>`;
   }
 
-  // ════ TEMPLATE: WRITEUP-LEFT-VIDEO-RIGHT + 3 supporting videos in row ════
+  /* WRITEUP LEFT / MAIN VIDEO RIGHT + ROW OF 3 SUPPORTING VIDEOS */
   else if (tmpl === 'writeup-left-video-right-row3') {
-    const mainVid = vids[0]; const mainSrc = mainVid ? embedSrc(mainVid) : null;
-    const mainHTML = mainSrc ? `<div class="split-vid-wrap"><iframe src="${mainSrc}" allowfullscreen loading="lazy"></iframe></div>` : '';
+    const v0 = vids[0]; const s0 = v0 ? src(v0) : null;
     const row3 = vids.slice(1).map(v=>{
-      const s = embedSrc(v);
-      return s ? `<div class="three-vid-item">
-        <p class="vid-label-sm">${esc(v.caption||'')}</p>
-        <div class="vid-wrap-sm"><iframe src="${s}" allowfullscreen loading="lazy"></iframe></div>
-      </div>` : '';
+      const s=src(v); if(!s) return '';
+      return `<div><p class="tvi-label">${esc(v.caption||'')}</p><div class="tvi-wrap">${iframe(v)}</div></div>`;
     }).filter(Boolean).join('');
-    body = `<div class="split-row equal">
-        <div><p class="split-writeup-label">About the Work</p><p class="split-writeup">${esc(P.fullDescription)}</p></div>
-        <div>${mainHTML}</div>
+    body = `<div class="split-row">
+        <div><p class="split-label">About the Work</p><p class="split-text">${esc(P.fullDescription)}</p></div>
+        <div>${s0?`<div class="split-vid-wrap">${iframe(v0)}</div>`:''}</div>
       </div>`
       + (row3 ? `<div class="three-vid-row">${row3}</div>` : '');
   }
 
-  // ════ TEMPLATE: VIDEO-LEFT-WRITEUP-RIGHT + 3 supporting videos in row ════
+  /* MAIN VIDEO LEFT / WRITEUP RIGHT + ROW OF 3 SUPPORTING VIDEOS */
   else if (tmpl === 'video-left-writeup-right-row3') {
-    const mainVid = vids[0]; const mainSrc = mainVid ? embedSrc(mainVid) : null;
-    const mainHTML = mainSrc ? `<div class="split-vid-wrap"><iframe src="${mainSrc}" allowfullscreen loading="lazy"></iframe></div>` : '';
+    const v0 = vids[0]; const s0 = v0 ? src(v0) : null;
     const row3 = vids.slice(1).map(v=>{
-      const s = embedSrc(v);
-      return s ? `<div class="three-vid-item">
-        <p class="vid-label-sm">${esc(v.caption||'')}</p>
-        <div class="vid-wrap-sm"><iframe src="${s}" allowfullscreen loading="lazy"></iframe></div>
-      </div>` : '';
+      const s=src(v); if(!s) return '';
+      return `<div><p class="tvi-label">${esc(v.caption||'')}</p><div class="tvi-wrap">${iframe(v)}</div></div>`;
     }).filter(Boolean).join('');
-    body = `<div class="split-row equal">
-        <div>${mainHTML}</div>
-        <div><p class="split-writeup-label">About the Work</p><p class="split-writeup">${esc(P.fullDescription)}</p></div>
+    body = `<div class="split-row">
+        <div>${s0?`<div class="split-vid-wrap">${iframe(v0)}</div>`:''}</div>
+        <div><p class="split-label">About the Work</p><p class="split-text">${esc(P.fullDescription)}</p></div>
       </div>`
       + (row3 ? `<div class="three-vid-row">${row3}</div>` : '');
   }
 
-  // ════ TEMPLATE: TWO VIDEOS SIDE BY SIDE + writeup below ════
+  /* 2 VIDEOS SIDE BY SIDE + WRITEUP BELOW */
   else if (tmpl === 'two-videos-side-by-side') {
-    const twoVids = vids.slice(0,2).map(v=>{
-      const s = embedSrc(v);
-      return s ? `<div class="two-vid-item">
-        <p class="vid-label-sm">${esc(v.caption||'')}</p>
-        <div class="vid-wrap-sm"><iframe src="${s}" allowfullscreen loading="lazy"></iframe></div>
-      </div>` : '';
+    const twoV = vids.slice(0,2).map(v=>{
+      const s=src(v); if(!s) return '';
+      return `<div><p class="tvi-label-sm">${esc(v.caption||'')}</p><div class="tvi-wrap">${iframe(v)}</div></div>`;
     }).filter(Boolean).join('');
-    body = `<div class="two-vid-row">${twoVids}</div>`
-      + `<div class="writeup-section"><div class="writeup-inner"><p class="writeup-text">${esc(P.fullDescription)}</p></div></div>`;
+    body = `<div class="two-vid-row">${twoV}</div>` + mkWriteup();
   }
 
-  // ════ TEMPLATE: PRINTS SIDE BY SIDE (AMG) ════
+  /* 2 PRINTS SIDE BY SIDE + CENTRED WRITEUP (AMG) */
   else if (tmpl === 'prints-side-by-side') {
-    const prints = [
-      {url: P.thumbnailUrl, caption: P.title},
-      ...(cols.filter(c=>c.url))
-    ].filter(p=>p.url);
-    lbPool = prints;
-    const printImgs = prints.map((p,i)=>`<img src="${p.url}" alt="${esc(p.caption||'')}" loading="lazy" onclick="lbOpenPool(prints,${i})" style="cursor:pointer">`).join('');
-    body = `<div class="prints-row">${printImgs}</div>
-      <div class="prints-writeup"><p>${esc(P.fullDescription)}</p></div>`;
-    window.prints = prints;
+    const prints = [{url:P.thumbnailUrl,caption:P.title}, ...cols.filter(c=>c.url)].filter(p=>p&&p.url);
+    LB_POOLS['prints'] = prints;
+    const imgs = prints.map((p,i)=>`<img src="${p.url}" alt="${esc(p.caption||'')}" loading="lazy" onclick="lbOpen('prints',${i})" style="cursor:pointer">`).join('');
+    body = `<div class="prints-row">${imgs}</div><div class="prints-writeup"><p>${esc(P.fullDescription)}</p></div>`;
   }
 
-  // ════ TEMPLATE: MHA ════
+  /* MHA: video → writeup → 3 portrait prints */
   else if (tmpl === 'mha') {
-    const prints = P.prints || [];
-    lbPool = prints;
-    window.mhaPrints = prints;
-    const printHTML = prints.map((p,i)=>`<div class="mha-print-item" onclick="lbOpenPool(mhaPrints,${i})"><img src="${p.url}" alt="${esc(p.caption||'')}" loading="lazy"></div>`).join('');
-    body = mkVideosBlock()
-      + mkWriteup()
-      + `<div class="mha-prints-row">${printHTML}</div>`;
+    const mhaPrints = (P.prints||[]).filter(p=>p&&p.url);
+    LB_POOLS['mhaPrints'] = mhaPrints;
+    const pHTML = mhaPrints.map((p,i)=>`<div class="mha-print-item" onclick="lbOpen('mhaPrints',${i})"><img src="${p.url}" alt="${esc(p.caption||'')}" loading="lazy"></div>`).join('');
+    body = mkVideos() + mkWriteup() + `<div class="mha-prints-row">${pHTML}</div>`;
   }
 
-  // ════ TEMPLATE: CHOOSE WHAT YOU LOVE ════
+  /* CWYL: question → image viewer (cols 2-6) → writeup left / video right */
   else if (tmpl === 'cwyl') {
-    // Collaterals 3-7 = indices 2-6 (0-based)
     const viewerImgs = cols.slice(2);
-    window.cwylImgs = viewerImgs;
+    LB_POOLS['cwylImgs'] = viewerImgs;
     let cwylCur = 0;
-
-    const firstSrc = viewerImgs[0] ? viewerImgs[0].url : '';
-    const viewerHTML = viewerImgs.length ? `<div class="cwyl-viewer">
+    const firstSrc = viewerImgs[0]?viewerImgs[0].url:'';
+    const viewerBlock = viewerImgs.length ? `<div class="cwyl-viewer">
       <p class="c-label" style="margin-bottom:16px">Campaign Execution</p>
-      <div class="cwyl-viewer-inner">
-        <img id="cwyl-img" class="cwyl-viewer-img" src="${firstSrc}" alt="" onclick="lbOpenPool(cwylImgs,0)">
-      </div>
+      <img id="cwyl-img" class="cwyl-viewer-img" src="${firstSrc}" alt="" onclick="lbOpen('cwylImgs',__CWYL_CUR__)">
       <div class="cwyl-viewer-nav">
-        <button class="cwyl-viewer-btn" onclick="cwylSlide(-1)">←</button>
-        <span class="cwyl-viewer-counter" id="cwyl-counter">1 / ${viewerImgs.length}</span>
-        <button class="cwyl-viewer-btn" onclick="cwylSlide(1)">→</button>
-        <span class="cwyl-viewer-caption" id="cwyl-cap">${esc(viewerImgs[0]&&viewerImgs[0].caption||'')}</span>
+        <button class="cwyl-btn" onclick="cwylSlide(-1)">←</button>
+        <span class="cwyl-counter" id="cwyl-counter">1 / ${viewerImgs.length}</span>
+        <button class="cwyl-btn" onclick="cwylSlide(1)">→</button>
+        <span class="cwyl-cap-text" id="cwyl-cap-text">${esc(viewerImgs[0]&&viewerImgs[0].caption||'')}</span>
       </div>
     </div>` : '';
 
-    const mainVid = vids[0]; const mainSrc = mainVid ? embedSrc(mainVid) : null;
-    const vidHTML = mainSrc ? `<div class="split-vid-wrap"><iframe src="${mainSrc}" allowfullscreen loading="lazy"></iframe></div>` : '';
-
+    const v0 = vids[0]; const s0 = v0?src(v0):null;
     body = `<div class="cwyl-question"><p>${esc(P.openingQuestion||'')}</p></div>`
-      + viewerHTML
+      + viewerBlock
       + `<div class="cwyl-bottom">
-          <div><p class="cwyl-bottom-label">About the Work</p><p class="cwyl-bottom-writeup">${esc(P.fullDescription)}</p></div>
-          <div>${vidHTML}</div>
+          <div><p class="cwyl-writeup-label">About the Work</p><p class="cwyl-writeup">${esc(P.fullDescription)}</p></div>
+          <div>${s0?`<div class="split-vid-wrap">${iframe(v0)}</div>`:''}</div>
         </div>`;
 
-    // CWYL slider logic
+    // CWYL slider — defined here, attached to DOM after root.innerHTML is set
     window.cwylSlide = d => {
-      cwylCur = (cwylCur + d + viewerImgs.length) % viewerImgs.length;
-      const img = $('cwyl-img');
-      if (img) { img.src = viewerImgs[cwylCur].url; img.onclick = ()=>lbOpenPool(cwylImgs, cwylCur); }
-      const ctr = $('cwyl-counter'); if(ctr) ctr.textContent = `${cwylCur+1} / ${viewerImgs.length}`;
-      const cap = $('cwyl-cap'); if(cap) cap.textContent = viewerImgs[cwylCur]&&viewerImgs[cwylCur].caption||'';
+      cwylCur = (cwylCur+d+viewerImgs.length)%viewerImgs.length;
+      const img=$('cwyl-img'); if(img){img.src=viewerImgs[cwylCur].url; img.onclick=()=>lbOpen('cwylImgs',cwylCur);}
+      const ctr=$('cwyl-counter'); if(ctr) ctr.textContent=`${cwylCur+1} / ${viewerImgs.length}`;
+      const cap=$('cwyl-cap-text'); if(cap) cap.textContent=viewerImgs[cwylCur]&&viewerImgs[cwylCur].caption||'';
     };
   }
 
-  // ════ FALLBACK: show video then writeup ════
+  /* DEFAULT: video → writeup → collaterals grid */
   else {
-    body = mkVideosBlock() + mkWriteup() + mkColSection(cols);
+    LB_POOLS['cols'] = cols;
+    body = mkVideos() + mkWriteup() + mkColSection(cols,'cols');
   }
 
-  root.innerHTML = hdr + body;
+  root.innerHTML = mkHeader() + body;
 
-  // ── LUX MOBILE SLIDER ──
+  // After root.innerHTML set — fix CWYL img onclick (was a placeholder)
+  if (tmpl === 'cwyl') {
+    const img=$('cwyl-img');
+    if(img) img.onclick = ()=>lbOpen('cwylImgs',0);
+  }
+
+  // ── LUX/MA mobile slider ──
   let luxCur = 0;
   window.luxSlide = d => {
-    luxCur = (luxCur + d + cols.length) % cols.length;
-    const track = $('lux-track'); if(track) track.style.transform=`translateX(-${luxCur*100}%)`;
-    const ctr = $('lux-counter'); if(ctr) ctr.textContent=`${luxCur+1} / ${cols.length}`;
+    const pool = LB_POOLS['cols']||[];
+    luxCur = (luxCur+d+pool.length)%pool.length;
+    const track=$('lux-track'); if(track) track.style.transform=`translateX(-${luxCur*100}%)`;
+    const ctr=$('lux-counter'); if(ctr) ctr.textContent=`${luxCur+1} / ${pool.length}`;
   };
 
-  // ── PROJECT RAIL ──
-  const rail = $('proj-rail');
-  const railEl = $('rail-scroll');
-  if (activeProjects.length > 1) {
-    rail.style.display = 'block';
-    activeProjects.forEach(proj => {
-      const isCurrent = proj.id === pid;
-      const card = document.createElement('a');
-      card.className = 'rail-card' + (isCurrent ? ' current' : '');
-      card.href = isCurrent ? '#' : `work.html?id=${proj.id}`;
-      const thumb = proj.thumbnailUrl
-        ? `<img src="${proj.thumbnailUrl}" alt="${esc(proj.title)}" loading="lazy">`
-        : `<div class="rail-thumb-ph"><span>${esc(proj.brand)}</span></div>`;
-      card.innerHTML = `<div class="rail-thumb">${thumb}</div><div class="rail-brand">${esc(proj.brand)}</div><div class="rail-title">${esc(proj.title)}</div>`;
-      railEl.appendChild(card);
-    });
-    requestAnimationFrame(()=>{
-      const cur = railEl.querySelector('.current');
-      if(cur) railEl.scrollLeft = cur.offsetLeft - (railEl.clientWidth/2) + (cur.clientWidth/2);
-      updateRailBtns();
-    });
-    railEl.addEventListener('scroll', updateRailBtns, {passive:true});
-  }
-  function updateRailBtns(){
-    const s=railEl;
-    if(!s) return;
-    $('rail-prev').classList.toggle('hidden', s.scrollLeft < 10);
-    $('rail-next').classList.toggle('hidden', s.scrollLeft >= s.scrollWidth - s.clientWidth - 10);
-  }
-  window.doRailScroll = d => { if(railEl) railEl.scrollLeft += d*320; };
+  // ── RAIL ──
+  buildRail();
 
-  // ── LIGHTBOX — pool-based ──
-  let lbCurIdx = 0;
-  let lbActivePool = cols;
-
-  window.lbOpenPool = (pool, i) => {
-    lbActivePool = pool; lbCurIdx = i;
-    lbRenderPool();
-    $('lb').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-  window.lbClose = () => {
-    $('lb').classList.remove('open');
-    document.body.style.overflow = '';
-  };
-  window.lbNav = d => {
-    lbCurIdx = (lbCurIdx + d + lbActivePool.length) % lbActivePool.length;
-    lbRenderPool();
-  };
-  window.lbOut = e => { if(e.target===$('lb')) lbClose(); };
-
-  function lbRenderPool() {
-    const c = lbActivePool[lbCurIdx]; if(!c) return;
-    $('lb-inner').innerHTML = `<img src="${c.url}" alt="${esc(c.caption||'')}">`;
-    $('lb-cap').textContent = c.caption||'';
-  }
-
-  document.addEventListener('keydown', e => {
+  // keyboard
+  document.addEventListener('keydown',e=>{
     if(!$('lb').classList.contains('open')) return;
     if(e.key==='Escape') lbClose();
     if(e.key==='ArrowRight') lbNav(1);
     if(e.key==='ArrowLeft') lbNav(-1);
   });
+
+  function buildRail(){
+    const rail=$('proj-rail'), railEl=$('rail-scroll');
+    if(!rail||!railEl) return;
+    if(activeProjects.length>1){
+      rail.style.display='block';
+      activeProjects.forEach(proj=>{
+        const isCurrent=proj.id===pid;
+        const card=document.createElement('a');
+        card.className='rail-card'+(isCurrent?' current':'');
+        card.href=isCurrent?'#':`work.html?id=${proj.id}`;
+        const thumb=proj.thumbnailUrl
+          ?`<img src="${proj.thumbnailUrl}" alt="${esc(proj.title)}" loading="lazy">`
+          :`<div class="rail-thumb-ph"><span>${esc(proj.brand)}</span></div>`;
+        card.innerHTML=`<div class="rail-thumb">${thumb}</div><div class="rail-brand">${esc(proj.brand)}</div><div class="rail-title">${esc(proj.title)}</div>`;
+        railEl.appendChild(card);
+      });
+      requestAnimationFrame(()=>{
+        const cur=railEl.querySelector('.current');
+        if(cur) railEl.scrollLeft=cur.offsetLeft-(railEl.clientWidth/2)+(cur.clientWidth/2);
+        updateRailBtns();
+      });
+      railEl.addEventListener('scroll',updateRailBtns,{passive:true});
+    }
+    function updateRailBtns(){
+      const s=railEl;
+      $('rail-prev').classList.toggle('hidden',s.scrollLeft<10);
+      $('rail-next').classList.toggle('hidden',s.scrollLeft>=s.scrollWidth-s.clientWidth-10);
+    }
+  }
+  window.doRailScroll=d=>{const r=$('rail-scroll');if(r)r.scrollLeft+=d*320;};
 })();
 </script>
 </body>

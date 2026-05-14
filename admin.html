@@ -826,6 +826,61 @@ window.downloadExport = ()=>{
   $('export-out').textContent = txt;
 };
 
+
+/* ── GALLERY THUMBNAILS ── */
+function renderThumbs(){
+  if(editIdx < 0){ if($('thumbs-list')) $('thumbs-list').innerHTML=''; return; }
+  const thumbs = S.projects[editIdx].thumbnails || [];
+  if(!$('thumbs-list')) return;
+  $('thumbs-list').innerHTML = thumbs.map((t,i) => `
+    <div style="background:var(--paper);padding:12px 14px;margin-bottom:8px;display:grid;grid-template-columns:auto 1fr 1fr auto;gap:10px;align-items:end">
+      <div class="fg" style="padding-bottom:2px">
+        <label style="opacity:0">x</label>
+        <button class="btn btn-sm" style="background:${t.active===false?'#bbb':'#1a7a3a'};color:#fff;border:none;min-width:52px;font-family:var(--mono);font-size:9px" onclick="toggleThumb(${i})">${t.active===false?'Off':'On'}</button>
+      </div>
+      <div class="fg"><label>Image URL</label>
+        <input type="text" id="th-url-${i}" value="${escA(t.url||'')}" placeholder="images/project/thumbnail-01.webp">
+      </div>
+      <div class="fg"><label>Caption</label>
+        <input type="text" id="th-cap-${i}" value="${escA(t.caption||'')}" placeholder="e.g. Event moment">
+      </div>
+      <div class="fg" style="padding-bottom:2px">
+        <label style="opacity:0">x</label>
+        <button class="btn btn-danger btn-sm" onclick="removeThumb(${i})">&#x2715;</button>
+      </div>
+    </div>`).join('');
+}
+function flushThumbsFromDOM(){
+  if(editIdx<0) return;
+  (S.projects[editIdx].thumbnails||[]).forEach((_,i)=>{
+    const u=$('th-url-'+i), c=$('th-cap-'+i);
+    if(u) S.projects[editIdx].thumbnails[i].url=u.value.trim();
+    if(c) S.projects[editIdx].thumbnails[i].caption=c.value.trim();
+  });
+}
+window.toggleThumb = i=>{
+  if(editIdx<0) return;
+  flushThumbsFromDOM();
+  if(!S.projects[editIdx].thumbnails) S.projects[editIdx].thumbnails=[];
+  const t=S.projects[editIdx].thumbnails[i]; if(!t) return;
+  t.active=t.active===false?true:false;
+  renderThumbs();
+  toast((t.active?'Thumbnail visible':'Thumbnail hidden')+' — export to publish.');
+};
+window.addThumb=()=>{
+  if(editIdx<0) return;
+  flushThumbsFromDOM();
+  if(!S.projects[editIdx].thumbnails) S.projects[editIdx].thumbnails=[];
+  S.projects[editIdx].thumbnails.push({url:'',caption:'',active:true});
+  renderThumbs();
+};
+window.removeThumb=i=>{
+  if(editIdx<0) return;
+  flushThumbsFromDOM();
+  S.projects[editIdx].thumbnails.splice(i,1);
+  renderThumbs();
+};
+/* ── END GALLERY THUMBNAILS ── */
 /* ═══════════════════════════════════════
    INIT
 ═══════════════════════════════════════ */
