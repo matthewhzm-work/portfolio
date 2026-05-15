@@ -959,35 +959,6 @@ const PORTFOLIO_DATA = {
       "active": true
     },
     {
-      "id": "mercedes-benz-eqc",
-      "brand": "Mercedes-Benz",
-      "title": "EQC",
-      "subtitle": "Launching Mercedes-Benz's first fully electric SUV into a market ready for something new",
-      "award": "",
-      "tags": [
-        "Auto",
-        "EV",
-        "Launch",
-        "Integrated"
-      ],
-      "placeholderColor": "#1a1a1a",
-      "gridSpan": 6,
-      "thumbnailUrl": "images/mercedes-benz-eqc/thumb.gif",
-      "thumbnailType": "gif",
-      "description": "The Mercedes-Benz EQC launch — introducing the brand's first fully electric SUV to Southeast Asia with a campaign built around the thrill of a new kind of drive.",
-      "fullDescription": "The EQC was Mercedes-Benz's declaration that electric luxury had arrived. The launch campaign balanced the rational case for electric — range, efficiency, charging — with the emotional pull that makes a Mercedes desirable. A car that didn't ask you to sacrifice anything.",
-      "projectTemplate": "writeup-left-video-right",
-      "collaterals": [],
-      "videos": [
-        {
-          "url": "https://vimeo.com/651140992",
-          "type": "vimeo",
-          "caption": "Mercedes-Benz EQC — Launch film"
-        }
-      ],
-      "active": true
-    },
-    {
       "id": "volkswagen-prints",
       "brand": "Volkswagen",
       "title": "Prints",
@@ -1081,6 +1052,35 @@ const PORTFOLIO_DATA = {
         }
       ],
       "videos": [],
+      "active": true
+    },
+    {
+      "id": "mercedes-benz-eqc",
+      "brand": "Mercedes-Benz",
+      "title": "EQC",
+      "subtitle": "Launching Mercedes-Benz's first fully electric SUV into a market ready for something new",
+      "award": "",
+      "tags": [
+        "Auto",
+        "EV",
+        "Launch",
+        "Integrated"
+      ],
+      "placeholderColor": "#1a1a1a",
+      "gridSpan": 6,
+      "thumbnailUrl": "images/mercedes-benz-eqc/thumb.gif",
+      "thumbnailType": "gif",
+      "description": "The Mercedes-Benz EQC launch — introducing the brand's first fully electric SUV to Southeast Asia with a campaign built around the thrill of a new kind of drive.",
+      "fullDescription": "The EQC was Mercedes-Benz's declaration that electric luxury had arrived. The launch campaign balanced the rational case for electric — range, efficiency, charging — with the emotional pull that makes a Mercedes desirable. A car that didn't ask you to sacrifice anything.",
+      "projectTemplate": "writeup-left-video-right",
+      "collaterals": [],
+      "videos": [
+        {
+          "url": "https://vimeo.com/651140992",
+          "type": "vimeo",
+          "caption": "Mercedes-Benz EQC — Launch film"
+        }
+      ],
       "active": true
     },
     {
