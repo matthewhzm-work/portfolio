@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CMS — Matthew Ho</title>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -131,6 +132,23 @@ body{background:var(--paper);font-family:var(--body);font-size:14px;color:var(--
   .g2,.g3{grid-template-columns:1fr}
   .col-grid{grid-template-columns:1fr 1fr}
 }
+
+/* ── QUILL RTE ── */
+.ql-container{font-family:var(--body);font-size:13px;border:none}
+.ql-toolbar.ql-snow{border:none;border-bottom:1px solid var(--light);padding:6px 8px;background:#f0efe9}
+.ql-toolbar.ql-snow .ql-picker-label,.ql-toolbar.ql-snow button{color:var(--ink)}
+.ql-toolbar.ql-snow .ql-picker-label:hover,.ql-toolbar.ql-snow button:hover,.ql-toolbar.ql-snow .ql-active{color:var(--red)}
+.rte-wrap{border:1.5px solid var(--light);transition:border-color 0.18s}
+.rte-wrap:focus-within{border-color:var(--red)}
+.ql-editor{min-height:90px;padding:10px 12px;line-height:1.6;color:var(--ink);background:var(--paper)}
+.ql-editor.ql-blank::before{color:#bbb;font-style:normal}
+.ql-editor h2{font-family:var(--display);font-size:1.35em;font-weight:700;margin:0.2em 0 0.4em;line-height:1.2}
+.ql-editor h3{font-family:var(--display);font-size:1.1em;font-weight:600;margin:0.2em 0 0.3em;line-height:1.2}
+.ql-editor p{margin-bottom:0.4em}
+.ql-editor ul,.ql-editor ol{padding-left:1.4em;margin-bottom:0.4em}
+.ql-editor .ql-size-small{font-size:0.85em}
+.ql-editor .ql-size-large{font-size:1.25em}
+.ql-editor .ql-size-huge{font-size:1.65em}
 </style>
 </head>
 <body>
@@ -231,8 +249,8 @@ body{background:var(--paper);font-family:var(--body);font-size:14px;color:var(--
               <div class="fg"><label>Award Label (optional)</label><input type="text" id="e-award" placeholder="e.g. 5× MEA Gold 2025"></div>
               <div class="fg full"><label>Project Title</label><input type="text" id="e-title"></div>
               <div class="fg full"><label>Subtitle (project page)</label><input type="text" id="e-subtitle"></div>
-              <div class="fg full"><label>Card Description (homepage)</label><textarea id="e-desc" rows="2"></textarea></div>
-              <div class="fg full"><label>Full Description (project page)</label><textarea id="e-fulldesc" rows="4"></textarea></div>
+              <div class="fg full"><label>Card Description (homepage card)</label><div class="rte-wrap"><div id="e-desc"></div></div></div>
+              <div class="fg full"><label>Full Description (project page write-up)</label><div class="rte-wrap"><div id="e-fulldesc"></div></div></div>
               <div class="fg"><label>Grid Span (columns out of 12)</label>
                 <select id="e-span">
                   <option value="7">Wide — 7/12</option>
@@ -244,9 +262,20 @@ body{background:var(--paper);font-family:var(--body);font-size:14px;color:var(--
               </div>
               <div class="fg"><label>Project Page Template</label>
                 <select id="e-template">
-                  <option value="film">Film — video hero, description, collateral grid</option>
-                  <option value="editorial">Editorial — hero image, centred text, alternating rows</option>
-                  <option value="grid">Grid — photo mosaic first, description below</option>
+                  <option value="default">Default — videos → write-up → collaterals</option>
+                  <option value="lux">Lux — video → 3-col write-up → 2-col images</option>
+                  <option value="hsbc-mind-athletes">HSBC Mind Athletes</option>
+                  <option value="writeup-then-video">Write-up → Video</option>
+                  <option value="writeup-left-video-right">Write-up Left / Video Right</option>
+                  <option value="video-left-writeup-right">Video Left / Write-up Right</option>
+                  <option value="writeup-left-video-right-row3">Write-up L / Video R + 3 below</option>
+                  <option value="video-left-writeup-right-row3">Video L / Write-up R + 3 below</option>
+                  <option value="two-videos-side-by-side">2 Videos Side-by-Side</option>
+                  <option value="prints-side-by-side">Prints Side-by-Side</option>
+                  <option value="mha">MHA — write-up → video → 3 prints</option>
+                  <option value="cwyl">CWYL — question → image viewer → split</option>
+                  <option value="ofnoah">ofnoah — custom layout</option>
+                  <option value="vivo">vivo V15 — quote → blossom pink → social → PUBG</option>
                 </select>
               </div>
               <div class="fg full"><label>Tags (comma-separated)</label><input type="text" id="e-tags" placeholder="Social, Integrated, Brand"></div>
@@ -352,6 +381,7 @@ body{background:var(--paper);font-family:var(--body);font-size:14px;color:var(--
 
 <div class="toast" id="toast"></div>
 
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script src="data.js"></script>
 <script>
 (function(){
@@ -392,6 +422,31 @@ if(sessionStorage.getItem(SK) === CORRECT){
 let S = JSON.parse(JSON.stringify(PORTFOLIO_DATA));
 let editIdx = -1;
 const $ = id => document.getElementById(id);
+
+/* ── QUILL STATE ── */
+const QUILTS = {};
+const QUILL_TOOLBAR = [
+  [{ header: [2, 3, false] }],
+  ['bold', 'italic', 'underline'],
+  [{ size: ['small', false, 'large', 'huge'] }],
+  [{ list: 'ordered' }, { list: 'bullet' }],
+  [{ indent: '-1' }, { indent: '+1' }],
+  ['clean']
+];
+function initRTE(id, html, placeholder) {
+  const el = document.getElementById(id);
+  if (!el) return null;
+  if (QUILTS[id]) { QUILTS[id].root.innerHTML = html || ''; return QUILTS[id]; }
+  const q = new Quill(el, { theme:'snow', placeholder: placeholder||'Write here…', modules:{ toolbar: QUILL_TOOLBAR } });
+  q.root.innerHTML = html || '';
+  QUILTS[id] = q;
+  return q;
+}
+function getQuillHtml(id) {
+  const q = QUILTS[id]; if (!q) return '';
+  const h = q.root.innerHTML;
+  return (h === '<p><br></p>' || h === '<p></p>') ? '' : h;
+}
 
 /* ═══════════════════════════════════════
    UTILS
@@ -443,24 +498,26 @@ function renderProfile(){
 }
 
 function renderBioList(){
-  $('bio-list').innerHTML = (S.bio||[]).map((p,i) => `
+  flushBioFromDOM();
+  $('bio-list').innerHTML=(S.bio||[]).map((p,i)=>`
     <div style="background:var(--paper);padding:14px;margin-bottom:8px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
         <span style="font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:0.1em;text-transform:uppercase">Paragraph ${i+1}</span>
         <button class="btn btn-danger btn-sm" onclick="removeBio(${i})">Remove</button>
       </div>
-      <textarea id="bio-${i}" rows="3">${esc(p)}</textarea>
+      <div class="rte-wrap"><div id="bio-rte-${i}"></div></div>
     </div>`).join('');
+  (S.bio||[]).forEach((p,i)=>initRTE('bio-rte-'+i, p, 'Bio paragraph…'));
 }
 
 window.addBio    = ()=>{ flushBioFromDOM(); S.bio.push(''); renderBioList(); };
 window.removeBio = i =>{ flushBioFromDOM(); S.bio.splice(i,1); renderBioList(); };
 
-/* Flush bio textareas → S.bio before any operation */
+/* Flush bio RTEs → S.bio before any operation */
 function flushBioFromDOM(){
   (S.bio||[]).forEach((_,i)=>{
-    const el = $('bio-'+i);
-    if(el) S.bio[i] = el.value;
+    const h=getQuillHtml('bio-rte-'+i);
+    if(h!==undefined && h!=='') S.bio[i]=h;
   });
 }
 
@@ -531,10 +588,10 @@ window.editProject = i => {
   $('e-award').value     = p.award           || '';
   $('e-title').value     = p.title           || '';
   $('e-subtitle').value  = p.subtitle        || '';
-  $('e-desc').value      = p.description     || '';
-  $('e-fulldesc').value  = p.fullDescription || '';
+  initRTE('e-desc',     p.description     || '', 'Short description shown on the homepage card…');
+  initRTE('e-fulldesc', p.fullDescription || '', 'Full write-up shown on the project page…');
   $('e-span').value      = String(p.gridSpan || 6);
-  $('e-template').value  = p.projectTemplate || 'film';
+  $('e-template').value  = p.projectTemplate || 'default';
   $('e-tags').value      = (p.tags||[]).join(', ');
   $('e-thumburl').value  = p.thumbnailUrl    || '';
   $('e-thumbtype').value = p.thumbnailType   || 'image';
@@ -561,8 +618,8 @@ window.saveProject = ()=>{
   p.award           = $('e-award').value.trim();
   p.title           = $('e-title').value.trim();
   p.subtitle        = $('e-subtitle').value.trim();
-  p.description     = $('e-desc').value.trim();
-  p.fullDescription = $('e-fulldesc').value.trim();
+  p.description     = getQuillHtml('e-desc');
+  p.fullDescription = getQuillHtml('e-fulldesc');
   p.gridSpan        = parseInt($('e-span').value) || 6;
   p.projectTemplate = $('e-template').value;
   p.tags            = $('e-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
@@ -663,6 +720,55 @@ window.removeCol = i=>{
   });
   S.projects[editIdx].collaterals.splice(i, 1);
   renderCols();
+};
+
+/* ═══════════════════════════════════════
+   VIDEOS
+═══════════════════════════════════════ */
+function renderVideos(){
+  if(editIdx<0){$('videos-list').innerHTML='';return;}
+  const vids=S.projects[editIdx].videos||[];
+  $('videos-list').innerHTML=vids.map((v,i)=>`
+    <div class="vid-row" style="background:var(--paper);padding:12px 14px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span style="font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:0.12em;text-transform:uppercase">Video ${i+1}</span>
+        <button class="btn btn-danger btn-sm" onclick="removeVid(${i})">Remove</button>
+      </div>
+      <div class="g2">
+        <div class="fg full"><label>URL (Vimeo / YouTube)</label>
+          <input type="text" class="vid-url" value="${escA(v.url||'')}" placeholder="https://vimeo.com/..."></div>
+        <div class="fg"><label>Type</label>
+          <select class="vid-type">
+            <option value="vimeo"   ${v.type==='vimeo'  ?'selected':''}>Vimeo</option>
+            <option value="youtube" ${v.type==='youtube'?'selected':''}>YouTube</option>
+            <option value="file"    ${v.type==='file'   ?'selected':''}>Direct file</option>
+          </select></div>
+        <div class="fg"><label>Caption</label>
+          <input type="text" class="vid-cap-inp" value="${escA(v.caption||'')}" placeholder="Film title or note"></div>
+      </div>
+    </div>`).join('');
+}
+function flushVideosFromDOM(){
+  if(editIdx<0) return;
+  const rows=[];
+  document.querySelectorAll('#videos-list .vid-row').forEach(row=>{
+    const url=row.querySelector('.vid-url').value.trim();
+    if(url) rows.push({url,type:row.querySelector('.vid-type').value,caption:row.querySelector('.vid-cap-inp').value.trim()});
+  });
+  S.projects[editIdx].videos=rows;
+}
+window.addVideo=()=>{
+  if(editIdx<0) return;
+  flushVideosFromDOM();
+  if(!S.projects[editIdx].videos) S.projects[editIdx].videos=[];
+  S.projects[editIdx].videos.push({url:'',type:'vimeo',caption:''});
+  renderVideos();
+};
+window.removeVid=i=>{
+  if(editIdx<0) return;
+  flushVideosFromDOM();
+  S.projects[editIdx].videos.splice(i,1);
+  renderVideos();
 };
 
 /* ═══════════════════════════════════════

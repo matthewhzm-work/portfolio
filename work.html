@@ -181,6 +181,25 @@ img{max-width:100%;height:auto;display:block}
 .ofnoah-last{padding:0 var(--pad) 80px}
 .ofnoah-last img{width:100%;max-width:25%;height:auto;display:block;margin:0 auto;cursor:pointer}
 
+/* ── RICH TEXT OUTPUT ── */
+.rte p{margin-bottom:0.75em}
+.rte p:last-child{margin-bottom:0}
+.rte h2{font-family:var(--display);font-size:1.4em;font-weight:700;line-height:1.15;margin:0.8em 0 0.4em;letter-spacing:-0.01em}
+.rte h3{font-family:var(--display);font-size:1.15em;font-weight:600;line-height:1.2;margin:0.6em 0 0.3em}
+.rte h2:first-child,.rte h3:first-child{margin-top:0}
+.rte strong,.rte b{font-weight:700}
+.rte em,.rte i{font-style:italic}
+.rte u{text-decoration:underline}
+.rte ul,.rte ol{padding-left:1.5em;margin-bottom:0.75em}
+.rte ul{list-style:disc}
+.rte ol{list-style:decimal}
+.rte li{margin-bottom:0.25em}
+.rte .ql-size-small{font-size:0.875em}
+.rte .ql-size-large{font-size:1.25em}
+.rte .ql-size-huge{font-size:1.65em}
+.rte .ql-indent-1{padding-left:2em}
+.rte .ql-indent-2{padding-left:4em}
+
 /* ── COLLATERAL GRID (fallback/general) ── */
 .col-section{padding:0 var(--pad) 80px}
 .col-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;margin-top:16px}
@@ -339,6 +358,40 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   const vids = (P.videos||[]).filter(v=>v.url&&v.url.trim());
   const tmpl = P.projectTemplate || 'default';
 
+  /* ── RICH TEXT HELPERS ── */
+  function renderHtml(s){
+    if(!s) return '';
+    if(!/</.test(s)) return '<p>'+String(s).replace(/\n\n+/g,'</p><p>').replace(/\n/g,'<br>')+'</p>';
+    return String(s);
+  }
+  function splitHtmlCols(html){
+    const rendered=renderHtml(html);
+    const tmp=document.createElement('div');
+    tmp.innerHTML=rendered;
+    const kids=Array.from(tmp.children);
+    if(kids.length<=1){
+      const sents=tmp.textContent.split(/(?<=[.!?])\s+/);
+      if(sents.length<=1) return [rendered,''];
+      const mid=Math.ceil(sents.length/2);
+      return ['<p>'+sents.slice(0,mid).join(' ')+'</p>','<p>'+sents.slice(mid).join(' ')+'</p>'];
+    }
+    const mid=Math.ceil(kids.length/2);
+    return [kids.slice(0,mid).map(k=>k.outerHTML).join(''),kids.slice(mid).map(k=>k.outerHTML).join('')];
+  }
+  function splitHtmlThree(html){
+    const rendered=renderHtml(html);
+    const tmp=document.createElement('div');
+    tmp.innerHTML=rendered;
+    const kids=Array.from(tmp.children);
+    if(kids.length<=1){
+      const sents=tmp.textContent.split(/(?<=[.!?])\s+/);
+      const t=Math.ceil(sents.length/3);
+      return ['<p>'+sents.slice(0,t).join(' ')+'</p>','<p>'+sents.slice(t,t*2).join(' ')+'</p>','<p>'+sents.slice(t*2).join(' ')+'</p>'];
+    }
+    const t=Math.ceil(kids.length/3);
+    return [kids.slice(0,t).map(k=>k.outerHTML).join(''),kids.slice(t,t*2).map(k=>k.outerHTML).join(''),kids.slice(t*2).map(k=>k.outerHTML).join('')];
+  }
+
   // ── LIGHTBOX ENGINE ──
   // All pools stored here; onclick passes pool key + index
   const LB_POOLS = { cols };
@@ -401,7 +454,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   }
 
   function mkWriteup() {
-    return `<div class="writeup-section"><div class="writeup-inner"><p class="c-label">About the Work</p><p class="writeup-text">${esc(P.fullDescription)}</p></div></div>`;
+    return `<div class="writeup-section"><div class="writeup-inner"><p class="c-label">About the Work</p><div class="writeup-text rte">${renderHtml(P.fullDescription)}</div></div></div>`;
   }
 
   function mkColSection(pool, poolKey) {
@@ -440,11 +493,9 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
     const luxPool = [...cols];
     if (P.thumbnailUrl) luxPool.splice(5, 0, {url: P.thumbnailUrl, caption: ''});
     LB_POOLS['cols'] = luxPool;
-    const sentences = P.fullDescription.split(/(?<=[.!?])\s+/);
-    const t = Math.ceil(sentences.length/3);
-    const [p1,p2,p3] = [sentences.slice(0,t).join(' '), sentences.slice(t,t*2).join(' '), sentences.slice(t*2).join(' ')];
+    const [lp1,lp2,lp3] = splitHtmlThree(P.fullDescription);
     body = mkVideos()
-      + `<div class="lux-writeup-3col"><p>${esc(p1)}</p><p>${esc(p2)||'&nbsp;'}</p><p>${esc(p3)||'&nbsp;'}</p></div>`
+      + `<div class="lux-writeup-3col"><div class="rte">${lp1||'&nbsp;'}</div><div class="rte">${lp2||'&nbsp;'}</div><div class="rte">${lp3||'&nbsp;'}</div></div>`
       + mkLuxGrid('cols');
   }
 
@@ -453,13 +504,10 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
     const thumbs = (P.thumbnails||[]).filter(t=>t.url&&t.url.trim()&&t.active!==false);
     LB_POOLS['thumbs'] = thumbs;
     const thumbItems = thumbs.map((t,i)=>`<div class="ma-thumb-item" onclick="lbOpen('thumbs',${i})"><img src="${t.url}" alt="${esc(t.caption||'')}" loading="lazy"></div>`).join('');
-    const maSentences = P.fullDescription.split(/(?<=[.!?])\s+/);
-    const maMid = Math.ceil(maSentences.length/2);
-    const maCol1 = maSentences.slice(0,maMid).join(' ');
-    const maCol2 = maSentences.slice(maMid).join(' ');
+    const [maCol1,maCol2] = splitHtmlCols(P.fullDescription);
     body = `<div class="ma-quote-section"><p class="ma-quote">${esc(P.quote||'')}</p></div>`
       + mkVideos()
-      + `<div class="ma-writeup-2col"><p>${esc(maCol1)}</p>${maCol2?`<p>${esc(maCol2)}</p>`:''}</div>`
+      + `<div class="ma-writeup-2col"><div class="rte">${maCol1}</div>${maCol2?`<div class="rte">${maCol2}</div>`:''}</div>`
       + (thumbItems ? `<div class="ma-thumb-section"><p class="c-label" style="margin-bottom:16px">Campaign Gallery</p><div class="ma-thumb-row">${thumbItems}</div></div>` : '')
       + mkLuxGrid('cols');
   }
@@ -473,7 +521,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   else if (tmpl === 'writeup-left-video-right') {
     const v = vids[0]; const s = v ? src(v) : null;
     body = `<div class="split-row">
-      <div><p class="split-label">About the Work</p><p class="split-text">${esc(P.fullDescription)}</p></div>
+      <div><p class="split-label">About the Work</p><div class="split-text rte">${renderHtml(P.fullDescription)}</div></div>
       <div>${s?`<div class="split-vid-wrap">${iframe(v)}</div>`:''}</div>
     </div>`;
   }
@@ -483,7 +531,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
     const v = vids[0]; const s = v ? src(v) : null;
     body = `<div class="split-row">
       <div>${s?`<div class="split-vid-wrap">${iframe(v)}</div>`:''}</div>
-      <div><p class="split-label">About the Work</p><p class="split-text">${esc(P.fullDescription)}</p></div>
+      <div><p class="split-label">About the Work</p><div class="split-text rte">${renderHtml(P.fullDescription)}</div></div>
     </div>`;
   }
 
@@ -495,7 +543,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
       return `<div><p class="tvi-label">${esc(v.caption||'')}</p><div class="tvi-wrap">${iframe(v)}</div></div>`;
     }).filter(Boolean).join('');
     body = `<div class="split-row">
-        <div><p class="split-label">About the Work</p><p class="split-text">${esc(P.fullDescription)}</p></div>
+        <div><p class="split-label">About the Work</p><div class="split-text rte">${renderHtml(P.fullDescription)}</div></div>
         <div>${s0?`<div class="split-vid-wrap">${iframe(v0)}</div>`:''}</div>
       </div>`
       + (row3 ? `<div class="three-vid-row">${row3}</div>` : '');
@@ -510,7 +558,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
     }).filter(Boolean).join('');
     body = `<div class="split-row">
         <div>${s0?`<div class="split-vid-wrap">${iframe(v0)}</div>`:''}</div>
-        <div><p class="split-label">About the Work</p><p class="split-text">${esc(P.fullDescription)}</p></div>
+        <div><p class="split-label">About the Work</p><div class="split-text rte">${renderHtml(P.fullDescription)}</div></div>
       </div>`
       + (row3 ? `<div class="three-vid-row">${row3}</div>` : '');
   }
@@ -529,7 +577,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
     const prints = [{url:P.thumbnailUrl,caption:P.title}, ...cols.filter(c=>c.url)].filter(p=>p&&p.url);
     LB_POOLS['prints'] = prints;
     const imgs = prints.map((p,i)=>`<img src="${p.url}" alt="${esc(p.caption||'')}" loading="lazy" onclick="lbOpen('prints',${i})" style="cursor:pointer">`).join('');
-    body = `<div class="prints-row">${imgs}</div><div class="prints-writeup"><p>${esc(P.fullDescription)}</p></div>`;
+    body = `<div class="prints-row">${imgs}</div><div class="prints-writeup rte">${renderHtml(P.fullDescription)}</div>`;
   }
 
   /* MHA: 2-col writeup → video → 3 portrait prints */
@@ -537,11 +585,8 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
     const mhaPrints = (P.prints||[]).filter(p=>p&&p.url);
     LB_POOLS['mhaPrints'] = mhaPrints;
     const pHTML = mhaPrints.map((p,i)=>`<div class="mha-print-item" onclick="lbOpen('mhaPrints',${i})"><img src="${p.url}" alt="${esc(p.caption||'')}" loading="lazy"></div>`).join('');
-    const mhaSentences = P.fullDescription.split(/(?<=[.!?])\s+/);
-    const mhaMid = Math.ceil(mhaSentences.length/2);
-    const mhaCol1 = mhaSentences.slice(0,mhaMid).join(' ');
-    const mhaCol2 = mhaSentences.slice(mhaMid).join(' ');
-    body = `<div class="ma-writeup-2col"><p>${esc(mhaCol1)}</p>${mhaCol2?`<p>${esc(mhaCol2)}</p>`:''}</div>`
+    const [mhaCol1,mhaCol2] = splitHtmlCols(P.fullDescription);
+    body = `<div class="ma-writeup-2col"><div class="rte">${mhaCol1}</div>${mhaCol2?`<div class="rte">${mhaCol2}</div>`:''}</div>`
       + mkVideos()
       + `<div class="mha-prints-row">${pHTML}</div>`;
   }
@@ -571,7 +616,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
     body = `<div class="cwyl-question"><p>${esc(P.openingQuestion||'')}</p></div>`
       + viewerBlock
       + `<div class="cwyl-bottom">
-          <div><p class="cwyl-writeup-label">About the Work</p><p class="cwyl-writeup">${esc(P.fullDescription)}</p></div>
+          <div><p class="cwyl-writeup-label">About the Work</p><div class="cwyl-writeup rte">${renderHtml(P.fullDescription)}</div></div>
           <div>${s0?`<div class="split-vid-wrap">${iframe(v0)}</div>`:''}</div>
         </div>`;
 
@@ -599,19 +644,16 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
     const socialRow = social.map(v=>`<div class="vivo-social-item"><p>${esc(v.caption||'')}</p>${vid4x5(v)}</div>`).join('');
     const pubgRow   = pubgRest.map(v=>`<div class="vivo-2pubg-item"><p>${esc(v.caption||'')}</p>${vid16x9(v)}</div>`).join('');
 
-    const sents = P.fullDescription.split(/(?<=[.!?])\s+/);
-    const mid   = Math.ceil(sents.length/2);
-    const wc1   = sents.slice(0,mid).join(' ');
-    const wc2   = sents.slice(mid).join(' ');
+    const [wc1,wc2] = splitHtmlCols(P.fullDescription);
 
     const pubg1S = pubg1 ? src(pubg1) : null;
 
     body = `<div class="vivo-quote"><p>${esc(P.quote||'')}</p></div>`
       + `<div class="vivo-3pink-row">${pinkRow}</div>`
-      + `<div class="vivo-2col-writeup"><p>${esc(wc1)}</p>${wc2?`<p>${esc(wc2)}</p>`:''}</div>`
+      + `<div class="vivo-2col-writeup"><div class="rte">${wc1}</div>${wc2?`<div class="rte">${wc2}</div>`:''}</div>`
       + `<div class="vivo-4social-row">${socialRow}</div>`
       + `<div class="vivo-pubg-split">
-          <div><p class="vivo-pubg-label">About the Work</p><p class="vivo-pubg-text">${esc(P.description)}</p></div>
+          <div><p class="vivo-pubg-label">About the Work</p><div class="vivo-pubg-text rte">${renderHtml(P.description)}</div></div>
           <div>${pubg1S?`<div class="vivo-vid-16x9"><iframe src="${pubg1S}" allowfullscreen loading="lazy"></iframe></div>`:''}</div>
         </div>`
       + `<div class="vivo-2pubg-row">${pubgRow}</div>`;
@@ -637,15 +679,12 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
     LB_POOLS['ofnoahMix'] = mixPool;
     LB_POOLS['ofnoahLast'] = lastPool;
 
-    const sentences = P.fullDescription.split(/(?<=[.!?])\s+/);
-    const mid = Math.ceil(sentences.length/2);
-    const col1 = sentences.slice(0,mid).join(' ');
-    const col2 = sentences.slice(mid).join(' ');
+    const [col1,col2] = splitHtmlCols(P.fullDescription);
 
     const sqHTML = sqPool.map((s,i)=>`<img src="${s.url}" loading="lazy" onclick="lbOpen('ofnoahSq',${i})">`).join('');
 
     body = `<div class="ofnoah-hero"><img src="${base}mainboard.gif" alt="ofnoah mainboard"></div>`
-      + `<div class="ofnoah-2col"><p>${esc(col1)}</p>${col2?`<p>${esc(col2)}</p>`:''}</div>`
+      + `<div class="ofnoah-2col"><div class="rte">${col1}</div>${col2?`<div class="rte">${col2}</div>`:''}</div>`
       + `<div class="ofnoah-squares"><div class="ofnoah-squares-inner">${sqHTML}</div></div>`
       + `<div class="ofnoah-mixed">
           <div class="ofnoah-outdoor"><img src="${base}outdoor3.webp" loading="lazy" onclick="lbOpen('ofnoahMix',0)"></div>

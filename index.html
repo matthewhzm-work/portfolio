@@ -184,6 +184,20 @@ nav.scrolled{
   font-size:15px;font-weight:400;color:rgba(255,255,255,0.72);
   line-height:1.85;margin-bottom:16px;
 }
+.about-body .rte p{margin-bottom:0.75em}
+.about-body .rte p:last-child{margin-bottom:0}
+.about-body .rte h2{font-family:var(--display);font-size:1.3em;font-weight:700;color:rgba(255,255,255,0.9);margin:0.7em 0 0.3em;line-height:1.15}
+.about-body .rte h3{font-family:var(--display);font-size:1.1em;font-weight:600;color:rgba(255,255,255,0.85);margin:0.5em 0 0.2em}
+.about-body .rte strong,.about-body .rte b{font-weight:700}
+.about-body .rte em,.about-body .rte i{font-style:italic}
+.about-body .rte u{text-decoration:underline}
+.about-body .rte ul,.about-body .rte ol{padding-left:1.4em;margin-bottom:0.6em;color:rgba(255,255,255,0.72)}
+.about-body .rte ul{list-style:disc}
+.about-body .rte ol{list-style:decimal}
+.about-body .rte li{margin-bottom:0.2em}
+.about-body .rte .ql-size-small{font-size:0.875em}
+.about-body .rte .ql-size-large{font-size:1.25em}
+.about-body .rte .ql-size-huge{font-size:1.65em}
 .contact-block{margin-top:44px}
 .contact-row{
   display:flex;align-items:baseline;gap:22px;
@@ -343,6 +357,7 @@ footer{
 (function(){
   const D = PORTFOLIO_DATA;
   const $ = id => document.getElementById(id);
+  function renderHtml(s){if(!s)return'';if(!/</.test(s))return'<p>'+String(s).replace(/\n\n+/g,'</p><p>').replace(/\n/g,'<br>')+'</p>';return String(s);}
 
   $('nav-main').textContent   = D.title + '  ·  ' + D.tagline;
   $('nav-awards').textContent = D.awardStrip;
@@ -354,9 +369,12 @@ footer{
   }, {passive:true});
 
   D.bio.forEach(p => {
-    const el = document.createElement('p');
+    const el = document.createElement('div');
     el.className = 'about-body';
-    el.textContent = p;
+    const inner = document.createElement('div');
+    inner.className = 'rte';
+    inner.innerHTML = renderHtml(p);
+    el.appendChild(inner);
     $('about-bio').appendChild(el);
   });
 
