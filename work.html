@@ -142,19 +142,20 @@ img{max-width:100%;height:auto;display:block}
 
 /* ── OFNOAH ── */
 .ofnoah-hero{padding:0 var(--pad) 64px}
-.ofnoah-hero img{width:100%;height:auto;display:block}
+.ofnoah-hero img{width:100%;max-width:50%;height:auto;display:block;margin:0 auto}
 .ofnoah-2col{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 64px}
 .ofnoah-2col p{font-size:16px;font-weight:300;line-height:1.9;color:#222}
-.ofnoah-squares{display:flex;gap:8px;padding:0 var(--pad) 64px}
-.ofnoah-squares img{flex:1;min-width:0;height:auto;display:block;cursor:pointer}
-.ofnoah-mixed{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 var(--pad) 64px;align-items:start}
-.ofnoah-mixed>.ofnoah-outdoor img{width:100%;height:auto;display:block;cursor:pointer}
+.ofnoah-squares{padding:0 var(--pad) 64px}
+.ofnoah-squares-inner{display:flex;gap:8px;max-width:75%;margin:0 auto}
+.ofnoah-squares-inner img{flex:1;min-width:0;height:auto;display:block;cursor:pointer}
+.ofnoah-mixed{display:grid;grid-template-columns:1fr 3fr;gap:12px;padding:0 var(--pad) 64px;align-items:start}
+.ofnoah-outdoor img{width:100%;height:auto;display:block;cursor:pointer}
 .ofnoah-3vert{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .ofnoah-3vert img{width:100%;height:auto;display:block;cursor:pointer}
-.ofnoah-banner{padding:0 var(--pad) 64px}
-.ofnoah-banner img{display:block;max-width:728px;height:auto}
+.ofnoah-banner{margin-top:12px}
+.ofnoah-banner img{display:block;width:100%;max-width:728px;height:auto}
 .ofnoah-last{padding:0 var(--pad) 80px}
-.ofnoah-last img{width:100%;height:auto;display:block;cursor:pointer}
+.ofnoah-last img{width:100%;max-width:25%;height:auto;display:block;margin:0 auto;cursor:pointer}
 
 /* ── COLLATERAL GRID (fallback/general) ── */
 .col-section{padding:0 var(--pad) 80px}
@@ -228,8 +229,8 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   .mha-print-item{width:100%;max-width:400px}
   .cwyl-bottom{grid-template-columns:1fr}
   .ofnoah-2col{grid-template-columns:1fr}
-  .ofnoah-squares{flex-wrap:wrap}
-  .ofnoah-squares img{flex:0 0 calc(50% - 4px)}
+  .ofnoah-squares-inner{flex-wrap:wrap;max-width:100%}
+  .ofnoah-squares-inner img{flex:0 0 calc(50% - 4px)}
   .ofnoah-mixed{grid-template-columns:1fr}
   .ma-thumb-row{display:grid;grid-template-columns:repeat(3,1fr);overflow-x:visible;gap:6px}
   .ma-thumb-item{width:100%;height:auto;aspect-ratio:3/2}
@@ -565,16 +566,18 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 
     body = `<div class="ofnoah-hero"><img src="${base}mainboard.gif" alt="ofnoah mainboard"></div>`
       + `<div class="ofnoah-2col"><p>${esc(col1)}</p>${col2?`<p>${esc(col2)}</p>`:''}</div>`
-      + `<div class="ofnoah-squares">${sqHTML}</div>`
+      + `<div class="ofnoah-squares"><div class="ofnoah-squares-inner">${sqHTML}</div></div>`
       + `<div class="ofnoah-mixed">
           <div class="ofnoah-outdoor"><img src="${base}outdoor3.webp" loading="lazy" onclick="lbOpen('ofnoahMix',0)"></div>
-          <div class="ofnoah-3vert">
-            <img src="${base}vertical-thumb.webp" loading="lazy" onclick="lbOpen('ofnoahMix',1)">
-            <img src="${base}vertical1.webp" loading="lazy" onclick="lbOpen('ofnoahMix',2)">
-            <img src="${base}vertical2.webp" loading="lazy" onclick="lbOpen('ofnoahMix',3)">
+          <div>
+            <div class="ofnoah-3vert">
+              <img src="${base}vertical-thumb.webp" loading="lazy" onclick="lbOpen('ofnoahMix',1)">
+              <img src="${base}vertical1.webp" loading="lazy" onclick="lbOpen('ofnoahMix',2)">
+              <img src="${base}vertical2.webp" loading="lazy" onclick="lbOpen('ofnoahMix',3)">
+            </div>
+            <div class="ofnoah-banner"><img src="${base}standard-banner.gif" alt="Standard banner"></div>
           </div>
         </div>`
-      + `<div class="ofnoah-banner"><img src="${base}standard-banner.gif" alt="Standard banner"></div>`
       + `<div class="ofnoah-last"><img src="${base}outdoor2.webp" loading="lazy" onclick="lbOpen('ofnoahLast',0)"></div>`;
   }
 
