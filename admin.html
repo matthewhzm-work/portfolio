@@ -154,6 +154,22 @@ body{background:var(--paper);font-family:var(--body);font-size:14px;color:var(--
 .ql-editor .ql-size-small{font-size:0.85em}
 .ql-editor .ql-size-large{font-size:1.25em}
 .ql-editor .ql-size-huge{font-size:1.65em}
+
+/* ── PROJECT GRID VIEW ── */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.proj-card{background:var(--paper);border:1.5px solid var(--light);display:flex;flex-direction:column;transition:border-color 0.15s}
+.proj-card:hover{border-color:#bbb}
+.proj-card-pos{font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:0.1em;padding:7px 10px 4px;line-height:1}
+.proj-card-thumb{width:100%;overflow:hidden;background:#111;flex-shrink:0}
+.proj-card-thumb img{width:100%;height:auto;display:block}
+.proj-card-ph{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
+.proj-card-body{padding:8px 10px 10px;flex:1}
+.proj-card-brand{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:3px}
+.proj-card-title{font-family:var(--display);font-size:12px;font-weight:600;line-height:1.3;color:var(--ink)}
+.proj-card-actions{display:flex;gap:5px;align-items:center;padding:7px 10px;border-top:1px solid var(--light)}
+.proj-card-actions .btn-move{background:var(--paper);color:var(--ink);border:1.5px solid var(--light);padding:4px 9px;font-size:12px;line-height:1;cursor:pointer;transition:all 0.15s;border-radius:0;font-family:var(--body)}
+.proj-card-actions .btn-move:hover:not(:disabled){border-color:var(--ink)}
+.proj-card-actions .btn-move:disabled{opacity:0.25;cursor:default}
 </style>
 </head>
 <body>
@@ -534,9 +550,6 @@ window.saveProfile = ()=>{
 /* ═══════════════════════════════════════
    PROJECT LIST
 ═══════════════════════════════════════ */
-/* ── DRAG STATE ── */
-let dragSrcIdx = -1;
-
 function renderList(){
   $('proj-count').textContent = S.projects.length + ' projects';
   const list = $('project-list');
@@ -544,66 +557,59 @@ function renderList(){
     list.innerHTML = '<p style="font-size:13px;color:var(--mid);padding:8px 0">No projects yet.</p>';
     return;
   }
-  /* Precompute grid positions — only active projects occupy grid cells.
-     Grid is 3 columns, row-first: pos 0 = R1·C1, pos 1 = R1·C2, pos 2 = R1·C3, … */
-  const gridPos = {};
-  let activeCount = 0;
-  S.projects.forEach((p, i) => {
-    if (p.active !== false) gridPos[i] = activeCount++;
-  });
 
-  list.innerHTML = S.projects.map((p,i) => {
-    const gp = gridPos[i];
-    const posLabel = gp !== undefined
-      ? `R${Math.floor(gp/3)+1}·C${(gp%3)+1}`
-      : '—';
-    const posColor = gp !== undefined ? 'var(--red)' : 'var(--mid)';
-    return `
-    <div class="list-item" data-idx="${i}" draggable="true">
-      <span class="li-drag" title="Drag to reorder">⠿</span>
-      <span style="font-family:var(--mono);font-size:9px;color:${posColor};min-width:36px;text-align:right;letter-spacing:0.04em">${posLabel}</span>
-      <div class="li-main">
-        <div class="li-title">${esc(p.title)}</div>
-        <div class="li-sub">${esc(p.brand)} · ${p.projectTemplate||'default'} · ${(p.collaterals||[]).length} collateral(s)${(p.videos&&p.videos.length)?' · '+p.videos.length+' video(s)':''}</div>
-      </div>
-      ${p.award ? `<span class="li-badge">${esc(p.award)}</span>` : ''}
-      <button class="btn btn-secondary btn-sm" onclick="toggleActive(${i})" style="background:${p.active===false?'#555':'#1a7a3a'};color:#fff;border:none" title="${p.active===false?'Hidden — click to show':'Visible — click to hide'}">${p.active===false?'Hidden':'Live'}</button>
-      <button class="btn btn-secondary btn-sm" onclick="editProject(${i})">Edit</button>
-    </div>`;
-  }).join('');
+  /* Split into active (grid) and hidden (list below), preserving full-array index */
+  const active = [], hidden = [];
+  S.projects.forEach((p, i) => (p.active !== false ? active : hidden).push({p, i}));
 
-  /* Wire up drag-and-drop on each item */
-  list.querySelectorAll('.list-item').forEach(el => {
-    const idx = +el.dataset.idx;
-    el.addEventListener('dragstart', e => {
-      dragSrcIdx = idx;
-      el.classList.add('dragging');
-      e.dataTransfer.effectAllowed = 'move';
+  let html = '';
+
+  /* ── Active projects: 3-column grid matching homepage layout ── */
+  if(active.length){
+    html += '<div class="proj-grid">';
+    active.forEach(({p, i}, gi) => {
+      const row = Math.floor(gi/3)+1, col = (gi%3)+1;
+      const isFirst = gi === 0, isLast = gi === active.length-1;
+      const hasImg = p.thumbnailUrl && p.thumbnailUrl.trim();
+      const thumbHtml = hasImg
+        ? `<div class="proj-card-thumb"><img src="${esc(p.thumbnailUrl)}" loading="lazy"></div>`
+        : `<div class="proj-card-thumb"><div class="proj-card-ph" style="background:${p.placeholderColor||'#111'}"><span style="font-family:var(--display);font-weight:700;font-size:10px;color:rgba(255,255,255,0.12)">${esc(p.brand)}</span></div></div>`;
+      html += `
+        <div class="proj-card">
+          <div class="proj-card-pos">R${row}·C${col}</div>
+          ${thumbHtml}
+          <div class="proj-card-body">
+            <div class="proj-card-brand">${esc(p.brand)}</div>
+            <div class="proj-card-title">${esc(p.title)}</div>
+          </div>
+          <div class="proj-card-actions">
+            <button class="btn-move" onclick="moveProject(${i},-1)"${isFirst?' disabled':''} title="Move left">←</button>
+            <button class="btn-move" onclick="moveProject(${i},1)"${isLast?' disabled':''} title="Move right">→</button>
+            <button class="btn btn-sm" style="background:#1a7a3a;color:#fff;border:none;margin-left:auto" onclick="toggleActive(${i})">Live</button>
+            <button class="btn btn-secondary btn-sm" onclick="editProject(${i})">Edit</button>
+          </div>
+        </div>`;
     });
-    el.addEventListener('dragend', () => {
-      el.classList.remove('dragging');
-      list.querySelectorAll('.list-item').forEach(r => r.classList.remove('drag-over'));
+    html += '</div>';
+  }
+
+  /* ── Hidden projects: compact list ── */
+  if(hidden.length){
+    html += `<div class="mini-label" style="margin-top:18px;margin-bottom:8px">Hidden (${hidden.length})</div>`;
+    hidden.forEach(({p, i}) => {
+      html += `
+        <div class="list-item" style="opacity:0.6">
+          <div class="li-main">
+            <div class="li-title">${esc(p.title)}</div>
+            <div class="li-sub">${esc(p.brand)} · ${p.projectTemplate||'default'}</div>
+          </div>
+          <button class="btn btn-sm" style="background:#555;color:#fff;border:none" onclick="toggleActive(${i})">Hidden</button>
+          <button class="btn btn-secondary btn-sm" onclick="editProject(${i})">Edit</button>
+        </div>`;
     });
-    el.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; });
-    el.addEventListener('dragenter', () => {
-      list.querySelectorAll('.list-item').forEach(r => r.classList.remove('drag-over'));
-      el.classList.add('drag-over');
-    });
-    el.addEventListener('dragleave', e => {
-      if(!el.contains(e.relatedTarget)) el.classList.remove('drag-over');
-    });
-    el.addEventListener('drop', e => {
-      e.preventDefault(); e.stopPropagation();
-      el.classList.remove('drag-over');
-      const dest = +el.dataset.idx;
-      if(dragSrcIdx < 0 || dragSrcIdx === dest) return;
-      const moved = S.projects.splice(dragSrcIdx, 1)[0];
-      S.projects.splice(dest, 0, moved);
-      dragSrcIdx = -1;
-      renderList();
-      toast(`"${moved.title}" → position ${dest + 1}. Export to publish.`, 'info');
-    });
-  });
+  }
+
+  list.innerHTML = html;
 }
 
 /* ═══════════════════════════════════════
@@ -617,6 +623,19 @@ window.toggleActive = i => {
   S.projects[i].active = S.projects[i].active === false ? true : false;
   renderList();
   toast((S.projects[i].active ? 'Project set to Live' : 'Project hidden') + ' — export to publish.');
+};
+
+/* Move a project one slot left (dir=-1) or right (dir=+1) within the active grid.
+   Swaps with the adjacent active project in the full S.projects array. */
+window.moveProject = (idx, dir) => {
+  const activeIdxs = S.projects.reduce((a,p,i) => { if(p.active !== false) a.push(i); return a; }, []);
+  const myPos = activeIdxs.indexOf(idx);
+  const targetPos = myPos + dir;
+  if(targetPos < 0 || targetPos >= activeIdxs.length) return;
+  const ti = activeIdxs[targetPos];
+  [S.projects[idx], S.projects[ti]] = [S.projects[ti], S.projects[idx]];
+  renderList();
+  toast('Project moved — export to publish.', 'info');
 };
 
 window.addProject = ()=>{
