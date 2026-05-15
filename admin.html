@@ -689,6 +689,10 @@ window.updateTemplateFields = function(){
 };
 
 window.closeEditor = ()=>{
+  /* Reset editIdx BEFORE hiding, so any subsequent flushAll()
+     (e.g. triggered by showSec on section switch) doesn't write
+     stale editor DOM data into the wrong project after a reorder. */
+  editIdx = -1;
   $('view-editor').style.display = 'none';
   $('view-list').style.display   = 'block';
   renderList();
@@ -1014,7 +1018,13 @@ function flushAll(){
   flushBioFromDOM();
   flushExpFromDOM();
   flushAwardsFromDOM();
-  if(editIdx >= 0) flushProjectFromDOM();
+  /* Only flush the project editor when it is actively open.
+     Checking both editIdx and the editor's inline display prevents
+     stale editor DOM from overwriting the wrong project after a reorder. */
+  const editorOpen = editIdx >= 0
+    && $('view-editor')
+    && $('view-editor').style.display !== 'none';
+  if(editorOpen) flushProjectFromDOM();
 }
 
 /* ═══════════════════════════════════════
