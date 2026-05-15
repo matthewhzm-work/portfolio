@@ -145,6 +145,25 @@ img{max-width:100%;height:auto;display:block}
 .cwyl-writeup{font-size:16px;font-weight:300;line-height:1.9;color:#222}
 .cwyl-writeup-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
 
+/* ── VIVO V15 ── */
+.vivo-quote{padding:80px var(--pad) 56px;text-align:center}
+.vivo-quote p{font-family:var(--display);font-size:clamp(22px,3vw,40px);font-weight:600;line-height:1.2;letter-spacing:-0.02em;color:var(--ink)}
+.vivo-3pink-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 var(--pad) 64px}
+.vivo-3pink-item p{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+.vivo-vid-16x9{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--ink)}
+.vivo-vid-16x9 iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.vivo-2col-writeup{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 64px}
+.vivo-2col-writeup p{font-size:16px;font-weight:300;line-height:1.9;color:#222}
+.vivo-4social-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 var(--pad) 64px}
+.vivo-social-item p{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+.vivo-vid-4x5{position:relative;padding-bottom:125%;height:0;overflow:hidden;background:var(--ink)}
+.vivo-vid-4x5 iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.vivo-pubg-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 64px;align-items:start}
+.vivo-pubg-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
+.vivo-pubg-text{font-size:16px;font-weight:300;line-height:1.9;color:#222}
+.vivo-2pubg-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:0 var(--pad) 80px}
+.vivo-2pubg-item p{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+
 /* ── OFNOAH ── */
 .ofnoah-hero{padding:0 var(--pad) 64px}
 .ofnoah-hero img{width:100%;max-width:50%;height:auto;display:block;margin:0 auto}
@@ -233,6 +252,11 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   .mha-prints-row{flex-direction:column;align-items:center}
   .mha-print-item{width:100%;max-width:400px}
   .cwyl-bottom{grid-template-columns:1fr}
+  .vivo-3pink-row{grid-template-columns:1fr}
+  .vivo-2col-writeup{grid-template-columns:1fr}
+  .vivo-4social-row{grid-template-columns:repeat(2,1fr)}
+  .vivo-pubg-split{grid-template-columns:1fr}
+  .vivo-2pubg-row{grid-template-columns:1fr}
   .ofnoah-2col{grid-template-columns:1fr}
   .ofnoah-squares-inner{flex-wrap:wrap;max-width:100%}
   .ofnoah-squares-inner img{flex:0 0 calc(50% - 4px)}
@@ -558,6 +582,39 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
       const ctr=$('cwyl-counter'); if(ctr) ctr.textContent=`${cwylCur+1} / ${viewerImgs.length}`;
       const cap=$('cwyl-cap-text'); if(cap) cap.textContent=viewerImgs[cwylCur]&&viewerImgs[cwylCur].caption||'';
     };
+  }
+
+  /* VIVO V15: quote → 3 blossom pink (16:9) → 2-col writeup → 4 social (4:5) → writeup+pubg1 → 2 pubg */
+  else if (tmpl === 'vivo') {
+    // video indices: 0-3 social, 4-6 PUBG, 7-9 elevating, 10-12 blossom pink
+    const blossomPink = [vids[10],vids[11],vids[12]].filter(Boolean);
+    const social      = [vids[0],vids[1],vids[2],vids[3]].filter(Boolean);
+    const pubg1       = vids[4];
+    const pubgRest    = [vids[5],vids[6]].filter(Boolean);
+
+    function vid16x9(v){ const s=src(v); return s?`<div class="vivo-vid-16x9"><iframe src="${s}" allowfullscreen loading="lazy"></iframe></div>`:''; }
+    function vid4x5(v) { const s=src(v); return s?`<div class="vivo-vid-4x5"><iframe src="${s}" allowfullscreen loading="lazy"></iframe></div>`:''; }
+
+    const pinkRow   = blossomPink.map(v=>`<div class="vivo-3pink-item"><p>${esc(v.caption||'')}</p>${vid16x9(v)}</div>`).join('');
+    const socialRow = social.map(v=>`<div class="vivo-social-item"><p>${esc(v.caption||'')}</p>${vid4x5(v)}</div>`).join('');
+    const pubgRow   = pubgRest.map(v=>`<div class="vivo-2pubg-item"><p>${esc(v.caption||'')}</p>${vid16x9(v)}</div>`).join('');
+
+    const sents = P.fullDescription.split(/(?<=[.!?])\s+/);
+    const mid   = Math.ceil(sents.length/2);
+    const wc1   = sents.slice(0,mid).join(' ');
+    const wc2   = sents.slice(mid).join(' ');
+
+    const pubg1S = pubg1 ? src(pubg1) : null;
+
+    body = `<div class="vivo-quote"><p>${esc(P.quote||'')}</p></div>`
+      + `<div class="vivo-3pink-row">${pinkRow}</div>`
+      + `<div class="vivo-2col-writeup"><p>${esc(wc1)}</p>${wc2?`<p>${esc(wc2)}</p>`:''}</div>`
+      + `<div class="vivo-4social-row">${socialRow}</div>`
+      + `<div class="vivo-pubg-split">
+          <div><p class="vivo-pubg-label">About the Work</p><p class="vivo-pubg-text">${esc(P.description)}</p></div>
+          <div>${pubg1S?`<div class="vivo-vid-16x9"><iframe src="${pubg1S}" allowfullscreen loading="lazy"></iframe></div>`:''}</div>
+        </div>`
+      + `<div class="vivo-2pubg-row">${pubgRow}</div>`;
   }
 
   /* OFNOAH: mainboard gif → 2-col writeup → squares → outdoor3+verticals → banner → outdoor2 */

@@ -900,7 +900,7 @@ const PORTFOLIO_DATA = {
         }
       ],
       "videos": [],
-      "active": true
+      "active": false
     },
     {
       "id": "bybit-valentines-day",
@@ -1045,7 +1045,8 @@ const PORTFOLIO_DATA = {
       "thumbnailType": "gif",
       "description": "A product launch campaign for the vivo V15 — introducing its pop-up front camera to a generation for whom self-expression and content creation are a way of life.",
       "fullDescription": "The vivo V15 had a genuinely novel feature — a motorised pop-up front camera that appeared only when you needed it. The launch campaign made that mechanism feel iconic, building the product's selfie credentials with an audience for whom the front camera is the most important lens on the phone.",
-      "projectTemplate": "default",
+      "quote": "The launch of the V15",
+      "projectTemplate": "vivo",
       "collaterals": [],
       "videos": [
         {
