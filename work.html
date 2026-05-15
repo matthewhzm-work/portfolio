@@ -140,6 +140,22 @@ img{max-width:100%;height:auto;display:block}
 .cwyl-writeup{font-size:16px;font-weight:300;line-height:1.9;color:#222}
 .cwyl-writeup-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
 
+/* ── OFNOAH ── */
+.ofnoah-hero{padding:0 var(--pad) 64px}
+.ofnoah-hero img{width:100%;height:auto;display:block}
+.ofnoah-2col{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 64px}
+.ofnoah-2col p{font-size:16px;font-weight:300;line-height:1.9;color:#222}
+.ofnoah-squares{display:flex;gap:8px;padding:0 var(--pad) 64px}
+.ofnoah-squares img{flex:1;min-width:0;height:auto;display:block;cursor:pointer}
+.ofnoah-mixed{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 var(--pad) 64px;align-items:start}
+.ofnoah-mixed>.ofnoah-outdoor img{width:100%;height:auto;display:block;cursor:pointer}
+.ofnoah-3vert{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ofnoah-3vert img{width:100%;height:auto;display:block;cursor:pointer}
+.ofnoah-banner{padding:0 var(--pad) 64px}
+.ofnoah-banner img{display:block;max-width:728px;height:auto}
+.ofnoah-last{padding:0 var(--pad) 80px}
+.ofnoah-last img{width:100%;height:auto;display:block;cursor:pointer}
+
 /* ── COLLATERAL GRID (fallback/general) ── */
 .col-section{padding:0 var(--pad) 80px}
 .col-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;margin-top:16px}
@@ -211,6 +227,10 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   .mha-prints-row{flex-direction:column;align-items:center}
   .mha-print-item{width:100%;max-width:400px}
   .cwyl-bottom{grid-template-columns:1fr}
+  .ofnoah-2col{grid-template-columns:1fr}
+  .ofnoah-squares{flex-wrap:wrap}
+  .ofnoah-squares img{flex:0 0 calc(50% - 4px)}
+  .ofnoah-mixed{grid-template-columns:1fr}
   .ma-thumb-row{display:grid;grid-template-columns:repeat(3,1fr);overflow-x:visible;gap:6px}
   .ma-thumb-item{width:100%;height:auto;aspect-ratio:3/2}
   .rail-btn{display:none}
@@ -514,6 +534,48 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
       const ctr=$('cwyl-counter'); if(ctr) ctr.textContent=`${cwylCur+1} / ${viewerImgs.length}`;
       const cap=$('cwyl-cap-text'); if(cap) cap.textContent=viewerImgs[cwylCur]&&viewerImgs[cwylCur].caption||'';
     };
+  }
+
+  /* OFNOAH: mainboard gif → 2-col writeup → squares → outdoor3+verticals → banner → outdoor2 */
+  else if (tmpl === 'ofnoah') {
+    const base = 'images/ofnoah-discreet-digital-clinic/';
+    const sqPool = [
+      {url:base+'square1.webp',caption:''},
+      {url:base+'square2.webp',caption:''},
+      {url:base+'square3.webp',caption:''},
+      {url:base+'square4.webp',caption:''},
+    ];
+    const mixPool = [
+      {url:base+'outdoor3.webp',caption:''},
+      {url:base+'vertical-thumb.webp',caption:''},
+      {url:base+'vertical1.webp',caption:''},
+      {url:base+'vertical2.webp',caption:''},
+    ];
+    const lastPool = [{url:base+'outdoor2.webp',caption:''}];
+    LB_POOLS['ofnoahSq'] = sqPool;
+    LB_POOLS['ofnoahMix'] = mixPool;
+    LB_POOLS['ofnoahLast'] = lastPool;
+
+    const sentences = P.fullDescription.split(/(?<=[.!?])\s+/);
+    const mid = Math.ceil(sentences.length/2);
+    const col1 = sentences.slice(0,mid).join(' ');
+    const col2 = sentences.slice(mid).join(' ');
+
+    const sqHTML = sqPool.map((s,i)=>`<img src="${s.url}" loading="lazy" onclick="lbOpen('ofnoahSq',${i})">`).join('');
+
+    body = `<div class="ofnoah-hero"><img src="${base}mainboard.gif" alt="ofnoah mainboard"></div>`
+      + `<div class="ofnoah-2col"><p>${esc(col1)}</p>${col2?`<p>${esc(col2)}</p>`:''}</div>`
+      + `<div class="ofnoah-squares">${sqHTML}</div>`
+      + `<div class="ofnoah-mixed">
+          <div class="ofnoah-outdoor"><img src="${base}outdoor3.webp" loading="lazy" onclick="lbOpen('ofnoahMix',0)"></div>
+          <div class="ofnoah-3vert">
+            <img src="${base}vertical-thumb.webp" loading="lazy" onclick="lbOpen('ofnoahMix',1)">
+            <img src="${base}vertical1.webp" loading="lazy" onclick="lbOpen('ofnoahMix',2)">
+            <img src="${base}vertical2.webp" loading="lazy" onclick="lbOpen('ofnoahMix',3)">
+          </div>
+        </div>`
+      + `<div class="ofnoah-banner"><img src="${base}standard-banner.gif" alt="Standard banner"></div>`
+      + `<div class="ofnoah-last"><img src="${base}outdoor2.webp" loading="lazy" onclick="lbOpen('ofnoahLast',0)"></div>`;
   }
 
   /* DEFAULT: video → writeup → collaterals grid */

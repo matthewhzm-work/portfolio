@@ -42,6 +42,7 @@ Each project has:
 - `prints-side-by-side`          — 2 prints full width → centred writeup below
 - `mha`                          — video → writeup → 3 portrait prints in 1 row
 - `cwyl`                         — opening question → image viewer (← →) → writeup L / vid R
+- `ofnoah`                       — mainboard GIF → 2-col writeup → 4 squares → outdoor3 L / 3 verticals R → banner → outdoor2
 - `default`                      — videos stacked → writeup → collateral grid
 
 ## Lightbox Architecture
@@ -84,7 +85,6 @@ All save operations flush DOM → state before writing (no oninput closures).
 The following projects are on default template and need bespoke layouts when Matthew provides assets:
 - nea-good-for-me-good-for-the-environment
 - bybit-valentines-day
-- ofnoah-discreet-digital-clinic
 - vivo-v15
 - volkswagen-prints
 

@@ -974,57 +974,8 @@ const PORTFOLIO_DATA = {
       "thumbnailType": "image",
       "description": "Brand and campaign work for ofnoah — Singapore's discreet digital clinic for men's health, making it easy and stigma-free to get the help you need.",
       "fullDescription": "ofnoah exists because men don't ask for help. The brand and campaign work was built around removing every barrier — the embarrassment, the inconvenience, the fear of judgement — and replacing them with a tone that was direct, warm, and completely judgment-free.",
-      "projectTemplate": "default",
-      "collaterals": [
-        {
-          "type": "image",
-          "url": "images/ofnoah-discreet-digital-clinic/collateral-1.webp",
-          "caption": "OA KV-04",
-          "orientation": "portrait"
-        },
-        {
-          "type": "image",
-          "url": "images/ofnoah-discreet-digital-clinic/collateral-2.webp",
-          "caption": "Outdoor 1",
-          "orientation": "portrait"
-        },
-        {
-          "type": "image",
-          "url": "images/ofnoah-discreet-digital-clinic/collateral-3.webp",
-          "caption": "Outdoor 2",
-          "orientation": "portrait"
-        },
-        {
-          "type": "gif",
-          "url": "images/ofnoah-discreet-digital-clinic/collateral-4.gif",
-          "caption": "Standard banner",
-          "orientation": "landscape"
-        },
-        {
-          "type": "image",
-          "url": "images/ofnoah-discreet-digital-clinic/collateral-5.webp",
-          "caption": "ED creative 1",
-          "orientation": "portrait"
-        },
-        {
-          "type": "image",
-          "url": "images/ofnoah-discreet-digital-clinic/collateral-6.webp",
-          "caption": "ED creative 2",
-          "orientation": "square"
-        },
-        {
-          "type": "image",
-          "url": "images/ofnoah-discreet-digital-clinic/collateral-7.webp",
-          "caption": "PE creative",
-          "orientation": "square"
-        },
-        {
-          "type": "image",
-          "url": "images/ofnoah-discreet-digital-clinic/collateral-8.webp",
-          "caption": "Hair visual",
-          "orientation": "square"
-        }
-      ],
+      "projectTemplate": "ofnoah",
+      "collaterals": [],
       "videos": [],
       "active": true
     },
