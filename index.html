@@ -90,11 +90,12 @@ nav.scrolled{
 }
 .sec-eyebrow em{color:var(--red);font-style:normal;margin-right:10px}
 
-/* ── GRID: CSS columns — auto-balanced, equal widths ── */
+/* ── GRID: CSS grid — row-first (left→right, top→bottom) ── */
 .project-grid{
   padding:0 var(--pad);
-  columns:3;
-  column-gap:var(--card-gap);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:var(--card-gap);
 }
 
 /* ── CARD ──
@@ -105,8 +106,6 @@ nav.scrolled{
   display:flex;flex-direction:column;
   background:var(--white);
   position:relative;
-  break-inside:avoid;
-  margin-bottom:var(--card-gap);
   transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);
   will-change:transform;
 }
@@ -290,7 +289,7 @@ footer{
   .nav-meta-awards{display:none}
   .nav-meta-sep{display:none}
   #work{padding-top:calc(132px + 36px)}
-  .project-grid{columns:2}
+  .project-grid{grid-template-columns:repeat(2,1fr)}
   .about-grid{grid-template-columns:1fr;gap:64px}
   #about,#awards{padding:80px var(--pad)}
   .awards-cols{grid-template-columns:1fr}
@@ -299,7 +298,7 @@ footer{
   footer{flex-direction:column;gap:10px;text-align:center;align-items:center}
 }
 @media(max-width:600px){
-  .project-grid{columns:1}
+  .project-grid{grid-template-columns:1fr}
 }
 </style>
 </head>

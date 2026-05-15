@@ -544,10 +544,24 @@ function renderList(){
     list.innerHTML = '<p style="font-size:13px;color:var(--mid);padding:8px 0">No projects yet.</p>';
     return;
   }
-  list.innerHTML = S.projects.map((p,i) => `
+  /* Precompute grid positions — only active projects occupy grid cells.
+     Grid is 3 columns, row-first: pos 0 = R1·C1, pos 1 = R1·C2, pos 2 = R1·C3, … */
+  const gridPos = {};
+  let activeCount = 0;
+  S.projects.forEach((p, i) => {
+    if (p.active !== false) gridPos[i] = activeCount++;
+  });
+
+  list.innerHTML = S.projects.map((p,i) => {
+    const gp = gridPos[i];
+    const posLabel = gp !== undefined
+      ? `R${Math.floor(gp/3)+1}·C${(gp%3)+1}`
+      : '—';
+    const posColor = gp !== undefined ? 'var(--red)' : 'var(--mid)';
+    return `
     <div class="list-item" data-idx="${i}" draggable="true">
       <span class="li-drag" title="Drag to reorder">⠿</span>
-      <span class="li-order" style="font-family:var(--mono);font-size:9px;color:var(--mid);min-width:18px;text-align:right">${i+1}</span>
+      <span style="font-family:var(--mono);font-size:9px;color:${posColor};min-width:36px;text-align:right;letter-spacing:0.04em">${posLabel}</span>
       <div class="li-main">
         <div class="li-title">${esc(p.title)}</div>
         <div class="li-sub">${esc(p.brand)} · ${p.projectTemplate||'default'} · ${(p.collaterals||[]).length} collateral(s)${(p.videos&&p.videos.length)?' · '+p.videos.length+' video(s)':''}</div>
@@ -555,7 +569,8 @@ function renderList(){
       ${p.award ? `<span class="li-badge">${esc(p.award)}</span>` : ''}
       <button class="btn btn-secondary btn-sm" onclick="toggleActive(${i})" style="background:${p.active===false?'#555':'#1a7a3a'};color:#fff;border:none" title="${p.active===false?'Hidden — click to show':'Visible — click to hide'}">${p.active===false?'Hidden':'Live'}</button>
       <button class="btn btn-secondary btn-sm" onclick="editProject(${i})">Edit</button>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
   /* Wire up drag-and-drop on each item */
   list.querySelectorAll('.list-item').forEach(el => {
