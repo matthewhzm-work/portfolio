@@ -1,13 +1,13 @@
 const PORTFOLIO_DATA = {
   "name": "Matthew Ho",
-  "title": "Copy-based Creative",
+  "title": "",
   "location": "Singapore",
   "email": "matthewhzm@gmail.com",
   "website": "matthewho.work",
   "tagline": "Creative Direction · Copywriting · Strategy",
   "awardStrip": "Cannes · D&AD · Epica · One Show",
   "bio": [
-    "<p>I’m a Senior Creative and copywriter with close to a decade of experience building integrated campaigns for global and regional brands across finance, beauty, automotive, government, tech, and lifestyle. Over the years, I’ve worked on brands including HSBC, Mercedes-Benz, Caltex, Temasek, and Singapore’s Ministry of Home Affairs, creating work across social, experiential, digital, content, and brand storytelling.</p><p>I believe the best creative ideas should do more than look good on a slide. They should move people, shape culture, and create real impact for brands. That mindset has helped me contribute to award-winning work recognised at the Cannes Lions, Spikes Asia, and The One Show.</p><p>At my core, I’m a strategist-minded creative who enjoys turning human truths into ideas that are sharp, culturally relevant, and commercially effective. Interested in building ideas beyond the pdf? Let's talk!</p><p><br></p>"
+    "<p>I’m a Senior Creative with close to a decade of experience building integrated campaigns across finance, beauty, automotive, government, tech, FMCG, and lifestyle brands. My work spans social, experiential, digital, content, and brand storytelling, always with a focus on ideas that connect with people in meaningful ways.&nbsp;</p><p>I believe the best creative ideas should do more than look good on a slide. They should move people, shape culture, and create real impact for brands. That mindset has helped me contribute to award-winning work recognised at the Cannes Lions, Spikes Asia, D&amp;AD, The One Show, and more.</p><p>At my core, I’m a strategic creative who enjoys turning human truths into ideas that are sharp, culturally relevant, and commercially effective. Interested in building ideas beyond the pdf? Let's talk!</p><p><br></p>"
   ],
   "experience": [
     {
