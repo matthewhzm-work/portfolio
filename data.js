@@ -7,7 +7,7 @@ const PORTFOLIO_DATA = {
   "tagline": "Creative Direction · Copywriting · Strategy",
   "awardStrip": "Cannes · D&AD · Epica · One Show",
   "bio": [
-    "<p>I have close to a decade of experience building integrated campaigns and brand initiatives across finance, beauty, automotive, government, tech, FMCG, and lifestyle industries. My background spans brand strategy, storytelling, social, experiential, digital content, and marketing communications, with a focus on ideas that connect with people in meaningful and commercially effective ways.</p><p>I’ve always believed strong ideas should do more than look good on a slide. They should shape perception, spark conversation, and create real impact. That mindset has allowed me to contribute to award-winning work recognised at the Cannes Lions, Spikes Asia, and The One Show.</p><p>At my core, I enjoy solving problems, understanding people, and turning insights into work that is thoughtful, culturally relevant, and effective. I thrive in collaborative environments where strategy, creativity, and good people come together to build meaningful ideas. Interested in building ideas beyond the pdf? Let's talk!</p>"
+    "<p>I’m a marketing and brand strategist with close to a decade of experience building integrated campaigns and brand initiatives across finance, beauty, automotive, government, tech, FMCG, and lifestyle industries. My background spans brand strategy, storytelling, social, experiential, digital content, and marketing communications, with a focus on ideas that connect with people in meaningful and commercially effective ways.</p><p>I’ve always believed strong ideas should do more than look good on a slide. They should shape perception, spark conversation, and create real impact. That mindset has allowed me to contribute to award-winning work recognised at the Cannes Lions, Spikes Asia, and The One Show.</p><p>At my core, I’m someone who enjoys understanding people, uncovering the tension in a problem, and turning it into work that feels thoughtful, culturally relevant, and effective. I thrive in collaborative environments where strategy, creativity, and good people come together to build meaningful ideas.</p>"
   ],
   "experience": [
     {
@@ -375,9 +375,9 @@ const PORTFOLIO_DATA = {
         {
           "id": "b103",
           "type": "text",
-          "col1": "<p>LUX tasked us with something culturally resonant — a campaign that spoke to women beyond product benefits. In Her Name put real women's stories at the heart of the work, earning a Cannes shortlist, a Gold at Epica, and recognition across ten international shows.</p>",
-          "col2": "",
-          "col3": "",
+          "col1": "<p>In Chinese culture, girls are traditionally given names connoting submissiveness — \"Quiet,\" \"Small,\" \"Obedient\" — while boys receive names of strength and victory. A growing movement, surfacing through the hashtag <strong>#IHateMyName</strong> (56M+ views), revealed how deeply this resonated with women across China.</p><p>LUX set out to change that.</p>",
+          "col2": "<p>Working with linguist Professor Liu from the University of China, we created <strong>100 new female names</strong> drawn from classical literature and modern ideals — names like <em>Yè Lěi</em> (Glowing Potential) and <em>Míng Yǔ</em> (Awaken the Universe). Each was visualised using traditional Chinese symbols and made shareable across social platforms.</p><p>The campaign sparked a cultural conversation in a country where tradition is rarely challenged.</p>",
+          "col3": "<p><strong>Results:</strong></p><ul><li>1.4B impressions in China; 150M globally</li><li>$600K in media value within the first 3 days</li><li>5M+ women introduced to the new names in the same period</li><li>78% of women surveyed considered changing their name</li><li>103% surge in web searches for stronger baby names at peak</li></ul>",
           "columns": 3,
           "width": "full"
         },
@@ -2000,8 +2000,8 @@ const PORTFOLIO_DATA = {
     }
   ],
   "linkedin": "https://www.linkedin.com/in/matthew-ho-4947016a/",
-  "bioHeadline": "A strategist's brain.",
-  "bioHeadlineAccent": "A writer's instinct."
+  "bioHeadline": "A strategist’s brain",
+  "bioHeadlineAccent": "with a writer’s instinct"
 };
 
 if (typeof module !== 'undefined') module.exports = PORTFOLIO_DATA;
