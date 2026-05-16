@@ -534,7 +534,7 @@ const PORTFOLIO_DATA = {
         {
           "id": "b203",
           "type": "text",
-          "col1": "<p>HSBC is one of golf's biggest sponsors worldwide. But golf — a sport of skill, focus, and precision — has an access problem. For people with severe physical disabilities, the game has always been out of reach.</p><p>We wanted to change that. Not with a charity initiative. With an actual competition.</p>",
+          "col1": "<p>HSBC is one of golf's biggest sponsors worldwide. But golf — a sport of skill, focus, and precision — has an access problem. For people with severe physical disabilities, the game has always been out of reach.</p><p>We wanted to change that. Not with a charity initiative. With an actual competition.</p><p>Our insight: people with physical disabilities often demonstrate heightened mental focus — a measurable cognitive advantage that traditional sports never had a format to reward. For centuries, sports was limited by the body. We built something where it's all about the mind.</p>",
           "col2": "<p>Thus, the <strong>Mind Athletes Tournament</strong> was created — the world's first sports championship won entirely by brainpower. Using EEG neurofeedback technology, we converted concentration into real-time gameplay, calibrated against 1,000 unique golfing scenarios mapped with professional golfers. No hands. No controllers. Just the power of the mind. </p><p>Debuted as a demonstration at the HSBC Women's World Championship in 2024, the concept proved so compelling it returned in 2025 as a full-blown tournament — 20 competitors, each with different disabilities, competing for the title of <strong>the world's first Mind Athletes Champion</strong>. The event was streamed live on Twitch, drawing a global audience and sparking conversation about the future of sport itself.</p>",
           "col3": "<p><strong>Results:</strong></p><ul><li>31M+ impressions</li><li>$68M+ worth of PR value</li><li>Global premiere on Twitch</li></ul>",
           "columns": 3,
@@ -612,7 +612,7 @@ const PORTFOLIO_DATA = {
       "id": "mha-home-of-the-unexpected",
       "brand": "Ministry of Home Affairs",
       "title": "Home of the Unexpected",
-      "subtitle": "Led the pitch and won Singapore's most prominent government creative account",
+      "subtitle": "A 65-year-old institution. A brand new voice. Singapore's oldest guardian, reimagined.",
       "award": "",
       "tags": [
         "Pitch Lead",
@@ -624,7 +624,7 @@ const PORTFOLIO_DATA = {
       "gridSpan": 6,
       "thumbnailUrl": "images/mha-home-of-the-unexpected/thumb.webp",
       "thumbnailType": "image",
-      "description": "Led the creative pitch team to win the Ministry of Home Affairs account. A campaign that found warmth and humanity in Singapore's most authoritative institution.",
+      "description": "<p>From pitch to campaign, built on a single provocation: the Ministry of Home Affairs isn't what you think it is.</p>",
       "fullDescription": "When VML was invited to pitch for the Ministry of Home Affairs, I led the creative team from brief to presentation. Home of the Unexpected shaped a platform idea that balanced authority with warmth, finding stories in the people who keep Singapore safe. We won the pitch.",
       "projectTemplate": "mha",
       "collaterals": [
@@ -667,8 +667,8 @@ const PORTFOLIO_DATA = {
         {
           "id": "b301",
           "type": "text",
-          "col1": "<p>When VML was invited to pitch for the Ministry of Home Affairs, I led the creative team from brief to presentation. Home of the Unexpected shaped a platform idea that balanced authority with warmth, finding stories in the people who keep Singapore safe. We won the pitch.</p>",
-          "col2": "",
+          "col1": "<p>When VML was invited to pitch for the Ministry of Home Affairs, we saw an opportunity no one had taken: show the institution as it actually is, not as people assumed it to be.</p><p>Our research surfaced a simple truth. Most people understood what MHA did — the stability, the purpose, the uniform. What they never saw were the unexpected ways a career there could shape you.&nbsp;</p>",
+          "col2": "<p>We took that tension and built a brand around it.</p><p><strong>The Home of the Unexpected</strong> — where we handle the unexpected, to keep your everyday expected.</p><p>A 65-year-old institution, reframed not as a place of authority, but as a place of surprising, unparalleled growth.</p>",
           "col3": "",
           "columns": 2,
           "width": "full"
