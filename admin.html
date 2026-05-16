@@ -324,6 +324,7 @@ body{background:var(--paper);font-family:var(--body);font-size:14px;color:var(--
                   <button onclick="addBlock('video')">▶&nbsp; Video</button>
                   <button onclick="addBlock('callout')">"&nbsp; Callout / Quote</button>
                   <button onclick="addBlock('text')">¶&nbsp; Text Write-up</button>
+                  <button onclick="addBlock('split')">⫠&nbsp; Split Row (50/50)</button>
                   <button onclick="addBlock('image')">▭&nbsp; Single Image</button>
                   <button onclick="addBlock('image-row')">▭▭ Image Row / Grid</button>
                 </div>
@@ -413,7 +414,7 @@ body{background:var(--paper);font-family:var(--body);font-size:14px;color:var(--
 ═══════════════════════════════════════ */
 const SK = 'mh_cms_v5';
 function h(s){let r=0;for(let i=0;i<s.length;i++)r=Math.imul(31,r)+s.charCodeAt(i)|0;return Math.abs(r).toString(16)}
-const CORRECT = h('Righttingz2026!');
+const CORRECT = '3a85d68f';
 
 window.checkPw = function(){
   const inp = document.getElementById('gate-pw');
@@ -740,9 +741,25 @@ function getBlockRTEHtml(blkId){
   const h = q.root.innerHTML;
   return (h==='<p><br></p>'||h==='<p></p>') ? '' : h;
 }
+/* Split block RTEs — keyed as 'left_ID' and 'right_ID' */
+function initSplitRTE(side, blkId, html){
+  const el = document.getElementById('blk-'+side+'rte-'+blkId);
+  if(!el) return;
+  const key = side+'_'+blkId;
+  if(BLOCK_QUILTS[key]){ BLOCK_QUILTS[key].root.innerHTML = html||''; return; }
+  const q = new Quill(el, {theme:'snow', placeholder:'Write here…', modules:{toolbar:QUILL_TOOLBAR}});
+  q.root.innerHTML = html||'';
+  BLOCK_QUILTS[key] = q;
+}
+function getSplitRTEHtml(side, blkId){
+  const key = side+'_'+blkId;
+  const q = BLOCK_QUILTS[key]; if(!q) return '';
+  const h = q.root.innerHTML;
+  return (h==='<p><br></p>'||h==='<p></p>') ? '' : h;
+}
 
 function blkLabel(type){
-  return {video:'▶ Video',callout:'" Callout',text:'¶ Text',image:'▭ Image','image-row':'▭▭ Image Row'}[type]||type;
+  return {video:'▶ Video',callout:'" Callout',text:'¶ Text',image:'▭ Image','image-row':'▭▭ Image Row',split:'⫠ Split Row'}[type]||type;
 }
 function blkPreview(b){
   if(b.type==='video')     return b.url ? b.url.replace(/https?:\/\//,'').slice(0,50) : '—';
@@ -750,6 +767,7 @@ function blkPreview(b){
   if(b.type==='text')      return b.html ? b.html.replace(/<[^>]+>/g,'').slice(0,60)+'…' : '—';
   if(b.type==='image')     return b.url ? b.url.split('/').pop() : '—';
   if(b.type==='image-row') return `${(b.images||[]).length} image(s)`;
+  if(b.type==='split')     return `${b.leftType||'text'} ← | → ${b.rightType||'video'}`;
   return '';
 }
 
@@ -844,6 +862,31 @@ function renderBlockEditorItem(b, bi, total){
     </div>`;
   }
 
+  else if(b.type==='split'){
+    const s2 = (v,c)=>v===c?'selected':'';
+    function sideHtml(side, type, url, vtype, html, label){
+      return `<div style="padding:12px;background:rgba(0,0,0,0.025);border:1px solid var(--light);margin-bottom:10px">
+        <p style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin:0 0 10px">${side.toUpperCase()} SIDE</p>
+        <div class="g2">
+          <div class="fg"><label>Type</label><select id="blk-${side}type-${id}">
+            <option value="text"  ${s2(type,'text')}>Text</option>
+            <option value="video" ${s2(type,'video')}>Video</option>
+            <option value="image" ${s2(type,'image')}>Image</option>
+          </select></div>
+          <div class="fg"><label>Label (optional)</label><input type="text" id="blk-${side}label-${id}" value="${escA(label||'')}" placeholder="e.g. About the Work"></div>
+          <div class="fg full"><label>URL (video or image)</label><input type="text" id="blk-${side}url-${id}" value="${escA(url||'')}"></div>
+          <div class="fg"><label>Platform</label><select id="blk-${side}vtype-${id}">
+            <option value="vimeo"   ${s2(vtype,'vimeo')}>Vimeo</option>
+            <option value="youtube" ${s2(vtype,'youtube')}>YouTube</option>
+          </select></div>
+        </div>
+        <div class="fg" style="margin-top:10px"><label>Text content (for text type)</label><div class="rte-wrap"><div id="blk-${side}rte-${id}"></div></div></div>
+      </div>`;
+    }
+    fields = sideHtml('left',  b.leftType||'text',   b.leftUrl,  b.leftVideoType,  b.leftHtml,  b.leftLabel)
+           + sideHtml('right', b.rightType||'video',  b.rightUrl, b.rightVideoType, b.rightHtml, b.rightLabel);
+  }
+
   else if(b.type==='image-row'){
     const imgItems = (b.images||[]).map((im,ii)=>`
       <div class="blk-img-sub" data-blk-img-id="${id}">
@@ -894,9 +937,13 @@ function renderBlocksEditor(){
 
   container.innerHTML = blocks.map((b,bi) => renderBlockEditorItem(b, bi, blocks.length)).join('');
 
-  /* Init Quill for text blocks after DOM is ready */
+  /* Init Quill for text + split blocks after DOM is ready */
   blocks.forEach(b => {
     if(b.type==='text') setTimeout(() => initBlockRTE(b.id, b.html||''), 0);
+    if(b.type==='split') setTimeout(() => {
+      initSplitRTE('left',  b.id, b.leftHtml||'');
+      initSplitRTE('right', b.id, b.rightHtml||'');
+    }, 0);
   });
 }
 
@@ -936,6 +983,20 @@ function flushBlockFromDOM(b){
           caption: (row.querySelector('.blk-img-cap')||{}).value||''
         })).filter(im => im.url.trim());
       break;
+    case 'split': {
+      ['left','right'].forEach(s => {
+        const tEl = document.getElementById('blk-'+s+'type-'+id);
+        const lEl = document.getElementById('blk-'+s+'label-'+id);
+        const uEl = document.getElementById('blk-'+s+'url-'+id);
+        const vEl = document.getElementById('blk-'+s+'vtype-'+id);
+        if(tEl) b[s+'Type']      = tEl.value;
+        if(lEl) b[s+'Label']     = lEl.value.trim();
+        if(uEl) b[s+'Url']       = uEl.value.trim();
+        if(vEl) b[s+'VideoType'] = vEl.value;
+        b[s+'Html'] = getSplitRTEHtml(s, id);
+      });
+      break;
+    }
   }
 }
 
@@ -965,6 +1026,7 @@ window.addBlock = type => {
     text:        {id, type:'text',      html:'', columns:1, width:'full'},
     image:       {id, type:'image',     url:'', caption:'', width:'full', lightbox:true},
     'image-row': {id, type:'image-row', images:[{url:'',caption:''},{url:'',caption:''}], columns:2, gap:'normal', lightbox:true},
+    split:       {id, type:'split',     leftType:'text', leftHtml:'', leftLabel:'', leftUrl:'', leftVideoType:'vimeo', rightType:'video', rightHtml:'', rightLabel:'', rightUrl:'', rightVideoType:'vimeo'},
   };
   const p = S.projects[editIdx];
   if(!p.blocks) p.blocks = [];

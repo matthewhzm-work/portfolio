@@ -219,6 +219,7 @@ img{max-width:100%;height:auto;display:block}
 .blk{padding:0 var(--pad) 72px}
 .blk-callout{text-align:center}
 .blk-text-cols{display:grid;gap:48px}
+.blk-split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
 
 /* ── COLLATERAL GRID (fallback/general) ── */
 .col-section{padding:0 var(--pad) 80px}
@@ -300,6 +301,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   .ofnoah-mixed{grid-template-columns:1fr}
   .ma-writeup-2col{grid-template-columns:1fr}
   .blk-text-cols{grid-template-columns:1fr!important}
+  .blk-split{grid-template-columns:1fr!important;gap:32px}
   .ma-thumb-row{display:grid;grid-template-columns:repeat(3,1fr);overflow-x:visible;gap:6px}
   .ma-thumb-item{width:100%;height:auto;aspect-ratio:3/2}
   .proj-rail-inner{grid-template-columns:1fr}
@@ -571,6 +573,23 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
           return `<div><img src="${im.url}" alt="${esc(im.caption||'')}" ${click} loading="lazy" style="width:100%;height:auto;display:block">${im.caption?`<p class="col-cap">${esc(im.caption)}</p>`:''}</div>`;
         }).join('');
         return `<div class="blk"><div style="display:grid;grid-template-columns:repeat(${cols},1fr);gap:${gap}">${imgsHtml}</div></div>`;
+      }
+      case 'split': {
+        function spl(type, url, vtype, html, lbl) {
+          const labelHtml = lbl ? `<p class="split-label">${esc(lbl)}</p>` : '';
+          if(type==='video' && url) {
+            const v={url,type:vtype||'vimeo'};
+            const s=src(v);
+            return `<div>${labelHtml}${s?`<div class="split-vid-wrap">${iframe(v)}</div>`:''}</div>`;
+          }
+          if(type==='image' && url) {
+            return `<div>${labelHtml}<img src="${url}" alt="" loading="lazy" style="width:100%;height:auto;display:block"></div>`;
+          }
+          return `<div>${labelHtml}<div class="split-text rte">${renderHtml(html||'')}</div></div>`;
+        }
+        const left  = spl(b.leftType||'text',  b.leftUrl,  b.leftVideoType,  b.leftHtml,  b.leftLabel);
+        const right = spl(b.rightType||'text',  b.rightUrl, b.rightVideoType, b.rightHtml, b.rightLabel);
+        return `<div class="blk"><div class="blk-split">${left}${right}</div></div>`;
       }
       default: return '';
     }
