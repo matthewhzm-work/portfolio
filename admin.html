@@ -153,6 +153,9 @@ body{background:var(--paper);font-family:var(--body);font-size:14px;color:var(--
 .blk-img-sub{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;margin-bottom:8px}
 .blk-img-sub input{padding:7px 10px;border:1.5px solid var(--light);font-family:var(--body);font-size:12px;background:var(--paper);outline:none;transition:border-color 0.18s;border-radius:0;width:100%}
 .blk-img-sub input:focus{border-color:var(--red)}
+.blk-vid-sub{display:grid;grid-template-columns:1fr auto 1fr auto;gap:8px;align-items:center;margin-bottom:8px}
+.blk-vid-sub input,.blk-vid-sub select{padding:7px 10px;border:1.5px solid var(--light);font-family:var(--body);font-size:12px;background:var(--paper);outline:none;transition:border-color 0.18s;border-radius:0;width:100%}
+.blk-vid-sub input:focus,.blk-vid-sub select:focus{border-color:var(--red)}
 
 /* ── QUILL RTE ── */
 .ql-container{font-family:var(--body);font-size:13px;border:none}
@@ -327,6 +330,8 @@ body{background:var(--paper);font-family:var(--body);font-size:14px;color:var(--
                   <button onclick="addBlock('split')">⫠&nbsp; Split Row (50/50)</button>
                   <button onclick="addBlock('image')">▭&nbsp; Single Image</button>
                   <button onclick="addBlock('image-row')">▭▭ Image Row / Grid</button>
+                  <button onclick="addBlock('video-row')">▶▶ Video Row</button>
+                  <button onclick="addBlock('image-viewer')">◫ Image Viewer</button>
                 </div>
               </div>
             </div>
@@ -741,6 +746,22 @@ function getBlockRTEHtml(blkId){
   const h = q.root.innerHTML;
   return (h==='<p><br></p>'||h==='<p></p>') ? '' : h;
 }
+/* Text block column RTEs — keyed as 'c1_ID', 'c2_ID', 'c3_ID' */
+function initColRTE(col, blkId, html){
+  const el = document.getElementById('blk-c'+col+'-'+blkId);
+  if(!el) return;
+  const key = 'c'+col+'_'+blkId;
+  if(BLOCK_QUILTS[key]){ BLOCK_QUILTS[key].root.innerHTML = html||''; return; }
+  const q = new Quill(el, {theme:'snow', placeholder:'Column '+col+'…', modules:{toolbar:QUILL_TOOLBAR}});
+  q.root.innerHTML = html||'';
+  BLOCK_QUILTS[key] = q;
+}
+function getColRTEHtml(col, blkId){
+  const key = 'c'+col+'_'+blkId;
+  const q = BLOCK_QUILTS[key]; if(!q) return '';
+  const h = q.root.innerHTML;
+  return (h==='<p><br></p>'||h==='<p></p>') ? '' : h;
+}
 /* Split block RTEs — keyed as 'left_ID' and 'right_ID' */
 function initSplitRTE(side, blkId, html){
   const el = document.getElementById('blk-'+side+'rte-'+blkId);
@@ -759,15 +780,17 @@ function getSplitRTEHtml(side, blkId){
 }
 
 function blkLabel(type){
-  return {video:'▶ Video',callout:'" Callout',text:'¶ Text',image:'▭ Image','image-row':'▭▭ Image Row',split:'⫠ Split Row'}[type]||type;
+  return {video:'▶ Video',callout:'" Callout',text:'¶ Text',image:'▭ Image','image-row':'▭▭ Image Row',split:'⫠ Split Row','video-row':'▶▶ Video Row','image-viewer':'◫ Image Viewer'}[type]||type;
 }
 function blkPreview(b){
-  if(b.type==='video')     return b.url ? b.url.replace(/https?:\/\//,'').slice(0,50) : '—';
-  if(b.type==='callout')   return b.text ? b.text.slice(0,60)+(b.text.length>60?'…':'') : '—';
-  if(b.type==='text')      return b.html ? b.html.replace(/<[^>]+>/g,'').slice(0,60)+'…' : '—';
-  if(b.type==='image')     return b.url ? b.url.split('/').pop() : '—';
-  if(b.type==='image-row') return `${(b.images||[]).length} image(s)`;
-  if(b.type==='split')     return `${b.leftType||'text'} ← | → ${b.rightType||'video'}`;
+  if(b.type==='video')          return b.url ? b.url.replace(/https?:\/\//,'').slice(0,50) : '—';
+  if(b.type==='callout')        return b.text ? b.text.slice(0,60)+(b.text.length>60?'…':'') : '—';
+  if(b.type==='text')           return b.html ? b.html.replace(/<[^>]+>/g,'').slice(0,60)+'…' : '—';
+  if(b.type==='image')          return b.url ? b.url.split('/').pop() : '—';
+  if(b.type==='image-row')      return `${(b.images||[]).length} image(s)`;
+  if(b.type==='split')          return `${b.leftType||'text'} ← | → ${b.rightType||'video'}`;
+  if(b.type==='video-row')      return `${(b.videos||[]).length} video(s) — ${b.columns||'auto'} col`;
+  if(b.type==='image-viewer')   return `${(b.images||[]).length} image(s) — slider`;
   return '';
 }
 
@@ -826,14 +849,16 @@ function renderBlockEditorItem(b, bi, total){
   }
 
   else if(b.type==='text'){
+    const cols = +(b.columns||1);
+    const colNote = n => n > cols
+      ? `<span style="font-family:var(--mono);font-size:9px;color:var(--mid);letter-spacing:0;text-transform:none"> — not rendered when Columns < ${n}</span>`
+      : '';
     fields = `<div style="margin-top:0">
-      <div class="fg" style="margin-bottom:12px"><label>Write-up</label>
-        <div class="rte-wrap"><div id="blk-rte-${id}"></div></div></div>
-      <div class="g2">
+      <div class="g2" style="margin-bottom:18px">
         <div class="fg"><label>Columns</label><select id="blk-cols-${id}">
-          <option value="1" ${sel(+(b.columns||1),1)}>1 column</option>
-          <option value="2" ${sel(+(b.columns),2)}>2 columns</option>
-          <option value="3" ${sel(+(b.columns),3)}>3 columns</option>
+          <option value="1" ${sel(cols,1)}>1 column</option>
+          <option value="2" ${sel(cols,2)}>2 columns</option>
+          <option value="3" ${sel(cols,3)}>3 columns</option>
         </select></div>
         <div class="fg"><label>Max width</label><select id="blk-width-${id}">
           <option value="full" ${sel(b.width||'full','full')}>Full</option>
@@ -842,6 +867,9 @@ function renderBlockEditorItem(b, bi, total){
           <option value="narrow" ${sel(b.width,'narrow')}>Narrow — 560px</option>
         </select></div>
       </div>
+      <div class="fg" style="margin-bottom:14px"><label>Column 1</label><div class="rte-wrap"><div id="blk-c1-${id}"></div></div></div>
+      <div class="fg" style="margin-bottom:14px"><label>Column 2${colNote(2)}</label><div class="rte-wrap"><div id="blk-c2-${id}"></div></div></div>
+      <div class="fg"><label>Column 3${colNote(3)}</label><div class="rte-wrap"><div id="blk-c3-${id}"></div></div></div>
     </div>`;
   }
 
@@ -862,29 +890,105 @@ function renderBlockEditorItem(b, bi, total){
     </div>`;
   }
 
+  else if(b.type==='video-row'){
+    const vidItems=(b.videos||[]).map((v,ii)=>`
+    <div class="blk-vid-sub" data-blk-vid-id="${id}">
+      <input type="text" class="blk-vid-url" value="${escA(v.url||'')}" placeholder="Video URL">
+      <select class="blk-vid-vtype">
+        <option value="vimeo" ${v.videoType==='vimeo'?'selected':''}>Vimeo</option>
+        <option value="youtube" ${v.videoType==='youtube'?'selected':''}>YouTube</option>
+      </select>
+      <input type="text" class="blk-vid-cap" value="${escA(v.caption||'')}" placeholder="Caption">
+      <button class="btn btn-danger btn-sm" onclick="removeRowVideo('${id}',${ii})">✕</button>
+    </div>`).join('');
+    fields=`<div style="margin-top:0">
+    <div class="g2" style="margin-bottom:14px">
+      <div class="fg"><label>Columns</label><select id="blk-cols-${id}">
+        <option value="2" ${sel(+(b.columns||2),2)}>2</option>
+        <option value="3" ${sel(+(b.columns),3)}>3</option>
+        <option value="4" ${sel(+(b.columns),4)}>4</option>
+      </select></div>
+      <div class="fg"><label>Aspect ratio</label><select id="blk-ar-${id}">
+        <option value="16:9" ${sel(b.aspectRatio||'16:9','16:9')}>16:9 — Landscape</option>
+        <option value="4:5"  ${sel(b.aspectRatio,'4:5')}>4:5 — Portrait / Social</option>
+      </select></div>
+    </div>
+    <p class="mini-label" style="margin-top:0;margin-bottom:8px">Videos</p>
+    <div id="blk-vids-${id}">${vidItems}</div>
+    <button class="btn btn-secondary btn-sm" style="margin-top:6px" onclick="addRowVideo('${id}')">+ Add Video</button>
+  </div>`;
+  }
+
+  else if(b.type==='image-viewer'){
+    const imgItems=(b.images||[]).map((im,ii)=>`
+    <div class="blk-img-sub" data-blk-img-id="${id}">
+      <input type="text" class="blk-img-url" value="${escA(im.url||'')}" placeholder="Image URL">
+      <input type="text" class="blk-img-cap" value="${escA(im.caption||'')}" placeholder="Caption (optional)">
+      <button class="btn btn-danger btn-sm" onclick="removeBlockImage('${id}',${ii})">✕</button>
+    </div>`).join('');
+    fields=`<div style="margin-top:0">
+    <div class="fg" style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+      <input type="checkbox" id="blk-lbox-${id}" ${b.lightbox!==false?'checked':''}>
+      <label for="blk-lbox-${id}" style="text-transform:none;letter-spacing:0;font-size:12px;cursor:pointer;margin:0">Open in lightbox on click</label>
+    </div>
+    <p class="mini-label" style="margin-top:0;margin-bottom:8px">Images (displayed as slider)</p>
+    <div id="blk-imgs-${id}">${imgItems}</div>
+    <button class="btn btn-secondary btn-sm" style="margin-top:6px" onclick="addBlockImage('${id}')">+ Add Image</button>
+  </div>`;
+  }
+
   else if(b.type==='split'){
-    const s2 = (v,c)=>v===c?'selected':'';
-    function sideHtml(side, type, url, vtype, html, label){
+    const s2=(v,c)=>v===c?'selected':'';
+    function sideHtml(side,type,url,vtype,html,label,images,lightbox){
+      const p=`blk-${side}`;
+      const imgRows=(images||[]).map((im,ii)=>`
+      <div class="blk-img-sub" data-blk-split-img="${side}_${id}">
+        <input type="text" class="blk-sim-url" value="${escA(im.url||'')}" placeholder="Image URL">
+        <input type="text" class="blk-sim-cap" value="${escA(im.caption||'')}" placeholder="Caption">
+        <button class="btn btn-danger btn-sm" onclick="removeSplitImage('${id}','${side}',${ii})">✕</button>
+      </div>`).join('');
       return `<div style="padding:12px;background:rgba(0,0,0,0.025);border:1px solid var(--light);margin-bottom:10px">
-        <p style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin:0 0 10px">${side.toUpperCase()} SIDE</p>
-        <div class="g2">
-          <div class="fg"><label>Type</label><select id="blk-${side}type-${id}">
-            <option value="text"  ${s2(type,'text')}>Text</option>
-            <option value="video" ${s2(type,'video')}>Video</option>
-            <option value="image" ${s2(type,'image')}>Image</option>
-          </select></div>
-          <div class="fg"><label>Label (optional)</label><input type="text" id="blk-${side}label-${id}" value="${escA(label||'')}" placeholder="e.g. About the Work"></div>
-          <div class="fg full"><label>URL (video or image)</label><input type="text" id="blk-${side}url-${id}" value="${escA(url||'')}"></div>
-          <div class="fg"><label>Platform</label><select id="blk-${side}vtype-${id}">
-            <option value="vimeo"   ${s2(vtype,'vimeo')}>Vimeo</option>
-            <option value="youtube" ${s2(vtype,'youtube')}>YouTube</option>
-          </select></div>
+      <p style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin:0 0 10px">${side.toUpperCase()} SIDE</p>
+      <div class="g2">
+        <div class="fg"><label>Type</label><select id="${p}type-${id}">
+          <option value="text"         ${s2(type,'text')}>Text</option>
+          <option value="video"        ${s2(type,'video')}>Video</option>
+          <option value="image"        ${s2(type,'image')}>Image</option>
+          <option value="image-viewer" ${s2(type,'image-viewer')}>Image Viewer (slider)</option>
+        </select></div>
+        <div class="fg"><label>Label (optional)</label><input type="text" id="${p}label-${id}" value="${escA(label||'')}" placeholder="e.g. About the Work"></div>
+        <div class="fg full"><label>URL (video or single image)</label><input type="text" id="${p}url-${id}" value="${escA(url||'')}"></div>
+        <div class="fg"><label>Platform</label><select id="${p}vtype-${id}">
+          <option value="vimeo"   ${s2(vtype,'vimeo')}>Vimeo</option>
+          <option value="youtube" ${s2(vtype,'youtube')}>YouTube</option>
+        </select></div>
+      </div>
+      <div class="fg" style="margin-top:10px"><label>Text content (for text type)</label><div class="rte-wrap"><div id="${p}rte-${id}"></div></div></div>
+      <div style="margin-top:12px">
+        <p style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);margin-bottom:8px">Images (for image-viewer type)</p>
+        <div id="blk-${side}imgs-${id}">${imgRows}</div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:6px">
+          <button class="btn btn-secondary btn-sm" onclick="addSplitImage('${id}','${side}')">+ Add Image</button>
+          <div style="display:flex;align-items:center;gap:6px">
+            <input type="checkbox" id="${p}lbox-${id}" ${lightbox!==false?'checked':''}>
+            <label for="${p}lbox-${id}" style="text-transform:none;letter-spacing:0;font-size:12px;cursor:pointer;margin:0">Lightbox</label>
+          </div>
         </div>
-        <div class="fg" style="margin-top:10px"><label>Text content (for text type)</label><div class="rte-wrap"><div id="blk-${side}rte-${id}"></div></div></div>
-      </div>`;
+      </div>
+    </div>`;
     }
-    fields = sideHtml('left',  b.leftType||'text',   b.leftUrl,  b.leftVideoType,  b.leftHtml,  b.leftLabel)
-           + sideHtml('right', b.rightType||'video',  b.rightUrl, b.rightVideoType, b.rightHtml, b.rightLabel);
+    fields=`<div class="fg" style="margin-bottom:14px">
+    <label>Column ratio</label>
+    <select id="blk-ratio-${id}">
+      <option value="50-50" ${s2(b.ratio||'50-50','50-50')}>50 / 50 — Equal</option>
+      <option value="40-60" ${s2(b.ratio,'40-60')}>40 / 60 — Narrow left, wide right</option>
+      <option value="60-40" ${s2(b.ratio,'60-40')}>60 / 40 — Wide left, narrow right</option>
+      <option value="33-67" ${s2(b.ratio,'33-67')}>33 / 67 — Sidebar left</option>
+      <option value="67-33" ${s2(b.ratio,'67-33')}>67 / 33 — Sidebar right</option>
+    </select>
+  </div>`
+    +sideHtml('left', b.leftType||'text', b.leftUrl, b.leftVideoType, b.leftHtml, b.leftLabel, b.leftImages, b.leftLightbox)
+    +sideHtml('right',b.rightType||'video',b.rightUrl,b.rightVideoType,b.rightHtml,b.rightLabel,b.rightImages,b.rightLightbox);
   }
 
   else if(b.type==='image-row'){
@@ -939,7 +1043,12 @@ function renderBlocksEditor(){
 
   /* Init Quill for text + split blocks after DOM is ready */
   blocks.forEach(b => {
-    if(b.type==='text') setTimeout(() => initBlockRTE(b.id, b.html||''), 0);
+    if(b.type==='text') setTimeout(() => {
+      /* col1/col2/col3 system; fall back to html for any legacy blocks */
+      initColRTE(1, b.id, b.col1 !== undefined ? (b.col1||'') : (b.html||''));
+      initColRTE(2, b.id, b.col2||'');
+      initColRTE(3, b.id, b.col3||'');
+    }, 0);
     if(b.type==='split') setTimeout(() => {
       initSplitRTE('left',  b.id, b.leftHtml||'');
       initSplitRTE('right', b.id, b.rightHtml||'');
@@ -963,9 +1072,12 @@ function flushBlockFromDOM(b){
       if(g('align')) b.align = g('align').value;
       break;
     case 'text':
-      b.html = getBlockRTEHtml(id);
       if(g('cols'))  b.columns = +g('cols').value;
       if(g('width')) b.width   = g('width').value;
+      b.col1 = getColRTEHtml(1, id);
+      b.col2 = getColRTEHtml(2, id);
+      b.col3 = getColRTEHtml(3, id);
+      delete b.html; /* remove legacy field if present */
       break;
     case 'image':
       if(g('url'))   b.url      = g('url').value.trim();
@@ -983,17 +1095,37 @@ function flushBlockFromDOM(b){
           caption: (row.querySelector('.blk-img-cap')||{}).value||''
         })).filter(im => im.url.trim());
       break;
+    case 'video-row':
+      if(g('cols')) b.columns=+g('cols').value;
+      if(g('ar'))   b.aspectRatio=g('ar').value;
+      b.videos=Array.from(document.querySelectorAll(`[data-blk-vid-id="${id}"]`))
+        .map(row=>({url:(row.querySelector('.blk-vid-url')||{}).value||'',videoType:(row.querySelector('.blk-vid-vtype')||{}).value||'vimeo',caption:(row.querySelector('.blk-vid-cap')||{}).value||''}))
+        .filter(v=>v.url.trim());
+      break;
+    case 'image-viewer':
+      if(g('lbox')) b.lightbox=g('lbox').checked;
+      b.images=Array.from(document.querySelectorAll(`[data-blk-img-id="${id}"]`))
+        .map(row=>({url:(row.querySelector('.blk-img-url')||{}).value||'',caption:(row.querySelector('.blk-img-cap')||{}).value||''}))
+        .filter(im=>im.url.trim());
+      break;
     case 'split': {
-      ['left','right'].forEach(s => {
-        const tEl = document.getElementById('blk-'+s+'type-'+id);
-        const lEl = document.getElementById('blk-'+s+'label-'+id);
-        const uEl = document.getElementById('blk-'+s+'url-'+id);
-        const vEl = document.getElementById('blk-'+s+'vtype-'+id);
-        if(tEl) b[s+'Type']      = tEl.value;
-        if(lEl) b[s+'Label']     = lEl.value.trim();
-        if(uEl) b[s+'Url']       = uEl.value.trim();
-        if(vEl) b[s+'VideoType'] = vEl.value;
-        b[s+'Html'] = getSplitRTEHtml(s, id);
+      const ratioEl=document.getElementById('blk-ratio-'+id);
+      if(ratioEl) b.ratio=ratioEl.value;
+      ['left','right'].forEach(s=>{
+        const tEl=document.getElementById('blk-'+s+'type-'+id);
+        const lEl=document.getElementById('blk-'+s+'label-'+id);
+        const uEl=document.getElementById('blk-'+s+'url-'+id);
+        const vEl=document.getElementById('blk-'+s+'vtype-'+id);
+        const xEl=document.getElementById('blk-'+s+'lbox-'+id);
+        if(tEl) b[s+'Type']     =tEl.value;
+        if(lEl) b[s+'Label']    =lEl.value.trim();
+        if(uEl) b[s+'Url']      =uEl.value.trim();
+        if(vEl) b[s+'VideoType']=vEl.value;
+        if(xEl) b[s+'Lightbox'] =xEl.checked;
+        b[s+'Html']=getSplitRTEHtml(s,id);
+        b[s+'Images']=Array.from(document.querySelectorAll(`[data-blk-split-img="${s}_${id}"]`))
+          .map(row=>({url:(row.querySelector('.blk-sim-url')||{}).value||'',caption:(row.querySelector('.blk-sim-cap')||{}).value||''}))
+          .filter(im=>im.url.trim());
       });
       break;
     }
@@ -1021,12 +1153,14 @@ window.addBlock = type => {
   flushBlocksFromDOM();
   const id = 'b'+Date.now();
   const defaults = {
-    video:       {id, type:'video',     url:'', videoType:'vimeo', caption:'', width:'wide'},
-    callout:     {id, type:'callout',   text:'', size:'xl', align:'center'},
-    text:        {id, type:'text',      html:'', columns:1, width:'full'},
-    image:       {id, type:'image',     url:'', caption:'', width:'full', lightbox:true},
-    'image-row': {id, type:'image-row', images:[{url:'',caption:''},{url:'',caption:''}], columns:2, gap:'normal', lightbox:true},
-    split:       {id, type:'split',     leftType:'text', leftHtml:'', leftLabel:'', leftUrl:'', leftVideoType:'vimeo', rightType:'video', rightHtml:'', rightLabel:'', rightUrl:'', rightVideoType:'vimeo'},
+    video:          {id, type:'video',         url:'', videoType:'vimeo', caption:'', width:'wide'},
+    callout:        {id, type:'callout',        text:'', size:'xl', align:'center'},
+    text:           {id, type:'text',           col1:'', col2:'', col3:'', columns:1, width:'full'},
+    image:          {id, type:'image',          url:'', caption:'', width:'full', lightbox:true},
+    'image-row':    {id, type:'image-row',      images:[{url:'',caption:''},{url:'',caption:''}], columns:2, gap:'normal', lightbox:true},
+    split:          {id, type:'split',          ratio:'50-50', leftType:'text', leftHtml:'', leftLabel:'', leftUrl:'', leftVideoType:'vimeo', leftImages:[], leftLightbox:true, rightType:'video', rightHtml:'', rightLabel:'', rightUrl:'', rightVideoType:'vimeo', rightImages:[], rightLightbox:true},
+    'video-row':    {id, type:'video-row',      videos:[{url:'',videoType:'vimeo',caption:''},{url:'',videoType:'vimeo',caption:''}], columns:2, aspectRatio:'16:9'},
+    'image-viewer': {id, type:'image-viewer',   images:[{url:'',caption:''},{url:'',caption:''}], lightbox:true},
   };
   const p = S.projects[editIdx];
   if(!p.blocks) p.blocks = [];
@@ -1074,6 +1208,31 @@ window.removeBlockImage = (blkId, imgIdx) => {
   renderBlocksEditor();
 };
 
+
+window.addRowVideo = blkId=>{
+  if(editIdx<0) return; flushBlocksFromDOM();
+  const b=(S.projects[editIdx].blocks||[]).find(b=>b.id===blkId); if(!b) return;
+  if(!b.videos) b.videos=[];
+  b.videos.push({url:'',videoType:'vimeo',caption:''});
+  renderBlocksEditor();
+};
+window.removeRowVideo = (blkId,vidIdx)=>{
+  if(editIdx<0) return; flushBlocksFromDOM();
+  const b=(S.projects[editIdx].blocks||[]).find(b=>b.id===blkId); if(!b||!b.videos) return;
+  b.videos.splice(vidIdx,1); renderBlocksEditor();
+};
+window.addSplitImage = (blkId,side)=>{
+  if(editIdx<0) return; flushBlocksFromDOM();
+  const b=(S.projects[editIdx].blocks||[]).find(b=>b.id===blkId); if(!b) return;
+  const k=side+'Images'; if(!b[k]) b[k]=[];
+  b[k].push({url:'',caption:''}); renderBlocksEditor();
+};
+window.removeSplitImage = (blkId,side,imgIdx)=>{
+  if(editIdx<0) return; flushBlocksFromDOM();
+  const b=(S.projects[editIdx].blocks||[]).find(b=>b.id===blkId); if(!b) return;
+  const k=side+'Images'; if(!b[k]) return;
+  b[k].splice(imgIdx,1); renderBlocksEditor();
+};
 
 window.syncColor  = v=>{ $('e-color').value=v; $('e-swatch').style.background=v; };
 window.syncSwatch = v=>{ if(/^#[0-9a-f]{6}$/i.test(v)){ $('e-colorpicker').value=v; $('e-swatch').style.background=v; } };

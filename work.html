@@ -220,6 +220,19 @@ img{max-width:100%;height:auto;display:block}
 .blk-callout{text-align:center}
 .blk-text-cols{display:grid;gap:48px}
 .blk-split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.blk-vid-row{display:grid;gap:24px}
+.blk-vid-row-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+.blk-vid-row-ar{position:relative;overflow:hidden;aspect-ratio:16/9}
+.blk-vid-row-ar.ar-4x5{aspect-ratio:4/5}
+.blk-vid-row-ar iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.blk-viewer{display:flex;align-items:center;gap:20px}
+.blk-viewer-img-wrap{flex:1;overflow:hidden}
+.blk-viewer-img-wrap img{width:100%;height:auto;display:block;cursor:pointer;transition:opacity 0.25s}
+.blk-viewer-arrow{font-size:28px;color:var(--ink);background:none;border:none;cursor:pointer;padding:8px;line-height:1;transition:opacity 0.2s;flex-shrink:0;font-family:sans-serif}
+.blk-viewer-arrow:hover{opacity:0.5}
+.blk-viewer-meta{display:flex;align-items:center;gap:16px;padding-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:0.08em}
+.blk-viewer-ctr{color:var(--mid)}
+.blk-viewer-cap{color:var(--ink)}
 
 /* ── COLLATERAL GRID (fallback/general) ── */
 .col-section{padding:0 var(--pad) 80px}
@@ -302,6 +315,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   .ma-writeup-2col{grid-template-columns:1fr}
   .blk-text-cols{grid-template-columns:1fr!important}
   .blk-split{grid-template-columns:1fr!important;gap:32px}
+  .blk-vid-row{grid-template-columns:1fr!important;gap:16px}
   .ma-thumb-row{display:grid;grid-template-columns:repeat(3,1fr);overflow-x:visible;gap:6px}
   .ma-thumb-item{width:100%;height:auto;aspect-ratio:3/2}
   .proj-rail-inner{grid-template-columns:1fr}
@@ -418,6 +432,29 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   // ── LIGHTBOX ENGINE ──
   // All pools stored here; onclick passes pool key + index
   const LB_POOLS = { cols };
+  const VIEWER_STATE = {};
+  window.viewerSlide = function(key, d) {
+    const st = VIEWER_STATE[key]; if(!st) return;
+    st.cur = (st.cur + d + st.imgs.length) % st.imgs.length;
+    const img = document.getElementById('vwr-img-'+key);
+    const ctr = document.getElementById('vwr-ctr-'+key);
+    const cap = document.getElementById('vwr-cap-'+key);
+    if(img){ img.src=st.imgs[st.cur].url; img.alt=esc(st.imgs[st.cur].caption||''); if(st.lightbox) img.onclick=()=>lbOpen(st.pool,st.cur); }
+    if(ctr) ctr.textContent=(st.cur+1)+' / '+st.imgs.length;
+    if(cap) cap.textContent=st.imgs[st.cur].caption||'';
+  };
+  function mkViewer(key, imgs, lightbox){
+    if(!imgs.length) return '';
+    return `<div class="blk-viewer">
+    <button class="blk-viewer-arrow" onclick="viewerSlide('${key}',-1)">←</button>
+    <div class="blk-viewer-img-wrap"><img id="vwr-img-${key}" src="${imgs[0].url}" alt="${esc(imgs[0].caption||'')}" loading="lazy"></div>
+    <button class="blk-viewer-arrow" onclick="viewerSlide('${key}',1)">→</button>
+  </div>
+  <div class="blk-viewer-meta">
+    <span class="blk-viewer-ctr" id="vwr-ctr-${key}">1 / ${imgs.length}</span>
+    <span class="blk-viewer-cap" id="vwr-cap-${key}">${esc(imgs[0].caption||'')}</span>
+  </div>`;
+  }
   let lbPoolKey = 'cols';
   let lbIdx = 0;
 
@@ -516,6 +553,11 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
         LB_POOLS['blk_'+b.id] = [{url:b.url, caption:b.caption||''}];
       if(b.type==='image-row' && b.lightbox)
         LB_POOLS['blk_'+b.id] = (b.images||[]).filter(im=>im.url).map(im=>({url:im.url,caption:im.caption||''}));
+      if(b.type==='image-viewer' && b.lightbox!==false) {
+        const imgs=(b.images||[]).filter(im=>im.url);
+        LB_POOLS['blk_'+b.id]=imgs.map(im=>({url:im.url,caption:im.caption||''}));
+        VIEWER_STATE[b.id]={cur:0,imgs,lightbox:true,pool:'blk_'+b.id};
+      }
     });
     return blocks.map(renderBlock).filter(Boolean).join('');
   }
@@ -545,13 +587,17 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
       }
       case 'text': {
         const cols = Math.min(Math.max(+(b.columns)||1,1),3);
-        const html = renderHtml(b.html||'');
         let inner;
-        if(cols===1) {
-          inner = `<div class="rte">${html}</div>`;
+        if(b.col1 !== undefined) {
+          /* Per-column system */
+          const parts = [b.col1||'', b.col2||'', b.col3||''].slice(0,cols).map(c=>renderHtml(c));
+          if(cols===1) inner = `<div class="rte">${parts[0]}</div>`;
+          else inner = `<div class="blk-text-cols" style="grid-template-columns:repeat(${cols},1fr)">${parts.map(p=>`<div class="rte">${p}</div>`).join('')}</div>`;
         } else {
-          const parts = cols===2 ? splitHtmlCols(html) : splitHtmlThree(html);
-          inner = `<div class="blk-text-cols" style="grid-template-columns:repeat(${cols},1fr)">${parts.map(p=>`<div class="rte">${p}</div>`).join('')}</div>`;
+          /* Legacy: auto-split single html field */
+          const html = renderHtml(b.html||'');
+          if(cols===1) inner = `<div class="rte">${html}</div>`;
+          else { const parts = cols===2 ? splitHtmlCols(html) : splitHtmlThree(html); inner = `<div class="blk-text-cols" style="grid-template-columns:repeat(${cols},1fr)">${parts.map(p=>`<div class="rte">${p}</div>`).join('')}`+`</div>`; }
         }
         return `<div class="blk"><div style="${mwStyle(b.width||'full')}">${inner}</div></div>`;
       }
@@ -574,22 +620,45 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
         }).join('');
         return `<div class="blk"><div style="display:grid;grid-template-columns:repeat(${cols},1fr);gap:${gap}">${imgsHtml}</div></div>`;
       }
+      case 'video-row': {
+        const rvids=(b.videos||[]).filter(v=>v.url);
+        if(!rvids.length) return '';
+        const rcols=b.columns||rvids.length;
+        const isPortrait=b.aspectRatio==='4:5';
+        const items=rvids.map(v=>{
+          const vobj={url:v.url,type:v.videoType||'vimeo'};
+          const s=src(vobj); if(!s) return '';
+          return `<div class="blk-vid-row-item">${v.caption?`<p class="blk-vid-row-label">${esc(v.caption)}</p>`:''}<div class="blk-vid-row-ar${isPortrait?' ar-4x5':''}"><iframe src="${s}" allowfullscreen loading="lazy"></iframe></div></div>`;
+        }).filter(Boolean).join('');
+        return `<div class="blk"><div class="blk-vid-row" style="grid-template-columns:repeat(${rcols},1fr)">${items}</div></div>`;
+      }
+      case 'image-viewer': {
+        const vimgs=(b.images||[]).filter(im=>im.url);
+        if(!vimgs.length) return '';
+        /* VIEWER_STATE already populated in renderBlocks pre-pass */
+        return `<div class="blk">${mkViewer(b.id, vimgs, b.lightbox!==false)}</div>`;
+      }
       case 'split': {
-        function spl(type, url, vtype, html, lbl) {
-          const labelHtml = lbl ? `<p class="split-label">${esc(lbl)}</p>` : '';
-          if(type==='video' && url) {
-            const v={url,type:vtype||'vimeo'};
-            const s=src(v);
-            return `<div>${labelHtml}${s?`<div class="split-vid-wrap">${iframe(v)}</div>`:''}</div>`;
-          }
-          if(type==='image' && url) {
-            return `<div>${labelHtml}<img src="${url}" alt="" loading="lazy" style="width:100%;height:auto;display:block"></div>`;
+        function spl(type,url,vtype,html,lbl,images,lightbox,poolKey){
+          const labelHtml=lbl?`<p class="split-label">${esc(lbl)}</p>`:'';
+          if(type==='video'&&url){const v={url,type:vtype||'vimeo'};const s=src(v);return `<div>${labelHtml}${s?`<div class="split-vid-wrap">${iframe(v)}</div>`:''}</div>`;}
+          if(type==='image'&&url){return `<div>${labelHtml}<img src="${url}" alt="" loading="lazy" style="width:100%;height:auto;display:block"></div>`;}
+          if(type==='image-viewer'){
+            const vimgs2=(images||[]).filter(im=>im.url);
+            if(!vimgs2.length) return `<div>${labelHtml}</div>`;
+            const vlight2=lightbox!==false;
+            const pool='blk_'+poolKey;
+            VIEWER_STATE[poolKey]={cur:0,imgs:vimgs2,lightbox:vlight2,pool};
+            if(vlight2) LB_POOLS[pool]=vimgs2.map(im=>({url:im.url,caption:im.caption||''}));
+            return `<div>${labelHtml}${mkViewer(poolKey,vimgs2,vlight2)}</div>`;
           }
           return `<div>${labelHtml}<div class="split-text rte">${renderHtml(html||'')}</div></div>`;
         }
-        const left  = spl(b.leftType||'text',  b.leftUrl,  b.leftVideoType,  b.leftHtml,  b.leftLabel);
-        const right = spl(b.rightType||'text',  b.rightUrl, b.rightVideoType, b.rightHtml, b.rightLabel);
-        return `<div class="blk"><div class="blk-split">${left}${right}</div></div>`;
+        const ratioMap={'40-60':'2fr 3fr','60-40':'3fr 2fr','33-67':'1fr 2fr','67-33':'2fr 1fr'};
+        const gridCols=ratioMap[b.ratio]||'1fr 1fr';
+        const left =spl(b.leftType||'text', b.leftUrl, b.leftVideoType, b.leftHtml, b.leftLabel, b.leftImages, b.leftLightbox, b.id+'_l');
+        const right=spl(b.rightType||'video',b.rightUrl,b.rightVideoType,b.rightHtml,b.rightLabel,b.rightImages,b.rightLightbox,b.id+'_r');
+        return `<div class="blk"><div class="blk-split" style="grid-template-columns:${gridCols}">${left}${right}</div></div>`;
       }
       default: return '';
     }
@@ -877,6 +946,12 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   }
 
   root.innerHTML = mkHeader() + body;
+
+  // After root.innerHTML set — init viewer image onclicks
+  Object.keys(VIEWER_STATE).forEach(key=>{
+    const st=VIEWER_STATE[key]; const img=document.getElementById('vwr-img-'+key);
+    if(img&&st.lightbox) img.onclick=()=>lbOpen(st.pool,0);
+  });
 
   // After root.innerHTML set — fix img onclicks (closures can't go in template literals)
   if (tmpl === 'cwyl') {

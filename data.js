@@ -359,7 +359,7 @@ const PORTFOLIO_DATA = {
       "blocks": [
         {"id":"b101","type":"video","url":"https://youtu.be/NnKLskYBy70","videoType":"youtube","caption":"LUX — In Her Name","width":"wide"},
         {"id":"b102","type":"callout","text":"Would you name your daughter \"inferior to men\"?","size":"xl","align":"center"},
-        {"id":"b103","type":"text","html":"<p>LUX tasked us with something culturally resonant — a campaign that spoke to women beyond product benefits. In Her Name put real women's stories at the heart of the work, earning a Cannes shortlist, a Gold at Epica, and recognition across ten international shows.</p>","columns":3,"width":"full"},
+        {"id":"b103","type":"text","col1":"<p>LUX tasked us with something culturally resonant — a campaign that spoke to women beyond product benefits. In Her Name put real women's stories at the heart of the work, earning a Cannes shortlist, a Gold at Epica, and recognition across ten international shows.</p>","col2":"","col3":"","columns":3,"width":"full"},
         {"id":"b104","type":"image-row","images":[
           {"url":"images/lux-in-her-name/collateral-1.webp","caption":"Credential — 100 Names"},
           {"url":"images/lux-in-her-name/collateral-2.webp","caption":"Hijacking — 100 Names"},
@@ -472,7 +472,7 @@ const PORTFOLIO_DATA = {
       "blocks": [
         {"id":"b201","type":"callout","text":"The first-ever sports championship won by brain power alone.","size":"xl","align":"center"},
         {"id":"b202","type":"video","url":"https://youtu.be/huYcvTtq5aM","videoType":"youtube","caption":"HSBC — Mind Athletes","width":"wide"},
-        {"id":"b203","type":"text","html":"<p>HSBC wanted to do something meaningful with their golf sponsorship beyond the usual tournament hospitality. Mind Athletes reframed golf as a sport of mental strength and created a first-of-its-kind experience for athletes with physical disabilities — sweeping five Gold awards at the Marketing Excellence Awards 2025.</p>","columns":2,"width":"full"},
+        {"id":"b203","type":"text","col1":"<p>HSBC wanted to do something meaningful with their golf sponsorship beyond the usual tournament hospitality. Mind Athletes reframed golf as a sport of mental strength and created a first-of-its-kind experience for athletes with physical disabilities — sweeping five Gold awards at the Marketing Excellence Awards 2025.</p>","col2":"","col3":"","columns":2,"width":"full"},
         {"id":"b204","type":"image-row","images":[
           {"url":"images/hsbc-mind-athletes/thumbnail-01.webp","caption":"Athlete in focus"},
           {"url":"images/hsbc-mind-athletes/thumbnail-02.webp","caption":"On-ground activation"},
@@ -547,7 +547,7 @@ const PORTFOLIO_DATA = {
         }
       ],
       "blocks": [
-        {"id":"b301","type":"text","html":"<p>When VML was invited to pitch for the Ministry of Home Affairs, I led the creative team from brief to presentation. Home of the Unexpected shaped a platform idea that balanced authority with warmth, finding stories in the people who keep Singapore safe. We won the pitch.</p>","columns":2,"width":"full"},
+        {"id":"b301","type":"text","col1":"<p>When VML was invited to pitch for the Ministry of Home Affairs, I led the creative team from brief to presentation. Home of the Unexpected shaped a platform idea that balanced authority with warmth, finding stories in the people who keep Singapore safe. We won the pitch.</p>","col2":"","col3":"","columns":2,"width":"full"},
         {"id":"b302","type":"video","url":"https://vimeo.com/1190043722","videoType":"vimeo","caption":"Ministry of Home Affairs — Home of the Unexpected","width":"wide"},
         {"id":"b303","type":"image-row","images":[
           {"url":"images/mha-home-of-the-unexpected/thumb.webp","caption":"Home of the Unexpected — Print 1"},
@@ -611,13 +611,13 @@ const PORTFOLIO_DATA = {
       "active": true,
       "blocks": [
         {"id":"b401","type":"video","url":"https://vimeo.com/718310698","videoType":"vimeo","caption":"Bybit — Valentine's Day (30s)","width":"wide"},
-        {"id":"b402","type":"text","html":"<p>Valentine's Day is a tough brief for a crypto exchange. The work found a genuine insight — that the best thing you can give someone you love is a better future — and turned it into a campaign that was warm, witty, and completely on-brand for Bybit's irreverent personality.</p>","columns":1,"width":"full"},
+        {"id":"b402","type":"text","col1":"<p>Valentine's Day is a tough brief for a crypto exchange. The work found a genuine insight — that the best thing you can give someone you love is a better future — and turned it into a campaign that was warm, witty, and completely on-brand for Bybit's irreverent personality.</p>","col2":"","col3":"","columns":1,"width":"full"},
         {"id":"b403","type":"image-row","images":[
           {"url":"images/bybit-valentines-day/collateral-blog-banners.gif","caption":"Blog banners — 10 markets"},
           {"url":"images/bybit-valentines-day/support-247.gif","caption":"24/7 Support"},
           {"url":"images/bybit-valentines-day/support-realtime.gif","caption":"Real-time trading"},
           {"url":"images/bybit-valentines-day/support-reliable.gif","caption":"Reliable platform"}
-        ],"columns":2,"gap":"normal","lightbox":true}
+        ],"columns":4,"gap":"normal","lightbox":true}
       ]
     },
     {
@@ -654,7 +654,7 @@ const PORTFOLIO_DATA = {
           {"url":"images/mercedes-amg-a-class/thumb.webp","caption":"Mercedes-AMG A Class Hatchback"},
           {"url":"images/mercedes-amg-a-class/collateral-1.webp","caption":"Mercedes-AMG A 45 S 4MATIC+"}
         ],"columns":2,"gap":"tight","lightbox":true},
-        {"id":"b502","type":"text","html":"<p>The AMG A Class Hatchback was a performance car hiding in everyday clothes. The campaign leaned into that contradiction — the sleeper aesthetic, the everyday silhouette that held something extraordinary underneath. Work that appealed to drivers who know, without having to explain.</p>","columns":1,"width":"medium"}
+        {"id":"b502","type":"text","col1":"<p>The AMG A Class Hatchback was a performance car hiding in everyday clothes. The campaign leaned into that contradiction — the sleeper aesthetic, the everyday silhouette that held something extraordinary underneath. Work that appealed to drivers who know, without having to explain.</p>","col2":"","col3":"","columns":1,"width":"medium"}
       ]
     },
     {
@@ -686,7 +686,7 @@ const PORTFOLIO_DATA = {
       ],
       "active": true,
       "blocks": [
-        {"id":"b601","type":"split","leftType":"video","leftUrl":"https://vimeo.com/1191934649","leftVideoType":"vimeo","leftLabel":"","leftHtml":"","rightType":"text","rightHtml":"<p>Dengue Danger had to cut through a famously hard-to-shift public health behaviour. The campaign used urgency without panic, specificity without jargon, and a tone that respected the intelligence of Singaporeans while making the stakes impossible to ignore.</p>","rightLabel":"About the Work","rightUrl":"","rightVideoType":"vimeo"}
+        {"id":"b601","type":"split","ratio":"50-50","leftType":"video","leftUrl":"https://vimeo.com/1191934649","leftVideoType":"vimeo","leftLabel":"","leftHtml":"","leftImages":[],"leftLightbox":true,"rightType":"text","rightHtml":"<p>Dengue Danger had to cut through a famously hard-to-shift public health behaviour. The campaign used urgency without panic, specificity without jargon, and a tone that respected the intelligence of Singaporeans while making the stakes impossible to ignore.</p>","rightLabel":"About the Work","rightUrl":"","rightVideoType":"vimeo","rightImages":[],"rightLightbox":true}
       ]
     },
     {
@@ -722,7 +722,7 @@ const PORTFOLIO_DATA = {
       "quote": "",
       "openingQuestion": "",
       "blocks": [
-        {"id":"b701","type":"split","leftType":"text","leftHtml":"<p>Better Is Never Down to One Thing challenged the financial category's habit of reducing life to metrics. The platform gave HSBC a more human voice — one that acknowledged complexity, celebrated multidimensionality, and spoke to people as whole human beings rather than account holders.</p>","leftLabel":"About the Work","leftUrl":"","leftVideoType":"vimeo","rightType":"video","rightUrl":"https://vimeo.com/1191945466","rightVideoType":"vimeo","rightLabel":"","rightHtml":""}
+        {"id":"b701","type":"split","ratio":"50-50","leftType":"text","leftHtml":"<p>Better Is Never Down to One Thing challenged the financial category's habit of reducing life to metrics. The platform gave HSBC a more human voice — one that acknowledged complexity, celebrated multidimensionality, and spoke to people as whole human beings rather than account holders.</p>","leftLabel":"About the Work","leftUrl":"","leftVideoType":"vimeo","leftImages":[],"leftLightbox":true,"rightType":"video","rightUrl":"https://vimeo.com/1191945466","rightVideoType":"vimeo","rightLabel":"","rightHtml":"","rightImages":[],"rightLightbox":true}
       ]
     },
     {
@@ -799,14 +799,14 @@ const PORTFOLIO_DATA = {
       "openingQuestion": "What if your interests could help you choose which credit card suits you best?",
       "blocks": [
         {"id":"b801","type":"callout","text":"What if your interests could help you choose which credit card suits you best?","size":"xl","align":"center"},
-        {"id":"b802","type":"image-row","images":[
+        {"id":"b802","type":"image-viewer","images":[
           {"url":"images/hsbc-choose-what-you-love/collateral-3.webp","caption":"Quiz question 1"},
           {"url":"images/hsbc-choose-what-you-love/collateral-4.webp","caption":"Quiz question 2"},
           {"url":"images/hsbc-choose-what-you-love/collateral-5.webp","caption":"Quiz question 3"},
           {"url":"images/hsbc-choose-what-you-love/collateral-6.webp","caption":"Quiz question 4"},
           {"url":"images/hsbc-choose-what-you-love/collateral-7.webp","caption":"Quiz question 5"}
-        ],"columns":3,"gap":"normal","lightbox":true},
-        {"id":"b803","type":"split","leftType":"image","leftUrl":"images/hsbc-choose-what-you-love/collateral-1.gif","leftLabel":"","leftHtml":"","leftVideoType":"vimeo","rightType":"text","rightHtml":"<p>Choose What You Love repositioned HSBC's rewards proposition around what customers genuinely care about — not just cashback categories, but the things that define how they live. The campaign ran across digital, social and in-branch touchpoints.</p>","rightLabel":"About the Work","rightUrl":"","rightVideoType":"vimeo"},
+        ],"lightbox":true},
+        {"id":"b803","type":"split","ratio":"50-50","leftType":"image","leftUrl":"images/hsbc-choose-what-you-love/collateral-1.gif","leftLabel":"","leftHtml":"","leftVideoType":"vimeo","leftImages":[],"leftLightbox":true,"rightType":"text","rightHtml":"<p>Choose What You Love repositioned HSBC's rewards proposition around what customers genuinely care about — not just cashback categories, but the things that define how they live. The campaign ran across digital, social and in-branch touchpoints.</p>","rightLabel":"About the Work","rightUrl":"","rightVideoType":"vimeo","rightImages":[],"rightLightbox":true},
         {"id":"b804","type":"video","url":"https://vimeo.com/1191934210","videoType":"vimeo","caption":"HSBC — Choose What You Love","width":"wide"}
       ]
     },
@@ -844,8 +844,8 @@ const PORTFOLIO_DATA = {
       ],
       "active": true,
       "blocks": [
-        {"id":"b901","type":"split","leftType":"video","leftUrl":"https://vimeo.com/605517069","leftVideoType":"vimeo","leftLabel":"Mercedes me Connect — Rebecca","leftHtml":"","rightType":"video","rightUrl":"https://vimeo.com/605516949","rightVideoType":"vimeo","rightLabel":"Mercedes me Connect — Desmond","rightHtml":""},
-        {"id":"b902","type":"text","html":"<p>Mercedes me Connect extended the luxury experience beyond the car itself. The campaign showed how the app kept drivers connected to their vehicle — remote monitoring, service scheduling, location sharing — in a way that felt less like utility and more like peace of mind.</p>","columns":1,"width":"full"}
+        {"id":"b901","type":"split","ratio":"50-50","leftType":"video","leftUrl":"https://vimeo.com/605517069","leftVideoType":"vimeo","leftLabel":"Mercedes me Connect — Rebecca","leftHtml":"","leftImages":[],"leftLightbox":true,"rightType":"video","rightUrl":"https://vimeo.com/605516949","rightVideoType":"vimeo","rightLabel":"Mercedes me Connect — Desmond","rightHtml":"","rightImages":[],"rightLightbox":true},
+        {"id":"b902","type":"text","col1":"<p>Mercedes me Connect extended the luxury experience beyond the car itself. The campaign showed how the app kept drivers connected to their vehicle — remote monitoring, service scheduling, location sharing — in a way that felt less like utility and more like peace of mind.</p>","col2":"","col3":"","columns":1,"width":"full"}
       ]
     },
     {
@@ -872,7 +872,7 @@ const PORTFOLIO_DATA = {
       "active": true,
       "blocks": [
         {"id":"ba01","type":"image","url":"images/ofnoah-discreet-digital-clinic/mainboard.gif","width":"full","lightbox":false,"caption":""},
-        {"id":"ba02","type":"text","html":"<p>ofnoah exists because men don't ask for help. The brand and campaign work was built around removing every barrier — the embarrassment, the inconvenience, the fear of judgement — and replacing them with a tone that was direct, warm, and completely judgment-free.</p>","columns":2,"width":"full"},
+        {"id":"ba02","type":"text","col1":"<p>ofnoah exists because men don't ask for help. The brand and campaign work was built around removing every barrier — the embarrassment, the inconvenience, the fear of judgement — and replacing them with a tone that was direct, warm, and completely judgment-free.</p>","col2":"","col3":"","columns":2,"width":"full"},
         {"id":"ba03","type":"image-row","images":[
           {"url":"images/ofnoah-discreet-digital-clinic/square1.webp","caption":""},
           {"url":"images/ofnoah-discreet-digital-clinic/square2.webp","caption":""},
@@ -980,17 +980,23 @@ const PORTFOLIO_DATA = {
       "active": true,
       "blocks": [
         {"id":"bb01","type":"callout","text":"The launch of the V15","size":"xl","align":"center"},
-        {"id":"bb02","type":"video","url":"https://vimeo.com/347315598","videoType":"vimeo","caption":"vivo V15 Blossom Pink 1","width":"medium"},
-        {"id":"bb03","type":"video","url":"https://vimeo.com/347315553","videoType":"vimeo","caption":"vivo V15 Blossom Pink 2","width":"medium"},
-        {"id":"bb04","type":"video","url":"https://vimeo.com/347315511","videoType":"vimeo","caption":"vivo V15 Blossom Pink 3","width":"medium"},
-        {"id":"bb05","type":"text","html":"<p>The vivo V15 had a genuinely novel feature — a motorised pop-up front camera that appeared only when you needed it. The launch campaign made that mechanism feel iconic, building the product's selfie credentials with an audience for whom the front camera is the most important lens on the phone.</p>","columns":2,"width":"full"},
-        {"id":"bb06","type":"video","url":"https://vimeo.com/1191942960","videoType":"vimeo","caption":"vivo V15 — Social film 1","width":"narrow"},
-        {"id":"bb07","type":"video","url":"https://vimeo.com/1191942959","videoType":"vimeo","caption":"vivo V15 — Social film 2","width":"narrow"},
-        {"id":"bb08","type":"video","url":"https://vimeo.com/1191942958","videoType":"vimeo","caption":"vivo V15 — Social film 3","width":"narrow"},
-        {"id":"bb09","type":"video","url":"https://vimeo.com/1191942957","videoType":"vimeo","caption":"vivo V15 — Social film 4","width":"narrow"},
-        {"id":"bb10","type":"split","leftType":"text","leftHtml":"<p>A product launch campaign for the vivo V15 — introducing its pop-up front camera to a generation for whom self-expression and content creation are a way of life.</p>","leftLabel":"About the Work","leftUrl":"","leftVideoType":"vimeo","rightType":"video","rightUrl":"https://vimeo.com/347315855","rightVideoType":"vimeo","rightLabel":"vivo V15 x PUBG — Up Your Game 1","rightHtml":""},
-        {"id":"bb11","type":"video","url":"https://vimeo.com/347315817","videoType":"vimeo","caption":"vivo V15 x PUBG — Up Your Game 2","width":"medium"},
-        {"id":"bb12","type":"video","url":"https://vimeo.com/347315773","videoType":"vimeo","caption":"vivo V15 x PUBG — Up Your Game 3","width":"medium"}
+        {"id":"bb02","type":"video-row","videos":[
+          {"url":"https://vimeo.com/347315598","videoType":"vimeo","caption":"Blossom Pink 1"},
+          {"url":"https://vimeo.com/347315553","videoType":"vimeo","caption":"Blossom Pink 2"},
+          {"url":"https://vimeo.com/347315511","videoType":"vimeo","caption":"Blossom Pink 3"}
+        ],"columns":3,"aspectRatio":"16:9"},
+        {"id":"bb05","type":"text","col1":"<p>The vivo V15 had a genuinely novel feature — a motorised pop-up front camera that appeared only when you needed it. The launch campaign made that mechanism feel iconic, building the product's selfie credentials with an audience for whom the front camera is the most important lens on the phone.</p>","col2":"","col3":"","columns":2,"width":"full"},
+        {"id":"bb06","type":"video-row","videos":[
+          {"url":"https://vimeo.com/1191942960","videoType":"vimeo","caption":"Social film 1"},
+          {"url":"https://vimeo.com/1191942959","videoType":"vimeo","caption":"Social film 2"},
+          {"url":"https://vimeo.com/1191942958","videoType":"vimeo","caption":"Social film 3"},
+          {"url":"https://vimeo.com/1191942957","videoType":"vimeo","caption":"Social film 4"}
+        ],"columns":4,"aspectRatio":"4:5"},
+        {"id":"bb10","type":"split","ratio":"50-50","leftType":"text","leftHtml":"<p>A product launch campaign for the vivo V15 — introducing its pop-up front camera to a generation for whom self-expression and content creation are a way of life.</p>","leftLabel":"About the Work","leftUrl":"","leftVideoType":"vimeo","leftImages":[],"leftLightbox":true,"rightType":"video","rightUrl":"https://vimeo.com/347315855","rightVideoType":"vimeo","rightLabel":"vivo V15 x PUBG — Up Your Game 1","rightHtml":"","rightImages":[],"rightLightbox":true},
+        {"id":"bb11","type":"video-row","videos":[
+          {"url":"https://vimeo.com/347315817","videoType":"vimeo","caption":"PUBG — Up Your Game 2"},
+          {"url":"https://vimeo.com/347315773","videoType":"vimeo","caption":"PUBG — Up Your Game 3"}
+        ],"columns":2,"aspectRatio":"16:9"}
       ]
     },
     {
@@ -1037,10 +1043,12 @@ const PORTFOLIO_DATA = {
       ],
       "active": true,
       "blocks": [
-        {"id":"bc01","type":"split","leftType":"text","leftHtml":"<p>The Revolution Credit Card launch needed to cut through in a saturated market. The work spoke directly to how a younger generation actually spends — on experiences, entertainment, and the things that matter to them — rather than defaulting to category clichés.</p>","leftLabel":"About the Work","leftUrl":"","leftVideoType":"vimeo","rightType":"video","rightUrl":"https://youtu.be/SDYoHuqEoAs","rightVideoType":"youtube","rightLabel":"","rightHtml":""},
-        {"id":"bc02","type":"video","url":"https://youtu.be/tVADyAUtMrk","videoType":"youtube","caption":"Revolution — Film 2","width":"medium"},
-        {"id":"bc03","type":"video","url":"https://youtu.be/tZV3SIV7bgg","videoType":"youtube","caption":"Revolution — Film 3","width":"medium"},
-        {"id":"bc04","type":"video","url":"https://youtu.be/VHT7D30uSUA","videoType":"youtube","caption":"Revolution — Film 4","width":"medium"}
+        {"id":"bc01","type":"split","ratio":"50-50","leftType":"text","leftHtml":"<p>The Revolution Credit Card launch needed to cut through in a saturated market. The work spoke directly to how a younger generation actually spends — on experiences, entertainment, and the things that matter to them — rather than defaulting to category clichés.</p>","leftLabel":"About the Work","leftUrl":"","leftVideoType":"vimeo","leftImages":[],"leftLightbox":true,"rightType":"video","rightUrl":"https://youtu.be/SDYoHuqEoAs","rightVideoType":"youtube","rightLabel":"","rightHtml":"","rightImages":[],"rightLightbox":true},
+        {"id":"bc02","type":"video-row","videos":[
+          {"url":"https://youtu.be/tVADyAUtMrk","videoType":"youtube","caption":"Revolution — Film 2"},
+          {"url":"https://youtu.be/tZV3SIV7bgg","videoType":"youtube","caption":"Revolution — Film 3"},
+          {"url":"https://youtu.be/VHT7D30uSUA","videoType":"youtube","caption":"Revolution — Film 4"}
+        ],"columns":3,"aspectRatio":"16:9"}
       ]
     },
     {
@@ -1087,10 +1095,12 @@ const PORTFOLIO_DATA = {
       ],
       "active": true,
       "blocks": [
-        {"id":"bd01","type":"split","leftType":"video","leftUrl":"https://vimeo.com/249916617","leftVideoType":"vimeo","leftLabel":"","leftHtml":"","rightType":"text","rightHtml":"<p>Tap and Go stripped away the friction from how HSBC talked about contactless payments. Rather than leading with features, the campaign led with moments — the split-second transactions that add up to a life lived at full speed.</p>","rightLabel":"About the Work","rightUrl":"","rightVideoType":"vimeo"},
-        {"id":"bd02","type":"video","url":"https://vimeo.com/249979667","videoType":"vimeo","caption":"HSBC Tap and Go — Shop","width":"medium"},
-        {"id":"bd03","type":"video","url":"https://vimeo.com/249979660","videoType":"vimeo","caption":"HSBC Tap and Go — Travel","width":"medium"},
-        {"id":"bd04","type":"video","url":"https://vimeo.com/249979654","videoType":"vimeo","caption":"HSBC Tap and Go — Purchases","width":"medium"}
+        {"id":"bd01","type":"split","ratio":"50-50","leftType":"video","leftUrl":"https://vimeo.com/249916617","leftVideoType":"vimeo","leftLabel":"","leftHtml":"","leftImages":[],"leftLightbox":true,"rightType":"text","rightHtml":"<p>Tap and Go stripped away the friction from how HSBC talked about contactless payments. Rather than leading with features, the campaign led with moments — the split-second transactions that add up to a life lived at full speed.</p>","rightLabel":"About the Work","rightUrl":"","rightVideoType":"vimeo","rightImages":[],"rightLightbox":true},
+        {"id":"bd02","type":"video-row","videos":[
+          {"url":"https://vimeo.com/249979667","videoType":"vimeo","caption":"HSBC Tap and Go — Shop"},
+          {"url":"https://vimeo.com/249979660","videoType":"vimeo","caption":"HSBC Tap and Go — Travel"},
+          {"url":"https://vimeo.com/249979654","videoType":"vimeo","caption":"HSBC Tap and Go — Purchases"}
+        ],"columns":3,"aspectRatio":"16:9"}
       ]
     },
     {
@@ -1189,8 +1199,7 @@ const PORTFOLIO_DATA = {
       "videos": [],
       "active": true,
       "blocks": [
-        {"id":"be01","type":"text","html":"<p>Volkswagen Prints was a lesson in restraint. The campaign trusted the idea over the asset, letting a strong visual concept carry the brand message without defaulting to the usual glamour shots. Work that rewarded the people paying attention.</p>","columns":1,"width":"full"},
-        {"id":"be02","type":"image-row","images":[
+        {"id":"be01","type":"split","ratio":"40-60","leftType":"text","leftLabel":"About the Work","leftHtml":"<p>Volkswagen Prints was a lesson in restraint. The campaign trusted the idea over the asset, letting a strong visual concept carry the brand message without defaulting to the usual glamour shots. Work that rewarded the people paying attention.</p>","leftUrl":"","leftVideoType":"vimeo","leftImages":[],"leftLightbox":true,"rightType":"image-viewer","rightHtml":"","rightUrl":"","rightVideoType":"vimeo","rightImages":[
           {"url":"images/volkswagen-prints/print-01.webp","caption":"Print 01"},
           {"url":"images/volkswagen-prints/print-02.webp","caption":"Print 02"},
           {"url":"images/volkswagen-prints/print-03.webp","caption":"Print 03"},
@@ -1203,7 +1212,7 @@ const PORTFOLIO_DATA = {
           {"url":"images/volkswagen-prints/print-10.webp","caption":"Print 10"},
           {"url":"images/volkswagen-prints/print-11.webp","caption":"Print 11"},
           {"url":"images/volkswagen-prints/print-12.webp","caption":"Print 12"}
-        ],"columns":3,"gap":"normal","lightbox":true}
+        ],"rightLightbox":true,"rightLabel":""}
       ]
     },
     {
@@ -1235,7 +1244,7 @@ const PORTFOLIO_DATA = {
       ],
       "active": true,
       "blocks": [
-        {"id":"bf01","type":"split","leftType":"text","leftHtml":"<p>The EQC was Mercedes-Benz's declaration that electric luxury had arrived. The launch campaign balanced the rational case for electric — range, efficiency, charging — with the emotional pull that makes a Mercedes desirable. A car that didn't ask you to sacrifice anything.</p>","leftLabel":"About the Work","leftUrl":"","leftVideoType":"vimeo","rightType":"video","rightUrl":"https://vimeo.com/651140992","rightVideoType":"vimeo","rightLabel":"","rightHtml":""}
+        {"id":"bf01","type":"split","ratio":"50-50","leftType":"text","leftHtml":"<p>The EQC was Mercedes-Benz's declaration that electric luxury had arrived. The launch campaign balanced the rational case for electric — range, efficiency, charging — with the emotional pull that makes a Mercedes desirable. A car that didn't ask you to sacrifice anything.</p>","leftLabel":"About the Work","leftUrl":"","leftVideoType":"vimeo","leftImages":[],"leftLightbox":true,"rightType":"video","rightUrl":"https://vimeo.com/651140992","rightVideoType":"vimeo","rightLabel":"","rightHtml":"","rightImages":[],"rightLightbox":true}
       ]
     },
     {
