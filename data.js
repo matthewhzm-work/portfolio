@@ -1452,7 +1452,7 @@ const PORTFOLIO_DATA = {
       "gridSpan": 5,
       "thumbnailUrl": "images/vivo-v15/thumb.gif",
       "thumbnailType": "gif",
-      "description": "A product launch campaign for the vivo V15 — introducing its pop-up front camera to a generation for whom self-expression and content creation are a way of life.",
+      "description": "<p>A product launch campaign for the vivo V15 — introducing its pop-up front camera to a generation for whom self-expression and content creation are a way of life.</p>",
       "fullDescription": "The vivo V15 had a genuinely novel feature — a motorised pop-up front camera that appeared only when you needed it. The launch campaign made that mechanism feel iconic, building the product's selfie credentials with an audience for whom the front camera is the most important lens on the phone.",
       "quote": "The launch of the V15",
       "projectTemplate": "vivo",
@@ -1529,41 +1529,28 @@ const PORTFOLIO_DATA = {
         {
           "id": "bb01",
           "type": "callout",
-          "text": "The launch of the V15",
-          "size": "xl",
+          "text": "The launch of the V15 series",
+          "size": "lg",
           "align": "center"
         },
         {
-          "id": "bb02",
-          "type": "video-row",
-          "videos": [
-            {
-              "url": "https://vimeo.com/347315598",
-              "videoType": "vimeo",
-              "caption": "Blossom Pink 1"
-            },
-            {
-              "url": "https://vimeo.com/347315553",
-              "videoType": "vimeo",
-              "caption": "Blossom Pink 2"
-            },
-            {
-              "url": "https://vimeo.com/347315511",
-              "videoType": "vimeo",
-              "caption": "Blossom Pink 3"
-            }
-          ],
-          "columns": 3,
-          "aspectRatio": "16:9"
-        },
-        {
-          "id": "bb05",
-          "type": "text",
-          "col1": "<p>The vivo V15 had a genuinely novel feature — a motorised pop-up front camera that appeared only when you needed it. The launch campaign made that mechanism feel iconic, building the product's selfie credentials with an audience for whom the front camera is the most important lens on the phone.</p>",
-          "col2": "",
-          "col3": "",
-          "columns": 2,
-          "width": "full"
+          "id": "bmp99udddsc0",
+          "type": "split",
+          "ratio": "60-40",
+          "leftType": "video",
+          "leftHtml": "",
+          "leftLabel": "BLOSSOM PINK COLOURWAY LAUNCH",
+          "leftUrl": "https://vimeo.com/347315553",
+          "leftVideoType": "vimeo",
+          "leftImages": [],
+          "leftLightbox": true,
+          "rightType": "text",
+          "rightHtml": "<p>Vivo invented the Elevating Front Camera. Then watched rivals follow.</p><p>For the V15 Series launch across Southeast Asia, we weren't going to let that innovation go uncelebrated. </p><p>We built an entire campaign around a single word that captured everything the phone stood for: <strong>UP</strong>.</p>",
+          "rightLabel": "",
+          "rightUrl": "",
+          "rightVideoType": "vimeo",
+          "rightImages": [],
+          "rightLightbox": true
         },
         {
           "id": "bb06",
@@ -1594,40 +1581,81 @@ const PORTFOLIO_DATA = {
           "aspectRatio": "4:5"
         },
         {
-          "id": "bb10",
-          "type": "split",
-          "ratio": "50-50",
-          "leftType": "text",
-          "leftHtml": "<p>A product launch campaign for the vivo V15 — introducing its pop-up front camera to a generation for whom self-expression and content creation are a way of life.</p>",
-          "leftLabel": "About the Work",
-          "leftUrl": "",
-          "leftVideoType": "vimeo",
-          "leftImages": [],
-          "leftLightbox": true,
-          "rightType": "video",
-          "rightUrl": "https://vimeo.com/347315855",
-          "rightVideoType": "vimeo",
-          "rightLabel": "vivo V15 x PUBG — Up Your Game 1",
-          "rightHtml": "",
-          "rightImages": [],
-          "rightLightbox": true
+          "id": "bmp9a7p421f9",
+          "type": "callout",
+          "text": "UP Your Game",
+          "size": "md",
+          "align": "center"
         },
         {
-          "id": "bb11",
+          "id": "bmp9a3pb20ea",
+          "type": "text",
+          "col1": "",
+          "col2": "<p>High-performance claims are easy to make. We let the game do the talking instead.</p><p>Partnering with PUBG — one of mobile gaming's most demanding experiences — we put the V15 where its most discerning audience already lived. Specs proven in real time, in the hands of the people who'd push the hardware hardest.</p>",
+          "col3": "",
+          "columns": 3,
+          "width": "full"
+        },
+        {
+          "id": "bmp9a22muh25",
           "type": "video-row",
           "videos": [
             {
               "url": "https://vimeo.com/347315817",
               "videoType": "vimeo",
-              "caption": "PUBG — Up Your Game 2"
+              "caption": "Multi Turbo"
             },
             {
               "url": "https://vimeo.com/347315773",
               "videoType": "vimeo",
-              "caption": "PUBG — Up Your Game 3"
+              "caption": "Competition Mode"
+            },
+            {
+              "url": "https://vimeo.com/347315855",
+              "videoType": "vimeo",
+              "caption": "Dual-Engine Fast Charging"
             }
           ],
-          "columns": 2,
+          "columns": 3,
+          "aspectRatio": "16:9"
+        },
+        {
+          "id": "bmp9a9aicotb",
+          "type": "callout",
+          "text": "Strength that holds UP",
+          "size": "md",
+          "align": "center"
+        },
+        {
+          "id": "bmp9a45n80z0",
+          "type": "text",
+          "col1": "",
+          "col2": "<p>The V15's Elevating Front Camera was genuinely new. But new meant untested — and the most common question was the most practical one: was it sturdy enough for everyday use?</p><p>So, we proved that they were in non-everyday scenarios. Pushing the camera through situations no one would normally put a phone through. If it holds up there, it holds up anywhere.</p>",
+          "col3": "",
+          "columns": 3,
+          "width": "full"
+        },
+        {
+          "id": "bmp9a47n19fi",
+          "type": "video-row",
+          "videos": [
+            {
+              "url": "https://vimeo.com/347315715",
+              "videoType": "vimeo",
+              "caption": "Swing"
+            },
+            {
+              "url": "https://vimeo.com/347315669 ",
+              "videoType": "vimeo",
+              "caption": "Drum"
+            },
+            {
+              "url": "https://vimeo.com/347315631",
+              "videoType": "vimeo",
+              "caption": "Model"
+            }
+          ],
+          "columns": 3,
           "aspectRatio": "16:9"
         }
       ]
