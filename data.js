@@ -800,7 +800,7 @@ const PORTFOLIO_DATA = {
         {
           "id": "bmp94ma5r2fg",
           "type": "split",
-          "ratio": "60-40",
+          "ratio": "33-67",
           "leftType": "image",
           "leftHtml": "",
           "leftLabel": "Supporting Banner",
@@ -809,7 +809,7 @@ const PORTFOLIO_DATA = {
           "leftImages": [],
           "leftLightbox": true,
           "rightType": "text",
-          "rightHtml": "<p>Getting it made was its own challenge. The concept was pitched directly to the CEO — a case for why Bybit needed to stop competing on promotions and start competing on brand. The pitch landed, securing a $120,000 production budget. From approval to launch, the entire campaign was conceived, produced, localised across 10 languages, and coordinated across 10 markets in under two months — a timeline that required tight cross-functional execution across creative, marketing, and regional teams simultaneously.</p>",
+          "rightHtml": "<p>Getting it made was its own challenge. </p><p>I pitched it directly to the CEO — a case for why Bybit needed to stop competing on promotions and start competing on brand. The pitch landed, securing a $120,000 production budget. </p><p>From approval to launch, the entire campaign was conceived, produced, localised across 10 languages, and coordinated across 10 markets in under two months — a timeline that required tight cross-functional execution across creative, marketing, and regional teams simultaneously.</p>",
           "rightLabel": "The Pitch",
           "rightUrl": "",
           "rightVideoType": "vimeo",
