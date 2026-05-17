@@ -792,7 +792,7 @@ const PORTFOLIO_DATA = {
               "caption": "Reliable platform"
             }
           ],
-          "columns": 4,
+          "columns": 3,
           "gap": "normal",
           "lightbox": true,
           "layout": "grid"
@@ -834,7 +834,7 @@ const PORTFOLIO_DATA = {
       "gridSpan": 6,
       "thumbnailUrl": "images/mercedes-amg-a-class/thumb.webp",
       "thumbnailType": "image",
-      "description": "A launch campaign for the Mercedes-AMG A Class Hatchback — positioning the most powerful A-Class ever made to drivers who refuse to compromise.",
+      "description": "<p>A set of prints to launch the Mercedes-AMG A Class Hatchback — positioning the most powerful A-Class ever made to drivers who refuse to compromise.</p>",
       "fullDescription": "The AMG A Class Hatchback was a performance car hiding in everyday clothes. The campaign leaned into that contradiction — the sleeper aesthetic, the everyday silhouette that held something extraordinary underneath. Work that appealed to drivers who know, without having to explain.",
       "projectTemplate": "prints-side-by-side",
       "collaterals": [
@@ -854,7 +854,7 @@ const PORTFOLIO_DATA = {
           "images": [
             {
               "url": "images/mercedes-amg-a-class/thumb.webp",
-              "caption": "Mercedes-AMG A Class Hatchback"
+              "caption": "Mercedes-AMG A 45 S 4MATIC+"
             },
             {
               "url": "images/mercedes-amg-a-class/collateral-1.webp",
@@ -863,12 +863,13 @@ const PORTFOLIO_DATA = {
           ],
           "columns": 2,
           "gap": "tight",
-          "lightbox": true
+          "lightbox": true,
+          "layout": "grid"
         },
         {
           "id": "b502",
           "type": "text",
-          "col1": "<p>The AMG A Class Hatchback was a performance car hiding in everyday clothes. The campaign leaned into that contradiction — the sleeper aesthetic, the everyday silhouette that held something extraordinary underneath. Work that appealed to drivers who know, without having to explain.</p>",
+          "col1": "<p>When the images are locked and sent from the global office, the words have to work harder. Here are a few examples where they did.</p><p><br></p>",
           "col2": "",
           "col3": "",
           "columns": 1,
@@ -880,7 +881,7 @@ const PORTFOLIO_DATA = {
       "id": "nea-dengue-danger",
       "brand": "NEA",
       "title": "Dengue Danger",
-      "subtitle": "A public health campaign that made Singapore take the dengue threat seriously",
+      "subtitle": "Ditching decades of fear-mongering. Making dengue education something kids actually remember.",
       "award": "",
       "tags": [
         "Public Health",
@@ -892,7 +893,7 @@ const PORTFOLIO_DATA = {
       "gridSpan": 4,
       "thumbnailUrl": "images/nea-dengue-danger/thumb.gif",
       "thumbnailType": "gif",
-      "description": "A public health campaign for the National Environment Agency urging Singaporeans to take dengue prevention seriously — before the next outbreak hits.",
+      "description": "<p>A long-overdue reboot of Singapore's school dengue education. Less fear, more engagement — and a lot more memorable for it.</p>",
       "fullDescription": "Dengue Danger had to cut through a famously hard-to-shift public health behaviour. The campaign used urgency without panic, specificity without jargon, and a tone that respected the intelligence of Singaporeans while making the stakes impossible to ignore.",
       "projectTemplate": "video-left-writeup-right",
       "collaterals": [],
@@ -908,7 +909,7 @@ const PORTFOLIO_DATA = {
         {
           "id": "b601",
           "type": "split",
-          "ratio": "50-50",
+          "ratio": "60-40",
           "leftType": "video",
           "leftUrl": "https://vimeo.com/1191934649",
           "leftVideoType": "vimeo",
@@ -917,7 +918,7 @@ const PORTFOLIO_DATA = {
           "leftImages": [],
           "leftLightbox": true,
           "rightType": "text",
-          "rightHtml": "<p>Dengue Danger had to cut through a famously hard-to-shift public health behaviour. The campaign used urgency without panic, specificity without jargon, and a tone that respected the intelligence of Singaporeans while making the stakes impossible to ignore.</p>",
+          "rightHtml": "<p>For years, Singapore's dengue education relied on the same playbook: scare kids into awareness. The videos shown in schools across the country were outdated, fear-driven, and frankly, forgettable.</p><p>We were asked to change that.</p><p>The challenge wasn't just making something new — it was making something that would actually stick. Because information delivered through fear fades. Information delivered through engagement doesn't.</p><p>So we ditched the fear-mongering and built something kids would actually want to watch. A fresh, entertaining approach to dengue education that made the right information memorable for all the right reasons.</p>",
           "rightLabel": "About the Work",
           "rightUrl": "",
           "rightVideoType": "vimeo",
