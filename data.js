@@ -708,7 +708,7 @@ const PORTFOLIO_DATA = {
       "id": "bybit-valentines-day",
       "brand": "Bybit",
       "title": "Valentine's Day",
-      "subtitle": "Making crypto feel warm — a seasonal campaign that traded on love, not just liquidity",
+      "subtitle": "These days, people aren't just into crypto. They're in love with it.",
       "award": "",
       "tags": [
         "Social",
@@ -720,7 +720,7 @@ const PORTFOLIO_DATA = {
       "gridSpan": 4,
       "thumbnailUrl": "images/bybit-valentines-day/thumb.gif",
       "thumbnailType": "gif",
-      "description": "A Valentine's Day campaign for Bybit that found the human side of a crypto exchange — proving that even in a world of wallets and trades, love is still the strongest currency.",
+      "description": "<p>On Valentine’s Day, we spoke to all the crypto lovebirds and created mass crazy-in-love hype for trading on Bybit.</p>",
       "fullDescription": "Valentine's Day is a tough brief for a crypto exchange. The work found a genuine insight — that the best thing you can give someone you love is a better future — and turned it into a campaign that was warm, witty, and completely on-brand for Bybit's irreverent personality.",
       "projectTemplate": "default",
       "collaterals": [
@@ -769,20 +769,16 @@ const PORTFOLIO_DATA = {
         {
           "id": "b402",
           "type": "text",
-          "col1": "<p>Valentine's Day is a tough brief for a crypto exchange. The work found a genuine insight — that the best thing you can give someone you love is a better future — and turned it into a campaign that was warm, witty, and completely on-brand for Bybit's irreverent personality.</p>",
-          "col2": "",
-          "col3": "",
-          "columns": 1,
+          "col1": "<p>Across the industry, exchanges were locked in an arms race of promotions, giveaways, and sign-up bonuses — each one trying to outbid the other for user attention. It worked, in the short term. But it created a market of deal-hunters with no loyalty, and brands that were indistinguishable from one another. When the promotions stopped, the users left.</p><p>Bybit was performing well by every metric that mattered — trading volume, promotions, user acquisition, etc. However, beneath the numbers, our brand score was doing badly: users were engaging with our deals, not our brand. </p>",
+          "col2": "<p>The challenge was to shift that — to build genuine brand affinity in a space where trust was increasingly scarce. Crypto exchanges were halting withdrawals, collapsing overnight, and leaving users stranded. Bybit needed to stand for something beyond the next promo.</p><p>The insight was simple: crypto wasn't just a hobby anymore. For millions of users, it was a passion. So, on Valentine's Day — a moment no crypto exchange had thought to own — we spoke to all the crypto lovebirds and created mass crazy-in-love hype for trading on Bybit.</p>",
+          "col3": "<p><strong>Results:</strong></p><p>1M impressions</p><p>167K video views</p><p>15.63K likes</p><p>581K engagements</p>",
+          "columns": 3,
           "width": "full"
         },
         {
           "id": "b403",
           "type": "image-row",
           "images": [
-            {
-              "url": "images/bybit-valentines-day/collateral-blog-banners.gif",
-              "caption": "Blog banners — 10 markets"
-            },
             {
               "url": "images/bybit-valentines-day/support-247.gif",
               "caption": "24/7 Support"
@@ -798,7 +794,27 @@ const PORTFOLIO_DATA = {
           ],
           "columns": 4,
           "gap": "normal",
-          "lightbox": true
+          "lightbox": true,
+          "layout": "grid"
+        },
+        {
+          "id": "bmp94ma5r2fg",
+          "type": "split",
+          "ratio": "60-40",
+          "leftType": "image",
+          "leftHtml": "",
+          "leftLabel": "Supporting Banner",
+          "leftUrl": "images/bybit-valentines-day/collateral-blog-banners.gif",
+          "leftVideoType": "vimeo",
+          "leftImages": [],
+          "leftLightbox": true,
+          "rightType": "text",
+          "rightHtml": "<p>Getting it made was its own challenge. The concept was pitched directly to the CEO — a case for why Bybit needed to stop competing on promotions and start competing on brand. The pitch landed, securing a $120,000 production budget. From approval to launch, the entire campaign was conceived, produced, localised across 10 languages, and coordinated across 10 markets in under two months — a timeline that required tight cross-functional execution across creative, marketing, and regional teams simultaneously.</p>",
+          "rightLabel": "The Pitch",
+          "rightUrl": "",
+          "rightVideoType": "vimeo",
+          "rightImages": [],
+          "rightLightbox": true
         }
       ]
     },
