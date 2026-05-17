@@ -1118,6 +1118,7 @@ const PORTFOLIO_DATA = {
         {
           "id": "b802",
           "type": "image-viewer",
+          "width": "compact",
           "images": [
             {
               "url": "images/hsbc-choose-what-you-love/collateral-3.webp",

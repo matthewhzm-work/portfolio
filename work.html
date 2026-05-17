@@ -567,7 +567,7 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
   }
 
   function renderBlock(b) {
-    const mw = w => ({full:'none',wide:'1075px',medium:'720px',narrow:'560px',small:'400px'}[w]||'none');
+    const mw = w => ({full:'none',wide:'1075px',medium:'720px',narrow:'560px',small:'400px',compact:'75%'}[w]||'none');
     const mwStyle = w => { const v=mw(w); return v!=='none' ? `max-width:${v};margin:0 auto` : ''; };
 
     switch(b.type) {
@@ -651,7 +651,8 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
         const vimgs=(b.images||[]).filter(im=>im.url);
         if(!vimgs.length) return '';
         /* VIEWER_STATE already populated in renderBlocks pre-pass */
-        return `<div class="blk">${mkViewer(b.id, vimgs, b.lightbox!==false)}</div>`;
+        const ivWrap = b.width ? `<div style="${mwStyle(b.width)}">${mkViewer(b.id, vimgs, b.lightbox!==false)}</div>` : mkViewer(b.id, vimgs, b.lightbox!==false);
+        return `<div class="blk">${ivWrap}</div>`;
       }
       case 'split': {
         function spl(type,url,vtype,html,lbl,images,lightbox,poolKey){

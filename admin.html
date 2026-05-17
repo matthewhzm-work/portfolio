@@ -932,9 +932,18 @@ function renderBlockEditorItem(b, bi, total){
       <button class="btn btn-danger btn-sm" onclick="removeBlockImage('${id}',${ii})">✕</button>
     </div>`).join('');
     fields=`<div style="margin-top:0">
-    <div class="fg" style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
-      <input type="checkbox" id="blk-lbox-${id}" ${b.lightbox!==false?'checked':''}>
-      <label for="blk-lbox-${id}" style="text-transform:none;letter-spacing:0;font-size:12px;cursor:pointer;margin:0">Open in lightbox on click</label>
+    <div class="g2" style="margin-bottom:14px">
+      <div class="fg"><label>Width</label><select id="blk-width-${id}">
+        <option value=""        ${!b.width?'selected':''}>Full — content width</option>
+        <option value="compact" ${b.width==='compact'?'selected':''}>Compact — 75%</option>
+        <option value="wide"    ${b.width==='wide'?'selected':''}>Wide — 1075px</option>
+        <option value="medium"  ${b.width==='medium'?'selected':''}>Medium — 720px</option>
+        <option value="narrow"  ${b.width==='narrow'?'selected':''}>Narrow — 560px</option>
+      </select></div>
+      <div class="fg" style="display:flex;align-items:center;gap:8px;padding-top:22px">
+        <input type="checkbox" id="blk-lbox-${id}" ${b.lightbox!==false?'checked':''}>
+        <label for="blk-lbox-${id}" style="text-transform:none;letter-spacing:0;font-size:12px;cursor:pointer;margin:0">Lightbox on click</label>
+      </div>
     </div>
     <p class="mini-label" style="margin-top:0;margin-bottom:8px">Images (displayed as slider)</p>
     <div id="blk-imgs-${id}">${imgItems}</div>
@@ -1161,7 +1170,8 @@ function flushBlockFromDOM(b){
     }
 
     case 'image-viewer': {
-      if(g('lbox')) b.lightbox = g('lbox').checked;
+      if(g('width')) b.width   = g('width').value || undefined;
+      if(g('lbox'))  b.lightbox = g('lbox').checked;
       /* GUARD: only rebuild array when container exists */
       const ivCtr = document.getElementById('blk-imgs-'+id);
       if(ivCtr) b.images = Array.from(document.querySelectorAll(`[data-blk-img-id="${id}"]`))
