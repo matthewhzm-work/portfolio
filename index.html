@@ -72,7 +72,9 @@ nav.scrolled{
 .nav-links{display:flex;gap:28px;list-style:none;flex-shrink:0}
 .nav-links a{
   font-family:var(--mono);font-size:13px;letter-spacing:0.08em;
-  text-transform:uppercase;color:var(--ink);text-decoration:none;
+  text-transform:uppercase;color:var(--ink);
+  text-decoration:underline;text-underline-offset:4px;
+  text-decoration-thickness:1px;text-decoration-color:rgba(10,10,10,0.3);
   transition:color 0.18s;
 }
 .nav-links a:hover{color:var(--red)}
@@ -308,6 +310,7 @@ footer{
   .about-grid{grid-template-columns:1fr;gap:64px}
   #about,#awards{padding:80px var(--pad)}
   .awards-cols{grid-template-columns:1fr}
+  .year-group{grid-column:auto!important}
   .award-row{grid-template-columns:80px 1fr}
   .award-brand{display:none}
   footer{flex-direction:column;gap:10px;text-align:center;align-items:center}
@@ -456,27 +459,28 @@ footer{
   const years = Object.keys(byYear).sort((a,b)=>b-a);
   const tc = t => ['Gold','Silver','Bronze'].includes(t)?'t-'+t:'t-other';
 
-  const colsA = [[],[]];
+  /* Balance years across 2 columns by row count */
+  const colAssign = {};
   let [rL,rR] = [0,0];
   years.forEach(yr => {
     const n = byYear[yr].length + 1;
-    if (rL <= rR) { colsA[0].push(yr); rL+=n; }
-    else          { colsA[1].push(yr); rR+=n; }
+    if (rL <= rR) { colAssign[yr] = 1; rL+=n; }
+    else          { colAssign[yr] = 2; rR+=n; }
   });
 
+  /* Render each year-group as a direct child in chronological (DOM) order.
+     grid-column places them into the correct desktop column.
+     On mobile the CSS overrides grid-column to auto so they flow chronologically. */
   const ac = $('awards-cols');
-  colsA.forEach(yrs => {
-    const col = document.createElement('div');
-    yrs.forEach(yr => {
-      const g = document.createElement('div');
-      g.className = 'year-group reveal';
-      g.innerHTML = `<div class="year-label">${yr}</div>`
-        + byYear[yr].map(a =>
-          `<div class="award-row"><span class="award-tier ${tc(a.tier)}">${a.tier}</span><span class="award-info"><strong>${a.show}</strong><span class="award-info-sub">— ${a.category}</span></span>${a.brand?`<span class="award-brand">${a.brand}</span>`:'<span></span>'}</div>`
-        ).join('');
-      col.appendChild(g);
-    });
-    ac.appendChild(col);
+  years.forEach(yr => {
+    const g = document.createElement('div');
+    g.className = 'year-group reveal';
+    g.style.gridColumn = colAssign[yr];
+    g.innerHTML = `<div class="year-label">${yr}</div>`
+      + byYear[yr].map(a =>
+        `<div class="award-row"><span class="award-tier ${tc(a.tier)}">${a.tier}</span><span class="award-info"><strong>${a.show}</strong><span class="award-info-sub">— ${a.category}</span></span>${a.brand?`<span class="award-brand">${a.brand}</span>`:'<span></span>'}</div>`
+      ).join('');
+    ac.appendChild(g);
   });
 
   const obs = new IntersectionObserver(entries => {
