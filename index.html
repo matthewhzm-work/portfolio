@@ -268,7 +268,7 @@ nav.scrolled{
   display:flex;align-items:center;gap:10px;
 }
 .awards-eyebrow em{color:var(--red);font-style:normal}
-.awards-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 64px;align-items:start}
+.awards-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 48px;align-items:start}
 .year-group{margin-bottom:28px}
 .year-group:last-child{margin-bottom:0}
 .year-label{
@@ -334,7 +334,7 @@ footer{
   .about-grid{grid-template-columns:1fr;gap:64px}
   #about{padding-bottom:64px}
   #awards{padding:40px var(--pad) 60px}
-  .awards-cols{grid-template-columns:1fr}
+  .awards-cols{grid-template-columns:1fr 1fr}
   .year-group{grid-column:auto!important}
   .award-row{grid-template-columns:80px 1fr}
   .award-brand{display:none}
@@ -342,6 +342,7 @@ footer{
 }
 @media(max-width:600px){
   .project-grid{grid-template-columns:1fr}
+  .awards-cols{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -535,13 +536,14 @@ footer{
   const years = Object.keys(byYear).sort((a,b)=>b-a);
   const tc = t => ['Gold','Silver','Bronze'].includes(t)?'t-'+t:'t-other';
 
-  /* Balance years across 2 columns by row count */
+  /* Balance years across 3 columns by row count (greedy shortest-column) */
   const colAssign = {};
-  let [rL,rR] = [0,0];
+  const colRows = [0, 0, 0];
   years.forEach(yr => {
-    const n = byYear[yr].length + 1;
-    if (rL <= rR) { colAssign[yr] = 1; rL+=n; }
-    else          { colAssign[yr] = 2; rR+=n; }
+    const n = byYear[yr].length + 1; // award rows + year-label row
+    const shortest = colRows.indexOf(Math.min(...colRows));
+    colAssign[yr] = shortest + 1; // 1-indexed grid-column
+    colRows[shortest] += n;
   });
 
   /* Render each year-group as a direct child in chronological (DOM) order.
