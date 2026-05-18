@@ -185,7 +185,10 @@ nav.scrolled{
 
 /* ── ABOUT ── */
 #about{
-  padding:calc(var(--nav-h) + 60px) var(--pad) 100px;
+  padding-top:calc(var(--nav-h) + 60px);
+  padding-right:var(--pad);
+  padding-bottom:100px;
+  padding-left:var(--pad);
   background:var(--ink);
   color:var(--paper);
 }
@@ -313,8 +316,8 @@ footer{
   :root{--pad:24px;--nav-h:auto}
   nav{flex-wrap:wrap;padding:14px var(--pad) 0;gap:0;height:auto}
   .nav-name{flex:1;padding-bottom:12px}
-  .nav-links{padding-bottom:12px}
-  .nav-icons{padding-bottom:12px}
+  .nav-links{flex:0 0 100%;order:2;padding-bottom:8px}
+  .nav-icons{order:1;padding-bottom:12px}
   .nav-meta{
     flex:0 0 100%;order:3;
     padding:8px 0 12px;border-top:1px solid rgba(29,37,64,0.08);
