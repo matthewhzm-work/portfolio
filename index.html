@@ -8,11 +8,11 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --paper:#CFCFCF;
-  --ink:#252525;
-  --red:#E8200C;
-  --mid:#7D7D7D;
-  --light:#B8B8B8;
+  --paper:#F5EDD4;
+  --ink:#1B2B48;
+  --red:#E8320C;
+  --mid:#8B9AB0;
+  --light:#D0C8B4;
   --white:#FFFFFF;
   --nav-h:68px;
   --pad:60px;
@@ -36,7 +36,7 @@ nav{
   transition:background 0.3s;
 }
 nav.scrolled{
-  background:rgba(207,207,207,0.96);
+  background:rgba(245,237,212,0.96);
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
 }
@@ -45,7 +45,7 @@ nav.scrolled{
   letter-spacing:0.01em;text-decoration:none;color:var(--ink);
   white-space:nowrap;flex-shrink:0;
 }
-.nav-name em{color:#7D7D7D;font-style:normal}
+.nav-name em{color:var(--red);font-style:normal}
 
 /* centre meta: title+tagline one colour, award strip another */
 .nav-meta{
@@ -55,17 +55,17 @@ nav.scrolled{
 }
 .nav-meta-main{
   font-family:var(--display);font-size:14px;letter-spacing:0.01em;
-  color:#252525;font-weight:400;
+  color:#1B2B48;font-weight:400;
   flex-shrink:1;overflow:hidden;text-overflow:ellipsis;
   white-space:nowrap;
 }
 .nav-meta-sep{
-  font-family:var(--display);font-size:14px;color:#7D7D7D;
+  font-family:var(--display);font-size:14px;color:#8B9AB0;
   padding:0 10px;flex-shrink:0;
 }
 .nav-meta-awards{
   font-family:var(--display);font-size:14px;letter-spacing:0.01em;
-  color:#7D7D7D;font-weight:400;
+  color:#8B9AB0;font-weight:400;
   flex-shrink:0;white-space:nowrap;
 }
 
@@ -74,10 +74,10 @@ nav.scrolled{
   font-family:var(--mono);font-size:13px;letter-spacing:0.08em;
   text-transform:uppercase;color:var(--ink);
   text-decoration:underline;text-underline-offset:4px;
-  text-decoration-thickness:1px;text-decoration-color:rgba(37,37,37,0.3);
+  text-decoration-thickness:1px;text-decoration-color:rgba(27,43,72,0.3);
   transition:color 0.18s;
 }
-.nav-links a:hover{color:var(--ink);text-decoration-color:rgba(37,37,37,0.7)}
+.nav-links a:hover{color:var(--ink);text-decoration-color:rgba(27,43,72,0.7)}
 
 /* ── WORK ── */
 #work{
@@ -90,7 +90,7 @@ nav.scrolled{
   text-transform:uppercase;color:var(--mid);
   padding:0 var(--pad);margin-bottom:28px;
 }
-.sec-eyebrow em{color:#7D7D7D;font-style:normal;margin-right:10px}
+.sec-eyebrow em{color:var(--red);font-style:normal;margin-right:10px}
 
 /* ── GRID: 3 independent flex columns, round-robin fill (left→right ordering)
    Each column packs cards with a consistent gap — no variable row gaps ── */
@@ -148,7 +148,7 @@ nav.scrolled{
 .card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
 .card-brand{
   font-family:var(--display);font-size:13px;letter-spacing:0.12em;
-  text-transform:uppercase;color:#545454;font-weight:600;
+  text-transform:uppercase;color:var(--red);font-weight:600;
 }
 .card-award{
   font-family:var(--mono);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;
@@ -159,7 +159,7 @@ nav.scrolled{
   font-weight:600;line-height:1.25;letter-spacing:-0.01em;
   margin-bottom:9px;color:var(--ink);
 }
-.card-desc{font-size:13px;font-weight:400;color:#545454;line-height:1.6;margin-bottom:14px}
+.card-desc{font-size:13px;font-weight:400;color:#4A5A6E;line-height:1.6;margin-bottom:14px}
 /* Quill wraps content in <p> tags whose default browser margins collapse
    through .card-desc, pulling description text into the title above or
    pushing it into the tags below. Zero them out so layout is predictable. */
@@ -168,12 +168,12 @@ nav.scrolled{
 .card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
 .tag{
   font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;
-  border:1px solid var(--light);color:#545454;padding:3px 9px;
+  border:1px solid var(--light);color:#4A5A6E;padding:3px 9px;
 }
 .card-cta{
   display:inline-flex;align-items:center;gap:6px;
   font-family:var(--mono);font-size:10px;letter-spacing:0.12em;
-  text-transform:uppercase;color:#7D7D7D;transition:color 0.22s;
+  text-transform:uppercase;color:#8B9AB0;transition:color 0.22s;
 }
 .project-card:hover .card-cta{color:var(--ink)}
 .cta-arr{display:inline-block;transition:transform 0.22s cubic-bezier(0.22,1,0.36,1)}
@@ -182,7 +182,7 @@ nav.scrolled{
 /* ── ABOUT ── */
 #about{
   padding:calc(var(--nav-h) + 60px) var(--pad) 100px;
-  background:#252525;
+  background:var(--ink);
   color:var(--paper);
 }
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
@@ -258,13 +258,13 @@ nav.scrolled{
   text-transform:uppercase;color:var(--mid);
   display:flex;align-items:center;gap:10px;
 }
-.awards-eyebrow em{color:#7D7D7D;font-style:normal}
+.awards-eyebrow em{color:var(--red);font-style:normal}
 .awards-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 64px;align-items:start}
 .year-group{margin-bottom:44px}
 .year-group:last-child{margin-bottom:0}
 .year-label{
   font-family:var(--mono);font-size:10px;letter-spacing:0.18em;
-  text-transform:uppercase;color:#545454;margin-bottom:10px;
+  text-transform:uppercase;color:var(--red);margin-bottom:10px;
 }
 .award-row{
   display:grid;grid-template-columns:90px 1fr auto;
@@ -275,14 +275,14 @@ nav.scrolled{
 .award-tier{font-family:var(--mono);font-size:10px;letter-spacing:0.05em}
 /* BRIGHTER tier colours */
 .t-Gold  {color:#C47F00;font-weight:700}
-.t-Silver{color:#545454555;font-weight:600}
+.t-Silver{color:#4A5A6E555;font-weight:600}
 .t-Bronze{color:#A0460A;font-weight:700}
-.t-other {color:#545454444;font-weight:500}
+.t-other {color:#4A5A6E444;font-weight:500}
 .award-info strong{font-weight:600;font-size:13px;color:var(--ink)}
-.award-info-sub{font-size:11px;color:#7D7D7D;margin-left:4px}
+.award-info-sub{font-size:11px;color:#8B9AB0;margin-left:4px}
 .award-brand{
   font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
-  color:#7D7D7D;text-align:right;white-space:nowrap;
+  color:#8B9AB0;text-align:right;white-space:nowrap;
 }
 
 /* ── FOOTER ── */
@@ -312,7 +312,7 @@ footer{
   .nav-links{padding-bottom:12px}
   .nav-meta{
     flex:0 0 100%;order:3;
-    padding:8px 0 12px;border-top:1px solid rgba(37,37,37,0.08);
+    padding:8px 0 12px;border-top:1px solid rgba(27,43,72,0.08);
     overflow:hidden;
   }
   .nav-meta-awards{display:none}
