@@ -180,8 +180,24 @@ nav.scrolled{
 .project-card:hover .cta-arr{transform:translateX(5px)}
 
 /* ── ABOUT ── */
-#about{padding:calc(var(--nav-h) + 60px) var(--pad) 100px;background:#191919;color:var(--paper)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
+#about{
+  padding:calc(var(--nav-h) + 60px) var(--pad) 100px;
+  background:#2E2E2E;
+  color:var(--paper);
+  position:relative;
+  overflow:hidden;
+}
+/* Grain texture overlay */
+#about::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:0.045;
+  pointer-events:none;
+  z-index:0;
+}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start;position:relative;z-index:1}
 .about-eyebrow{
   font-family:var(--mono);font-size:10px;letter-spacing:0.2em;
   text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:32px;
