@@ -81,7 +81,7 @@ nav.scrolled{
 
 /* ── WORK ── */
 #work{
-  padding-top:calc(var(--nav-h) + 52px);
+  padding-top:72px;
   padding-bottom:120px;
 }
 .home-divider{margin:0 var(--pad) 36px;height:1px;background:var(--light)}
@@ -180,7 +180,7 @@ nav.scrolled{
 .project-card:hover .cta-arr{transform:translateX(5px)}
 
 /* ── ABOUT ── */
-#about{padding:120px var(--pad);background:var(--ink);color:var(--paper)}
+#about{padding:calc(var(--nav-h) + 60px) var(--pad) 100px;background:var(--ink);color:var(--paper)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
 .about-eyebrow{
   font-family:var(--mono);font-size:10px;letter-spacing:0.2em;
@@ -235,6 +235,16 @@ nav.scrolled{
 .exp-period{font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:0.04em;white-space:nowrap;flex-shrink:0}
 .exp-role{font-size:13px;font-weight:400;color:rgba(255,255,255,0.6);line-height:1.5;margin-bottom:3px}
 .exp-clients{font-size:12px;font-weight:400;color:rgba(255,255,255,0.35);line-height:1.5}
+
+/* ── FESTIVAL LOGOS STRIP ── */
+#fest{overflow:hidden;padding:22px 0;background:var(--paper);border-bottom:1px solid var(--light)}
+.fest-mask{overflow:hidden;width:100%;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 6%,#000 94%,transparent 100%)}
+.fest-track{display:flex;align-items:center;width:max-content;animation:festScroll 50s linear infinite}
+.fest-track:hover{animation-play-state:paused}
+.fest-item{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);opacity:0.38;white-space:nowrap;padding:0 40px;transition:opacity 0.25s;cursor:default}
+.fest-item:hover{opacity:0.75}
+.fest-sep{font-size:8px;color:var(--mid);opacity:0.3;flex-shrink:0;user-select:none;padding:0 4px}
+@keyframes festScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ── RECOGNITION ── */
 #awards{padding:120px var(--pad)}
@@ -303,12 +313,14 @@ footer{
   }
   .nav-meta-awards{display:none}
   .nav-meta-sep{display:none}
-  #work{padding-top:calc(132px + 36px)}
+  #about{padding-top:calc(132px + 24px)}
+  #work{padding-top:56px}
   /* Collapse to 2-col grid; project-col becomes invisible so cards flow into grid */
   .project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--card-gap)}
   .project-col{display:contents}
   .about-grid{grid-template-columns:1fr;gap:64px}
-  #about,#awards{padding:80px var(--pad)}
+  #about{padding-bottom:64px}
+  #awards{padding:80px var(--pad)}
   .awards-cols{grid-template-columns:1fr}
   .year-group{grid-column:auto!important}
   .award-row{grid-template-columns:80px 1fr}
@@ -323,29 +335,23 @@ footer{
 <body>
 
 <nav id="main-nav">
-  <a href="#work" class="nav-name">Matthew Ho <em>—</em></a>
+  <a href="#about" class="nav-name">Matthew Ho <em>—</em></a>
   <div class="nav-meta">
     <span class="nav-meta-main" id="nav-main"></span>
     <span class="nav-meta-sep">·</span>
     <span class="nav-meta-awards" id="nav-awards"></span>
   </div>
   <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
     <li><a href="#awards">Recognition</a></li>
   </ul>
 </nav>
 
-<section id="work">
-  <div class="home-divider"></div>
-  <p class="sec-eyebrow"><em>01</em>Selected Work</p>
-  <div class="project-grid" id="project-grid"></div>
-</section>
-
 <section id="about">
   <div class="about-grid">
     <div class="reveal">
-      <p class="about-eyebrow">02 — About</p>
+      <p class="about-eyebrow">01 — About</p>
       <h2 class="about-headline" id="about-headline"></h2>
       <div id="about-bio"></div>
       <div class="contact-block" id="contact-block"></div>
@@ -355,6 +361,39 @@ footer{
       <div id="exp-list"></div>
     </div>
   </div>
+</section>
+
+<section id="fest" aria-hidden="true">
+  <div class="fest-mask">
+    <div class="fest-track">
+      <span class="fest-item">Cannes Lions</span><span class="fest-sep">·</span>
+      <span class="fest-item">Spikes Asia</span><span class="fest-sep">·</span>
+      <span class="fest-item">D&amp;AD</span><span class="fest-sep">·</span>
+      <span class="fest-item">The One Show</span><span class="fest-sep">·</span>
+      <span class="fest-item">Effie</span><span class="fest-sep">·</span>
+      <span class="fest-item">Adfest</span><span class="fest-sep">·</span>
+      <span class="fest-item">London International</span><span class="fest-sep">·</span>
+      <span class="fest-item">Marketing Excellence</span><span class="fest-sep">·</span>
+      <span class="fest-item">Epica</span><span class="fest-sep">·</span>
+      <span class="fest-item">Gong</span><span class="fest-sep">·</span>
+      <span class="fest-item">Cannes Lions</span><span class="fest-sep">·</span>
+      <span class="fest-item">Spikes Asia</span><span class="fest-sep">·</span>
+      <span class="fest-item">D&amp;AD</span><span class="fest-sep">·</span>
+      <span class="fest-item">The One Show</span><span class="fest-sep">·</span>
+      <span class="fest-item">Effie</span><span class="fest-sep">·</span>
+      <span class="fest-item">Adfest</span><span class="fest-sep">·</span>
+      <span class="fest-item">London International</span><span class="fest-sep">·</span>
+      <span class="fest-item">Marketing Excellence</span><span class="fest-sep">·</span>
+      <span class="fest-item">Epica</span><span class="fest-sep">·</span>
+      <span class="fest-item">Gong</span><span class="fest-sep">·</span>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="home-divider"></div>
+  <p class="sec-eyebrow"><em>02</em>Selected Work</p>
+  <div class="project-grid" id="project-grid"></div>
 </section>
 
 <section id="awards">
