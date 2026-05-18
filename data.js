@@ -7,7 +7,7 @@ const PORTFOLIO_DATA = {
   "tagline": "Creative Direction · Copywriting · Strategy",
   "awardStrip": "Cannes · D&AD · Epica · One Show",
   "bio": [
-    "<p>I’m a marketing and brand strategist with close to a decade of experience building integrated campaigns and brand initiatives across finance, beauty, automotive, government, tech, FMCG, and lifestyle industries. My background spans brand strategy, storytelling, social, experiential, digital content, and marketing communications, with a focus on ideas that connect with people in meaningful and commercially effective ways.</p><p>I’ve always believed strong ideas should do more than look good on a slide. They should shape perception, spark conversation, and create real impact. That mindset has allowed me to contribute to award-winning work recognised at the Cannes Lions, Spikes Asia, and The One Show.</p><p>At my core, I’m someone who enjoys understanding people, uncovering the tension in a problem, and turning it into work that feels thoughtful, culturally relevant, and effective. I thrive in collaborative environments where strategy, creativity, and good people come together to build meaningful ideas.</p>"
+    "<p>When you grow up with one family computer and two older brothers, you learn to communicate fast. You learn to pitch your case, sweeten the deal, and find every tiny opportunity to squeeze out five more minutes online.</p><p>Creativity, for me, started there. Not in school. Not in an agency. But in the corner of my parents' bedroom, figuring out how to turn limited time into unlimited fun.</p><p>And that instinct to find clever ways in? I never quite outgrew it.</p><p>Today, I'm a senior creative with close to a decade of experience building integrated campaigns across finance, beauty, automotive, government, tech, FMCG, and lifestyle brands — shaping ideas that travel across platforms, markets, and audiences without losing their spark or commercial intent.</p><p>I care about the craft as much as I care about the people in the room. I thrive in collaborative environments where ideas are challenged, sharpened, and built together. I'm comfortable leading from the front, equally comfortable rolling up my sleeves alongside the team. And I'm still looking for every way to get more time on the screen.</p><p>If you're looking for someone who brings big thinking, sharp execution, and ideas that actually work beyond a PDF — let's talk.</p>"
   ],
   "experience": [
     {
@@ -2054,8 +2054,8 @@ const PORTFOLIO_DATA = {
     }
   ],
   "linkedin": "https://www.linkedin.com/in/matthew-ho-4947016a/",
-  "bioHeadline": "A strategist’s brain",
-  "bioHeadlineAccent": "with a writer’s instinct"
+  "bioHeadline": "Welcome to my never-quite-ending",
+  "bioHeadlineAccent": "search for screen time"
 };
 
 if (typeof module !== 'undefined') module.exports = PORTFOLIO_DATA;
