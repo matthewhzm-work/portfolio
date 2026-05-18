@@ -8,11 +8,11 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --paper:#F5EDD4;
-  --ink:#1B2B48;
-  --red:#E8320C;
-  --mid:#8B9AB0;
-  --light:#D0C8B4;
+  --paper:#FFFAF0;
+  --ink:#1D2540;
+  --red:#D93240;
+  --mid:#1C3059;
+  --light:#E0D8CC;
   --white:#FFFFFF;
   --nav-h:68px;
   --pad:60px;
@@ -36,7 +36,7 @@ nav{
   transition:background 0.3s;
 }
 nav.scrolled{
-  background:rgba(245,237,212,0.96);
+  background:rgba(255,250,240,0.96);
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
 }
@@ -55,17 +55,17 @@ nav.scrolled{
 }
 .nav-meta-main{
   font-family:var(--display);font-size:14px;letter-spacing:0.01em;
-  color:#1B2B48;font-weight:400;
+  color:#1D2540;font-weight:400;
   flex-shrink:1;overflow:hidden;text-overflow:ellipsis;
   white-space:nowrap;
 }
 .nav-meta-sep{
-  font-family:var(--display);font-size:14px;color:#8B9AB0;
+  font-family:var(--display);font-size:14px;color:#1C3059;
   padding:0 10px;flex-shrink:0;
 }
 .nav-meta-awards{
   font-family:var(--display);font-size:14px;letter-spacing:0.01em;
-  color:#8B9AB0;font-weight:400;
+  color:#1C3059;font-weight:400;
   flex-shrink:0;white-space:nowrap;
 }
 
@@ -74,10 +74,10 @@ nav.scrolled{
   font-family:var(--mono);font-size:13px;letter-spacing:0.08em;
   text-transform:uppercase;color:var(--ink);
   text-decoration:underline;text-underline-offset:4px;
-  text-decoration-thickness:1px;text-decoration-color:rgba(27,43,72,0.3);
+  text-decoration-thickness:1px;text-decoration-color:rgba(29,37,64,0.3);
   transition:color 0.18s;
 }
-.nav-links a:hover{color:var(--ink);text-decoration-color:rgba(27,43,72,0.7)}
+.nav-links a:hover{color:var(--ink);text-decoration-color:rgba(29,37,64,0.7)}
 .nav-icons{display:flex;align-items:center;gap:16px;flex-shrink:0}
 .nav-icon{display:flex;align-items:center;justify-content:center;color:var(--mid);transition:color 0.18s}
 .nav-icon:hover{color:var(--ink)}
@@ -163,7 +163,7 @@ nav.scrolled{
   font-weight:600;line-height:1.25;letter-spacing:-0.01em;
   margin-bottom:9px;color:var(--ink);
 }
-.card-desc{font-size:13px;font-weight:400;color:#4A5A6E;line-height:1.6;margin-bottom:14px}
+.card-desc{font-size:13px;font-weight:400;color:#1C3059;line-height:1.6;margin-bottom:14px}
 /* Quill wraps content in <p> tags whose default browser margins collapse
    through .card-desc, pulling description text into the title above or
    pushing it into the tags below. Zero them out so layout is predictable. */
@@ -172,12 +172,12 @@ nav.scrolled{
 .card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
 .tag{
   font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;
-  border:1px solid var(--light);color:#4A5A6E;padding:3px 9px;
+  border:1px solid var(--light);color:#1C3059;padding:3px 9px;
 }
 .card-cta{
   display:inline-flex;align-items:center;gap:6px;
   font-family:var(--mono);font-size:10px;letter-spacing:0.12em;
-  text-transform:uppercase;color:#8B9AB0;transition:color 0.22s;
+  text-transform:uppercase;color:#1C3059;transition:color 0.22s;
 }
 .project-card:hover .card-cta{color:var(--ink)}
 .cta-arr{display:inline-block;transition:transform 0.22s cubic-bezier(0.22,1,0.36,1)}
@@ -279,14 +279,14 @@ nav.scrolled{
 .award-tier{font-family:var(--mono);font-size:10px;letter-spacing:0.05em}
 /* BRIGHTER tier colours */
 .t-Gold  {color:#C47F00;font-weight:700}
-.t-Silver{color:#4A5A6E555;font-weight:600}
+.t-Silver{color:#1C3059555;font-weight:600}
 .t-Bronze{color:#A0460A;font-weight:700}
-.t-other {color:#4A5A6E444;font-weight:500}
+.t-other {color:#1C3059444;font-weight:500}
 .award-info strong{font-weight:600;font-size:13px;color:var(--ink)}
-.award-info-sub{font-size:11px;color:#8B9AB0;margin-left:4px}
+.award-info-sub{font-size:11px;color:#1C3059;margin-left:4px}
 .award-brand{
   font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
-  color:#8B9AB0;text-align:right;white-space:nowrap;
+  color:#1C3059;text-align:right;white-space:nowrap;
 }
 
 /* ── FOOTER ── */
@@ -317,7 +317,7 @@ footer{
   .nav-icons{padding-bottom:12px}
   .nav-meta{
     flex:0 0 100%;order:3;
-    padding:8px 0 12px;border-top:1px solid rgba(27,43,72,0.08);
+    padding:8px 0 12px;border-top:1px solid rgba(29,37,64,0.08);
     overflow:hidden;
   }
   .nav-meta-awards{display:none}
