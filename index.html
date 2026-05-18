@@ -65,7 +65,7 @@ nav.scrolled{
 }
 .nav-meta-awards{
   font-family:var(--display);font-size:14px;letter-spacing:0.01em;
-  color:#1C3059;font-weight:400;
+  color:var(--red);font-weight:400;
   flex-shrink:0;white-space:nowrap;
 }
 
@@ -120,14 +120,16 @@ nav.scrolled{
   display:flex;flex-direction:column;
   background:var(--white);
   position:relative;
+  border-radius:10px;
   transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);
   will-change:transform;
 }
-.project-card:hover{transform:translateY(-8px)}
+.project-card:hover{transform:translateY(-8px) rotate(var(--tilt,0deg))}
 
 .card-thumb{
   width:100%;overflow:hidden;background:#111;
   flex-shrink:0;position:relative;
+  border-radius:10px 10px 0 0;
 }
 .card-thumb img{width:100%;height:auto;display:block}
 /* Dark overlay on card hover */
@@ -135,6 +137,7 @@ nav.scrolled{
   content:'';position:absolute;inset:0;
   background:var(--ink);opacity:0;
   transition:opacity 0.4s ease;pointer-events:none;
+  border-radius:inherit;
   z-index:1;
 }
 .project-card:hover::after{opacity:0.22}
@@ -309,7 +312,7 @@ footer{
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.65s ease,transform 0.65s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 /* Card lift — needs higher specificity than .reveal.visible (0,2,0) to win */
-.project-card.visible:hover{transform:translateY(-8px);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
+.project-card.visible:hover{transform:translateY(-8px) rotate(var(--tilt,0deg));transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
@@ -523,6 +526,7 @@ footer{
     card.href = `work.html?id=${p.id}`;
     card.style.transitionDelay = `${(i%4)*0.06}s`;
     card.style.order = String(i); // preserves L→R sequence when cols collapse at breakpoints
+    card.style.setProperty('--tilt', (Math.random() < 0.5 ? '-' : '') + '1.5deg');
     card.innerHTML = `<div class="card-thumb">${thumb}</div><div class="card-body"><div class="card-top"><span class="card-brand">${esc(p.brand)}</span>${p.award?`<span class="card-award">${esc(p.award)}</span>`:''}</div><div class="card-title">${esc(p.title)}</div><div class="card-desc">${renderHtml(p.description)}</div><div class="card-tags">${(p.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div><div class="card-cta">View project <span class="cta-arr">→</span></div></div>`;
 
     colEls[i % 3].appendChild(card);
