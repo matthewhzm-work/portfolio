@@ -282,6 +282,20 @@ nav.scrolled{
 .fest-logo:hover{opacity:0.9}
 @keyframes festScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
+/* ── SCROLL INDICATOR (anchored fest mode) ── */
+#scroll-indicator{
+  position:fixed;left:50%;transform:translateX(-50%);
+  display:none;flex-direction:column;align-items:center;gap:5px;
+  opacity:1;transition:opacity 0.5s ease;pointer-events:none;z-index:50;
+}
+#scroll-indicator.hidden{opacity:0}
+#scroll-indicator svg{animation:chevBounce 1.5s ease-in-out infinite}
+#scroll-indicator svg:last-child{animation-delay:0.15s}
+@keyframes chevBounce{
+  0%,100%{transform:translateY(0);opacity:0.3}
+  50%{transform:translateY(5px);opacity:0.7}
+}
+
 /* ── RECOGNITION ── */
 #awards{padding:48px var(--pad) 80px}
 .awards-header{margin-bottom:36px}
@@ -435,6 +449,12 @@ footer{
   </div>
 </section>
 
+<!-- Scroll indicator: shown only during anchored-fest initial load -->
+<div id="scroll-indicator" aria-hidden="true">
+  <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,2 10,10 18,2"/></svg>
+  <svg width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,2 10,10 18,2"/></svg>
+</div>
+
 <section id="work">
   <p class="sec-eyebrow"><em>02</em>Selected Work</p>
   <div class="project-grid" id="project-grid"></div>
@@ -478,8 +498,86 @@ footer{
   const ah = $('about-headline');
   if(ah) ah.innerHTML = esc(D.bioHeadline||'') + '<br><em>' + esc(D.bioHeadlineAccent||'') + '</em>';
 
+  /* ── ANCHORED FEST STRIP ── */
+  let festAnchored = false;
+  let festPh       = null;
+  let festReleaseAt = 0;
+  const ABOUT_NAV_OFFSET = 48;  // matches CSS calc(nav-h + 48px)
+  const ABOUT_BOT_PAD    = 72;  // matches CSS padding-bottom:72px
+
+  function festSetup() {
+    if (window.innerWidth <= 900) return;   // mobile scrolls freely
+    const navEl   = $('main-nav');
+    const aboutEl = document.getElementById('about');
+    const festEl  = $('fest');
+    const indEl   = $('scroll-indicator');
+    if (!navEl || !aboutEl || !festEl || !indEl) return;
+
+    const navH  = navEl.offsetHeight;
+    const festH = festEl.offsetHeight;
+    const vp    = window.innerHeight;
+
+    // Measure fest natural position BEFORE any DOM changes
+    const naturalFestTop = festEl.getBoundingClientRect().top;
+
+    // Scroll position where natural and fixed positions align → seamless release
+    festReleaseAt = Math.max(1, naturalFestTop - (vp - festH));
+
+    // Centre about content via padding (transitionable on release)
+    const gridH  = aboutEl.querySelector('.about-grid').offsetHeight;
+    const availH = vp - navH - festH;
+    const extra  = Math.max(0, (availH - gridH) / 2);
+    aboutEl.style.paddingTop    = (navH + extra) + 'px';
+    aboutEl.style.paddingBottom = extra + 'px';
+
+    // Fix fest at bottom of viewport
+    festEl.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:100;border-bottom:none;border-top:1px solid var(--light)';
+
+    // Placeholder keeps subsequent content in flow
+    festPh = document.createElement('div');
+    festPh.style.height = festH + 'px';
+    festEl.after(festPh);
+
+    // Position chevron indicator just above fest strip
+    indEl.style.bottom  = (festH + 14) + 'px';
+    indEl.style.display = 'flex';
+
+    festAnchored = true;
+  }
+
+  function festRelease() {
+    if (!festAnchored) return;
+    festAnchored = false;
+
+    const aboutEl = document.getElementById('about');
+    const festEl  = $('fest');
+    const indEl   = $('scroll-indicator');
+    const navH    = ($('main-nav') || {}).offsetHeight || 68;
+
+    // Restore fest (positions align at festReleaseAt — no jump)
+    festEl.style.cssText = '';
+    if (festPh) { festPh.remove(); festPh = null; }
+
+    // Smooth about section padding back to natural CSS values
+    aboutEl.style.transition = 'padding-top 0.55s cubic-bezier(0.22,1,0.36,1),padding-bottom 0.55s cubic-bezier(0.22,1,0.36,1)';
+    aboutEl.style.paddingTop    = (navH + ABOUT_NAV_OFFSET) + 'px';
+    aboutEl.style.paddingBottom = ABOUT_BOT_PAD + 'px';
+    setTimeout(() => {
+      aboutEl.style.transition    = '';
+      aboutEl.style.paddingTop    = '';
+      aboutEl.style.paddingBottom = '';
+    }, 700);
+
+    // Fade out indicator
+    indEl.classList.add('hidden');
+    setTimeout(() => { indEl.style.display = 'none'; }, 500);
+  }
+
+  window.addEventListener('load', festSetup);
+
   window.addEventListener('scroll', () => {
     $('main-nav').classList.toggle('scrolled', window.scrollY > 20);
+    if (festAnchored && window.scrollY >= festReleaseAt) festRelease();
   }, {passive:true});
 
   /* ── Mobile bio padding: track actual nav height so #about clears it exactly ── */
@@ -489,7 +587,7 @@ footer{
     if (!nav || !about) return;
     if (window.innerWidth <= 900) {
       about.style.paddingTop = (nav.offsetHeight + 24) + 'px';
-    } else {
+    } else if (!festAnchored) {
       about.style.paddingTop = '';
     }
   }
