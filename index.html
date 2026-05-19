@@ -209,32 +209,30 @@ nav.scrolled{
 
 /* ── ABOUT ── */
 #about{
-  padding-top:calc(var(--nav-h) + 60px);
+  padding-top:calc(var(--nav-h) + 48px);
   padding-right:var(--pad);
-  padding-bottom:100px;
+  padding-bottom:72px;
   padding-left:var(--pad);
   background:var(--ink);
   color:var(--paper);
 }
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
 .about-eyebrow{
   font-family:var(--mono);font-size:10px;letter-spacing:0.2em;
-  text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:32px;
+  text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:24px;
 }
 .about-headline{
-  font-family:var(--display);font-size:clamp(28px,3.5vw,46px);
-  font-weight:700;line-height:1.1;letter-spacing:-0.02em;margin-bottom:30px;
+  font-family:var(--display);font-size:clamp(25px,3.1vw,40px);
+  font-weight:700;line-height:1.1;letter-spacing:-0.02em;margin-bottom:20px;
 }
 .about-headline em{color:rgba(255,255,255,0.52);font-style:normal;display:block;font-weight:400}
 .about-body{
-  /* Fluid bio text: scales 14px→15px across 768px→1080px viewport height.
-     svh = stable viewport height (excludes browser chrome). vh fallback for older browsers. */
   font-size:clamp(14px,calc(11.5px + 0.32vh),15px);
   font-size:clamp(14px,calc(11.5px + 0.32svh),15px);
   font-weight:400;color:rgba(255,255,255,0.72);
-  line-height:1.85;margin-bottom:16px;
+  line-height:1.78;margin-bottom:14px;
 }
-.about-body .rte p{margin-bottom:0.75em}
+.about-body .rte p{margin-bottom:0.65em}
 .about-body .rte p:last-child{margin-bottom:0}
 .about-body .rte h2{font-family:var(--display);font-size:1.3em;font-weight:700;color:rgba(255,255,255,0.9);margin:0.7em 0 0.3em;line-height:1.15}
 .about-body .rte h3{font-family:var(--display);font-size:1.1em;font-weight:600;color:rgba(255,255,255,0.85);margin:0.5em 0 0.2em}
@@ -248,10 +246,10 @@ nav.scrolled{
 .about-body .rte .ql-size-small{font-size:0.875em}
 .about-body .rte .ql-size-large{font-size:1.25em}
 .about-body .rte .ql-size-huge{font-size:1.65em}
-.contact-block{margin-top:44px}
+.contact-block{margin-top:32px}
 .contact-row{
   display:flex;align-items:baseline;gap:22px;
-  padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.07);
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.07);
 }
 .contact-row:first-child{border-top:1px solid rgba(255,255,255,0.07)}
 .contact-key{
@@ -265,22 +263,22 @@ nav.scrolled{
 .contact-val:hover{opacity:0.65}
 .exp-eyebrow{
   font-family:var(--mono);font-size:10px;letter-spacing:0.2em;
-  text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:32px;
+  text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:24px;
 }
-.exp-item{padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.exp-item{padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
 .exp-item:last-child{border-bottom:none}
-.exp-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:4px}
+.exp-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:3px}
 .exp-co{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-0.01em}
 .exp-period{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,0.42);letter-spacing:0.04em;white-space:nowrap;flex-shrink:0}
 .exp-role{font-size:13px;font-weight:400;color:rgba(255,255,255,0.6);line-height:1.5;margin-bottom:3px}
 .exp-clients{font-size:12px;font-weight:400;color:rgba(255,255,255,0.35);line-height:1.5}
 
 /* ── FESTIVAL LOGOS STRIP ── */
-#fest{overflow:hidden;padding:28px 0;background:var(--paper);border-bottom:1px solid var(--light)}
+#fest{overflow:hidden;padding:24px 0;background:var(--paper);border-bottom:1px solid var(--light)}
 .fest-mask{overflow:hidden;width:100%;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 8%,#000 92%,transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 8%,#000 92%,transparent 100%)}
 .fest-track{display:flex;align-items:center;width:max-content;animation:festScroll 65s linear infinite}
 .fest-track:hover{animation-play-state:paused}
-.fest-logo{height:40px;width:auto;filter:brightness(0);opacity:0.45;transition:opacity 0.25s;flex-shrink:0}
+.fest-logo{height:38px;width:auto;filter:brightness(0);opacity:0.45;transition:opacity 0.25s;flex-shrink:0}
 .fest-logo:hover{opacity:0.9}
 @keyframes festScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
