@@ -819,7 +819,7 @@ const PORTFOLIO_DATA = {
       ]
     },
     {
-      "id": "mercedes-amg-a-class",
+      "id": "mercedes-print-ads",
       "brand": "Mercedes-AMG",
       "title": "Prints",
       "subtitle": "The most powerful A-Class ever — a campaign built for a different kind of driver",
@@ -840,7 +840,7 @@ const PORTFOLIO_DATA = {
       "collaterals": [
         {
           "type": "image",
-          "url": "images/mercedes-amg-a-class/collateral-1.webp",
+          "url": "images/mercedes-print-ads/collateral-1.webp",
           "caption": "Mercedes-AMG A 45 S 4MATIC+",
           "orientation": "landscape"
         }
@@ -849,36 +849,25 @@ const PORTFOLIO_DATA = {
       "active": true,
       "blocks": [
         {
-          "id": "b502",
-          "type": "text",
-          "col1": "<p>When the images are locked and sent from the global office, the words have to work harder. Here are a few examples where they did.</p><p><br></p>",
-          "col2": "",
-          "col3": "",
-          "columns": 1,
-          "width": "medium"
-        },
-        {
-          "id": "bmpc1chft96e",
-          "type": "image-viewer",
-          "images": [
-            {
-              "url": "images/mercedes-print-ads/thumb.webp",
-              "caption": ""
-            },
+          "id": "bmp_split1",
+          "type": "split",
+          "ratio": "40-60",
+          "leftType": "text",
+          "leftHtml": "<p>When the images are locked and sent from the global office, the words have to work harder. Here are a few examples where they did.</p>",
+          "leftLabel": "",
+          "rightType": "image-viewer",
+          "rightImages": [
             {
               "url": "images/mercedes-print-ads/print-glc-coupe.webp",
-              "caption": ""
-            },
-            {
-              "url": "images/mercedes-print-ads/collateral-1.webp",
-              "caption": ""
+              "caption": "Silence is Overrated — Mercedes-AMG GLC 43 4MATIC Coupé"
             },
             {
               "url": "images/mercedes-print-ads/print-glc-suv.webp",
-              "caption": ""
+              "caption": "Luxury Takes the Lead — Mercedes-AMG GLC 43 4MATIC SUV"
             }
           ],
-          "lightbox": true
+          "rightLightbox": true,
+          "rightLabel": ""
         }
       ]
     },
