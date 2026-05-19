@@ -293,10 +293,10 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 @media(max-width:900px){
   :root{--pad:24px}
   nav{flex-wrap:wrap;height:auto;padding:12px var(--pad) 0;gap:0}
-  .nav-name{flex:1;padding-bottom:10px}
-  .nav-back{padding-bottom:10px}
-  .nav-icons{padding-bottom:10px}
-  .nav-meta{flex:0 0 100%;padding:7px 0 10px;border-top:1px solid rgba(29,37,64,0.07);overflow:hidden}
+  .nav-name{flex:1;order:1;padding-bottom:10px}
+  .nav-icons{order:2;padding-bottom:10px}
+  .nav-meta{flex:0 0 100%;order:3;padding:7px 0 10px;border-top:1px solid rgba(29,37,64,0.07);overflow:hidden}
+  .nav-back{order:4;padding-bottom:10px}
   .nav-meta-awards,.nav-meta-sep{display:none}
   /* FIX: mobile header clears the 2-row nav (~112px tall) */
   .work-header{margin-top:0;padding-top:148px}
