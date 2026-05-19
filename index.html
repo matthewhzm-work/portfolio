@@ -227,7 +227,11 @@ nav.scrolled{
 }
 .about-headline em{color:rgba(255,255,255,0.52);font-style:normal;display:block;font-weight:400}
 .about-body{
-  font-size:15px;font-weight:400;color:rgba(255,255,255,0.72);
+  /* Fluid bio text: scales 14px→15px across 768px→1080px viewport height.
+     svh = stable viewport height (excludes browser chrome). vh fallback for older browsers. */
+  font-size:clamp(14px,calc(11.5px + 0.32vh),15px);
+  font-size:clamp(14px,calc(11.5px + 0.32svh),15px);
+  font-weight:400;color:rgba(255,255,255,0.72);
   line-height:1.85;margin-bottom:16px;
 }
 .about-body .rte p{margin-bottom:0.75em}
@@ -355,6 +359,7 @@ footer{
   .project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--card-gap)}
   .project-col{display:contents}
   .about-grid{grid-template-columns:1fr;gap:64px}
+  .about-body{font-size:15px}  /* reset fluid scaling on mobile — scrolling is fine */
   #about{padding-bottom:64px}
   #awards{padding:40px var(--pad) 60px}
   .awards-cols{column-count:2}
