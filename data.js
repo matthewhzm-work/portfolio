@@ -7,7 +7,7 @@ const PORTFOLIO_DATA = {
   "tagline": "Creative Direction · Copywriting · Strategy",
   "awardStrip": "Cannes · D&AD · Epica · One Show",
   "bio": [
-    "<p>When you grow up with one family computer and two older brothers, you learn to communicate fast. You learn to pitch your case, sweeten the deal, and find every tiny opportunity to squeeze out five more minutes online.</p><p>Creativity, for me, started there. Not in school. Not in an agency. But in the corner of my parents' bedroom, figuring out how to turn limited time into unlimited fun.</p><p>And that instinct to find clever ways in? I never quite outgrew it.</p><p>Today, I'm a senior creative with close to a decade of experience building integrated campaigns across platforms, markets, and audiences without losing their spark or commercial intent. I'm comfortable leading from the front, equally comfortable rolling up my sleeves alongside the team. And I'm still chasing more time on the screen — these days, for finance, beauty, automotive, government, tech, FMCG, and lifestyle brands. </p>"
+    "<p>When you grow up with one family computer and two older brothers, you learn to communicate fast. You learn to pitch your case, sweeten the deal, and find every tiny opportunity to squeeze out five more minutes online.</p><p>Creativity, for me, started there. Not in school. Not in an agency. But in the corner of my parents' bedroom, figuring out how to turn limited time into unlimited fun.</p><p>And that instinct to find clever ways in? I never quite outgrew it.</p><p>Today, I'm a senior creative marketer and brand strategist with close to a decade of experience building integrated campaigns across platforms, markets, and audiences without losing their spark or commercial intent. I'm comfortable leading from the front, equally comfortable rolling up my sleeves alongside the team. And I'm still chasing more time on the screen — these days, for finance, beauty, automotive, government, tech, FMCG, and lifestyle brands. </p>"
   ],
   "experience": [
     {
@@ -615,7 +615,7 @@ const PORTFOLIO_DATA = {
       "subtitle": "A 65-year-old institution. A brand new voice. Singapore's oldest guardian, reimagined.",
       "award": "",
       "tags": [
-        "Pitch Lead",
+        "Pitch",
         "Government",
         "Integrated",
         "Campaign"
@@ -700,7 +700,8 @@ const PORTFOLIO_DATA = {
           ],
           "columns": 3,
           "gap": "normal",
-          "lightbox": true
+          "lightbox": true,
+          "layout": "grid"
         }
       ]
     },
