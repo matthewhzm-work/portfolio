@@ -280,6 +280,9 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding
 .not-found h2{font-family:var(--display);font-size:52px;font-weight:700;letter-spacing:-0.02em}
 .not-found a{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1C3059;text-decoration:none}
 
+/* ── FOCUS ── */
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+
 /* ── LIGHTBOX ── */
 .lb{position:fixed;inset:0;background:rgba(0,0,0,0.93);display:flex;align-items:center;justify-content:center;z-index:1000;opacity:0;pointer-events:none;transition:opacity 0.22s ease}
 .lb.open{opacity:1;pointer-events:all}

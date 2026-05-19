@@ -121,7 +121,7 @@ nav.scrolled{
 .project-card{
   text-decoration:none;color:inherit;
   display:flex;flex-direction:column;
-  background:var(--white);
+  background:var(--paper);
   position:relative;
   border-radius:10px;
   transition:transform 0.4s cubic-bezier(0.22,1,0.36,1);
@@ -302,11 +302,10 @@ nav.scrolled{
 }
 .award-row:first-of-type{border-top:1px solid var(--light)}
 .award-tier{font-family:var(--mono);font-size:10px;letter-spacing:0.05em}
-/* BRIGHTER tier colours */
 .t-Gold  {color:#C47F00;font-weight:700}
-.t-Silver{color:#1C3059555;font-weight:600}
+.t-Silver{color:var(--mid);font-weight:600}
 .t-Bronze{color:#A0460A;font-weight:700}
-.t-other {color:#1C3059444;font-weight:500}
+.t-other {color:rgba(29,37,64,0.5);font-weight:500}
 .award-info strong{font-weight:600;font-size:13px;color:var(--ink)}
 .award-info-sub{font-size:11px;color:#1C3059;margin-left:4px}
 .award-brand{
@@ -326,6 +325,9 @@ footer{
 .footer-linkedin:hover{color:rgba(255,255,255,0.9)}
 .footer-email{color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s}
 .footer-email:hover{color:rgba(255,255,255,0.9)}
+
+/* ── FOCUS ── */
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.65s ease,transform 0.65s ease}
