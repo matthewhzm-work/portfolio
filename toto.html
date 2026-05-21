@@ -28,7 +28,7 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
 .nav-icon svg{width:18px;height:18px;display:block}
 
 /* ── WRAPPER ── */
-.wrap{max-width:1320px;margin:0 auto;padding:0 60px;padding-top:68px;display:flex;flex-direction:column;height:100dvh;overflow:hidden}
+.wrap{max-width:1320px;margin:0 auto;padding:0 60px;padding-top:68px}
 
 /* ── PAGE HEADER ── */
 .pg-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(29,37,64,.38);margin-top:clamp(10px,3.5vh,52px);margin-bottom:clamp(4px,0.8vh,14px)}
@@ -55,13 +55,13 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
 @media(max-width:768px){.draw-row{padding-left:20px;padding-right:20px}}
 
 /* ── TICKET SCROLL (desktop) ── */
-.ticket-scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;padding-bottom:0;margin-bottom:0;flex:1;min-height:0}
+.ticket-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;margin-bottom:30px}
 
 /* ════════════════════════════════════════════
    TICKET — Arial Narrow + #E8604C only.
    No portfolio fonts or colours inside here.
    ════════════════════════════════════════════ */
-.ticket{width:100%;min-width:860px;background:#fff;border:2px solid #ADADAD;display:flex;font-family:'Arial Narrow',Arial,sans-serif;user-select:none;height:100%}
+.ticket{width:100%;min-width:860px;background:#fff;border:2px solid #ADADAD;display:flex;font-family:'Arial Narrow',Arial,sans-serif;user-select:none}
 
 /* Left sidebar */
 .tl{width:96px;flex-shrink:0;border-right:2px solid #ADADAD;display:flex;flex-direction:column;font-family:'Arial Narrow',Arial,sans-serif}
@@ -88,7 +88,7 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
 .pnl-type{font-size:7.5px;color:#AAA;font-family:'Arial Narrow',Arial,sans-serif}
 
 /* Number grid — rows of 9 */
-.pnl-nums{display:grid;grid-template-columns:repeat(9,1fr);gap:2px;flex:1;min-height:0;align-content:space-evenly}
+.pnl-nums{display:grid;grid-template-columns:repeat(9,1fr);gap:2px;flex:1;min-height:0}
 .nb{aspect-ratio:1;border-radius:50%;border:1px solid #C8C8C8;display:flex;align-items:center;justify-content:center;font-size:clamp(5px,1.1vh,8.5px);font-weight:700;color:#2A2A2A;font-family:'Arial Narrow',Arial,sans-serif;line-height:1;position:relative;min-height:0;min-width:0;width:100%}
 @keyframes nbPop{0%{transform:scale(.1);opacity:0}65%{transform:scale(1.22)}100%{transform:scale(1);opacity:1}}
 .nb.on{background:#E8604C;border-color:#E8604C;color:#fff;animation:nbPop .22s cubic-bezier(.34,1.56,.64,1) both}
@@ -113,7 +113,7 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
 .cm-q.vis{opacity:1}
 
 /* ── FOOTER ── */
-.pg-ft{margin-top:0;padding:clamp(6px,1vh,18px) 0;border-top:1px solid var(--light);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(29,37,64,.25);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;flex-shrink:0}
+.pg-ft{margin-top:48px;padding:18px 0 64px;border-top:1px solid var(--light);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(29,37,64,.25);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .pg-ft a{color:rgba(29,37,64,.35);text-decoration:underline;text-underline-offset:3px}
 
 /* ════════════════════════════════════════════
@@ -146,7 +146,7 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
 .mob-pnl-hdr{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:3px;border-bottom:1px solid #EBEBEB;margin-bottom:2px}
 .mob-pnl-type{font-size:7.5px;color:#AAA;font-family:'Arial Narrow',Arial,sans-serif}
 .mob-pnl-id{font-size:15px;font-weight:700;color:#E8604C;font-family:'Arial Narrow',Arial,sans-serif}
-.mob-nums{display:grid;grid-template-columns:repeat(9,1fr);gap:2px;flex:1;min-height:0;align-content:space-evenly}
+.mob-nums{display:grid;grid-template-columns:repeat(9,1fr);gap:2px}
 
 /* Swipe hint + dots (portfolio layer) */
 .swipe-hint{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;color:var(--light);text-align:center;padding:8px 0 4px}
@@ -162,11 +162,26 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
   .pg-eyebrow,.pg-title,.pg-sub,.btn-row,.pg-ft{padding-left:20px;padding-right:20px}
   .pg-title{font-size:clamp(22px,7vw,34px)}
   .ticket-scroll{display:none}
+  .mob-outer{display:block}
+}
+
+/* ── VIEWPORT FIT — tall enough screens (≥700px) ── */
+@media(min-height:700px){
+  .wrap{display:flex;flex-direction:column;height:100dvh;overflow:hidden}
+  .ticket-scroll{flex:1;min-height:0;overflow-y:hidden;padding-bottom:0;margin-bottom:0}
+  .ticket{height:100%}
+  .pnl-nums{align-content:space-evenly}
+  .pg-ft{margin-top:0;padding:clamp(6px,1vh,18px) 0;flex-shrink:0}
+}
+
+/* ── VIEWPORT FIT — mobile tall ── */
+@media(max-width:768px) and (min-height:700px){
   .mob-outer{display:flex;flex-direction:column;flex:1;min-height:0}
   .mob-ticket{display:flex;flex-direction:column;flex:1;min-height:0}
   .mob-hd{flex-shrink:0}
   .mob-carousel{flex:1;min-height:0}
   .mob-board{min-height:0}
+  .mob-nums{flex:1;min-height:0;align-content:space-evenly}
   .swipe-hint{flex-shrink:0}
   .mob-dots{flex-shrink:0}
 }
