@@ -107,12 +107,9 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
 .tr-toto{writing-mode:vertical-rl;font-family:Arial,sans-serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:.12em;flex:1;display:flex;align-items:center;justify-content:center}
 .tr-tagline{writing-mode:vertical-rl;transform:rotate(180deg);font-family:Arial,sans-serif;font-size:5.5px;color:rgba(255,255,255,.6);letter-spacing:.08em;text-align:center;padding:0 3px}
 
-/* ── COMMENTARY (portfolio layer) ── */
-.commentary{min-height:52px;margin-bottom:6px}
-.cm-q{font-family:'Inter',sans-serif;font-size:14px;font-style:italic;color:rgba(29,37,64,.55);opacity:0;transform:translateY(7px);transition:opacity .5s ease,transform .5s ease;margin-bottom:6px}
-.cm-q.vis{opacity:1;transform:translateY(0)}
-.cm-m{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(29,37,64,.28);opacity:0;transition:opacity .4s ease .28s}
-.cm-m.vis{opacity:1}
+/* ── QUIP (inline with button row) ── */
+.cm-q{font-family:'Inter',sans-serif;font-size:17px;font-style:italic;color:rgba(29,37,64,.55);opacity:0;transition:opacity .5s ease;flex:1;align-self:center;min-width:0}
+.cm-q.vis{opacity:1}
 
 /* ── FOOTER ── */
 .pg-ft{margin-top:48px;padding:18px 0 64px;border-top:1px solid var(--light);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(29,37,64,.25);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
@@ -194,6 +191,7 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
     <button class="btn-qp" id="btn-qp">Quick Pick</button>
     <button class="btn-clear" id="btn-clear">Clear All</button>
     <button class="btn-copy" id="btn-copy">Copy Numbers</button>
+    <div class="cm-q" id="cm-q"></div>
   </div>
 
   <p class="tk-instr" id="tk-instr">Mark six numbers per board.</p>
@@ -278,11 +276,6 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
       <span class="mob-dot"></span>
       <span class="mob-dot"></span>
     </div>
-  </div>
-
-  <div class="commentary">
-    <div class="cm-q" id="cm-q"></div>
-    <div class="cm-m" id="cm-m"></div>
   </div>
 
   <div class="pg-ft">
@@ -506,7 +499,6 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
       }
     });
     document.getElementById('cm-q').classList.remove('vis');
-    document.getElementById('cm-m').classList.remove('vis');
     cpBtn.classList.remove('show','ok');
     cpBtn.textContent='Copy Numbers';
   }
@@ -555,12 +547,11 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
   /* ── Quip ── */
   function showQuip(){
     if(!QUIPS.length) return;
-    var q=document.getElementById('cm-q'), m=document.getElementById('cm-m');
-    q.textContent='“'+QUIPS[(draws-1)%QUIPS.length]+'” — Matt';
-    m.textContent='Quick pick #'+draws;
-    q.classList.remove('vis'); m.classList.remove('vis');
+    var q=document.getElementById('cm-q');
+    q.textContent=QUIPS[Math.floor(Math.random()*QUIPS.length)];
+    q.classList.remove('vis');
     void q.offsetWidth;
-    q.classList.add('vis'); m.classList.add('vis');
+    q.classList.add('vis');
   }
 
   /* ── Copy ── */

@@ -2151,25 +2151,25 @@ const PORTFOLIO_DATA = {
   "bioHeadline": "My never-quite-ending",
   "bioHeadlineAccent": "search for screen time",
   "totoPage": {
-    "eyebrow": "Lucky Numbers Generator",
-    "title": "The odds are 1 in 13,983,816.<br><em>I've seen worse briefs.</em>",
-    "subtitle": "Six panels. Forty-nine numbers. One shot at early retirement — or at least a good story for the next pitch. Quick Pick does the thinking. You do the hoping.",
+    "eyebrow": "Feeling lucky?",
+    "title": "The odds are 1 in 13,983,816.<br><em>So, you know, same as winning a pitch</em>",
+    "subtitle": "If you're reading this, either I'm getting lucky with a job, or you're getting lucky with a win. Give it a shot — worst case, you still have a great portfolio to look at.",
     "quips": [
       "Statistically, you have better odds of winning a Cannes Grand Prix.",
-      "Six numbers locked. No revisions. First time for everything.",
-      "In advertising, we call this a long-term awareness play.",
-      "The brief was: pick six. The only brief no client has ever changed.",
-      "If this wins, I'm flying to France. For Cannes. Obviously.",
+      "If you don't like it, then get like an awards-hungry-hippo and try again.",
+      "Like some of my ECDs love to say...'just whack ah'.",
+      "Not financial advice. But also not not financial advice.",
+      "If you win, don't forget me.",
       "Odds: 1 in 13,983,816. Still better than first-round client approval.",
-      "Numbers filed. Now we wait — same feeling as post-submission.",
-      "Ten years of picking the right words. Numbers are somehow harder.",
-      "Singapore dreaming. Six panels at a time. Results in 4–6 business days.",
+      "Statistically improbable. Emotionally essential.",
+      "The only campaign where you control the numbers. Allegedly.",
+      "The strategy is vibes. The execution is instinct. The results are to pray for.",
       "The ROI here is speculative, but the brand experience is exceptional.",
       "Filed under: long-term investment, niche target audience, zero media budget.",
       "No strategy deck required. Pure instinct. God help us.",
       "My creative director would call this 'owning the whitespace.'",
-      "A fully integrated six-panel campaign with zero client touchpoints.",
-      "Committed to all six. No overthinking. A new personal best."
+      "Do you need to send these numbers to a focus group first?",
+      "Budget: $1. Timeline: immediate. Impact: potentially life-changing. Best brief ever."
     ]
   }
 };
