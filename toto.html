@@ -49,10 +49,10 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
 .btn-copy.show{display:flex}
 .btn-copy.ok{color:var(--mid);border-color:var(--mid)}
 
-/* ── DRAW BADGE ── */
-.draw-row{display:flex;justify-content:flex-end;margin-bottom:12px}
-.draw-badge{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;background:var(--red);color:var(--paper);padding:4px 10px;white-space:nowrap}
-@media(max-width:768px){.draw-row{padding-right:20px}}
+/* ── DRAW ROW (quip left · badge right) ── */
+.draw-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+.draw-badge{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;background:var(--red);color:var(--paper);padding:4px 10px;white-space:nowrap;flex-shrink:0}
+@media(max-width:768px){.draw-row{padding-left:20px;padding-right:20px}}
 
 /* ── TICKET SCROLL (desktop) ── */
 .ticket-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;margin-bottom:30px}
@@ -108,8 +108,8 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
 .tr-toto{writing-mode:vertical-rl;font-family:Arial,sans-serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:.12em;flex:1;display:flex;align-items:center;justify-content:center}
 .tr-tagline{writing-mode:vertical-rl;transform:rotate(180deg);font-family:Arial,sans-serif;font-size:5.5px;color:rgba(255,255,255,.6);letter-spacing:.08em;text-align:center;padding:0 3px}
 
-/* ── QUIP (above ticket, centred) ── */
-.cm-q{font-family:'Inter',sans-serif;font-size:17px;font-style:italic;color:rgba(29,37,64,.55);opacity:0;transition:opacity .5s ease;text-align:center;margin-bottom:16px}
+/* ── QUIP ── */
+.cm-q{font-family:'Inter',sans-serif;font-size:17px;font-style:italic;color:rgba(29,37,64,.55);opacity:0;transition:opacity .5s ease;flex:1;min-width:0}
 .cm-q.vis{opacity:1}
 
 /* ── FOOTER ── */
@@ -194,8 +194,10 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
     <button class="btn-copy" id="btn-copy">Copy Numbers</button>
   </div>
 
-  <div class="cm-q" id="cm-q"></div>
-  <div class="draw-row"><span class="draw-badge" id="draw-badge"></span></div>
+  <div class="draw-row">
+    <div class="cm-q" id="cm-q"></div>
+    <span class="draw-badge" id="draw-badge"></span>
+  </div>
 
   <!-- ── DESKTOP TICKET ── -->
   <div class="ticket-scroll">
@@ -307,19 +309,25 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
     var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     var sgtMs  = Date.now() + 8*3600000 - (new Date().getTimezoneOffset()*60000);
     var sgt    = new Date(sgtMs);
-    var day    = sgt.getUTCDay();
+    var day    = sgt.getUTCDay();   // 0=Sun … 6=Sat
     var h      = sgt.getUTCHours();
-    var m      = sgt.getUTCMinutes();
-    var before630 = (h < 18) || (h === 18 && m < 30);
-    var drawMs;
-    if((day===1||day===4) && before630){
-      drawMs = sgtMs;
-    } else {
-      var ahead=1;
-      while(ahead<=7){ var nd=(day+ahead)%7; if(nd===1||nd===4) break; ahead++; }
-      drawMs = sgtMs + ahead*86400000;
-    }
-    var d = new Date(drawMs);
+    var mn     = sgt.getUTCMinutes();
+    var t      = h*60+mn;           // minutes since midnight SGT
+    var t630   = 18*60+30;          // 1110 — draw cutoff
+    // Two clean windows:
+    // Thu 6:30pm → Mon 6:30pm  →  next draw = this Monday
+    // Mon 6:30pm → Thu 6:30pm  →  next draw = this Thursday
+    var add;
+    if     (day===1 && t<t630)  add=0; // Mon before 6:30 → today (Mon)
+    else if(day===1)             add=3; // Mon after  6:30 → Thu (+3)
+    else if(day===2)             add=2; // Tue          → Thu (+2)
+    else if(day===3)             add=1; // Wed          → Thu (+1)
+    else if(day===4 && t<t630)  add=0; // Thu before 6:30 → today (Thu)
+    else if(day===4)             add=4; // Thu after  6:30 → Mon (+4)
+    else if(day===5)             add=3; // Fri          → Mon (+3)
+    else if(day===6)             add=2; // Sat          → Mon (+2)
+    else                         add=1; // Sun          → Mon (+1)
+    var d = new Date(sgtMs + add*86400000);
     var badge = document.getElementById('draw-badge');
     if(badge) badge.textContent = 'Next Draw · '+DAYS[d.getUTCDay()]+' '+d.getUTCDate()+' '+MONTHS[d.getUTCMonth()]+' · 6.30pm';
   })();

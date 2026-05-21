@@ -2152,7 +2152,7 @@ const PORTFOLIO_DATA = {
   "bioHeadlineAccent": "search for screen time",
   "totoPage": {
     "eyebrow": "Feeling lucky?",
-    "title": "The odds are 1 in 13,983,816.<br><em>So, you know, same as winning a pitch</em>",
+    "title": "The odds are 1 in 13,983,816.<br><em>So, you know, same as winning a pitch?</em>",
     "subtitle": "If you're reading this, either I'm getting lucky with a job, or you're getting lucky with a win. Give it a shot — worst case, you still have a great portfolio to look at.",
     "quips": [
       "Statistically, you have better odds of winning a Cannes Grand Prix.",
