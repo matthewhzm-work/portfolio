@@ -34,7 +34,7 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
 .pg-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(29,37,64,.38);margin-top:52px;margin-bottom:14px}
 .pg-title{font-family:'Lexend',sans-serif;font-size:clamp(26px,3.8vw,50px);font-weight:700;letter-spacing:-.025em;line-height:1.06;margin-bottom:14px}
 .pg-title em{color:var(--red);font-style:normal}
-.pg-sub{font-size:14.5px;color:rgba(29,37,64,.58);max-width:520px;line-height:1.72;margin-bottom:36px}
+.pg-sub{font-size:14.5px;color:rgba(29,37,64,.58);line-height:1.72;margin-bottom:36px}
 
 /* ── BUTTONS ── */
 .btn-row{display:flex;gap:12px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
@@ -107,8 +107,8 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
 .tr-toto{writing-mode:vertical-rl;font-family:Arial,sans-serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:.12em;flex:1;display:flex;align-items:center;justify-content:center}
 .tr-tagline{writing-mode:vertical-rl;transform:rotate(180deg);font-family:Arial,sans-serif;font-size:5.5px;color:rgba(255,255,255,.6);letter-spacing:.08em;text-align:center;padding:0 3px}
 
-/* ── QUIP (inline with button row) ── */
-.cm-q{font-family:'Inter',sans-serif;font-size:17px;font-style:italic;color:rgba(29,37,64,.55);opacity:0;transition:opacity .5s ease;flex:1;align-self:center;min-width:0}
+/* ── QUIP (above ticket, centred) ── */
+.cm-q{font-family:'Inter',sans-serif;font-size:17px;font-style:italic;color:rgba(29,37,64,.55);opacity:0;transition:opacity .5s ease;text-align:center;margin-bottom:16px}
 .cm-q.vis{opacity:1}
 
 /* ── FOOTER ── */
@@ -191,10 +191,10 @@ nav.scrolled{background:rgba(255,250,240,.96);backdrop-filter:blur(14px);-webkit
     <button class="btn-qp" id="btn-qp">Quick Pick</button>
     <button class="btn-clear" id="btn-clear">Clear All</button>
     <button class="btn-copy" id="btn-copy">Copy Numbers</button>
-    <div class="cm-q" id="cm-q"></div>
   </div>
 
   <p class="tk-instr" id="tk-instr">Mark six numbers per board.</p>
+  <div class="cm-q" id="cm-q"></div>
 
   <!-- ── DESKTOP TICKET ── -->
   <div class="ticket-scroll">
