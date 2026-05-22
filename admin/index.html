@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMS — Matthew Ho</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#F5F4EF;--ink:#0A0A0A;--red:#E8200C;
+  --mid:#777;--light:#E2E1DC;--panel:#fff;--danger:#C0392B;
+  --display:'Lexend',sans-serif;
+  --body:'Inter',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+body{background:var(--paper);font-family:var(--body);font-size:14px;color:var(--ink);-webkit-font-smoothing:antialiased}
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{background:var(--ink);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sb-logo{padding:24px 20px 20px;border-bottom:1px solid rgba(255,255,255,0.07)}
+.sb-name{font-family:var(--display);font-size:17px;font-weight:700;color:#fff}
+.sb-name em{color:var(--red);font-style:normal}
+.sb-sub{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-top:4px}
+.sb-nav{padding:12px 0;flex:1}
+.sb-section{font-family:var(--mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.22);padding:12px 20px 5px}
+.sb-item{display:block;padding:10px 20px;color:rgba(255,255,255,0.52);font-size:13px;cursor:pointer;transition:all 0.15s;border-left:3px solid transparent;user-select:none;font-family:var(--body)}
+.sb-item:hover{color:#fff;background:rgba(255,255,255,0.04)}
+.sb-item.active{color:#fff;border-left-color:var(--red);background:rgba(232,32,12,0.08)}
+.sb-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.07)}
+.preview-btn{display:block;text-align:center;background:var(--red);color:#fff;padding:10px;font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:opacity 0.2s}
+.preview-btn:hover{opacity:0.82}
+
+/* MAIN */
+.main{padding:40px;overflow-y:auto}
+.pg-title{font-family:var(--display);font-size:26px;font-weight:700;letter-spacing:-0.02em;margin-bottom:5px}
+.pg-title em{color:var(--red);font-style:normal}
+.pg-desc{font-size:13px;color:var(--mid);margin-bottom:28px;font-weight:400}
+
+/* CARDS */
+.card{background:var(--panel);padding:28px;margin-bottom:16px}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.card-label{font-size:14px;font-weight:600;font-family:var(--display)}
+
+/* FORMS */
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid)}
+.fg input,.fg select,.fg textarea{
+  width:100%;padding:9px 11px;border:1.5px solid var(--light);
+  font-family:var(--body);font-size:13px;color:var(--ink);
+  background:var(--paper);outline:none;transition:border-color 0.18s;border-radius:0;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--red)}
+.fg textarea{resize:vertical;min-height:76px;line-height:1.5}
+.fg select{cursor:pointer}
+.fg .hint{font-family:var(--mono);font-size:10px;color:var(--mid);margin-top:3px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.full{grid-column:1/-1}
+.divider{height:1px;background:var(--light);margin:16px 0}
+.mini-label{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin:14px 0 10px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border:none;transition:all 0.15s;border-radius:0;font-weight:500}
+.btn-primary{background:var(--red);color:#fff}.btn-primary:hover{opacity:0.85}
+.btn-secondary{background:var(--paper);color:var(--ink);border:1.5px solid var(--light)}.btn-secondary:hover{border-color:var(--ink)}
+.btn-success{background:#1a7a3a;color:#fff}.btn-success:hover{opacity:0.85}
+.btn-danger{background:transparent;color:var(--danger);border:1.5px solid var(--danger)}.btn-danger:hover{background:var(--danger);color:#fff}
+.btn-sm{padding:5px 11px;font-size:9px}
+.btn-group{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+
+/* LIST ITEMS */
+.list-item{background:var(--paper);padding:13px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px;transition:opacity 0.15s}
+.list-item.drag-over{outline:2px solid var(--red);outline-offset:-2px}
+.list-item.dragging{opacity:0.45}
+.li-drag{font-size:16px;color:var(--mid);cursor:grab;padding:0 4px;user-select:none;flex-shrink:0;line-height:1}
+.li-drag:hover{color:var(--ink)}
+.li-order{font-family:var(--mono);font-size:9px;color:var(--mid);min-width:18px;text-align:right;flex-shrink:0}
+.li-main{flex:1}
+.li-title{font-weight:600;font-size:13px;margin-bottom:2px;font-family:var(--display)}
+.li-sub{font-size:11px;color:var(--mid)}
+.li-badge{font-family:var(--mono);font-size:9px;background:var(--ink);color:var(--paper);padding:3px 9px}
+
+/* TABS */
+.tab-bar{display:flex;border-bottom:1.5px solid var(--light);margin-bottom:22px}
+.tab{padding:9px 18px;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1.5px;color:var(--mid);transition:all 0.15s}
+.tab.active{color:var(--red);border-bottom-color:var(--red)}
+
+/* COL ROWS */
+.col-row{background:var(--paper);padding:12px 14px;margin-bottom:8px}
+.col-row-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.col-row-num{font-family:var(--mono);font-size:10px;color:var(--red)}
+.col-grid{display:grid;grid-template-columns:100px 1fr 1fr 100px;gap:10px;align-items:end}
+
+/* COLOR */
+.color-row{display:flex;align-items:center;gap:10px}
+.swatch-box{width:34px;height:34px;flex-shrink:0;border:1.5px solid var(--light);cursor:pointer;position:relative;overflow:hidden}
+.swatch-box input[type=color]{position:absolute;inset:-4px;width:calc(100%+8px);height:calc(100%+8px);opacity:0;cursor:pointer;border:none}
+
+/* SECTIONS */
+.cms-sec{display:none}.cms-sec.active{display:block}
+
+/* EXPORT */
+.export-box{background:var(--ink);padding:20px;margin-bottom:16px}
+.export-box pre{color:#7ee787;font-family:var(--mono);font-size:11px;line-height:1.6;white-space:pre-wrap;word-break:break-all;max-height:360px;overflow-y:auto}
+.export-info{font-family:var(--mono);font-size:10px;color:var(--mid);margin-top:12px;line-height:1.6}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--ink);color:#fff;padding:13px 20px;font-family:var(--mono);font-size:11px;letter-spacing:0.06em;transform:translateY(80px);opacity:0;transition:all 0.28s;z-index:9999;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-left:4px solid #27ae60}
+.toast.error{border-left:4px solid var(--danger)}
+.toast.info{border-left:4px solid #2980b9}
+
+/* GATE */
+.gate{position:fixed;inset:0;background:var(--ink);display:flex;align-items:center;justify-content:center;z-index:99999}
+.gate-inner{width:360px}
+.gate-logo{font-family:var(--display);font-size:26px;font-weight:700;color:#fff;margin-bottom:6px}
+.gate-logo em{color:var(--red);font-style:normal}
+.gate-sub{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:32px}
+.gate-wrap{position:relative;margin-bottom:12px}
+.gate-wrap input{width:100%;padding:13px 48px 13px 16px;background:#1a1a1a;border:1.5px solid #333;font-family:var(--body);font-size:15px;color:#fff;outline:none;transition:border-color 0.2s;border-radius:0}
+.gate-wrap input:focus{border-color:var(--red)}
+.gate-wrap input.shake{animation:shake 0.35s ease;border-color:var(--danger)}
+.gate-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.3);cursor:pointer;user-select:none;font-size:18px}
+.gate-eye:hover{color:rgba(255,255,255,0.7)}
+.gate-btn{width:100%;padding:13px;background:var(--red);color:#fff;border:none;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:opacity 0.2s;border-radius:0}
+.gate-btn:hover{opacity:0.85}
+.gate-err{font-family:var(--mono);font-size:10px;color:#e74c3c;margin-top:10px;min-height:15px;letter-spacing:0.06em}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:static;height:auto}
+  .g2,.g3{grid-template-columns:1fr}
+  .col-grid{grid-template-columns:1fr 1fr}
+}
+
+/* ── BLOCK EDITOR ── */
+.blk-ed-item{background:var(--paper);border:1.5px solid var(--light);margin-bottom:10px;transition:border-color 0.15s}
+.blk-ed-item:hover{border-color:#bbb}
+.blk-ed-header{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(0,0,0,0.025);border-bottom:1px solid var(--light)}
+.blk-ed-type{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);flex-shrink:0;min-width:88px}
+.blk-ed-preview{font-size:11px;color:var(--mid);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--mono)}
+.blk-ed-acts{display:flex;gap:5px;flex-shrink:0}
+.blk-ed-fields{padding:14px 16px 16px}
+.blk-add-wrap{position:relative;display:inline-block}
+.blk-add-menu{position:absolute;right:0;top:calc(100% + 6px);background:var(--ink);min-width:170px;z-index:100;padding:6px 0;box-shadow:0 8px 24px rgba(0,0,0,0.18)}
+.blk-add-menu button{display:block;width:100%;text-align:left;padding:10px 16px;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.75);background:none;border:none;cursor:pointer;transition:background 0.15s;border-radius:0}
+.blk-add-menu button:hover{background:rgba(255,255,255,0.08);color:#fff}
+.blk-img-sub{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;margin-bottom:8px}
+.blk-img-sub input{padding:7px 10px;border:1.5px solid var(--light);font-family:var(--body);font-size:12px;background:var(--paper);outline:none;transition:border-color 0.18s;border-radius:0;width:100%}
+.blk-img-sub input:focus{border-color:var(--red)}
+.blk-vid-sub{display:grid;grid-template-columns:1fr auto 1fr auto;gap:8px;align-items:center;margin-bottom:8px}
+.blk-vid-sub input,.blk-vid-sub select{padding:7px 10px;border:1.5px solid var(--light);font-family:var(--body);font-size:12px;background:var(--paper);outline:none;transition:border-color 0.18s;border-radius:0;width:100%}
+.blk-vid-sub input:focus,.blk-vid-sub select:focus{border-color:var(--red)}
+
+/* ── QUILL RTE ── */
+.ql-container{font-family:var(--body);font-size:13px;border:none}
+.ql-toolbar.ql-snow{border:none;border-bottom:1px solid var(--light);padding:6px 8px;background:#f0efe9}
+.ql-toolbar.ql-snow .ql-picker-label,.ql-toolbar.ql-snow button{color:var(--ink)}
+.ql-toolbar.ql-snow .ql-picker-label:hover,.ql-toolbar.ql-snow button:hover,.ql-toolbar.ql-snow .ql-active{color:var(--red)}
+.rte-wrap{border:1.5px solid var(--light);transition:border-color 0.18s}
+.rte-wrap:focus-within{border-color:var(--red)}
+.ql-editor{min-height:90px;padding:10px 12px;line-height:1.6;color:var(--ink);background:var(--paper)}
+.ql-editor.ql-blank::before{color:#bbb;font-style:normal}
+.ql-editor h2{font-family:var(--display);font-size:1.35em;font-weight:700;margin:0.2em 0 0.4em;line-height:1.2}
+.ql-editor h3{font-family:var(--display);font-size:1.1em;font-weight:600;margin:0.2em 0 0.3em;line-height:1.2}
+.ql-editor p{margin-bottom:0.4em}
+.ql-editor ul,.ql-editor ol{padding-left:1.4em;margin-bottom:0.4em}
+.ql-editor .ql-size-small{font-size:0.85em}
+.ql-editor .ql-size-large{font-size:1.25em}
+.ql-editor .ql-size-huge{font-size:1.65em}
+
+/* ── PROJECT GRID VIEW ── */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.proj-card{background:var(--paper);border:1.5px solid var(--light);display:flex;flex-direction:column;transition:border-color 0.15s}
+.proj-card:hover{border-color:#bbb}
+.proj-card-pos{font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:0.1em;padding:7px 10px 4px;line-height:1}
+.proj-card-thumb{width:100%;overflow:hidden;background:#111;flex-shrink:0}
+.proj-card-thumb img{width:100%;height:auto;display:block}
+.proj-card-ph{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
+.proj-card-body{padding:8px 10px 10px;flex:1}
+.proj-card-brand{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:3px}
+.proj-card-title{font-family:var(--display);font-size:12px;font-weight:600;line-height:1.3;color:var(--ink)}
+.proj-card-actions{display:flex;gap:5px;align-items:center;padding:7px 10px;border-top:1px solid var(--light)}
+.proj-card-actions .btn-move{background:var(--paper);color:var(--ink);border:1.5px solid var(--light);padding:4px 9px;font-size:12px;line-height:1;cursor:pointer;transition:all 0.15s;border-radius:0;font-family:var(--body)}
+.proj-card-actions .btn-move:hover:not(:disabled){border-color:var(--ink)}
+.proj-card-actions .btn-move:disabled{opacity:0.25;cursor:default}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div class="gate-inner">
+    <div class="gate-logo">Matthew Ho <em>—</em></div>
+    <div class="gate-sub">CMS Admin Access</div>
+    <div class="gate-wrap">
+      <input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()">
+      <span class="gate-eye" id="gate-eye" onclick="toggleEye()">👁</span>
+    </div>
+    <button class="gate-btn" onclick="checkPw()">Enter</button>
+    <div class="gate-err" id="gate-err"></div>
+  </div>
+</div>
+
+<div class="layout" id="cms" style="display:none">
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <div class="sb-name">Matthew Ho <em>—</em></div>
+      <div class="sb-sub">Portfolio CMS</div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">Content</div>
+      <div class="sb-item active" onclick="showSec('profile',this)">Profile &amp; Bio</div>
+      <div class="sb-item" onclick="showSec('projects',this)">Work Projects</div>
+      <div class="sb-item" onclick="showSec('experience',this)">Experience</div>
+      <div class="sb-item" onclick="showSec('awards',this)">Awards</div>
+      <div class="sb-section">Pages</div>
+      <div class="sb-item" onclick="showSec('toto',this)">TOTO Page</div>
+      <div class="sb-section">Publish</div>
+      <div class="sb-item" onclick="showSec('export',this)">Export &amp; Download</div>
+    </nav>
+    <div class="sb-footer">
+      <a href="../" target="_blank" class="preview-btn">↗ Preview Site</a>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- PROFILE -->
+    <div id="sec-profile" class="cms-sec active">
+      <h1 class="pg-title">Profile<em>.</em></h1>
+      <p class="pg-desc">Personal details and bio shown in the About section.</p>
+      <div class="card">
+        <div class="card-head"><span class="card-label">Identity</span></div>
+        <div class="g2">
+          <div class="fg"><label>Full Name</label><input type="text" id="p-name"></div>
+          <div class="fg"><label>Title</label><input type="text" id="p-title"></div>
+          <div class="fg"><label>Location</label><input type="text" id="p-location"></div>
+          <div class="fg"><label>Email</label><input type="email" id="p-email"></div>
+          <div class="fg"><label>Website (no https://)</label><input type="text" id="p-website"></div>
+          <div class="fg"><label>LinkedIn URL</label><input type="text" id="p-linkedin" placeholder="https://www.linkedin.com/in/..."></div>
+          <div class="fg full"><label>Tagline (nav bar)</label><input type="text" id="p-tagline"></div>
+          <div class="fg full"><label>Award Strip (nav bar — shown in red)</label><input type="text" id="p-awards"></div>
+          <div class="fg full"><label>About Section Headline — Line 1</label><input type="text" id="p-bioheadline" placeholder="A strategist's brain."></div>
+          <div class="fg full"><label>About Section Headline — Line 2 (shown in red)</label><input type="text" id="p-bioheadlineaccent" placeholder="A writer's instinct."></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><span class="card-label">Bio</span></div>
+        <div class="fg"><div class="rte-wrap"><div id="bio-rte"></div></div></div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="saveProfile()">Save Profile</button>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div id="sec-projects" class="cms-sec">
+      <h1 class="pg-title">Work<em>.</em></h1>
+      <p class="pg-desc">Add, edit and reorder portfolio projects.</p>
+      <div id="view-list">
+        <div class="card">
+          <div class="card-head">
+            <span class="card-label">Projects</span>
+            <span style="font-family:var(--mono);font-size:10px;color:var(--red)" id="proj-count"></span>
+          </div>
+          <div id="project-list"></div>
+          <div class="btn-group"><button class="btn btn-primary" onclick="addProject()">+ Add Project</button></div>
+        </div>
+      </div>
+      <div id="view-editor" style="display:none">
+        <div class="card">
+          <div class="card-head">
+            <span class="card-label" id="editor-heading">Edit Project</span>
+            <button class="btn btn-secondary btn-sm" onclick="closeEditor()">← Back to list</button>
+          </div>
+          <div class="tab-bar">
+            <div class="tab active" id="tbb-card"    onclick="switchTab('card',this)">Card</div>
+            <div class="tab"        id="tbb-page"    onclick="switchTab('page',this)">Page Content</div>
+            <div class="tab"        id="tbb-gallery" onclick="switchTab('gallery',this)">Gallery</div>
+          </div>
+
+          <!-- ── CARD TAB ── -->
+          <div id="tab-card">
+            <div class="g2">
+              <div class="fg"><label>Brand / Client</label><input type="text" id="e-brand"></div>
+              <div class="fg"><label>Award Label (optional)</label><input type="text" id="e-award" placeholder="e.g. 5× MEA Gold 2025"></div>
+              <div class="fg full"><label>Project Title</label><input type="text" id="e-title"></div>
+              <div class="fg full"><label>Subtitle (shown on project page)</label><input type="text" id="e-subtitle"></div>
+              <div class="fg full"><label>Card Description (homepage card only)</label><div class="rte-wrap"><div id="e-desc"></div></div></div>
+              <div class="fg full"><label>Tags (comma-separated)</label><input type="text" id="e-tags" placeholder="Social, Integrated, Brand"></div>
+            </div>
+            <div class="divider"></div>
+            <p class="mini-label">Thumbnail</p>
+            <div class="g2">
+              <div class="fg full">
+                <label>Image URL</label>
+                <input type="text" id="e-thumburl" placeholder="images/project/thumb.webp">
+                <span class="hint">Relative path or full URL. Leave blank to use colour placeholder.</span>
+              </div>
+              <div class="fg">
+                <label>Type</label>
+                <select id="e-thumbtype">
+                  <option value="image">Image (WebP / JPG / PNG)</option>
+                  <option value="gif">GIF (animated)</option>
+                </select>
+              </div>
+              <div class="fg">
+                <label>Fallback Colour</label>
+                <div class="color-row">
+                  <div class="swatch-box" id="e-swatch"><input type="color" id="e-colorpicker" value="#111111" oninput="syncColor(this.value)"></div>
+                  <input type="text" id="e-color" value="#111111" oninput="syncSwatch(this.value)" style="flex:1">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── PAGE CONTENT TAB ── -->
+          <div id="tab-page" style="display:none">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+              <p style="font-size:12px;color:var(--mid);font-family:var(--mono);line-height:1.6">Build the project page block by block. Blocks render in order — header, videos, text, images, callouts.</p>
+              <div class="blk-add-wrap">
+                <button class="btn btn-primary" onclick="toggleAddBlock(event)">+ Add Block ▾</button>
+                <div class="blk-add-menu" id="blk-add-menu" style="display:none">
+                  <button onclick="addBlock('video')">▶&nbsp; Video</button>
+                  <button onclick="addBlock('callout')">"&nbsp; Callout / Quote</button>
+                  <button onclick="addBlock('text')">¶&nbsp; Text Write-up</button>
+                  <button onclick="addBlock('split')">⫠&nbsp; Split Row (50/50)</button>
+                  <button onclick="addBlock('image')">▭&nbsp; Single Image</button>
+                  <button onclick="addBlock('image-row')">▭▭ Image Row / Grid</button>
+                  <button onclick="addBlock('video-row')">▶▶ Video Row</button>
+                  <button onclick="addBlock('image-viewer')">◫ Image Viewer</button>
+                </div>
+              </div>
+            </div>
+            <div id="blocks-list"></div>
+          </div>
+
+          <!-- ── GALLERY TAB ── -->
+          <div id="tab-gallery" style="display:none">
+            <p style="font-size:12px;color:var(--mid);margin-bottom:16px;font-family:var(--mono)">Toggle individual thumbnails on/off. Active ones appear in the Campaign Gallery strip on the project page.</p>
+            <div id="thumbs-list"></div>
+            <button class="btn btn-secondary btn-sm" onclick="addThumb()" style="margin-top:8px">+ Add Thumbnail</button>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-primary" onclick="saveProject()">Save Project</button>
+            <button class="btn btn-danger"  onclick="deleteProject()">Delete Project</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div id="sec-experience" class="cms-sec">
+      <h1 class="pg-title">Experience<em>.</em></h1>
+      <p class="pg-desc">Employment history shown in the About section.</p>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-label">Roles</span>
+          <button class="btn btn-secondary btn-sm" onclick="addExp()">+ Add Role</button>
+        </div>
+        <div id="exp-cms"></div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="saveExp()">Save Experience</button>
+      </div>
+    </div>
+
+    <!-- AWARDS -->
+    <div id="sec-awards" class="cms-sec">
+      <h1 class="pg-title">Awards<em>.</em></h1>
+      <p class="pg-desc">Award history shown in the Recognition section.</p>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-label">Awards</span>
+          <button class="btn btn-secondary btn-sm" onclick="addAward()">+ Add Award</button>
+        </div>
+        <div id="awards-cms"></div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="saveAwards()">Save Awards</button>
+      </div>
+    </div>
+
+    <!-- TOTO PAGE -->
+    <div id="sec-toto" class="cms-sec">
+      <h1 class="pg-title">TOTO<em>.</em></h1>
+      <p class="pg-desc">Edit the eyebrow, headline and subtitle for the TOTO Lucky Pick page. Manage the rotating quotes below — they appear after every Quick Pick.</p>
+      <div class="card">
+        <div class="card-head"><span class="card-label">Page Headlines</span></div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="fg"><label>Eyebrow</label><input type="text" id="tt-eyebrow" placeholder="Lucky Numbers Generator"></div>
+          <div class="fg"><label>Title HTML — use &lt;br&gt; for line break, &lt;em&gt; for red accent</label><textarea id="tt-title" style="min-height:60px" placeholder="The odds are 1 in 13,983,816.&lt;br&gt;&lt;em&gt;I've seen worse briefs.&lt;/em&gt;"></textarea></div>
+          <div class="fg"><label>Subtitle</label><textarea id="tt-subtitle" style="min-height:80px"></textarea></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-label">Quick Pick Quotes</span>
+          <button class="btn btn-secondary btn-sm" onclick="addQuip()">+ Add Quote</button>
+        </div>
+        <div id="quips-list"></div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="saveToto()">Save TOTO Page</button>
+      </div>
+    </div>
+
+    <!-- EXPORT -->
+    <div id="sec-export" class="cms-sec">
+      <h1 class="pg-title">Export<em>.</em></h1>
+      <p class="pg-desc">Generate your updated data.js, then copy or download it. Replace the file in your GitHub repo — site updates in ~60 seconds.</p>
+      <div class="card">
+        <div class="card-head"><span class="card-label">Generated data.js</span></div>
+        <div class="export-box"><pre id="export-out">Click "Generate" to preview your data.js.</pre></div>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="doExport()">Generate data.js</button>
+          <button class="btn btn-secondary" onclick="copyExport()">Copy to Clipboard</button>
+          <button class="btn btn-success" onclick="downloadExport()">↓ Download data.js</button>
+        </div>
+        <p class="export-info">
+          GitHub workflow: open your repo → click <strong>data.js</strong> → pencil ✏️ → select all → paste → Commit changes.<br>
+          Or drag the downloaded file onto the GitHub upload page to replace it directly.
+        </p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<script src="../data.js"></script>
+<script>
+(function(){
+
+/* ═══════════════════════════════════════
+   GATE
+═══════════════════════════════════════ */
+const SK = 'mh_cms_v5';
+function h(s){let r=0;for(let i=0;i<s.length;i++)r=Math.imul(31,r)+s.charCodeAt(i)|0;return Math.abs(r).toString(16)}
+const CORRECT = '3a85d68f';
+
+window.checkPw = function(){
+  const inp = document.getElementById('gate-pw');
+  if(h(inp.value) === CORRECT){
+    sessionStorage.setItem(SK, CORRECT);
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('cms').style.display  = 'grid';
+  } else {
+    inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake');
+    document.getElementById('gate-err').textContent = 'Incorrect password.';
+    inp.value = '';
+    setTimeout(()=>inp.classList.remove('shake'), 380);
+  }
+};
+window.toggleEye = function(){
+  const inp = document.getElementById('gate-pw');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  document.getElementById('gate-eye').textContent = inp.type === 'password' ? '👁' : '🙈';
+};
+if(sessionStorage.getItem(SK) === CORRECT){
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('cms').style.display  = 'grid';
+}
+
+/* ═══════════════════════════════════════
+   STATE — deep clone so we don't mutate the original constant
+═══════════════════════════════════════ */
+let S = JSON.parse(JSON.stringify(PORTFOLIO_DATA));
+let editIdx   = -1;
+let unsaved   = false;   /* tracks whether editor has pending changes since last save */
+const $ = id => document.getElementById(id);
+
+/* ── QUILL STATE ── */
+const QUILTS = {};
+const QUILL_TOOLBAR = [
+  [{ header: [2, 3, false] }],
+  ['bold', 'italic', 'underline'],
+  [{ size: ['small', false, 'large', 'huge'] }],
+  [{ list: 'ordered' }, { list: 'bullet' }],
+  [{ indent: '-1' }, { indent: '+1' }],
+  ['clean']
+];
+function initRTE(id, html, placeholder) {
+  const el = document.getElementById(id);
+  if (!el) return null;
+  if (QUILTS[id]) { QUILTS[id].root.innerHTML = html || ''; return QUILTS[id]; }
+  const q = new Quill(el, { theme:'snow', placeholder: placeholder||'Write here…', modules:{ toolbar: QUILL_TOOLBAR } });
+  q.root.innerHTML = html || '';
+  QUILTS[id] = q;
+  return q;
+}
+function getQuillHtml(id) {
+  const q = QUILTS[id]; if (!q) return '';
+  const h = q.root.innerHTML;
+  return (h === '<p><br></p>' || h === '<p></p>') ? '' : h;
+}
+
+/* ═══════════════════════════════════════
+   UTILS
+═══════════════════════════════════════ */
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escA(s){ return String(s||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+function toast(msg, type='success'){
+  const t = $('toast');
+  t.textContent = msg;
+  t.className   = 'toast ' + type + ' show';
+  clearTimeout(t._tid);
+  t._tid = setTimeout(()=>t.classList.remove('show'), 3200);
+}
+
+/* ═══════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════ */
+window.showSec = function(key, el){
+  /* Preserve any in-progress edits before switching sections */
+  flushAll();
+  document.querySelectorAll('.cms-sec').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(n => n.classList.remove('active'));
+  $('sec-'+key).classList.add('active');
+  if(el) el.classList.add('active');
+  ({
+    profile:    renderProfile,
+    projects:   ()=>{ renderList(); closeEditor(); },
+    experience: renderExp,
+    awards:     renderAwards,
+    toto:       renderToto,
+    export:     doExport
+  })[key]?.();
+};
+
+/* ═══════════════════════════════════════
+   PROFILE
+═══════════════════════════════════════ */
+function renderProfile(){
+  $('p-name').value            = S.name             || '';
+  $('p-title').value           = S.title            || '';
+  $('p-location').value        = S.location         || '';
+  $('p-email').value           = S.email            || '';
+  $('p-website').value         = S.website          || '';
+  $('p-linkedin').value        = S.linkedin         || '';
+  $('p-tagline').value         = S.tagline          || '';
+  $('p-awards').value          = S.awardStrip       || '';
+  $('p-bioheadline').value     = S.bioHeadline      || '';
+  $('p-bioheadlineaccent').value = S.bioHeadlineAccent || '';
+  /* Single bio RTE — join all legacy paragraphs into one block */
+  const bioHtml = Array.isArray(S.bio) ? S.bio.join('') : (S.bio||'');
+  initRTE('bio-rte', bioHtml, 'Write your bio here…');
+}
+
+function flushBioFromDOM(){
+  const h = getQuillHtml('bio-rte');
+  if(h !== undefined) S.bio = [h];   /* always single-element array */
+}
+
+window.saveProfile = ()=>{
+  S.name              = $('p-name').value.trim();
+  S.title             = $('p-title').value.trim();
+  S.location          = $('p-location').value.trim();
+  S.email             = $('p-email').value.trim();
+  S.website           = $('p-website').value.trim();
+  S.linkedin          = $('p-linkedin').value.trim();
+  S.tagline           = $('p-tagline').value.trim();
+  S.awardStrip        = $('p-awards').value.trim();
+  S.bioHeadline       = $('p-bioheadline').value.trim();
+  S.bioHeadlineAccent = $('p-bioheadlineaccent').value.trim();
+  flushBioFromDOM();
+  toast('Profile saved — generate data.js to publish.');
+};
+
+/* ═══════════════════════════════════════
+   PROJECT LIST
+═══════════════════════════════════════ */
+function renderList(){
+  $('proj-count').textContent = S.projects.length + ' projects';
+  const list = $('project-list');
+  if(!S.projects.length){
+    list.innerHTML = '<p style="font-size:13px;color:var(--mid);padding:8px 0">No projects yet.</p>';
+    return;
+  }
+
+  /* Split into active (grid) and hidden (list below), preserving full-array index */
+  const active = [], hidden = [];
+  S.projects.forEach((p, i) => (p.active !== false ? active : hidden).push({p, i}));
+
+  let html = '';
+
+  /* ── Active projects: 3-column grid matching homepage layout ── */
+  if(active.length){
+    html += '<div class="proj-grid">';
+    active.forEach(({p, i}, gi) => {
+      const row = Math.floor(gi/3)+1, col = (gi%3)+1;
+      const isFirst = gi === 0, isLast = gi === active.length-1;
+      const hasImg = p.thumbnailUrl && p.thumbnailUrl.trim();
+      const thumbHtml = hasImg
+        ? `<div class="proj-card-thumb"><img src="${esc(p.thumbnailUrl)}" loading="lazy"></div>`
+        : `<div class="proj-card-thumb"><div class="proj-card-ph" style="background:${p.placeholderColor||'#111'}"><span style="font-family:var(--display);font-weight:700;font-size:10px;color:rgba(255,255,255,0.12)">${esc(p.brand)}</span></div></div>`;
+      html += `
+        <div class="proj-card">
+          <div class="proj-card-pos">R${row}·C${col}</div>
+          ${thumbHtml}
+          <div class="proj-card-body">
+            <div class="proj-card-brand">${esc(p.brand)}</div>
+            <div class="proj-card-title">${esc(p.title)}</div>
+          </div>
+          <div class="proj-card-actions">
+            <button class="btn-move" onclick="moveProject(${i},-1)"${isFirst?' disabled':''} title="Move left">←</button>
+            <button class="btn-move" onclick="moveProject(${i},1)"${isLast?' disabled':''} title="Move right">→</button>
+            <button class="btn btn-sm" style="background:#1a7a3a;color:#fff;border:none;margin-left:auto" onclick="toggleActive(${i})">Live</button>
+            <button class="btn btn-secondary btn-sm" onclick="editProject(${i})">Edit</button>
+          </div>
+        </div>`;
+    });
+    html += '</div>';
+  }
+
+  /* ── Hidden projects: compact list ── */
+  if(hidden.length){
+    html += `<div class="mini-label" style="margin-top:18px;margin-bottom:8px">Hidden (${hidden.length})</div>`;
+    hidden.forEach(({p, i}) => {
+      html += `
+        <div class="list-item" style="opacity:0.6">
+          <div class="li-main">
+            <div class="li-title">${esc(p.title)}</div>
+            <div class="li-sub">${esc(p.brand)} · ${p.projectTemplate||'default'}</div>
+          </div>
+          <button class="btn btn-sm" style="background:#555;color:#fff;border:none" onclick="toggleActive(${i})">Hidden</button>
+          <button class="btn btn-secondary btn-sm" onclick="editProject(${i})">Edit</button>
+        </div>`;
+    });
+  }
+
+  list.innerHTML = html;
+}
+
+/* ═══════════════════════════════════════
+   PROJECT EDITOR
+
+   FIX: saveProject() reads every editor field directly from DOM.
+   Never uses stale closure values. Works correctly regardless of
+   which tab the user is on when they click Save.
+═══════════════════════════════════════ */
+window.toggleActive = i => {
+  S.projects[i].active = S.projects[i].active === false ? true : false;
+  renderList();
+  toast((S.projects[i].active ? 'Project set to Live' : 'Project hidden') + ' — export to publish.');
+};
+
+/* Move a project one slot left (dir=-1) or right (dir=+1) within the active grid.
+   Swaps with the adjacent active project in the full S.projects array. */
+window.moveProject = (idx, dir) => {
+  const activeIdxs = S.projects.reduce((a,p,i) => { if(p.active !== false) a.push(i); return a; }, []);
+  const myPos = activeIdxs.indexOf(idx);
+  const targetPos = myPos + dir;
+  if(targetPos < 0 || targetPos >= activeIdxs.length) return;
+  const ti = activeIdxs[targetPos];
+  [S.projects[idx], S.projects[ti]] = [S.projects[ti], S.projects[idx]];
+  renderList();
+  toast('Project moved — export to publish.', 'info');
+};
+
+window.addProject = ()=>{
+  S.projects.push({
+    id:'project-'+Date.now(), brand:'', title:'New Project', subtitle:'', award:'',
+    tags:[], placeholderColor:'#111111', gridSpan:6,
+    thumbnailUrl:'', thumbnailType:'image', projectTemplate:'default',
+    description:'', active:true, blocks:[]
+  });
+  editProject(S.projects.length-1);
+};
+
+window.editProject = i => {
+  editIdx  = i;
+  unsaved  = false;   /* reset on each open — first interaction will flip to true */
+  const p = S.projects[i];
+  $('view-list').style.display   = 'none';
+  $('view-editor').style.display = 'block';
+  $('editor-heading').textContent = 'Editing: ' + (p.title || 'New Project');
+  /* Card tab fields */
+  $('e-brand').value     = p.brand    || '';
+  $('e-award').value     = p.award    || '';
+  $('e-title').value     = p.title    || '';
+  $('e-subtitle').value  = p.subtitle || '';
+  $('e-tags').value      = (p.tags||[]).join(', ');
+  initRTE('e-desc', p.description || '', 'Short description shown on the homepage card…');
+  /* Thumbnail */
+  $('e-thumburl').value  = p.thumbnailUrl   || '';
+  $('e-thumbtype').value = p.thumbnailType  || 'image';
+  const col = p.placeholderColor || '#111111';
+  $('e-color').value = $('e-colorpicker').value = col;
+  $('e-swatch').style.background = col;
+  /* Tabs */
+  renderThumbs();
+  switchTab('card', $('tbb-card'));
+};
+
+window.closeEditor = () => {
+  if(unsaved && !confirm('You have unsaved changes. Go back without saving?')) return;
+  unsaved = false;
+  editIdx = -1;
+  $('view-editor').style.display = 'none';
+  $('view-list').style.display   = 'block';
+  renderList();
+};
+
+/* ── TABS ── */
+window.switchTab = (key, btn) => {
+  ['card','page','gallery'].forEach(t => {
+    const el = $('tab-'+t); if(el) el.style.display = t===key ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab-bar .tab').forEach(t => t.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  /* Render blocks when switching to page tab */
+  if(key === 'page') renderBlocksEditor();
+};
+
+/* ── FLUSH PROJECT FROM DOM ── */
+function flushProjectFromDOM(){
+  if(editIdx < 0) return;
+  const p = S.projects[editIdx];
+  p.brand            = $('e-brand').value.trim();
+  p.award            = $('e-award').value.trim();
+  p.title            = $('e-title').value.trim();
+  p.subtitle         = $('e-subtitle').value.trim();
+  p.description      = getQuillHtml('e-desc');
+  p.tags             = $('e-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  p.thumbnailUrl     = $('e-thumburl').value.trim();
+  p.thumbnailType    = $('e-thumbtype').value;
+  p.placeholderColor = $('e-color').value.trim() || '#111111';
+  flushBlocksFromDOM();
+  flushThumbsFromDOM();
+  if(!p.id || p.id.startsWith('project-')){
+    const slug = p.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+    if(slug) p.id = slug;
+  }
+}
+
+window.saveProject = ()=>{
+  if(editIdx < 0){ toast('No project selected.','error'); return; }
+  flushProjectFromDOM();
+  unsaved = false;
+  $('editor-heading').textContent = 'Editing: ' + S.projects[editIdx].title;
+  toast('Project "' + S.projects[editIdx].title + '" saved — export to publish.');
+};
+
+window.deleteProject = ()=>{
+  if(editIdx < 0) return;
+  if(!confirm('Delete "' + S.projects[editIdx].title + '"? This cannot be undone.')) return;
+  S.projects.splice(editIdx, 1);
+  editIdx = -1;
+  closeEditor();
+  toast('Project deleted.');
+};
+
+/* ═══════════════════════════════════════
+   BLOCK EDITOR
+═══════════════════════════════════════ */
+const BLOCK_QUILTS = {};
+
+function initBlockRTE(blkId, html){
+  const el = document.getElementById('blk-rte-'+blkId);
+  if(!el) return;
+  if(BLOCK_QUILTS[blkId]){ BLOCK_QUILTS[blkId].root.innerHTML = html||''; return; }
+  const q = new Quill(el, {theme:'snow', placeholder:'Write here…', modules:{toolbar:QUILL_TOOLBAR}});
+  q.root.innerHTML = html||'';
+  BLOCK_QUILTS[blkId] = q;
+}
+function getBlockRTEHtml(blkId){
+  const q = BLOCK_QUILTS[blkId]; if(!q) return '';
+  const h = q.root.innerHTML;
+  return (h==='<p><br></p>'||h==='<p></p>') ? '' : h;
+}
+/* Text block column RTEs — keyed as 'c1_ID', 'c2_ID', 'c3_ID' */
+function initColRTE(col, blkId, html){
+  const el = document.getElementById('blk-c'+col+'-'+blkId);
+  if(!el) return;
+  const key = 'c'+col+'_'+blkId;
+  if(BLOCK_QUILTS[key]){ BLOCK_QUILTS[key].root.innerHTML = html||''; return; }
+  const q = new Quill(el, {theme:'snow', placeholder:'Column '+col+'…', modules:{toolbar:QUILL_TOOLBAR}});
+  q.root.innerHTML = html||'';
+  BLOCK_QUILTS[key] = q;
+}
+function getColRTEHtml(col, blkId){
+  const key = 'c'+col+'_'+blkId;
+  const q = BLOCK_QUILTS[key]; if(!q) return '';
+  const h = q.root.innerHTML;
+  return (h==='<p><br></p>'||h==='<p></p>') ? '' : h;
+}
+/* Split block RTEs — keyed as 'left_ID' and 'right_ID' */
+function initSplitRTE(side, blkId, html){
+  const el = document.getElementById('blk-'+side+'rte-'+blkId);
+  if(!el) return;
+  const key = side+'_'+blkId;
+  if(BLOCK_QUILTS[key]){ BLOCK_QUILTS[key].root.innerHTML = html||''; return; }
+  const q = new Quill(el, {theme:'snow', placeholder:'Write here…', modules:{toolbar:QUILL_TOOLBAR}});
+  q.root.innerHTML = html||'';
+  BLOCK_QUILTS[key] = q;
+}
+function getSplitRTEHtml(side, blkId){
+  const key = side+'_'+blkId;
+  const q = BLOCK_QUILTS[key]; if(!q) return '';
+  const h = q.root.innerHTML;
+  return (h==='<p><br></p>'||h==='<p></p>') ? '' : h;
+}
+
+function blkLabel(type){
+  return {video:'▶ Video',callout:'" Callout',text:'¶ Text',image:'▭ Image','image-row':'▭▭ Image Row',split:'⫠ Split Row','video-row':'▶▶ Video Row','image-viewer':'◫ Image Viewer'}[type]||type;
+}
+function blkPreview(b){
+  if(b.type==='video')          return b.url ? b.url.replace(/https?:\/\//,'').slice(0,50) : '—';
+  if(b.type==='callout')        return b.text ? b.text.slice(0,60)+(b.text.length>60?'…':'') : '—';
+  if(b.type==='text')           return (b.col1||b.html) ? (b.col1||b.html).replace(/<[^>]+>/g,'').slice(0,60)+'…' : '—';
+  if(b.type==='image')          return b.url ? b.url.split('/').pop() : '—';
+  if(b.type==='image-row')      return `${(b.images||[]).length} image(s)`;
+  if(b.type==='split')          return `${b.leftType||'text'} ← | → ${b.rightType||'video'}`;
+  if(b.type==='video-row')      return `${(b.videos||[]).length} video(s) — ${b.columns||'auto'} col`;
+  if(b.type==='image-viewer')   return `${(b.images||[]).length} image(s) — slider`;
+  return '';
+}
+
+function renderBlockEditorItem(b, bi, total){
+  const id = b.id;
+  const sel = (val, cur) => val===cur ? 'selected' : '';
+  const isFirst = bi===0, isLast = bi===total-1;
+
+  const header = `<div class="blk-ed-header">
+    <span class="blk-ed-type">${blkLabel(b.type)}</span>
+    <span class="blk-ed-preview">${blkPreview(b)}</span>
+    <div class="blk-ed-acts">
+      <button class="btn-move" onclick="moveBlock('${id}',-1)"${isFirst?' disabled':''} title="Move up">↑</button>
+      <button class="btn-move" onclick="moveBlock('${id}',1)"${isLast?' disabled':''} title="Move down">↓</button>
+      <button class="btn btn-danger btn-sm" onclick="removeBlock('${id}')">✕</button>
+    </div>
+  </div>`;
+
+  let fields = '';
+
+  if(b.type==='video'){
+    fields = `<div class="g2" style="margin-top:0">
+      <div class="fg full"><label>Video URL</label><input type="text" id="blk-url-${id}" value="${escA(b.url||'')}" placeholder="https://vimeo.com/… or https://youtu.be/…"></div>
+      <div class="fg"><label>Platform</label><select id="blk-vtype-${id}">
+        <option value="vimeo" ${sel(b.videoType,'vimeo')}>Vimeo</option>
+        <option value="youtube" ${sel(b.videoType,'youtube')}>YouTube</option>
+        <option value="file" ${sel(b.videoType,'file')}>Direct file</option>
+      </select></div>
+      <div class="fg"><label>Width</label><select id="blk-width-${id}">
+        <option value="full" ${sel(b.width||'wide','full')}>Full page</option>
+        <option value="wide" ${sel(b.width||'wide','wide')}>Wide — 1075px</option>
+        <option value="medium" ${sel(b.width,'medium')}>Medium — 720px</option>
+        <option value="narrow" ${sel(b.width,'narrow')}>Narrow — 560px</option>
+      </select></div>
+      <div class="fg full"><label>Caption (optional)</label><input type="text" id="blk-cap-${id}" value="${escA(b.caption||'')}"></div>
+    </div>`;
+  }
+
+  else if(b.type==='callout'){
+    fields = `<div style="margin-top:0">
+      <div class="fg" style="margin-bottom:12px"><label>Text</label>
+        <textarea id="blk-text-${id}" style="min-height:56px;resize:vertical" placeholder="Your callout or quote…">${escA(b.text||'')}</textarea></div>
+      <div class="g2">
+        <div class="fg"><label>Size</label><select id="blk-size-${id}">
+          <option value="xl" ${sel(b.size||'xl','xl')}>XL — clamp(28→52px)</option>
+          <option value="lg" ${sel(b.size,'lg')}>L — clamp(22→40px)</option>
+          <option value="md" ${sel(b.size,'md')}>M — clamp(18→28px)</option>
+          <option value="sm" ${sel(b.size,'sm')}>S — 18px</option>
+        </select></div>
+        <div class="fg"><label>Alignment</label><select id="blk-align-${id}">
+          <option value="center" ${sel(b.align||'center','center')}>Centre</option>
+          <option value="left" ${sel(b.align,'left')}>Left</option>
+        </select></div>
+      </div>
+    </div>`;
+  }
+
+  else if(b.type==='text'){
+    const cols = +(b.columns||1);
+    const colNote = n => n > cols
+      ? `<span style="font-family:var(--mono);font-size:9px;color:var(--mid);letter-spacing:0;text-transform:none"> — not rendered when Columns < ${n}</span>`
+      : '';
+    fields = `<div style="margin-top:0">
+      <div class="g2" style="margin-bottom:18px">
+        <div class="fg"><label>Columns</label><select id="blk-cols-${id}">
+          <option value="1" ${sel(cols,1)}>1 column</option>
+          <option value="2" ${sel(cols,2)}>2 columns</option>
+          <option value="3" ${sel(cols,3)}>3 columns</option>
+        </select></div>
+        <div class="fg"><label>Max width</label><select id="blk-width-${id}">
+          <option value="full" ${sel(b.width||'full','full')}>Full</option>
+          <option value="wide" ${sel(b.width,'wide')}>Wide — 960px</option>
+          <option value="medium" ${sel(b.width,'medium')}>Medium — 720px</option>
+          <option value="narrow" ${sel(b.width,'narrow')}>Narrow — 560px</option>
+        </select></div>
+      </div>
+      <div class="fg" style="margin-bottom:14px"><label>Column 1</label><div class="rte-wrap"><div id="blk-c1-${id}"></div></div></div>
+      <div class="fg" style="margin-bottom:14px"><label>Column 2${colNote(2)}</label><div class="rte-wrap"><div id="blk-c2-${id}"></div></div></div>
+      <div class="fg"><label>Column 3${colNote(3)}</label><div class="rte-wrap"><div id="blk-c3-${id}"></div></div></div>
+    </div>`;
+  }
+
+  else if(b.type==='image'){
+    fields = `<div class="g2" style="margin-top:0">
+      <div class="fg full"><label>Image URL / path</label><input type="text" id="blk-url-${id}" value="${escA(b.url||'')}" placeholder="images/project/image.webp"></div>
+      <div class="fg"><label>Width</label><select id="blk-width-${id}">
+        <option value="full" ${sel(b.width||'full','full')}>Full page</option>
+        <option value="wide" ${sel(b.width,'wide')}>Wide — 1075px</option>
+        <option value="medium" ${sel(b.width,'medium')}>Medium — 720px</option>
+        <option value="small" ${sel(b.width,'small')}>Small — 400px</option>
+      </select></div>
+      <div class="fg" style="display:flex;align-items:center;gap:8px;padding-top:22px">
+        <input type="checkbox" id="blk-lbox-${id}" ${b.lightbox!==false?'checked':''}>
+        <label for="blk-lbox-${id}" style="text-transform:none;letter-spacing:0;font-size:12px;cursor:pointer;margin:0">Open in lightbox</label>
+      </div>
+      <div class="fg full"><label>Caption (optional)</label><input type="text" id="blk-cap-${id}" value="${escA(b.caption||'')}"></div>
+    </div>`;
+  }
+
+  else if(b.type==='video-row'){
+    const vidItems=(b.videos||[]).map((v,ii)=>`
+    <div class="blk-vid-sub" data-blk-vid-id="${id}">
+      <input type="text" class="blk-vid-url" value="${escA(v.url||'')}" placeholder="Video URL">
+      <select class="blk-vid-vtype">
+        <option value="vimeo" ${v.videoType==='vimeo'?'selected':''}>Vimeo</option>
+        <option value="youtube" ${v.videoType==='youtube'?'selected':''}>YouTube</option>
+      </select>
+      <input type="text" class="blk-vid-cap" value="${escA(v.caption||'')}" placeholder="Caption">
+      <button class="btn btn-danger btn-sm" onclick="removeRowVideo('${id}',${ii})">✕</button>
+    </div>`).join('');
+    fields=`<div style="margin-top:0">
+    <div class="g2" style="margin-bottom:14px">
+      <div class="fg"><label>Columns</label><select id="blk-cols-${id}">
+        <option value="2" ${sel(+(b.columns||2),2)}>2</option>
+        <option value="3" ${sel(+(b.columns),3)}>3</option>
+        <option value="4" ${sel(+(b.columns),4)}>4</option>
+      </select></div>
+      <div class="fg"><label>Aspect ratio</label><select id="blk-ar-${id}">
+        <option value="16:9" ${sel(b.aspectRatio||'16:9','16:9')}>16:9 — Landscape</option>
+        <option value="4:5"  ${sel(b.aspectRatio,'4:5')}>4:5 — Portrait / Social</option>
+      </select></div>
+    </div>
+    <p class="mini-label" style="margin-top:0;margin-bottom:8px">Videos</p>
+    <div id="blk-vids-${id}">${vidItems}</div>
+    <button class="btn btn-secondary btn-sm" style="margin-top:6px" onclick="addRowVideo('${id}')">+ Add Video</button>
+  </div>`;
+  }
+
+  else if(b.type==='image-viewer'){
+    const imgItems=(b.images||[]).map((im,ii)=>`
+    <div class="blk-img-sub" data-blk-img-id="${id}">
+      <input type="text" class="blk-img-url" value="${escA(im.url||'')}" placeholder="Image URL">
+      <input type="text" class="blk-img-cap" value="${escA(im.caption||'')}" placeholder="Caption (optional)">
+      <button class="btn btn-danger btn-sm" onclick="removeBlockImage('${id}',${ii})">✕</button>
+    </div>`).join('');
+    fields=`<div style="margin-top:0">
+    <div class="g2" style="margin-bottom:14px">
+      <div class="fg"><label>Width</label><select id="blk-width-${id}">
+        <option value=""        ${!b.width?'selected':''}>Full — content width</option>
+        <option value="compact" ${b.width==='compact'?'selected':''}>Compact — 75%</option>
+        <option value="wide"    ${b.width==='wide'?'selected':''}>Wide — 1075px</option>
+        <option value="medium"  ${b.width==='medium'?'selected':''}>Medium — 720px</option>
+        <option value="narrow"  ${b.width==='narrow'?'selected':''}>Narrow — 560px</option>
+      </select></div>
+      <div class="fg" style="display:flex;align-items:center;gap:8px;padding-top:22px">
+        <input type="checkbox" id="blk-lbox-${id}" ${b.lightbox!==false?'checked':''}>
+        <label for="blk-lbox-${id}" style="text-transform:none;letter-spacing:0;font-size:12px;cursor:pointer;margin:0">Lightbox on click</label>
+      </div>
+    </div>
+    <p class="mini-label" style="margin-top:0;margin-bottom:8px">Images (displayed as slider)</p>
+    <div id="blk-imgs-${id}">${imgItems}</div>
+    <button class="btn btn-secondary btn-sm" style="margin-top:6px" onclick="addBlockImage('${id}')">+ Add Image</button>
+  </div>`;
+  }
+
+  else if(b.type==='split'){
+    const s2=(v,c)=>v===c?'selected':'';
+    function sideHtml(side,type,url,vtype,html,label,images,lightbox){
+      const p=`blk-${side}`;
+      const imgRows=(images||[]).map((im,ii)=>`
+      <div class="blk-img-sub" data-blk-split-img="${side}_${id}">
+        <input type="text" class="blk-sim-url" value="${escA(im.url||'')}" placeholder="Image URL">
+        <input type="text" class="blk-sim-cap" value="${escA(im.caption||'')}" placeholder="Caption">
+        <button class="btn btn-danger btn-sm" onclick="removeSplitImage('${id}','${side}',${ii})">✕</button>
+      </div>`).join('');
+      return `<div style="padding:12px;background:rgba(0,0,0,0.025);border:1px solid var(--light);margin-bottom:10px">
+      <p style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin:0 0 10px">${side.toUpperCase()} SIDE</p>
+      <div class="g2">
+        <div class="fg"><label>Type</label><select id="${p}type-${id}">
+          <option value="text"         ${s2(type,'text')}>Text</option>
+          <option value="video"        ${s2(type,'video')}>Video</option>
+          <option value="image"        ${s2(type,'image')}>Image</option>
+          <option value="image-viewer" ${s2(type,'image-viewer')}>Image Viewer (slider)</option>
+        </select></div>
+        <div class="fg"><label>Label (optional)</label><input type="text" id="${p}label-${id}" value="${escA(label||'')}" placeholder="e.g. About the Work"></div>
+        <div class="fg full"><label>URL (video or single image)</label><input type="text" id="${p}url-${id}" value="${escA(url||'')}"></div>
+        <div class="fg"><label>Platform</label><select id="${p}vtype-${id}">
+          <option value="vimeo"   ${s2(vtype,'vimeo')}>Vimeo</option>
+          <option value="youtube" ${s2(vtype,'youtube')}>YouTube</option>
+        </select></div>
+      </div>
+      <div class="fg" style="margin-top:10px"><label>Text content (for text type)</label><div class="rte-wrap"><div id="${p}rte-${id}"></div></div></div>
+      <div style="margin-top:12px">
+        <p style="font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);margin-bottom:8px">Images (for image-viewer type)</p>
+        <div id="blk-${side}imgs-${id}">${imgRows}</div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:6px">
+          <button class="btn btn-secondary btn-sm" onclick="addSplitImage('${id}','${side}')">+ Add Image</button>
+          <div style="display:flex;align-items:center;gap:6px">
+            <input type="checkbox" id="${p}lbox-${id}" ${lightbox!==false?'checked':''}>
+            <label for="${p}lbox-${id}" style="text-transform:none;letter-spacing:0;font-size:12px;cursor:pointer;margin:0">Lightbox</label>
+          </div>
+        </div>
+      </div>
+    </div>`;
+    }
+    fields=`<div class="fg" style="margin-bottom:14px">
+    <label>Column ratio</label>
+    <select id="blk-ratio-${id}">
+      <option value="50-50" ${s2(b.ratio||'50-50','50-50')}>50 / 50 — Equal</option>
+      <option value="40-60" ${s2(b.ratio,'40-60')}>40 / 60 — Narrow left, wide right</option>
+      <option value="60-40" ${s2(b.ratio,'60-40')}>60 / 40 — Wide left, narrow right</option>
+      <option value="33-67" ${s2(b.ratio,'33-67')}>33 / 67 — Sidebar left</option>
+      <option value="67-33" ${s2(b.ratio,'67-33')}>67 / 33 — Sidebar right</option>
+    </select>
+  </div>`
+    +sideHtml('left', b.leftType||'text', b.leftUrl, b.leftVideoType, b.leftHtml, b.leftLabel, b.leftImages, b.leftLightbox)
+    +sideHtml('right',b.rightType||'video',b.rightUrl,b.rightVideoType,b.rightHtml,b.rightLabel,b.rightImages,b.rightLightbox);
+  }
+
+  else if(b.type==='image-row'){
+    const isScroll = (b.layout||'grid') === 'scroll';
+    const imgItems = (b.images||[]).map((im,ii)=>`
+      <div class="blk-img-sub" data-blk-img-id="${id}">
+        <input type="text" class="blk-img-url" value="${escA(im.url||'')}" placeholder="Image URL">
+        <input type="text" class="blk-img-cap" value="${escA(im.caption||'')}" placeholder="Caption (optional)">
+        <button class="btn btn-danger btn-sm" onclick="removeBlockImage('${id}',${ii})">✕</button>
+      </div>`).join('');
+    fields = `<div style="margin-top:0">
+      <div class="g2" style="margin-bottom:14px">
+        <div class="fg full"><label>Layout</label><select id="blk-layout-${id}" onchange="toggleIRLayout('${id}')">
+          <option value="grid" ${!isScroll?'selected':''}>Grid — fixed column count</option>
+          <option value="scroll" ${isScroll?'selected':''}>Scroll Row — horizontal strip</option>
+        </select></div>
+        <div class="fg" id="blk-cols-wrap-${id}" ${isScroll?'style="display:none"':''}>
+          <label>Columns</label><select id="blk-cols-${id}">
+            <option value="2" ${sel(+(b.columns||2),2)}>2</option>
+            <option value="3" ${sel(+(b.columns),3)}>3</option>
+            <option value="4" ${sel(+(b.columns),4)}>4</option>
+          </select>
+        </div>
+        <div class="fg"><label>Gap</label><select id="blk-gap-${id}">
+          <option value="tight" ${sel(b.gap,'tight')}>Tight — 4px</option>
+          <option value="normal" ${sel(b.gap||'normal','normal')}>Normal — 8px</option>
+          <option value="wide" ${sel(b.gap,'wide')}>Wide — 20px</option>
+        </select></div>
+        <div class="fg" style="display:flex;align-items:center;gap:8px;padding-top:22px">
+          <input type="checkbox" id="blk-lbox-${id}" ${b.lightbox!==false?'checked':''}>
+          <label for="blk-lbox-${id}" style="text-transform:none;letter-spacing:0;font-size:12px;cursor:pointer;margin:0">Lightbox</label>
+        </div>
+      </div>
+      <p class="mini-label" style="margin-top:0;margin-bottom:8px">Images</p>
+      <div id="blk-imgs-${id}">${imgItems}</div>
+      <button class="btn btn-secondary btn-sm" style="margin-top:6px" onclick="addBlockImage('${id}')">+ Add Image</button>
+    </div>`;
+  }
+
+  return `<div class="blk-ed-item" data-blk-id="${id}">
+    ${header}
+    <div class="blk-ed-fields">${fields}</div>
+  </div>`;
+}
+
+/* Removes stale Quill instances for the current project's text/split blocks.
+   Must be called AFTER flushBlocksFromDOM (so Quill content is captured first)
+   and BEFORE rebuilding the block editor DOM (so initColRTE/initSplitRTE create
+   fresh instances on the new nodes instead of updating detached ones). */
+function clearBlockQuillInstances(){
+  if(editIdx < 0) return;
+  (S.projects[editIdx].blocks || []).forEach(b => {
+    if(b.type === 'text')  [1,2,3].forEach(c => delete BLOCK_QUILTS['c'+c+'_'+b.id]);
+    if(b.type === 'split') ['left','right'].forEach(s  => delete BLOCK_QUILTS[s+'_'+b.id]);
+  });
+}
+
+/* skipFlush — pass true from CRUD operations that already flushed + cleared
+   before mutating S.  Pass false (default) from tab-switch so pending edits
+   are captured before the DOM is rebuilt. */
+function renderBlocksEditor(skipFlush){
+  if(editIdx < 0) return;
+  const p = S.projects[editIdx];
+  const blocks = p.blocks || [];
+  const container = $('blocks-list');
+  if(!container) return;
+
+  if(!skipFlush){
+    /* Capture any in-progress edits, then clear stale Quill references */
+    flushBlocksFromDOM();
+    clearBlockQuillInstances();
+  }
+
+  if(!blocks.length){
+    container.innerHTML = '<p style="font-size:12px;color:var(--mid);padding:20px 0;font-family:var(--mono);text-align:center">No blocks yet — use "+ Add Block" to start building.</p>';
+    return;
+  }
+
+  container.innerHTML = blocks.map((b,bi) => renderBlockEditorItem(b, bi, blocks.length)).join('');
+
+  /* Init Quill for text + split blocks after DOM is ready */
+  blocks.forEach(b => {
+    if(b.type==='text') setTimeout(() => {
+      /* col1/col2/col3 system; fall back to html for any legacy blocks */
+      initColRTE(1, b.id, b.col1 !== undefined ? (b.col1||'') : (b.html||''));
+      initColRTE(2, b.id, b.col2||'');
+      initColRTE(3, b.id, b.col3||'');
+    }, 0);
+    if(b.type==='split') setTimeout(() => {
+      initSplitRTE('left',  b.id, b.leftHtml||'');
+      initSplitRTE('right', b.id, b.rightHtml||'');
+    }, 0);
+  });
+}
+
+function flushBlockFromDOM(b){
+  const id = b.id;
+  const g  = s => document.getElementById('blk-'+s+'-'+id);
+  switch(b.type){
+
+    case 'video':
+      if(g('url'))   b.url       = g('url').value.trim();
+      if(g('vtype')) b.videoType = g('vtype').value;
+      if(g('width')) b.width     = g('width').value;
+      if(g('cap'))   b.caption   = g('cap').value.trim();
+      break;
+
+    case 'callout':
+      if(g('text'))  b.text  = g('text').value.trim();
+      if(g('size'))  b.size  = g('size').value;
+      if(g('align')) b.align = g('align').value;
+      break;
+
+    case 'text':
+      if(g('cols'))  b.columns = +g('cols').value;
+      if(g('width')) b.width   = g('width').value;
+      /* GUARD: only flush Quill RTEs when they were actually initialised.
+         Without this, getColRTEHtml returns '' and silently wipes all text
+         content whenever saveProject() is called from the Card tab. */
+      if(BLOCK_QUILTS['c1_'+id] !== undefined){
+        b.col1 = getColRTEHtml(1, id);
+        b.col2 = getColRTEHtml(2, id);
+        b.col3 = getColRTEHtml(3, id);
+        delete b.html; /* remove legacy single-column field if present */
+      }
+      break;
+
+    case 'image':
+      if(g('url'))   b.url      = g('url').value.trim();
+      if(g('width')) b.width    = g('width').value;
+      if(g('cap'))   b.caption  = g('cap').value.trim();
+      if(g('lbox'))  b.lightbox = g('lbox').checked;
+      break;
+
+    case 'image-row': {
+      if(g('layout')) b.layout   = g('layout').value;
+      if(g('cols'))   b.columns  = +g('cols').value;
+      if(g('gap'))    b.gap      = g('gap').value;
+      if(g('lbox'))   b.lightbox = g('lbox').checked;
+      /* GUARD: only rebuild array when the container exists in DOM.
+         Without this, querySelectorAll returns [] and wipes all images.
+         No URL filter here — empty placeholder rows are stripped at
+         export time in buildOutput(), keeping remove-by-index correct. */
+      const irCtr = document.getElementById('blk-imgs-'+id);
+      if(irCtr) b.images = Array.from(document.querySelectorAll(`[data-blk-img-id="${id}"]`))
+        .map(row => ({
+          url:     (row.querySelector('.blk-img-url')||{}).value||'',
+          caption: (row.querySelector('.blk-img-cap')||{}).value||''
+        }));
+      break;
+    }
+
+    case 'video-row': {
+      if(g('cols')) b.columns     = +g('cols').value;
+      if(g('ar'))   b.aspectRatio = g('ar').value;
+      /* GUARD: only rebuild array when container exists */
+      const vrCtr = document.getElementById('blk-vids-'+id);
+      if(vrCtr) b.videos = Array.from(document.querySelectorAll(`[data-blk-vid-id="${id}"]`))
+        .map(row => ({
+          url:       (row.querySelector('.blk-vid-url')  ||{}).value||'',
+          videoType: (row.querySelector('.blk-vid-vtype')||{}).value||'vimeo',
+          caption:   (row.querySelector('.blk-vid-cap')  ||{}).value||''
+        }));
+      break;
+    }
+
+    case 'image-viewer': {
+      if(g('width')) b.width   = g('width').value || undefined;
+      if(g('lbox'))  b.lightbox = g('lbox').checked;
+      /* GUARD: only rebuild array when container exists */
+      const ivCtr = document.getElementById('blk-imgs-'+id);
+      if(ivCtr) b.images = Array.from(document.querySelectorAll(`[data-blk-img-id="${id}"]`))
+        .map(row => ({
+          url:     (row.querySelector('.blk-img-url')||{}).value||'',
+          caption: (row.querySelector('.blk-img-cap')||{}).value||''
+        }));
+      break;
+    }
+
+    case 'split': {
+      const ratioEl = document.getElementById('blk-ratio-'+id);
+      if(ratioEl) b.ratio = ratioEl.value;
+      ['left','right'].forEach(s => {
+        const tEl = document.getElementById('blk-'+s+'type-'+id);
+        const lEl = document.getElementById('blk-'+s+'label-'+id);
+        const uEl = document.getElementById('blk-'+s+'url-'+id);
+        const vEl = document.getElementById('blk-'+s+'vtype-'+id);
+        const xEl = document.getElementById('blk-'+s+'lbox-'+id);
+        if(tEl) b[s+'Type']      = tEl.value;
+        if(lEl) b[s+'Label']     = lEl.value.trim();
+        if(uEl) b[s+'Url']       = uEl.value.trim();
+        if(vEl) b[s+'VideoType'] = vEl.value;
+        if(xEl) b[s+'Lightbox']  = xEl.checked;
+        /* GUARD: only flush Quill RTE when initialised */
+        if(BLOCK_QUILTS[s+'_'+id] !== undefined) b[s+'Html'] = getSplitRTEHtml(s, id);
+        /* GUARD: only rebuild images array when container exists */
+        const siCtr = document.getElementById('blk-'+s+'imgs-'+id);
+        if(siCtr) b[s+'Images'] = Array.from(document.querySelectorAll(`[data-blk-split-img="${s}_${id}"]`))
+          .map(row => ({
+            url:     (row.querySelector('.blk-sim-url')||{}).value||'',
+            caption: (row.querySelector('.blk-sim-cap')||{}).value||''
+          }));
+      });
+      break;
+    }
+  }
+}
+
+function flushBlocksFromDOM(){
+  if(editIdx < 0) return;
+  (S.projects[editIdx].blocks||[]).forEach(b => flushBlockFromDOM(b));
+}
+
+/* Block add menu toggle */
+window.toggleAddBlock = e => {
+  e.stopPropagation();
+  const m = $('blk-add-menu');
+  m.style.display = m.style.display==='none' ? 'block' : 'none';
+};
+document.addEventListener('click', () => {
+  const m = $('blk-add-menu'); if(m) m.style.display='none';
+});
+
+/* Block CRUD
+   Pattern for every mutating op:
+     1. flushBlocksFromDOM()       — capture any pending DOM edits into S
+     2. clearBlockQuillInstances() — drop stale Quill refs AFTER flush
+     3. mutate S
+     4. renderBlocksEditor(true)   — rebuild DOM from updated S without re-flushing
+   Skipping step 2 / using renderBlocksEditor() (without true) would cause the
+   re-render's internal flush to re-read the un-mutated DOM and undo the mutation. */
+
+window.addBlock = type => {
+  if(editIdx < 0) return;
+  unsaved = true;
+  flushBlocksFromDOM();
+  clearBlockQuillInstances();
+  /* Timestamp + random suffix prevents ID collisions across rapid adds */
+  const id = 'b'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+  const defaults = {
+    video:          {id, type:'video',        url:'', videoType:'vimeo', caption:'', width:'wide'},
+    callout:        {id, type:'callout',      text:'', size:'xl', align:'center'},
+    text:           {id, type:'text',         col1:'', col2:'', col3:'', columns:1, width:'full'},
+    image:          {id, type:'image',        url:'', caption:'', width:'full', lightbox:true},
+    'image-row':    {id, type:'image-row',    images:[], layout:'grid', columns:2, gap:'normal', lightbox:true},
+    split:          {id, type:'split',        ratio:'50-50',
+                     leftType:'text',  leftHtml:'',  leftLabel:'',  leftUrl:'',  leftVideoType:'vimeo',  leftImages:[],  leftLightbox:true,
+                     rightType:'video', rightHtml:'', rightLabel:'', rightUrl:'', rightVideoType:'vimeo', rightImages:[], rightLightbox:true},
+    'video-row':    {id, type:'video-row',    videos:[], columns:2, aspectRatio:'16:9'},
+    'image-viewer': {id, type:'image-viewer', images:[], lightbox:true},
+  };
+  const p = S.projects[editIdx];
+  if(!p.blocks) p.blocks = [];
+  p.blocks.push(defaults[type] || {id, type});
+  $('blk-add-menu').style.display = 'none';
+  renderBlocksEditor(true);
+};
+
+window.removeBlock = blkId => {
+  if(editIdx < 0) return;
+  unsaved = true;
+  flushBlocksFromDOM();
+  clearBlockQuillInstances();
+  const p = S.projects[editIdx];
+  p.blocks = (p.blocks||[]).filter(b => b.id !== blkId);
+  renderBlocksEditor(true);
+};
+
+window.moveBlock = (blkId, dir) => {
+  if(editIdx < 0) return;
+  unsaved = true;
+  flushBlocksFromDOM();
+  clearBlockQuillInstances();
+  const blocks = S.projects[editIdx].blocks || [];
+  const i = blocks.findIndex(b => b.id === blkId);
+  if(i < 0) return;
+  const ni = i + dir;
+  if(ni < 0 || ni >= blocks.length) return;
+  [blocks[i], blocks[ni]] = [blocks[ni], blocks[i]];
+  renderBlocksEditor(true);
+};
+
+window.addBlockImage = blkId => {
+  if(editIdx < 0) return;
+  unsaved = true;
+  flushBlocksFromDOM();
+  clearBlockQuillInstances();
+  const b = (S.projects[editIdx].blocks||[]).find(b => b.id === blkId);
+  if(!b) return;
+  if(!b.images) b.images = [];
+  b.images.push({url:'', caption:''});
+  renderBlocksEditor(true);
+};
+
+window.removeBlockImage = (blkId, imgIdx) => {
+  if(editIdx < 0) return;
+  unsaved = true;
+  flushBlocksFromDOM();
+  clearBlockQuillInstances();
+  const b = (S.projects[editIdx].blocks||[]).find(b => b.id === blkId);
+  if(!b || !b.images) return;
+  b.images.splice(imgIdx, 1);
+  renderBlocksEditor(true);
+};
+
+window.addRowVideo = blkId => {
+  if(editIdx < 0) return;
+  unsaved = true;
+  flushBlocksFromDOM();
+  clearBlockQuillInstances();
+  const b = (S.projects[editIdx].blocks||[]).find(b => b.id === blkId);
+  if(!b) return;
+  if(!b.videos) b.videos = [];
+  b.videos.push({url:'', videoType:'vimeo', caption:''});
+  renderBlocksEditor(true);
+};
+
+window.removeRowVideo = (blkId, vidIdx) => {
+  if(editIdx < 0) return;
+  unsaved = true;
+  flushBlocksFromDOM();
+  clearBlockQuillInstances();
+  const b = (S.projects[editIdx].blocks||[]).find(b => b.id === blkId);
+  if(!b || !b.videos) return;
+  b.videos.splice(vidIdx, 1);
+  renderBlocksEditor(true);
+};
+
+window.addSplitImage = (blkId, side) => {
+  if(editIdx < 0) return;
+  unsaved = true;
+  flushBlocksFromDOM();
+  clearBlockQuillInstances();
+  const b = (S.projects[editIdx].blocks||[]).find(b => b.id === blkId);
+  if(!b) return;
+  const k = side + 'Images';
+  if(!b[k]) b[k] = [];
+  b[k].push({url:'', caption:''});
+  renderBlocksEditor(true);
+};
+
+window.removeSplitImage = (blkId, side, imgIdx) => {
+  if(editIdx < 0) return;
+  unsaved = true;
+  flushBlocksFromDOM();
+  clearBlockQuillInstances();
+  const b = (S.projects[editIdx].blocks||[]).find(b => b.id === blkId);
+  if(!b) return;
+  const k = side + 'Images';
+  if(!b[k]) return;
+  b[k].splice(imgIdx, 1);
+  renderBlocksEditor(true);
+};
+
+/* Toggle Columns dropdown visibility when image-row layout changes */
+window.toggleIRLayout = id => {
+  const layoutEl   = document.getElementById('blk-layout-'+id);
+  const colsWrapEl = document.getElementById('blk-cols-wrap-'+id);
+  if(layoutEl && colsWrapEl)
+    colsWrapEl.style.display = layoutEl.value === 'scroll' ? 'none' : '';
+};
+
+window.syncColor  = v=>{ $('e-color').value=v; $('e-swatch').style.background=v; };
+window.syncSwatch = v=>{ if(/^#[0-9a-f]{6}$/i.test(v)){ $('e-colorpicker').value=v; $('e-swatch').style.background=v; } };
+
+/* ═══════════════════════════════════════
+   EXPERIENCE
+
+   FIX: renderExp uses individual IDs (exp-co-N etc) so saveExp() can
+   read them back reliably from the DOM, not from oninput closures.
+═══════════════════════════════════════ */
+function renderExp(){
+  $('exp-cms').innerHTML = (S.experience||[]).map((e,i) => `
+    <div style="background:var(--paper);padding:16px;margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <span style="font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:0.12em;text-transform:uppercase">Role ${i+1}</span>
+        <button class="btn btn-danger btn-sm" onclick="removeExp(${i})">Remove</button>
+      </div>
+      <div class="g3">
+        <div class="fg"><label>Company</label>
+          <input type="text" id="exp-co-${i}" value="${escA(e.company||'')}"></div>
+        <div class="fg"><label>Period</label>
+          <input type="text" id="exp-per-${i}" value="${escA(e.period||'')}"></div>
+        <div class="fg"><label>Role / Title</label>
+          <input type="text" id="exp-role-${i}" value="${escA(e.role||'')}"></div>
+        <div class="fg full"><label>Clients / Notes</label>
+          <input type="text" id="exp-cli-${i}" value="${escA(e.clients||'')}"></div>
+      </div>
+    </div>`).join('');
+}
+
+window.addExp = ()=>{
+  flushExpFromDOM();
+  S.experience.push({company:'',role:'',clients:'',period:''});
+  renderExp();
+};
+
+window.removeExp = i=>{
+  flushExpFromDOM();
+  S.experience.splice(i,1);
+  renderExp();
+};
+
+function flushExpFromDOM(){
+  (S.experience||[]).forEach((_,i)=>{
+    const co   = $('exp-co-'+i),   per  = $('exp-per-'+i);
+    const role = $('exp-role-'+i), cli  = $('exp-cli-'+i);
+    if(co)   S.experience[i].company = co.value;
+    if(per)  S.experience[i].period  = per.value;
+    if(role) S.experience[i].role    = role.value;
+    if(cli)  S.experience[i].clients = cli.value;
+  });
+}
+
+window.saveExp = ()=>{
+  flushExpFromDOM();
+  toast('Experience saved — generate data.js to publish.');
+};
+
+/* ═══════════════════════════════════════
+   AWARDS
+
+   FIX: same pattern — individual IDs, DOM-read on save.
+═══════════════════════════════════════ */
+const TIERS = ['Gold','Silver','Bronze','Shortlist','Finalist','Merit','Graphite Pencil','Most Creative'];
+
+function renderAwards(){
+  $('awards-cms').innerHTML = (S.awards||[]).map((a,i) => `
+    <div style="background:var(--paper);padding:12px 14px;margin-bottom:8px">
+      <div style="display:grid;grid-template-columns:64px 1fr 130px 1fr 80px auto;gap:10px;align-items:end">
+        <div class="fg"><label>Year</label>
+          <input type="text" id="aw-yr-${i}" value="${esc(String(a.year||''))}" style="padding:7px"></div>
+        <div class="fg"><label>Show / Festival</label>
+          <input type="text" id="aw-sh-${i}" value="${escA(a.show||'')}" style="padding:7px"></div>
+        <div class="fg"><label>Tier</label>
+          <select id="aw-ti-${i}" style="padding:7px">
+            ${TIERS.map(t=>`<option value="${t}" ${a.tier===t?'selected':''}>${t}</option>`).join('')}
+          </select></div>
+        <div class="fg"><label>Category</label>
+          <input type="text" id="aw-ca-${i}" value="${escA(a.category||'')}" style="padding:7px"></div>
+        <div class="fg"><label>Brand</label>
+          <input type="text" id="aw-br-${i}" value="${escA(a.brand||'')}" style="padding:7px"></div>
+        <div class="fg" style="padding-bottom:2px">
+          <label style="opacity:0">x</label>
+          <button class="btn btn-danger btn-sm" onclick="removeAward(${i})">✕</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function flushAwardsFromDOM(){
+  (S.awards||[]).forEach((_,i)=>{
+    const yr = $('aw-yr-'+i), sh = $('aw-sh-'+i), ti = $('aw-ti-'+i);
+    const ca = $('aw-ca-'+i), br = $('aw-br-'+i);
+    if(yr) S.awards[i].year     = yr.value;
+    if(sh) S.awards[i].show     = sh.value;
+    if(ti) S.awards[i].tier     = ti.value;
+    if(ca) S.awards[i].category = ca.value;
+    if(br) S.awards[i].brand    = br.value;
+  });
+}
+
+window.addAward = ()=>{
+  flushAwardsFromDOM();
+  S.awards.unshift({year:new Date().getFullYear(),show:'',tier:'Gold',category:'',brand:''});
+  renderAwards();
+};
+
+window.removeAward = i=>{
+  flushAwardsFromDOM();
+  S.awards.splice(i,1);
+  renderAwards();
+};
+
+window.saveAwards = ()=>{
+  flushAwardsFromDOM();
+  toast('Awards saved — generate data.js to publish.');
+};
+
+/* ═══════════════════════════════════════
+   FLUSH ALL — call before export or section switch
+   Reads every visible DOM field back into S so nothing is lost.
+═══════════════════════════════════════ */
+function flushAll(){
+  /* Profile identity */
+  if($('p-name'))              S.name             = $('p-name').value.trim();
+  if($('p-title'))             S.title            = $('p-title').value.trim();
+  if($('p-location'))          S.location         = $('p-location').value.trim();
+  if($('p-email'))             S.email            = $('p-email').value.trim();
+  if($('p-website'))           S.website          = $('p-website').value.trim();
+  if($('p-linkedin'))          S.linkedin         = $('p-linkedin').value.trim();
+  if($('p-tagline'))           S.tagline          = $('p-tagline').value.trim();
+  if($('p-awards'))            S.awardStrip       = $('p-awards').value.trim();
+  if($('p-bioheadline'))       S.bioHeadline      = $('p-bioheadline').value.trim();
+  if($('p-bioheadlineaccent')) S.bioHeadlineAccent = $('p-bioheadlineaccent').value.trim();
+  flushBioFromDOM();
+  flushExpFromDOM();
+  flushAwardsFromDOM();
+  flushTotoFromDOM();
+  /* Only flush the project editor when it is actively open.
+     Checking both editIdx and the editor's inline display prevents
+     stale editor DOM from overwriting the wrong project after a reorder. */
+  const editorOpen = editIdx >= 0
+    && $('view-editor')
+    && $('view-editor').style.display !== 'none';
+  if(editorOpen) flushProjectFromDOM();
+}
+
+/* ═══════════════════════════════════════
+   TOTO PAGE
+═══════════════════════════════════════ */
+function renderToto(){
+  const t = S.totoPage || {};
+  $('tt-eyebrow').value  = t.eyebrow  || '';
+  $('tt-title').value    = t.title    || '';
+  $('tt-subtitle').value = t.subtitle || '';
+  renderQuips();
+}
+
+function renderQuips(){
+  const quips = (S.totoPage && S.totoPage.quips) || [];
+  if(!quips.length){
+    $('quips-list').innerHTML = '<p style="font-size:13px;color:var(--mid);padding:8px 0">No quotes yet. Click + Add Quote to get started.</p>';
+    return;
+  }
+  $('quips-list').innerHTML = quips.map((q,i) => `
+    <div class="list-item" id="quip-row-${i}">
+      <span class="li-order" style="min-width:22px">${i+1}</span>
+      <input type="text" id="quip-${i}" value="${escA(q)}"
+        style="flex:1;padding:8px 11px;border:1.5px solid var(--light);font-family:var(--body);font-size:13px;color:var(--ink);background:var(--paper);outline:none;border-radius:0"
+        onfocus="this.style.borderColor='var(--red)'"
+        onblur="this.style.borderColor='var(--light)'">
+      <button class="btn btn-secondary btn-sm" onclick="moveQuip(${i},-1)"${i===0?' disabled':''}>↑</button>
+      <button class="btn btn-secondary btn-sm" onclick="moveQuip(${i},1)"${i===quips.length-1?' disabled':''}>↓</button>
+      <button class="btn btn-danger btn-sm" onclick="removeQuip(${i})">✕</button>
+    </div>`).join('');
+}
+
+function flushTotoFromDOM(){
+  if(!$('tt-eyebrow')) return;
+  if(!S.totoPage) S.totoPage = {};
+  S.totoPage.eyebrow  = $('tt-eyebrow').value.trim();
+  S.totoPage.title    = $('tt-title').value.trim();
+  S.totoPage.subtitle = $('tt-subtitle').value.trim();
+  const quips = (S.totoPage.quips || []);
+  quips.forEach((_,i) => {
+    const inp = $('quip-'+i);
+    if(inp) quips[i] = inp.value.trim();
+  });
+  S.totoPage.quips = quips.filter(q => q);
+}
+
+window.saveToto = ()=>{
+  flushTotoFromDOM();
+  toast('TOTO page saved — generate data.js to publish.');
+};
+
+window.addQuip = ()=>{
+  flushTotoFromDOM();
+  if(!S.totoPage)       S.totoPage       = {};
+  if(!S.totoPage.quips) S.totoPage.quips = [];
+  S.totoPage.quips.push('');
+  renderQuips();
+  const last = S.totoPage.quips.length - 1;
+  setTimeout(() => { const el = $('quip-'+last); if(el) el.focus(); }, 40);
+};
+
+window.removeQuip = i => {
+  flushTotoFromDOM();
+  S.totoPage.quips.splice(i, 1);
+  renderQuips();
+};
+
+window.moveQuip = (i, dir) => {
+  flushTotoFromDOM();
+  const qs = S.totoPage.quips;
+  const j  = i + dir;
+  if(j < 0 || j >= qs.length) return;
+  [qs[i], qs[j]] = [qs[j], qs[i]];
+  renderQuips();
+};
+
+/* ═══════════════════════════════════════
+   EXPORT + DOWNLOAD
+═══════════════════════════════════════ */
+function buildOutput(){
+  /* Deep-clone so we can strip editing artefacts without mutating live state.
+     Empty-URL placeholder rows (added when user creates a new block) are kept
+     in S during editing so remove-by-index stays accurate, but they must not
+     appear in the exported file — work.html would try to render broken images. */
+  const out = JSON.parse(JSON.stringify(S));
+  out.projects.forEach(p => {
+    (p.blocks||[]).forEach(b => {
+      if(b.images)      b.images      = b.images.filter(im => im.url && im.url.trim());
+      if(b.videos)      b.videos      = b.videos.filter(v  => v.url  && v.url.trim());
+      if(b.leftImages)  b.leftImages  = b.leftImages.filter(im => im.url && im.url.trim());
+      if(b.rightImages) b.rightImages = b.rightImages.filter(im => im.url && im.url.trim());
+    });
+  });
+  return 'const PORTFOLIO_DATA = ' + JSON.stringify(out, null, 2)
+       + ";\n\nif (typeof module !== 'undefined') module.exports = PORTFOLIO_DATA;";
+}
+
+window.doExport = ()=>{
+  flushAll();
+  $('export-out').textContent = buildOutput();
+};
+
+window.copyExport = ()=>{
+  const txt = $('export-out').textContent;
+  if(!txt || txt.startsWith('Click')){ toast('Click Generate first.','error'); return; }
+  navigator.clipboard.writeText(txt)
+    .then(()  => toast('Copied — paste into GitHub data.js and commit.'))
+    .catch(()  => toast('Select all text and copy manually.','error'));
+};
+
+window.downloadExport = ()=>{
+  flushAll();
+  const txt = buildOutput();
+  const blob = new Blob([txt], {type:'text/javascript'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'data.js';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('data.js downloaded — upload to your GitHub repo.', 'info');
+  $('export-out').textContent = txt;
+};
+
+
+/* ── GALLERY THUMBNAILS ── */
+function renderThumbs(){
+  if(editIdx < 0){ if($('thumbs-list')) $('thumbs-list').innerHTML=''; return; }
+  const thumbs = S.projects[editIdx].thumbnails || [];
+  if(!$('thumbs-list')) return;
+  $('thumbs-list').innerHTML = thumbs.map((t,i) => `
+    <div style="background:var(--paper);padding:12px 14px;margin-bottom:8px;display:grid;grid-template-columns:auto 1fr 1fr auto;gap:10px;align-items:end">
+      <div class="fg" style="padding-bottom:2px">
+        <label style="opacity:0">x</label>
+        <button class="btn btn-sm" style="background:${t.active===false?'#bbb':'#1a7a3a'};color:#fff;border:none;min-width:52px;font-family:var(--mono);font-size:9px" onclick="toggleThumb(${i})">${t.active===false?'Off':'On'}</button>
+      </div>
+      <div class="fg"><label>Image URL</label>
+        <input type="text" id="th-url-${i}" value="${escA(t.url||'')}" placeholder="images/project/thumbnail-01.webp">
+      </div>
+      <div class="fg"><label>Caption</label>
+        <input type="text" id="th-cap-${i}" value="${escA(t.caption||'')}" placeholder="e.g. Event moment">
+      </div>
+      <div class="fg" style="padding-bottom:2px">
+        <label style="opacity:0">x</label>
+        <button class="btn btn-danger btn-sm" onclick="removeThumb(${i})">&#x2715;</button>
+      </div>
+    </div>`).join('');
+}
+function flushThumbsFromDOM(){
+  if(editIdx<0) return;
+  (S.projects[editIdx].thumbnails||[]).forEach((_,i)=>{
+    const u=$('th-url-'+i), c=$('th-cap-'+i);
+    if(u) S.projects[editIdx].thumbnails[i].url=u.value.trim();
+    if(c) S.projects[editIdx].thumbnails[i].caption=c.value.trim();
+  });
+}
+window.toggleThumb = i=>{
+  if(editIdx<0) return;
+  flushThumbsFromDOM();
+  if(!S.projects[editIdx].thumbnails) S.projects[editIdx].thumbnails=[];
+  const t=S.projects[editIdx].thumbnails[i]; if(!t) return;
+  t.active=t.active===false?true:false;
+  renderThumbs();
+  toast((t.active?'Thumbnail visible':'Thumbnail hidden')+' — export to publish.');
+};
+window.addThumb=()=>{
+  if(editIdx<0) return;
+  flushThumbsFromDOM();
+  if(!S.projects[editIdx].thumbnails) S.projects[editIdx].thumbnails=[];
+  S.projects[editIdx].thumbnails.push({url:'',caption:'',active:true});
+  renderThumbs();
+};
+window.removeThumb=i=>{
+  if(editIdx<0) return;
+  flushThumbsFromDOM();
+  S.projects[editIdx].thumbnails.splice(i,1);
+  renderThumbs();
+};
+/* ── END GALLERY THUMBNAILS ── */
+/* ═══════════════════════════════════════
+   UNSAVED CHANGES TRACKING
+   Attach once to the static editor container. Any user interaction
+   (typing, selecting, checking) inside the editor sets the flag.
+   CRUD block operations also set it explicitly where DOM events may
+   not fire (e.g. clicking ↑ ↓ ✕ buttons).
+═══════════════════════════════════════ */
+(function(){
+  const ed = $('view-editor');
+  if(!ed) return;
+  const mark = () => { unsaved = true; };
+  ed.addEventListener('input',  mark, {passive:true});
+  ed.addEventListener('change', mark, {passive:true});
+})();
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
+renderProfile();
+
+})();
+</script>
+</body>
+</html>

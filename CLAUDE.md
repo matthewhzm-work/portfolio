@@ -4,15 +4,28 @@
 Personal portfolio site for Matthew Ho, Senior Creative (Copywriter · Strategist · Campaign Lead), based in Singapore. Built in vanilla HTML/CSS/JS — no frameworks, no build tools. Deployed on GitHub Pages at matthewho.work.
 
 ## Resume
-`resume.html` — ATS-friendly resume page. Pulls all content (name, tagline, bio, experience, awards) live from `data.js`. Accessible at matthewho.work/resume.html. Has a browser-print "Save as PDF" button. No Claude/AI attribution anywhere in this file or its commit.
+`resume/index.html` — ATS-friendly resume page. Pulls all content (name, tagline, bio, experience, awards) live from `data.js`. Accessible at matthewho.work/resume. Has a browser-print "Save as PDF" button. No Claude/AI attribution anywhere in this file or its commit.
 
 ## File Structure
 - `index.html` — Homepage: 3-column independent flex grid, About section, Recognition section
-- `work.html` — All project pages (single file, block-based renderer + legacy template fallback)
-- `admin.html` — Password-protected CMS
+- `work/index.html` — All project pages (single file, block-based renderer + legacy template fallback). URL: `/work/`
+- `admin/index.html` — Password-protected CMS. URL: `/admin/`
 - `data.js` — Single source of truth for all content. Exposes `PORTFOLIO_DATA` global.
-- `resume.html` — ATS-friendly resume, data-driven from data.js, print-to-PDF ready
+- `resume/index.html` — ATS-friendly resume, data-driven from data.js, print-to-PDF ready. URL: `/resume/`
+- `toto/index.html` — TOTO lucky numbers generator. URL: `/toto/`
 - `images/` — All processed images as WebP (80% quality, 2400px max) or optimised GIF
+
+## URL Structure (no .html extensions)
+Pages use the folder-index pattern so GitHub Pages serves them without `.html`:
+- `/` → `index.html`
+- `/work/?id=PROJECT_ID` → `work/index.html`
+- `/toto/` → `toto/index.html`
+- `/resume/` → `resume/index.html`
+- `/admin/` → `admin/index.html`
+
+All asset references inside `work/`, `toto/`, `resume/`, `admin/` use `../` prefix:
+- `../favicon.svg`, `../data.js`, `href="../"` for home link
+- Image paths in `data.js` are all **absolute** (`/images/...`) so they resolve correctly from any subdirectory
 
 ## Design System
 - Fonts: Lexend (display/titles), Inter (body), IBM Plex Mono (labels/UI/mono)

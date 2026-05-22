@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matthew Ho — Resume</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+
+/* ── Tokens ── */
+:root{
+  --ink:#111111;
+  --mid:#555555;
+  --rule:#DDDDDD;
+  --page:794px;   /* A4 width at 96dpi */
+  --pad:48px;
+}
+
+/* ── Body / page shell ── */
+body{
+  background:#F0EFED;
+  font-family:'Helvetica Neue',Arial,sans-serif;
+  font-size:14px;
+  line-height:1.55;
+  color:var(--ink);
+}
+
+/* ── Page wrapper ── */
+.page{
+  max-width:var(--page);
+  margin:32px auto;
+  background:#fff;
+  padding:var(--pad) var(--pad) 56px;
+  border:1px solid #D8D6D3;
+}
+
+/* ── Header ── */
+.r-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  padding-bottom:18px;
+  border-bottom:2px solid var(--ink);
+  margin-bottom:22px;
+  gap:20px;
+}
+.r-name{
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:-0.02em;
+  line-height:1.1;
+}
+.r-title{
+  font-size:13px;
+  color:var(--mid);
+  margin-top:5px;
+  letter-spacing:0.02em;
+}
+.r-contact{
+  text-align:right;
+  font-size:12px;
+  color:var(--mid);
+  line-height:1.8;
+  flex-shrink:0;
+}
+.r-contact a{color:var(--mid);text-decoration:none}
+.r-contact a:hover{text-decoration:underline}
+
+/* ── Sections ── */
+.r-section{margin-bottom:24px}
+.r-section:last-child{margin-bottom:0}
+
+.r-section-title{
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--mid);
+  border-bottom:1px solid var(--rule);
+  padding-bottom:5px;
+  margin-bottom:14px;
+}
+
+/* ── Summary ── */
+.r-summary{
+  font-size:13.5px;
+  line-height:1.65;
+  color:#222;
+}
+
+/* ── Experience ── */
+.r-exp-item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:0 16px;
+  margin-bottom:16px;
+}
+.r-exp-item:last-child{margin-bottom:0}
+.r-exp-co{
+  font-size:14px;
+  font-weight:700;
+}
+.r-exp-period{
+  font-size:12px;
+  color:var(--mid);
+  white-space:nowrap;
+  padding-top:2px;
+  text-align:right;
+}
+.r-exp-role{
+  font-size:13px;
+  color:#333;
+  grid-column:1;
+}
+.r-exp-clients{
+  font-size:12px;
+  color:var(--mid);
+  grid-column:1 / -1;
+  margin-top:2px;
+}
+
+/* ── Awards table ── */
+.r-awards-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12px;
+}
+.r-awards-table thead th{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--mid);
+  text-align:left;
+  padding:0 8px 6px 0;
+  border-bottom:1px solid var(--rule);
+}
+.r-awards-table thead th:last-child{padding-right:0;text-align:right}
+.r-awards-table tbody tr{border-bottom:1px solid #F0F0F0}
+.r-awards-table tbody tr:last-child{border-bottom:none}
+.r-awards-table td{
+  padding:5px 8px 5px 0;
+  vertical-align:top;
+}
+.r-awards-table td:last-child{padding-right:0;text-align:right;color:var(--mid)}
+.tier-gold  {color:#B07800;font-weight:700}
+.tier-silver{color:#666666;font-weight:600}
+.tier-bronze{color:#8B4513;font-weight:600}
+.tier-other {color:var(--mid)}
+
+/* ── Footer ── */
+.r-footer{
+  margin-top:32px;
+  padding-top:14px;
+  border-top:1px solid var(--rule);
+  font-size:11px;
+  color:#999;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* ── Print ── */
+@media print{
+  html,body{background:#fff;font-size:12px}
+  .page{
+    margin:0;
+    border:none;
+    max-width:none;
+    padding:18mm 18mm 20mm;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .no-print{display:none!important}
+  .r-section{page-break-inside:avoid}
+  .r-exp-item{page-break-inside:avoid}
+}
+
+/* ── Toolbar (screen only) ── */
+.toolbar{
+  max-width:var(--page);
+  margin:0 auto 12px;
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+.toolbar-btn{
+  font-family:inherit;
+  font-size:11px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:7px 16px;
+  border:1px solid #CCC;
+  background:#fff;
+  cursor:pointer;
+  color:#444;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.toolbar-btn:hover{background:#F5F5F5}
+.toolbar-btn.primary{background:#111;color:#fff;border-color:#111}
+.toolbar-btn.primary:hover{background:#333}
+@media print{.toolbar{display:none}}
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <a class="toolbar-btn" href="../">← Portfolio</a>
+  <button class="toolbar-btn primary" onclick="window.print()">Save as PDF ↓</button>
+</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="r-header">
+    <div>
+      <div class="r-name" id="r-name"></div>
+      <div class="r-title" id="r-title"></div>
+    </div>
+    <div class="r-contact" id="r-contact"></div>
+  </header>
+
+  <!-- SUMMARY -->
+  <section class="r-section">
+    <div class="r-section-title">Profile</div>
+    <div class="r-summary" id="r-summary"></div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="r-section">
+    <div class="r-section-title">Experience</div>
+    <div id="r-experience"></div>
+  </section>
+
+  <!-- RECOGNITION -->
+  <section class="r-section">
+    <div class="r-section-title">Awards &amp; Recognition</div>
+    <table class="r-awards-table">
+      <thead>
+        <tr>
+          <th style="width:42px">Year</th>
+          <th>Show</th>
+          <th>Category</th>
+          <th style="width:56px">Tier</th>
+          <th style="width:72px">Brand</th>
+        </tr>
+      </thead>
+      <tbody id="r-awards"></tbody>
+    </table>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="r-footer">
+    <span id="r-website"></span>
+    <span id="r-updated"></span>
+  </footer>
+
+</div>
+
+<script src="../data.js"></script>
+<script>
+(function(){
+  const D  = PORTFOLIO_DATA;
+  const $  = id => document.getElementById(id);
+  const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  // ── Header
+  $('r-name').textContent = D.name || 'Matthew Ho';
+  $('r-title').textContent = D.tagline || '';
+  $('r-contact').innerHTML = [
+    D.email    ? `<a href="mailto:${D.email}">${esc(D.email)}</a>` : '',
+    D.linkedin ? `<a href="${D.linkedin}" target="_blank">LinkedIn</a>` : '',
+    D.website  ? `<a href="https://${D.website}" target="_blank">${esc(D.website)}</a>` : '',
+    D.location ? `<span>${esc(D.location)}</span>` : '',
+  ].filter(Boolean).join('<br>');
+
+  // ── Profile — strip HTML tags for ATS-safe plain text feel
+  const bioText = Array.isArray(D.bio)
+    ? D.bio.map(p => p.replace(/<[^>]+>/g,'')).join(' ').replace(/\s+/g,' ').trim()
+    : String(D.bio).replace(/<[^>]+>/g,'').trim();
+  $('r-summary').textContent = bioText;
+
+  // ── Experience
+  const expEl = $('r-experience');
+  (D.experience||[]).forEach(e => {
+    expEl.insertAdjacentHTML('beforeend', `
+      <div class="r-exp-item">
+        <span class="r-exp-co">${esc(e.company)}</span>
+        <span class="r-exp-period">${esc(e.period)}</span>
+        <span class="r-exp-role">${esc(e.role)}</span>
+        <span class="r-exp-clients">Clients: ${esc(e.clients)}</span>
+      </div>`);
+  });
+
+  // ── Awards — sorted newest first, Gold/Silver/Bronze then others
+  const tierOrder = {'Gold':0,'Silver':1,'Bronze':2};
+  const sorted = [...(D.awards||[])].sort((a,b) => {
+    if (b.year !== a.year) return b.year - a.year;
+    return (tierOrder[a.tier]??9) - (tierOrder[b.tier]??9);
+  });
+
+  const tierClass = t => {
+    if (t==='Gold')   return 'tier-gold';
+    if (t==='Silver') return 'tier-silver';
+    if (t==='Bronze') return 'tier-bronze';
+    return 'tier-other';
+  };
+
+  const tbody = $('r-awards');
+  sorted.forEach(a => {
+    tbody.insertAdjacentHTML('beforeend', `
+      <tr>
+        <td>${esc(a.year)}</td>
+        <td>${esc(a.show)}</td>
+        <td>${esc(a.category)}</td>
+        <td class="${tierClass(a.tier)}">${esc(a.tier)}</td>
+        <td>${esc(a.brand||'')}</td>
+      </tr>`);
+  });
+
+  // ── Footer
+  if (D.website) $('r-website').innerHTML = `<a href="https://${D.website}">${esc(D.website)}</a>`;
+  $('r-updated').textContent = 'Updated ' + new Date().toLocaleDateString('en-SG', {month:'long', year:'numeric'});
+
+  // ── Page title
+  document.title = (D.name||'Matthew Ho') + ' — Resume';
+})();
+</script>
+</body>
+</html>

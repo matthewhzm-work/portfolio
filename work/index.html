@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Matthew Ho</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#FFFAF0;--ink:#1D2540;--red:#D93240;
+  --mid:#1C3059;--light:#E0D8CC;--white:#FFFFFF;
+  --nav-h:68px;--pad:60px;
+  --display:'Lexend',sans-serif;
+  --body:'Inter',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);display:flex;align-items:center;padding:0 var(--pad);background:var(--paper);z-index:200;gap:28px;transition:background 0.3s}
+nav.scrolled{background:rgba(255,250,240,0.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.nav-name{font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:0.01em;text-decoration:none;color:var(--ink);white-space:nowrap;flex-shrink:0}
+.nav-name em{color:var(--red);font-style:normal}
+.nav-meta{flex:1;min-width:0;display:flex;align-items:center;white-space:nowrap;overflow:hidden}
+.nav-meta-main{font-family:var(--display);font-size:14px;letter-spacing:0.01em;color:#1D2540;font-weight:400;flex-shrink:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nav-meta-sep{font-family:var(--display);font-size:14px;color:#1C3059;padding:0 10px;flex-shrink:0}
+.nav-meta-awards{font-family:var(--display);font-size:14px;letter-spacing:0.01em;color:var(--red);font-weight:400;flex-shrink:0;white-space:nowrap}
+.nav-back{font-family:var(--mono);font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#1C3059;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;text-decoration-color:rgba(29,37,64,0.3);flex-shrink:0;transition:color 0.2s;display:flex;align-items:center;gap:6px}
+.nav-back:hover{color:var(--ink)}
+.nav-back-arrow{display:inline-block;transition:transform 0.2s}
+.nav-back:hover .nav-back-arrow{transform:translateX(-4px)}
+.nav-icons{display:flex;align-items:center;gap:16px;flex-shrink:0}
+.nav-icon{display:flex;align-items:center;justify-content:center;color:var(--mid);transition:color 0.18s}
+.nav-icon:hover{color:var(--ink)}
+.nav-icon svg{width:18px;height:18px;display:block}
+
+/* ── PROJECT HEADER ── */
+.work-header{margin-top:var(--nav-h);padding:72px var(--pad) 32px}
+.work-divider{margin:0 var(--pad) 56px;height:1px;background:var(--light)}
+.work-header-meta{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.work-brand{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--red)}
+.work-award{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:4px 11px}
+.work-title{font-family:var(--display);font-size:clamp(36px,5.5vw,72px);font-weight:700;line-height:1.0;letter-spacing:-0.02em;margin-bottom:18px;color:var(--ink)}
+.work-subtitle{font-size:17px;font-weight:300;color:#1C3059;line-height:1.7;margin-bottom:22px}
+.work-tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{font-family:var(--mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;border:1px solid var(--light);color:#1C3059;padding:4px 10px}
+
+/* ── LABELS ── */
+.c-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
+
+/* ── IMAGES: always full, never cropped ── */
+img{max-width:100%;height:auto;display:block}
+
+/* ── VIDEO: centred 1075px ── */
+.vid-section{padding:0 var(--pad) 72px}
+.vid-centred{max-width:1075px;margin:0 auto}
+.vid-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--ink)}
+.vid-wrap iframe,.vid-wrap video{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.vid-cap{font-family:var(--mono);font-size:11px;color:var(--mid);margin-top:12px;text-align:center;letter-spacing:0.06em}
+.vid-item{margin-bottom:48px}
+.vid-item:last-child{margin-bottom:0}
+.vid-item-label{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:12px}
+
+/* ── WRITEUP ── */
+.writeup-section{padding:0 var(--pad) 72px}
+.writeup-inner{max-width:680px}
+.writeup-text{font-size:17px;font-weight:300;line-height:1.9;color:#1C3059}
+
+/* ── SPLIT ROW (video+writeup side by side) ── */
+.split-row{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 72px;align-items:start}
+.split-vid-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--ink)}
+.split-vid-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.split-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
+.split-text{font-size:16px;font-weight:300;line-height:1.9;color:#1C3059}
+
+/* ── 3 VIDEOS IN A ROW ── */
+.three-vid-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding:0 var(--pad) 80px}
+.tvi-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+.tvi-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--ink)}
+.tvi-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+
+/* ── TWO VIDEOS SIDE BY SIDE ── */
+.two-vid-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:0 var(--pad) 56px}
+.tvi-label-sm{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+
+/* ── LUX ── */
+.lux-writeup-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;padding:72px var(--pad)}
+.lux-writeup-3col p{font-size:15px;font-weight:300;line-height:1.85;color:#1C3059}
+.lux-grid-section{padding:0 var(--pad) 80px}
+.lux-grid-inner{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lux-img-wrap{overflow:hidden;cursor:pointer;position:relative;background:var(--ink)}
+.lux-img-wrap img{width:100%;height:auto;display:block;transition:transform 0.45s cubic-bezier(0.22,1,0.36,1)}
+.lux-img-wrap::after{content:'';position:absolute;inset:0;background:rgba(29,37,64,0.85);opacity:0;transition:opacity 0.35s;pointer-events:none}
+.lux-img-wrap:hover::after{opacity:0.14}
+.lux-img-wrap:hover img{transform:scale(1.03)}
+.lux-mobile-slider{display:none;overflow:hidden}
+.lux-mobile-track{display:flex;transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
+.lux-mobile-slide{flex:0 0 100%;cursor:pointer}
+.lux-mobile-slide img{width:100%;height:auto;display:block}
+.lux-mobile-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--paper)}
+.lux-mobile-btn{font-family:var(--mono);font-size:20px;color:var(--ink);background:none;border:none;cursor:pointer;padding:4px 10px;transition:color 0.2s}
+.lux-mobile-btn:hover{color:var(--ink)}
+.lux-mobile-counter{font-family:var(--mono);font-size:11px;color:var(--mid);letter-spacing:0.1em}
+
+/* ── MIND ATHLETES ── */
+.ma-quote-section{padding:80px var(--pad) 64px;display:flex;align-items:center;justify-content:center;text-align:center}
+.ma-quote{font-family:var(--display);font-size:clamp(24px,3.5vw,44px);font-weight:600;line-height:1.2;letter-spacing:-0.02em;color:var(--ink);max-width:800px}
+.ma-thumb-section{padding:0 var(--pad) 80px}
+.ma-thumb-row{display:flex;gap:8px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;padding-bottom:4px}
+.ma-thumb-row::-webkit-scrollbar{display:none}
+.ma-thumb-item{flex-shrink:0;width:160px;height:106px;overflow:hidden;background:var(--ink);cursor:pointer;position:relative}
+.ma-thumb-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1)}
+.ma-thumb-item::after{content:'';position:absolute;inset:0;background:rgba(29,37,64,0.85);opacity:0;transition:opacity 0.3s;pointer-events:none}
+.ma-thumb-item:hover::after{opacity:0.18}
+.ma-thumb-item:hover img{transform:scale(1.06)}
+
+.ma-writeup-2col{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 72px}
+.ma-writeup-2col p{font-size:15px;font-weight:300;line-height:1.85;color:#1C3059}
+
+/* ── PRINTS SIDE BY SIDE (AMG) ── */
+.prints-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 var(--pad) 56px}
+.prints-row img{width:100%;height:auto;display:block;cursor:pointer}
+.prints-writeup{padding:0 var(--pad) 80px;text-align:center;max-width:640px;margin:0 auto}
+.prints-writeup p{font-size:15px;font-weight:300;line-height:1.85;color:#1C3059}
+
+/* ── MHA 3 PORTRAIT PRINTS ── */
+.mha-prints-row{display:flex;gap:20px;padding:0 var(--pad) 80px;justify-content:center;align-items:flex-start}
+.mha-print-item{width:260px;flex-shrink:0;cursor:pointer;position:relative;overflow:hidden}
+.mha-print-item img{width:100%;height:auto;display:block;transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
+.mha-print-item::after{content:'';position:absolute;inset:0;background:rgba(29,37,64,0.85);opacity:0;transition:opacity 0.3s;pointer-events:none}
+.mha-print-item:hover::after{opacity:0.12}
+.mha-print-item:hover img{transform:scale(1.03)}
+
+/* ── CWYL ── */
+.cwyl-question{padding:72px var(--pad) 48px;max-width:1100px;margin:0 auto;text-align:center}
+.cwyl-question p{font-family:var(--display);font-size:clamp(26px,3.5vw,48px);font-weight:600;line-height:1.2;letter-spacing:-0.02em;color:var(--ink)}
+.cwyl-viewer{padding:0 var(--pad) 64px}
+.cwyl-viewer-inner{max-width:75%;margin:0 auto;width:100%}
+.cwyl-viewer-wrap{display:flex;align-items:center;justify-content:center;gap:20px}
+.cwyl-viewer-img-wrap{max-width:75%;flex-shrink:1}
+.cwyl-gif-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 64px;align-items:start}
+.cwyl-viewer-img{width:100%;height:auto;display:block;cursor:pointer}
+.cwyl-arrow{display:flex;align-items:center;justify-content:center;width:44px;height:44px;font-size:20px;font-family:var(--mono);background:var(--ink);border:none;color:var(--paper);flex-shrink:0;cursor:pointer;transition:background 0.2s;line-height:1;user-select:none}
+.cwyl-arrow:hover{background:var(--ink)}
+.cwyl-viewer-nav{display:flex;align-items:center;gap:16px;margin-top:16px}
+.cwyl-counter{font-family:var(--mono);font-size:11px;color:var(--mid);letter-spacing:0.1em}
+.cwyl-cap-text{font-family:var(--mono);font-size:11px;color:var(--mid);letter-spacing:0.06em;margin-left:auto}
+.cwyl-bottom{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 80px;align-items:start}
+.cwyl-writeup{font-size:16px;font-weight:300;line-height:1.9;color:#1C3059}
+.cwyl-writeup-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
+
+/* ── VIVO V15 ── */
+.vivo-quote{padding:80px var(--pad) 56px;text-align:center}
+.vivo-quote p{font-family:var(--display);font-size:clamp(22px,3vw,40px);font-weight:600;line-height:1.2;letter-spacing:-0.02em;color:var(--ink)}
+.vivo-3pink-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 var(--pad) 64px}
+.vivo-3pink-item p{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+.vivo-vid-16x9{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--ink)}
+.vivo-vid-16x9 iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.vivo-2col-writeup{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 64px}
+.vivo-2col-writeup p{font-size:16px;font-weight:300;line-height:1.9;color:#1C3059}
+.vivo-4social-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 var(--pad) 64px}
+.vivo-social-item p{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+.vivo-vid-4x5{position:relative;padding-bottom:125%;height:0;overflow:hidden;background:var(--ink)}
+.vivo-vid-4x5 iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.vivo-pubg-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 64px;align-items:start}
+.vivo-pubg-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
+.vivo-pubg-text{font-size:16px;font-weight:300;line-height:1.9;color:#1C3059}
+.vivo-2pubg-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:0 var(--pad) 80px}
+.vivo-2pubg-item p{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+
+/* ── OFNOAH ── */
+.ofnoah-hero{padding:0 var(--pad) 64px}
+.ofnoah-hero img{width:100%;max-width:50%;height:auto;display:block;margin:0 auto}
+.ofnoah-2col{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:0 var(--pad) 64px}
+.ofnoah-2col p{font-size:16px;font-weight:300;line-height:1.9;color:#1C3059}
+.ofnoah-squares{padding:0 var(--pad) 64px}
+.ofnoah-squares-inner{display:flex;gap:8px;max-width:75%;margin:0 auto}
+.ofnoah-squares-inner img{flex:1;min-width:0;height:auto;display:block;cursor:pointer}
+.ofnoah-mixed{display:grid;grid-template-columns:1fr 3fr;gap:12px;padding:0 var(--pad) 64px;align-items:start}
+.ofnoah-outdoor img{width:100%;height:auto;display:block;cursor:pointer}
+.ofnoah-3vert{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ofnoah-3vert img{width:100%;height:auto;display:block;cursor:pointer}
+.ofnoah-banner{margin-top:12px}
+.ofnoah-banner img{display:block;width:100%;max-width:728px;height:auto}
+.ofnoah-last{padding:0 var(--pad) 80px}
+.ofnoah-last img{width:100%;max-width:25%;height:auto;display:block;margin:0 auto;cursor:pointer}
+
+/* ── VW PRINTS ── */
+.vw-split{display:grid;grid-template-columns:2fr 3fr;gap:64px;padding:0 var(--pad) 80px;align-items:start}
+.vw-writeup{font-size:16px;font-weight:300;line-height:1.9;color:#1C3059}
+.vw-writeup-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px}
+.vw-gallery{position:relative}
+.vw-gallery-img-wrap{overflow:hidden;line-height:0}
+.vw-gallery-img-wrap img{width:100%;height:auto;display:block;cursor:pointer}
+.vw-gallery-controls{display:flex;align-items:center;gap:12px;margin-top:16px}
+.vw-gallery-arrow{display:flex;align-items:center;justify-content:center;width:44px;height:44px;font-size:20px;font-family:var(--mono);background:var(--ink);border:none;color:var(--paper);flex-shrink:0;cursor:pointer;transition:background 0.2s;line-height:1;user-select:none}
+.vw-gallery-arrow:hover{background:var(--ink)}
+.vw-gallery-counter{font-family:var(--mono);font-size:11px;color:var(--mid);letter-spacing:0.1em}
+.vw-gallery-cap{font-family:var(--mono);font-size:11px;color:var(--mid);letter-spacing:0.06em;margin-left:auto}
+
+/* ── RICH TEXT OUTPUT ── */
+.rte{color:#1C3059}
+.rte p{margin-bottom:0.75em}
+.rte p:last-child{margin-bottom:0}
+.rte h2{font-family:var(--display);font-size:1.4em;font-weight:700;line-height:1.15;margin:0.8em 0 0.4em;letter-spacing:-0.01em}
+.rte h3{font-family:var(--display);font-size:1.15em;font-weight:600;line-height:1.2;margin:0.6em 0 0.3em}
+.rte h2:first-child,.rte h3:first-child{margin-top:0}
+.rte strong,.rte b{font-weight:700}
+.rte em,.rte i{font-style:italic}
+.rte u{text-decoration:underline}
+.rte ul,.rte ol{padding-left:1.5em;margin-bottom:0.75em}
+.rte ul{list-style:disc}
+.rte ol{list-style:decimal}
+.rte li{margin-bottom:0.25em}
+.rte .ql-size-small{font-size:0.875em}
+.rte .ql-size-large{font-size:1.25em}
+.rte .ql-size-huge{font-size:1.65em}
+.rte .ql-indent-1{padding-left:2em}
+.rte .ql-indent-2{padding-left:4em}
+
+/* ── BLOCKS (page builder) ── */
+.blk{padding:0 var(--pad) 72px}
+.blk-callout{text-align:center}
+.blk-text-cols{display:grid;gap:48px}
+.blk-split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.blk-vid-row{display:grid;gap:24px}
+.blk-vid-row-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:8px}
+.blk-vid-row-ar{position:relative;overflow:hidden;aspect-ratio:16/9}
+.blk-vid-row-ar.ar-4x5{aspect-ratio:4/5}
+.blk-vid-row-ar iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.blk-viewer{display:flex;align-items:center;gap:20px}
+.blk-viewer-img-wrap{flex:1;overflow:hidden}
+.blk-viewer-img-wrap img{width:100%;height:auto;display:block;cursor:pointer;transition:opacity 0.25s}
+.blk-viewer-arrow{font-size:28px;color:var(--ink);background:none;border:none;cursor:pointer;padding:8px;line-height:1;transition:opacity 0.2s;flex-shrink:0;font-family:sans-serif}
+.blk-viewer-arrow:hover{opacity:0.5}
+.blk-viewer-meta{display:flex;align-items:center;gap:16px;padding-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:0.08em}
+.blk-viewer-ctr{color:var(--mid)}
+.blk-viewer-cap{color:#1C3059}
+
+/* ── IMAGE SCROLL ROW (image-row layout:scroll) ── */
+.blk-img-scroll::-webkit-scrollbar{display:none}
+
+/* ── COLLATERAL GRID (fallback/general) ── */
+.col-section{padding:0 var(--pad) 80px}
+.col-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;margin-top:16px}
+.col-item{overflow:hidden;background:var(--ink);cursor:pointer;position:relative}
+.col-item img{width:100%;height:auto;display:block;transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
+.col-item::after{content:'';position:absolute;inset:0;background:rgba(29,37,64,0.85);opacity:0;transition:opacity 0.3s;pointer-events:none}
+.col-item:hover::after{opacity:0.14}
+.col-item:hover img{transform:scale(1.03)}
+.col-cap{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;color:var(--mid);margin-top:8px}
+
+/* ── PROJECT RAIL ── */
+.proj-rail{background:var(--ink);padding:56px var(--pad) 64px}
+.proj-rail-label{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:36px}
+.proj-rail-inner{display:grid;grid-template-columns:3fr 2fr;gap:64px;align-items:start}
+.rail-index{columns:2;column-gap:32px;column-rule:1px solid rgba(255,255,255,0.07)}
+.rail-idx-item{display:block;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.07);text-decoration:none;break-inside:avoid;transition:opacity 0.18s}
+.rail-idx-item.current{opacity:0.25;pointer-events:none}
+.rail-idx-brand{display:block;font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:4px;transition:color 0.18s}
+.rail-idx-title{display:block;font-family:var(--display);font-size:13px;font-weight:500;color:rgba(255,255,255,0.7);letter-spacing:-0.01em;line-height:1.3;transition:color 0.18s}
+.rail-idx-item:not(.current):hover .rail-idx-brand{color:rgba(255,255,255,0.9)}
+.rail-idx-item:not(.current):hover .rail-idx-title{color:#fff}
+.rail-preview-wrap{position:relative;width:100%;aspect-ratio:16/9;background:rgba(255,255,255,0.04);overflow:hidden}
+.rail-preview-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 0.3s ease}
+.rail-preview-img.active{opacity:1}
+.rail-preview-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.18);pointer-events:none;transition:opacity 0.3s}
+.rail-preview-wrap.has-preview .rail-preview-hint{opacity:0}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding:22px var(--pad);display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.28)}
+
+/* ── NOT FOUND ── */
+.not-found{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;margin-top:var(--nav-h);gap:20px;text-align:center}
+.not-found h2{font-family:var(--display);font-size:52px;font-weight:700;letter-spacing:-0.02em}
+.not-found a{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1C3059;text-decoration:none}
+
+/* ── FOCUS ── */
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+
+/* ── LIGHTBOX ── */
+.lb{position:fixed;inset:0;background:rgba(0,0,0,0.93);display:flex;align-items:center;justify-content:center;z-index:1000;opacity:0;pointer-events:none;transition:opacity 0.22s ease}
+.lb.open{opacity:1;pointer-events:all}
+.lb-inner{max-width:92vw;max-height:92vh;display:flex;align-items:center;justify-content:center}
+.lb-inner img{max-width:92vw;max-height:90vh;width:auto;height:auto;object-fit:contain;display:block}
+.lb-close{position:fixed;top:22px;right:28px;font-size:32px;color:rgba(255,255,255,0.65);cursor:pointer;user-select:none;z-index:1001;line-height:1;transition:color 0.15s;font-family:sans-serif}
+.lb-close:hover{color:#fff}
+.lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);font-size:32px;color:rgba(255,255,255,0.45);cursor:pointer;user-select:none;z-index:1001;padding:20px;transition:color 0.15s;line-height:1}
+.lb-prev{left:0}.lb-next{right:0}
+.lb-prev:hover,.lb-next:hover{color:#fff}
+.lb-cap{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.38);text-align:center;pointer-events:none;white-space:nowrap}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  :root{--pad:24px}
+  nav{flex-wrap:wrap;height:auto;padding:12px var(--pad) 0;gap:0}
+  .nav-name{flex:1;order:1;padding-bottom:10px}
+  .nav-icons{order:2;padding-bottom:10px}
+  .nav-meta{flex:0 0 100%;order:3;padding:7px 0 10px;border-top:1px solid rgba(29,37,64,0.07);overflow:hidden}
+  .nav-back{order:4;padding-bottom:10px}
+  .nav-meta-awards,.nav-meta-sep{display:none}
+  /* FIX: mobile header clears the 2-row nav (~112px tall) */
+  .work-header{margin-top:0;padding-top:148px}
+  .lux-grid-inner{display:none}
+  .lux-mobile-slider{display:block}
+  .lux-writeup-3col{grid-template-columns:1fr;gap:24px;padding:48px var(--pad)}
+  .split-row{grid-template-columns:1fr;gap:32px}
+  .three-vid-row{grid-template-columns:1fr;gap:24px}
+  .two-vid-row{grid-template-columns:1fr}
+  .prints-row{grid-template-columns:1fr}
+  .mha-prints-row{flex-direction:column;align-items:center}
+  .mha-print-item{width:100%;max-width:400px}
+  .cwyl-bottom{grid-template-columns:1fr}
+  .cwyl-gif-split{grid-template-columns:1fr}
+  .vw-split{grid-template-columns:1fr;gap:32px}
+  .vivo-3pink-row{grid-template-columns:1fr}
+  .vivo-2col-writeup{grid-template-columns:1fr}
+  .vivo-4social-row{grid-template-columns:repeat(2,1fr)}
+  .vivo-pubg-split{grid-template-columns:1fr}
+  .vivo-2pubg-row{grid-template-columns:1fr}
+  .ofnoah-2col{grid-template-columns:1fr}
+  .ofnoah-squares-inner{flex-wrap:wrap;max-width:100%}
+  .ofnoah-squares-inner img{flex:0 0 calc(50% - 4px)}
+  .ofnoah-mixed{grid-template-columns:1fr}
+  .ma-writeup-2col{grid-template-columns:1fr}
+  .blk-text-cols{grid-template-columns:1fr!important}
+  .blk-split{grid-template-columns:1fr!important;gap:32px}
+  .blk-vid-row{grid-template-columns:1fr!important;gap:16px}
+  .ma-thumb-row{display:grid;grid-template-columns:repeat(3,1fr);overflow-x:visible;gap:6px}
+  .ma-thumb-item{width:100%;height:auto;aspect-ratio:3/2}
+  .proj-rail-inner{grid-template-columns:1fr}
+  .rail-preview-wrap{display:none}
+  .rail-index{columns:1}
+  footer{flex-direction:column;gap:6px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="../" class="nav-name">Matthew Ho <em>—</em></a>
+  <div class="nav-meta">
+    <span class="nav-meta-main" id="nav-main"></span>
+    <span class="nav-meta-sep">·</span>
+    <span class="nav-meta-awards" id="nav-awards"></span>
+  </div>
+  <a href="../#work" class="nav-back"><span class="nav-back-arrow">←</span> All Work</a>
+  <div class="nav-icons">
+    <a id="nav-li" href="#" target="_blank" rel="noopener" class="nav-icon" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a id="nav-em" href="#" class="nav-icon" aria-label="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+    </a>
+  </div>
+</nav>
+
+<div class="lb" id="lb" onclick="if(event.target===this)lbClose()">
+  <span class="lb-close" onclick="lbClose()">×</span>
+  <span class="lb-prev" onclick="lbNav(-1)">‹</span>
+  <div class="lb-inner" id="lb-inner"></div>
+  <span class="lb-next" onclick="lbNav(1)">›</span>
+  <div class="lb-cap" id="lb-cap"></div>
+</div>
+
+<div id="root"></div>
+
+<div class="proj-rail" id="proj-rail" style="display:none">
+  <p class="proj-rail-label">More Work</p>
+  <div class="proj-rail-inner">
+    <div class="rail-index" id="rail-index"></div>
+    <div class="rail-preview-wrap" id="rail-preview-wrap">
+      <span class="rail-preview-hint">Hover to preview</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span id="f-left"></span>
+  <span id="f-year"></span>
+</footer>
+
+<script src="../data.js"></script>
+<script>
+(function(){
+  const D   = PORTFOLIO_DATA;
+  const $   = id => document.getElementById(id);
+  const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+  const activeProjects = D.projects.filter(p => p.active !== false);
+
+  $('nav-main').textContent   = D.tagline;
+  $('nav-awards').textContent = D.awardStrip;
+  const nli = $('nav-li'); if(nli && D.linkedin) nli.href = D.linkedin;
+  const nem = $('nav-em'); if(nem && D.email) nem.href = 'mailto:' + D.email;
+  $('f-left').textContent     = D.name + '  ·  ' + D.email;
+  $('f-year').textContent     = '© ' + new Date().getFullYear();
+
+  window.addEventListener('scroll',()=>$('main-nav').classList.toggle('scrolled',window.scrollY>20),{passive:true});
+
+  const params = new URLSearchParams(window.location.search);
+  const pid    = params.get('id');
+  const idx    = activeProjects.findIndex(p => p.id === pid);
+  const P      = idx > -1 ? activeProjects[idx] : null;
+  const root   = $('root');
+
+  if (!P) {
+    root.innerHTML = `<div class="not-found"><h2>Not found.</h2><a href="../#work">← Back to work</a></div>`;
+    buildRail();
+    return;
+  }
+
+  document.title = P.title + ' — ' + D.name;
+  const cols = (P.collaterals||[]).filter(c=>c.url&&c.url.trim());
+  const vids = (P.videos||[]).filter(v=>v.url&&v.url.trim());
+  const tmpl = P.projectTemplate || 'default';
+
+  /* ── RICH TEXT HELPERS ── */
+  function renderHtml(s){
+    if(!s) return '';
+    if(!/</.test(s)) return '<p>'+String(s).replace(/\n\n+/g,'</p><p>').replace(/\n/g,'<br>')+'</p>';
+    return String(s);
+  }
+  function splitHtmlCols(html){
+    const rendered=renderHtml(html);
+    const tmp=document.createElement('div');
+    tmp.innerHTML=rendered;
+    const kids=Array.from(tmp.children);
+    if(kids.length<=1){
+      const sents=tmp.textContent.split(/(?<=[.!?])\s+/);
+      if(sents.length<=1) return [rendered,''];
+      const mid=Math.ceil(sents.length/2);
+      return ['<p>'+sents.slice(0,mid).join(' ')+'</p>','<p>'+sents.slice(mid).join(' ')+'</p>'];
+    }
+    const mid=Math.ceil(kids.length/2);
+    return [kids.slice(0,mid).map(k=>k.outerHTML).join(''),kids.slice(mid).map(k=>k.outerHTML).join('')];
+  }
+  function splitHtmlThree(html){
+    const rendered=renderHtml(html);
+    const tmp=document.createElement('div');
+    tmp.innerHTML=rendered;
+    const kids=Array.from(tmp.children);
+    if(kids.length<=1){
+      const sents=tmp.textContent.split(/(?<=[.!?])\s+/);
+      const t=Math.ceil(sents.length/3);
+      return ['<p>'+sents.slice(0,t).join(' ')+'</p>','<p>'+sents.slice(t,t*2).join(' ')+'</p>','<p>'+sents.slice(t*2).join(' ')+'</p>'];
+    }
+    const t=Math.ceil(kids.length/3);
+    return [kids.slice(0,t).map(k=>k.outerHTML).join(''),kids.slice(t,t*2).map(k=>k.outerHTML).join(''),kids.slice(t*2).map(k=>k.outerHTML).join('')];
+  }
+
+  // ── LIGHTBOX ENGINE ──
+  // All pools stored here; onclick passes pool key + index
+  const LB_POOLS = { cols };
+  const VIEWER_STATE = {};
+  window.viewerSlide = function(key, d) {
+    const st = VIEWER_STATE[key]; if(!st) return;
+    st.cur = (st.cur + d + st.imgs.length) % st.imgs.length;
+    const img = document.getElementById('vwr-img-'+key);
+    const ctr = document.getElementById('vwr-ctr-'+key);
+    const cap = document.getElementById('vwr-cap-'+key);
+    if(img){ img.src=st.imgs[st.cur].url; img.alt=esc(st.imgs[st.cur].caption||''); if(st.lightbox) img.onclick=()=>lbOpen(st.pool,st.cur); }
+    if(ctr) ctr.textContent=(st.cur+1)+' / '+st.imgs.length;
+    if(cap) cap.textContent=st.imgs[st.cur].caption||'';
+  };
+  function mkViewer(key, imgs, lightbox){
+    if(!imgs.length) return '';
+    return `<div class="blk-viewer">
+    <button class="blk-viewer-arrow" onclick="viewerSlide('${key}',-1)">←</button>
+    <div class="blk-viewer-img-wrap"><img id="vwr-img-${key}" src="${imgs[0].url}" alt="${esc(imgs[0].caption||'')}" loading="lazy"></div>
+    <button class="blk-viewer-arrow" onclick="viewerSlide('${key}',1)">→</button>
+  </div>
+  <div class="blk-viewer-meta">
+    <span class="blk-viewer-ctr" id="vwr-ctr-${key}">1 / ${imgs.length}</span>
+    <span class="blk-viewer-cap" id="vwr-cap-${key}">${esc(imgs[0].caption||'')}</span>
+  </div>`;
+  }
+  let lbPoolKey = 'cols';
+  let lbIdx = 0;
+
+  function lbOpen(poolKey, i) {
+    lbPoolKey = poolKey; lbIdx = i;
+    lbRender();
+    $('lb').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function lbRender() {
+    const pool = LB_POOLS[lbPoolKey]||[];
+    const c = pool[lbIdx]; if(!c) return;
+    $('lb-inner').innerHTML = `<img src="${c.url}" alt="${esc(c.caption||'')}">`;
+    $('lb-cap').textContent = c.caption||'';
+  }
+  window.lbClose = () => { $('lb').classList.remove('open'); document.body.style.overflow=''; };
+  window.lbNav   = d  => {
+    const pool = LB_POOLS[lbPoolKey]||[];
+    lbIdx = (lbIdx+d+pool.length)%pool.length; lbRender();
+  };
+  // Expose so inline onclick strings can call: lbOpen('cols',0)
+  window.lbOpen = lbOpen;
+
+  // ── EMBED HELPER ──
+  function src(v) {
+    if(v.type==='youtube'){const m=v.url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);if(m)return'https://www.youtube.com/embed/'+m[1]+'?rel=0&modestbranding=1';}
+    if(v.type==='vimeo'){const m=v.url.match(/vimeo\.com\/(\d+)/);if(m)return'https://player.vimeo.com/video/'+m[1]+'?byline=0&portrait=0&title=0';}
+    return null;
+  }
+  function iframe(v){const s=src(v);return s?`<iframe src="${s}" allowfullscreen loading="lazy"></iframe>`:'';}
+
+  // ── SHARED HTML BUILDERS ──
+  function mkHeader() {
+    return `<div class="work-header">
+      <div class="work-header-meta">
+        <span class="work-brand">${esc(P.brand)}</span>
+        ${P.award?`<span class="work-award">${esc(P.award)}</span>`:''}
+      </div>
+      <h1 class="work-title">${esc(P.title)}</h1>
+      <p class="work-subtitle">${esc(P.subtitle)}</p>
+      <div class="work-tags">${(P.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
+    </div><div class="work-divider"></div>`;
+  }
+
+  function mkVideos() {
+    if(!vids.length) return '';
+    const multi = vids.length > 1;
+    const items = vids.map((v,i)=>{
+      const s=src(v); if(!s && v.type!=='file') return '';
+      const player = s ? `<div class="vid-wrap">${iframe(v)}</div>`
+                       : `<div class="vid-wrap"><video src="${v.url}" controls playsinline></video></div>`;
+      const lbl = multi ? `<p class="vid-item-label">${esc(v.caption||`Video ${i+1}`)}</p>` : '';
+      const cap = !multi&&v.caption ? `<p class="vid-cap">${esc(v.caption)}</p>` : '';
+      return `<div class="vid-item">${lbl}${player}${cap}</div>`;
+    }).filter(Boolean).join('');
+    return items ? `<div class="vid-section"><div class="vid-centred">${items}</div></div>` : '';
+  }
+
+  function mkWriteup() {
+    return `<div class="writeup-section"><div class="writeup-inner"><p class="c-label">About the Work</p><div class="writeup-text rte">${renderHtml(P.fullDescription)}</div></div></div>`;
+  }
+
+  function mkColSection(pool, poolKey) {
+    if(!pool||!pool.length) return '';
+    const html = pool.map((c,i)=>`<div>
+      <div class="col-item" onclick="lbOpen('${poolKey}',${i})"><img src="${c.url}" alt="${esc(c.caption||'')}"></div>
+      ${c.caption?`<p class="col-cap">${esc(c.caption)}</p>`:''}
+    </div>`).join('');
+    return `<div class="col-section"><p class="c-label">Campaign Collaterals</p><div class="col-grid">${html}</div></div>`;
+  }
+
+  // LUX shared grid/slider
+  function mkLuxGrid(poolKey) {
+    const pool = LB_POOLS[poolKey]||[];
+    const gridItems = pool.map((c,i)=>`<div class="lux-img-wrap" onclick="lbOpen('${poolKey}',${i})"><img src="${c.url}" alt="${esc(c.caption||'')}" loading="lazy"></div>`).join('');
+    const slideItems = pool.map((c,i)=>`<div class="lux-mobile-slide" onclick="lbOpen('${poolKey}',${i})"><img src="${c.url}" alt="${esc(c.caption||'')}" loading="lazy"></div>`).join('');
+    return `<div class="lux-grid-section">
+      <p class="c-label" style="padding:0 var(--pad);margin-bottom:20px">Supporting Images</p>
+      <div class="lux-grid-inner">${gridItems}</div>
+      <div class="lux-mobile-slider">
+        <div class="lux-mobile-track" id="lux-track">${slideItems}</div>
+        <div class="lux-mobile-nav">
+          <button class="lux-mobile-btn" onclick="luxSlide(-1)">←</button>
+          <span class="lux-mobile-counter" id="lux-counter">1 / ${pool.length}</span>
+          <button class="lux-mobile-btn" onclick="luxSlide(1)">→</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // ── BLOCK RENDERER (page-builder output) ──
+  function renderBlocks(blocks) {
+    // Register lightbox pools for image blocks up front
+    blocks.forEach(b => {
+      if(b.type==='image' && b.lightbox && b.url)
+        LB_POOLS['blk_'+b.id] = [{url:b.url, caption:b.caption||''}];
+      if(b.type==='image-row' && b.lightbox)
+        LB_POOLS['blk_'+b.id] = (b.images||[]).filter(im=>im.url).map(im=>({url:im.url,caption:im.caption||''}));
+      if(b.type==='image-viewer' && b.lightbox!==false) {
+        const imgs=(b.images||[]).filter(im=>im.url);
+        LB_POOLS['blk_'+b.id]=imgs.map(im=>({url:im.url,caption:im.caption||''}));
+        VIEWER_STATE[b.id]={cur:0,imgs,lightbox:true,pool:'blk_'+b.id};
+      }
+    });
+    return blocks.map(renderBlock).filter(Boolean).join('');
+  }
+
+  function renderBlock(b) {
+    const mw = w => ({full:'none',wide:'1075px',medium:'720px',narrow:'560px',small:'400px',compact:'75%'}[w]||'none');
+    const mwStyle = w => { const v=mw(w); return v!=='none' ? `max-width:${v};margin:0 auto` : ''; };
+
+    switch(b.type) {
+      case 'video': {
+        const v = {url:b.url, type:b.videoType||'vimeo'};
+        const s = src(v);
+        if(!s && b.videoType!=='file') return '';
+        const player = s
+          ? `<div class="vid-wrap">${iframe(v)}</div>`
+          : `<div class="vid-wrap"><video src="${b.url}" controls playsinline></video></div>`;
+        return `<div class="blk"><div style="${mwStyle(b.width||'wide')}">${player}${b.caption?`<p class="vid-cap">${esc(b.caption)}</p>`:''}</div></div>`;
+      }
+      case 'callout': {
+        const sz = {xl:'clamp(28px,4vw,52px)',lg:'clamp(22px,3vw,40px)',md:'clamp(18px,2.5vw,28px)',sm:'18px'};
+        const fs = sz[b.size]||sz.xl;
+        const fw = (b.size==='xl'||b.size==='lg') ? '600' : '500';
+        const al = b.align==='left' ? 'left' : 'center';
+        return `<div class="blk blk-callout" style="text-align:${al}">
+          <p style="font-family:var(--display);font-size:${fs};font-weight:${fw};line-height:1.2;letter-spacing:-0.02em;color:var(--ink);max-width:900px;${al==='center'?'margin:0 auto':''}">${esc(b.text||'')}</p>
+        </div>`;
+      }
+      case 'text': {
+        const cols = Math.min(Math.max(+(b.columns)||1,1),3);
+        let inner;
+        if(b.col1 !== undefined) {
+          /* Per-column system */
+          const parts = [b.col1||'', b.col2||'', b.col3||''].slice(0,cols).map(c=>renderHtml(c));
+          if(cols===1) inner = `<div class="rte">${parts[0]}</div>`;
+          else inner = `<div class="blk-text-cols" style="grid-template-columns:repeat(${cols},1fr)">${parts.map(p=>`<div class="rte">${p}</div>`).join('')}</div>`;
+        } else {
+          /* Legacy: auto-split single html field */
+          const html = renderHtml(b.html||'');
+          if(cols===1) inner = `<div class="rte">${html}</div>`;
+          else { const parts = cols===2 ? splitHtmlCols(html) : splitHtmlThree(html); inner = `<div class="blk-text-cols" style="grid-template-columns:repeat(${cols},1fr)">${parts.map(p=>`<div class="rte">${p}</div>`).join('')}`+`</div>`; }
+        }
+        return `<div class="blk"><div style="${mwStyle(b.width||'full')}">${inner}</div></div>`;
+      }
+      case 'image': {
+        if(!b.url) return '';
+        const click = b.lightbox ? `onclick="lbOpen('blk_${b.id}',0)" style="cursor:pointer"` : 'style=""';
+        return `<div class="blk"><div style="${mwStyle(b.width||'full')}">
+          <img src="${b.url}" alt="${esc(b.caption||'')}" ${click} loading="lazy">
+          ${b.caption?`<p class="vid-cap">${esc(b.caption)}</p>`:''}
+        </div></div>`;
+      }
+      case 'image-row': {
+        const imgs = (b.images||[]).filter(im=>im.url);
+        if(!imgs.length) return '';
+        if(b.layout === 'scroll'){
+          /* Horizontal scrolling strip — images at natural aspect ratio, fixed height */
+          const gap = {tight:'4px',normal:'8px',wide:'20px'}[b.gap]||'8px';
+          const imgsHtml = imgs.map((im,i)=>{
+            const click = b.lightbox ? `onclick="lbOpen('blk_${b.id}',${i})"` : '';
+            const cursor = b.lightbox ? 'cursor:pointer;' : '';
+            return `<div style="flex-shrink:0;${cursor}"><img src="${im.url}" alt="${esc(im.caption||'')}" ${click} loading="lazy" style="height:200px;width:auto;display:block">${im.caption?`<p class="col-cap" style="white-space:nowrap">${esc(im.caption)}</p>`:''}</div>`;
+          }).join('');
+          return `<div class="blk"><div class="blk-img-scroll" style="display:flex;gap:${gap};overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;padding-bottom:4px">${imgsHtml}</div></div>`;
+        }
+        /* Default: CSS grid */
+        const cols = b.columns||imgs.length;
+        const gap = {tight:'4px',normal:'12px',wide:'32px'}[b.gap]||'12px';
+        const imgsHtml = imgs.map((im,i)=>{
+          const click = b.lightbox ? `onclick="lbOpen('blk_${b.id}',${i})" style="cursor:pointer"` : 'style=""';
+          return `<div><img src="${im.url}" alt="${esc(im.caption||'')}" ${click} loading="lazy" style="width:100%;height:auto;display:block">${im.caption?`<p class="col-cap">${esc(im.caption)}</p>`:''}</div>`;
+        }).join('');
+        return `<div class="blk"><div style="display:grid;grid-template-columns:repeat(${cols},1fr);gap:${gap}">${imgsHtml}</div></div>`;
+      }
+      case 'video-row': {
+        const rvids=(b.videos||[]).filter(v=>v.url);
+        if(!rvids.length) return '';
+        const rcols=b.columns||rvids.length;
+        const isPortrait=b.aspectRatio==='4:5';
+        const items=rvids.map(v=>{
+          const vobj={url:v.url,type:v.videoType||'vimeo'};
+          const s=src(vobj); if(!s) return '';
+          return `<div class="blk-vid-row-item">${v.caption?`<p class="blk-vid-row-label">${esc(v.caption)}</p>`:''}<div class="blk-vid-row-ar${isPortrait?' ar-4x5':''}"><iframe src="${s}" allowfullscreen loading="lazy"></iframe></div></div>`;
+        }).filter(Boolean).join('');
+        return `<div class="blk"><div class="blk-vid-row" style="grid-template-columns:repeat(${rcols},1fr)">${items}</div></div>`;
+      }
+      case 'image-viewer': {
+        const vimgs=(b.images||[]).filter(im=>im.url);
+        if(!vimgs.length) return '';
+        /* VIEWER_STATE already populated in renderBlocks pre-pass */
+        const ivWrap = b.width ? `<div style="${mwStyle(b.width)}">${mkViewer(b.id, vimgs, b.lightbox!==false)}</div>` : mkViewer(b.id, vimgs, b.lightbox!==false);
+        return `<div class="blk">${ivWrap}</div>`;
+      }
+      case 'split': {
+        function spl(type,url,vtype,html,lbl,images,lightbox,poolKey){
+          const labelHtml=lbl?`<p class="split-label">${esc(lbl)}</p>`:'';
+          if(type==='video'&&url){const v={url,type:vtype||'vimeo'};const s=src(v);return `<div>${labelHtml}${s?`<div class="split-vid-wrap">${iframe(v)}</div>`:''}</div>`;}
+          if(type==='image'&&url){return `<div>${labelHtml}<img src="${url}" alt="" loading="lazy" style="width:100%;height:auto;display:block"></div>`;}
+          if(type==='image-viewer'){
+            const vimgs2=(images||[]).filter(im=>im.url);
+            if(!vimgs2.length) return `<div>${labelHtml}</div>`;
+            const vlight2=lightbox!==false;
+            const pool='blk_'+poolKey;
+            VIEWER_STATE[poolKey]={cur:0,imgs:vimgs2,lightbox:vlight2,pool};
+            if(vlight2) LB_POOLS[pool]=vimgs2.map(im=>({url:im.url,caption:im.caption||''}));
+            return `<div>${labelHtml}${mkViewer(poolKey,vimgs2,vlight2)}</div>`;
+          }
+          return `<div>${labelHtml}<div class="split-text rte">${renderHtml(html||'')}</div></div>`;
+        }
+        const ratioMap={'40-60':'2fr 3fr','60-40':'3fr 2fr','33-67':'1fr 2fr','67-33':'2fr 1fr'};
+        const gridCols=ratioMap[b.ratio]||'1fr 1fr';
+        const left =spl(b.leftType||'text', b.leftUrl, b.leftVideoType, b.leftHtml, b.leftLabel, b.leftImages, b.leftLightbox, b.id+'_l');
+        const right=spl(b.rightType||'video',b.rightUrl,b.rightVideoType,b.rightHtml,b.rightLabel,b.rightImages,b.rightLightbox,b.id+'_r');
+        return `<div class="blk"><div class="blk-split" style="grid-template-columns:${gridCols}">${left}${right}</div></div>`;
+      }
+      default: return '';
+    }
+  }
+
+  // ── BUILD BODY ──
+  let body = '';
+
+  /* BLOCKS: page-builder overrides all templates */
+  if (P.blocks && P.blocks.length > 0) {
+    body = renderBlocks(P.blocks);
+  }
+
+  /* LUX: video → 3-col writeup → 2-col images */
+  else if (tmpl === 'lux') {
+    const luxPool = [...cols];
+    LB_POOLS['cols'] = luxPool;
+    let lp1, lp2, lp3;
+    if (P.fullDescription2) {
+      lp1 = renderHtml(P.fullDescription);
+      lp2 = renderHtml(P.fullDescription2);
+      lp3 = renderHtml(P.fullDescription3||'');
+    } else {
+      [lp1,lp2,lp3] = splitHtmlThree(P.fullDescription);
+    }
+    body = mkVideos()
+      + `<div class="ma-quote-section"><p class="ma-quote">Would you name your daughter “inferior to men”?</p></div>`
+      + `<div class="lux-writeup-3col"><div class="rte">${lp1||'&nbsp;'}</div><div class="rte">${lp2||'&nbsp;'}</div><div class="rte">${lp3||'&nbsp;'}</div></div>`
+      + mkLuxGrid('cols');
+  }
+
+  /* HSBC MIND ATHLETES: quote → video → 2-col writeup → thumb gallery → 2-col images */
+  else if (tmpl === 'hsbc-mind-athletes') {
+    const thumbs = (P.thumbnails||[]).filter(t=>t.url&&t.url.trim()&&t.active!==false);
+    LB_POOLS['thumbs'] = thumbs;
+    const thumbItems = thumbs.map((t,i)=>`<div class="ma-thumb-item" onclick="lbOpen('thumbs',${i})"><img src="${t.url}" alt="${esc(t.caption||'')}" loading="lazy"></div>`).join('');
+    let maCol1, maCol2;
+    if (P.fullDescription2) { maCol1 = renderHtml(P.fullDescription); maCol2 = renderHtml(P.fullDescription2); }
+    else { [maCol1,maCol2] = splitHtmlCols(P.fullDescription); }
+    body = `<div class="ma-quote-section"><p class="ma-quote">${esc(P.quote||'')}</p></div>`
+      + mkVideos()
+      + `<div class="ma-writeup-2col"><div class="rte">${maCol1}</div>${maCol2?`<div class="rte">${maCol2}</div>`:''}</div>`
+      + (thumbItems ? `<div class="ma-thumb-section"><p class="c-label" style="margin-bottom:16px">Campaign Gallery</p><div class="ma-thumb-row">${thumbItems}</div></div>` : '')
+      + mkLuxGrid('cols');
+  }
+
+  /* WRITEUP THEN VIDEO */
+  else if (tmpl === 'writeup-then-video') {
+    body = mkWriteup() + mkVideos();
+  }
+
+  /* WRITEUP LEFT / VIDEO RIGHT */
+  else if (tmpl === 'writeup-left-video-right') {
+    const v = vids[0]; const s = v ? src(v) : null;
+    body = `<div class="split-row">
+      <div><p class="split-label">About the Work</p><div class="split-text rte">${renderHtml(P.fullDescription)}</div></div>
+      <div>${s?`<div class="split-vid-wrap">${iframe(v)}</div>`:''}</div>
+    </div>`;
+  }
+
+  /* VIDEO LEFT / WRITEUP RIGHT */
+  else if (tmpl === 'video-left-writeup-right') {
+    const v = vids[0]; const s = v ? src(v) : null;
+    body = `<div class="split-row">
+      <div>${s?`<div class="split-vid-wrap">${iframe(v)}</div>`:''}</div>
+      <div><p class="split-label">About the Work</p><div class="split-text rte">${renderHtml(P.fullDescription)}</div></div>
+    </div>`;
+  }
+
+  /* WRITEUP LEFT / MAIN VIDEO RIGHT + ROW OF 3 SUPPORTING VIDEOS */
+  else if (tmpl === 'writeup-left-video-right-row3') {
+    const v0 = vids[0]; const s0 = v0 ? src(v0) : null;
+    const row3 = vids.slice(1).map(v=>{
+      const s=src(v); if(!s) return '';
+      return `<div><p class="tvi-label">${esc(v.caption||'')}</p><div class="tvi-wrap">${iframe(v)}</div></div>`;
+    }).filter(Boolean).join('');
+    body = `<div class="split-row">
+        <div><p class="split-label">About the Work</p><div class="split-text rte">${renderHtml(P.fullDescription)}</div></div>
+        <div>${s0?`<div class="split-vid-wrap">${iframe(v0)}</div>`:''}</div>
+      </div>`
+      + (row3 ? `<div class="three-vid-row">${row3}</div>` : '');
+  }
+
+  /* MAIN VIDEO LEFT / WRITEUP RIGHT + ROW OF 3 SUPPORTING VIDEOS */
+  else if (tmpl === 'video-left-writeup-right-row3') {
+    const v0 = vids[0]; const s0 = v0 ? src(v0) : null;
+    const row3 = vids.slice(1).map(v=>{
+      const s=src(v); if(!s) return '';
+      return `<div><p class="tvi-label">${esc(v.caption||'')}</p><div class="tvi-wrap">${iframe(v)}</div></div>`;
+    }).filter(Boolean).join('');
+    body = `<div class="split-row">
+        <div>${s0?`<div class="split-vid-wrap">${iframe(v0)}</div>`:''}</div>
+        <div><p class="split-label">About the Work</p><div class="split-text rte">${renderHtml(P.fullDescription)}</div></div>
+      </div>`
+      + (row3 ? `<div class="three-vid-row">${row3}</div>` : '');
+  }
+
+  /* 2 VIDEOS SIDE BY SIDE + WRITEUP BELOW */
+  else if (tmpl === 'two-videos-side-by-side') {
+    const twoV = vids.slice(0,2).map(v=>{
+      const s=src(v); if(!s) return '';
+      return `<div><p class="tvi-label-sm">${esc(v.caption||'')}</p><div class="tvi-wrap">${iframe(v)}</div></div>`;
+    }).filter(Boolean).join('');
+    body = `<div class="two-vid-row">${twoV}</div>` + mkWriteup();
+  }
+
+  /* 2 PRINTS SIDE BY SIDE + CENTRED WRITEUP (AMG) */
+  else if (tmpl === 'prints-side-by-side') {
+    const prints = [{url:P.thumbnailUrl,caption:P.title}, ...cols.filter(c=>c.url)].filter(p=>p&&p.url);
+    LB_POOLS['prints'] = prints;
+    const imgs = prints.map((p,i)=>`<img src="${p.url}" alt="${esc(p.caption||'')}" loading="lazy" onclick="lbOpen('prints',${i})" style="cursor:pointer">`).join('');
+    body = `<div class="prints-row">${imgs}</div><div class="prints-writeup rte">${renderHtml(P.fullDescription)}</div>`;
+  }
+
+  /* MHA: 2-col writeup → video → 3 portrait prints */
+  else if (tmpl === 'mha') {
+    const mhaPrints = (P.prints||[]).filter(p=>p&&p.url);
+    LB_POOLS['mhaPrints'] = mhaPrints;
+    const pHTML = mhaPrints.map((p,i)=>`<div class="mha-print-item" onclick="lbOpen('mhaPrints',${i})"><img src="${p.url}" alt="${esc(p.caption||'')}" loading="lazy"></div>`).join('');
+    let mhaCol1, mhaCol2;
+    if (P.fullDescription2) { mhaCol1 = renderHtml(P.fullDescription); mhaCol2 = renderHtml(P.fullDescription2); }
+    else { [mhaCol1,mhaCol2] = splitHtmlCols(P.fullDescription); }
+    body = `<div class="ma-writeup-2col"><div class="rte">${mhaCol1}</div>${mhaCol2?`<div class="rte">${mhaCol2}</div>`:''}</div>`
+      + mkVideos()
+      + `<div class="mha-prints-row">${pHTML}</div>`;
+  }
+
+  /* CWYL: question → image viewer (cols 2-6) → writeup left / video right */
+  else if (tmpl === 'cwyl') {
+    const viewerImgs = cols.slice(2);
+    LB_POOLS['cwylImgs'] = viewerImgs;
+    let cwylCur = 0;
+    const firstSrc = viewerImgs[0]?viewerImgs[0].url:'';
+    const viewerBlock = viewerImgs.length ? `<div class="cwyl-viewer">
+      <p class="c-label" style="margin-bottom:16px">Campaign Execution</p>
+      <div class="cwyl-viewer-inner">
+        <div class="cwyl-viewer-wrap">
+          <button class="cwyl-arrow" onclick="cwylSlide(-1)">←</button>
+          <div class="cwyl-viewer-img-wrap">
+            <img id="cwyl-img" class="cwyl-viewer-img" src="${firstSrc}" alt="" onclick="lbOpen('cwylImgs',__CWYL_CUR__)">
+          </div>
+          <button class="cwyl-arrow" onclick="cwylSlide(1)">→</button>
+        </div>
+        <div class="cwyl-viewer-nav">
+          <span class="cwyl-counter" id="cwyl-counter">1 / ${viewerImgs.length}</span>
+          <span class="cwyl-cap-text" id="cwyl-cap-text">${esc(viewerImgs[0]&&viewerImgs[0].caption||'')}</span>
+        </div>
+      </div>
+    </div>` : '';
+
+    const gifCol = cols[0];
+    const gifSection = gifCol ? `<div class="cwyl-gif-split">
+      <div><img src="${gifCol.url}" alt="${esc(gifCol.caption||'')}" style="width:100%;height:auto;display:block"></div>
+      <div class="rte">${renderHtml(P.fullDescription)}</div>
+    </div>` : '';
+
+    const v0 = vids[0]; const s0 = v0?src(v0):null;
+    body = `<div class="cwyl-question"><p>${esc(P.openingQuestion||'')}</p></div>`
+      + viewerBlock
+      + gifSection
+      + `<div class="cwyl-bottom">
+          <div><p class="cwyl-writeup-label">About the Work</p><div class="cwyl-writeup rte">${renderHtml(P.fullDescription)}</div></div>
+          <div>${s0?`<div class="split-vid-wrap">${iframe(v0)}</div>`:''}</div>
+        </div>`;
+
+    // CWYL slider — defined here, attached to DOM after root.innerHTML is set
+    window.cwylSlide = d => {
+      cwylCur = (cwylCur+d+viewerImgs.length)%viewerImgs.length;
+      const img=$('cwyl-img'); if(img){img.src=viewerImgs[cwylCur].url; img.onclick=()=>lbOpen('cwylImgs',cwylCur);}
+      const ctr=$('cwyl-counter'); if(ctr) ctr.textContent=`${cwylCur+1} / ${viewerImgs.length}`;
+      const cap=$('cwyl-cap-text'); if(cap) cap.textContent=viewerImgs[cwylCur]&&viewerImgs[cwylCur].caption||'';
+    };
+  }
+
+  /* VIVO V15: quote → 3 blossom pink (16:9) → 2-col writeup → 4 social (4:5) → writeup+pubg1 → 2 pubg */
+  else if (tmpl === 'vivo') {
+    // video indices: 0-3 social, 4-6 PUBG, 7-9 elevating, 10-12 blossom pink
+    const blossomPink = [vids[10],vids[11],vids[12]].filter(Boolean);
+    const social      = [vids[0],vids[1],vids[2],vids[3]].filter(Boolean);
+    const pubg1       = vids[4];
+    const pubgRest    = [vids[5],vids[6]].filter(Boolean);
+
+    function vid16x9(v){ const s=src(v); return s?`<div class="vivo-vid-16x9"><iframe src="${s}" allowfullscreen loading="lazy"></iframe></div>`:''; }
+    function vid4x5(v) { const s=src(v); return s?`<div class="vivo-vid-4x5"><iframe src="${s}" allowfullscreen loading="lazy"></iframe></div>`:''; }
+
+    const pinkRow   = blossomPink.map(v=>`<div class="vivo-3pink-item"><p>${esc(v.caption||'')}</p>${vid16x9(v)}</div>`).join('');
+    const socialRow = social.map(v=>`<div class="vivo-social-item"><p>${esc(v.caption||'')}</p>${vid4x5(v)}</div>`).join('');
+    const pubgRow   = pubgRest.map(v=>`<div class="vivo-2pubg-item"><p>${esc(v.caption||'')}</p>${vid16x9(v)}</div>`).join('');
+
+    let wc1, wc2;
+    if (P.fullDescription2) { wc1 = renderHtml(P.fullDescription); wc2 = renderHtml(P.fullDescription2); }
+    else { [wc1,wc2] = splitHtmlCols(P.fullDescription); }
+
+    const pubg1S = pubg1 ? src(pubg1) : null;
+
+    body = `<div class="vivo-quote"><p>${esc(P.quote||'')}</p></div>`
+      + `<div class="vivo-3pink-row">${pinkRow}</div>`
+      + `<div class="vivo-2col-writeup"><div class="rte">${wc1}</div>${wc2?`<div class="rte">${wc2}</div>`:''}</div>`
+      + `<div class="vivo-4social-row">${socialRow}</div>`
+      + `<div class="vivo-pubg-split">
+          <div><p class="vivo-pubg-label">About the Work</p><div class="vivo-pubg-text rte">${renderHtml(P.description)}</div></div>
+          <div>${pubg1S?`<div class="vivo-vid-16x9"><iframe src="${pubg1S}" allowfullscreen loading="lazy"></iframe></div>`:''}</div>
+        </div>`
+      + `<div class="vivo-2pubg-row">${pubgRow}</div>`;
+  }
+
+  /* OFNOAH: mainboard gif → 2-col writeup → squares → outdoor3+verticals → banner → outdoor2 */
+  else if (tmpl === 'ofnoah') {
+    const base = '/images/ofnoah-discreet-digital-clinic/';
+    const sqPool = [
+      {url:base+'square1.webp',caption:''},
+      {url:base+'square2.webp',caption:''},
+      {url:base+'square3.webp',caption:''},
+      {url:base+'square4.webp',caption:''},
+    ];
+    const mixPool = [
+      {url:base+'outdoor3.webp',caption:''},
+      {url:base+'vertical-thumb.webp',caption:''},
+      {url:base+'vertical1.webp',caption:''},
+      {url:base+'vertical2.webp',caption:''},
+    ];
+    const lastPool = [{url:base+'outdoor2.webp',caption:''}];
+    LB_POOLS['ofnoahSq'] = sqPool;
+    LB_POOLS['ofnoahMix'] = mixPool;
+    LB_POOLS['ofnoahLast'] = lastPool;
+
+    let col1, col2;
+    if (P.fullDescription2) { col1 = renderHtml(P.fullDescription); col2 = renderHtml(P.fullDescription2); }
+    else { [col1,col2] = splitHtmlCols(P.fullDescription); }
+
+    const sqHTML = sqPool.map((s,i)=>`<img src="${s.url}" loading="lazy" onclick="lbOpen('ofnoahSq',${i})">`).join('');
+
+    body = `<div class="ofnoah-hero"><img src="${base}mainboard.gif" alt="ofnoah mainboard"></div>`
+      + `<div class="ofnoah-2col"><div class="rte">${col1}</div>${col2?`<div class="rte">${col2}</div>`:''}</div>`
+      + `<div class="ofnoah-squares"><div class="ofnoah-squares-inner">${sqHTML}</div></div>`
+      + `<div class="ofnoah-mixed">
+          <div class="ofnoah-outdoor"><img src="${base}outdoor3.webp" loading="lazy" onclick="lbOpen('ofnoahMix',0)"></div>
+          <div>
+            <div class="ofnoah-3vert">
+              <img src="${base}vertical-thumb.webp" loading="lazy" onclick="lbOpen('ofnoahMix',1)">
+              <img src="${base}vertical1.webp" loading="lazy" onclick="lbOpen('ofnoahMix',2)">
+              <img src="${base}vertical2.webp" loading="lazy" onclick="lbOpen('ofnoahMix',3)">
+            </div>
+            <div class="ofnoah-banner"><img src="${base}standard-banner.gif" alt="Standard banner"></div>
+          </div>
+        </div>`
+      + `<div class="ofnoah-last"><img src="${base}outdoor2.webp" loading="lazy" onclick="lbOpen('ofnoahLast',0)"></div>`;
+  }
+
+  /* VW PRINTS: writeup left 2/5 · image gallery right 3/5 */
+  else if (tmpl === 'vw-prints') {
+    LB_POOLS['vwPrints'] = cols;
+    let vwCur = 0;
+    const firstImg = cols[0] ? cols[0].url : '';
+    body = `<div class="vw-split">
+      <div>
+        <p class="vw-writeup-label">About the Work</p>
+        <div class="vw-writeup rte">${renderHtml(P.fullDescription)}</div>
+      </div>
+      <div class="vw-gallery">
+        <div class="vw-gallery-img-wrap">
+          <img id="vw-img" src="${firstImg}" alt="${esc(cols[0]&&cols[0].caption||'')}" loading="lazy">
+        </div>
+        <div class="vw-gallery-controls">
+          <button class="vw-gallery-arrow" onclick="vwSlide(-1)">←</button>
+          <button class="vw-gallery-arrow" onclick="vwSlide(1)">→</button>
+          <span class="vw-gallery-counter" id="vw-counter">1 / ${cols.length}</span>
+          <span class="vw-gallery-cap" id="vw-cap">${esc(cols[0]&&cols[0].caption||'')}</span>
+        </div>
+      </div>
+    </div>`;
+    window.vwSlide = d => {
+      vwCur = (vwCur + d + cols.length) % cols.length;
+      const img = $('vw-img');
+      if (img) { img.src = cols[vwCur].url; img.alt = esc(cols[vwCur].caption||''); img.onclick = ()=>lbOpen('vwPrints',vwCur); }
+      const ctr = $('vw-counter'); if (ctr) ctr.textContent = `${vwCur+1} / ${cols.length}`;
+      const cap = $('vw-cap'); if (cap) cap.textContent = cols[vwCur].caption||'';
+    };
+  }
+
+  /* DEFAULT: video → writeup → collaterals grid */
+  else {
+    LB_POOLS['cols'] = cols;
+    body = mkVideos() + mkWriteup() + mkColSection(cols,'cols');
+  }
+
+  root.innerHTML = mkHeader() + body;
+
+  // After root.innerHTML set — init viewer image onclicks
+  Object.keys(VIEWER_STATE).forEach(key=>{
+    const st=VIEWER_STATE[key]; const img=document.getElementById('vwr-img-'+key);
+    if(img&&st.lightbox) img.onclick=()=>lbOpen(st.pool,0);
+  });
+
+  // After root.innerHTML set — fix img onclicks (closures can't go in template literals)
+  if (tmpl === 'cwyl') {
+    const img=$('cwyl-img');
+    if(img) img.onclick = ()=>lbOpen('cwylImgs',cwylCur);
+  }
+  if (tmpl === 'vw-prints') {
+    const img=$('vw-img');
+    if(img) img.onclick = ()=>lbOpen('vwPrints',0);
+  }
+
+  // ── LUX/MA mobile slider ──
+  let luxCur = 0;
+  window.luxSlide = d => {
+    const pool = LB_POOLS['cols']||[];
+    luxCur = (luxCur+d+pool.length)%pool.length;
+    const track=$('lux-track'); if(track) track.style.transform=`translateX(-${luxCur*100}%)`;
+    const ctr=$('lux-counter'); if(ctr) ctr.textContent=`${luxCur+1} / ${pool.length}`;
+  };
+
+  // ── RAIL ──
+  buildRail();
+
+  // keyboard
+  document.addEventListener('keydown',e=>{
+    if(!$('lb').classList.contains('open')) return;
+    if(e.key==='Escape') lbClose();
+    if(e.key==='ArrowRight') lbNav(1);
+    if(e.key==='ArrowLeft') lbNav(-1);
+  });
+
+  function buildRail(){
+    const rail=$('proj-rail'), idxEl=$('rail-index'), previewWrap=$('rail-preview-wrap');
+    if(!rail||!idxEl) return;
+    if(activeProjects.length<2){rail.style.display='none';return;}
+    rail.style.display='block';
+    idxEl.innerHTML='';
+    if(previewWrap) previewWrap.querySelectorAll('.rail-preview-img').forEach(i=>i.remove());
+
+    activeProjects.forEach(proj=>{
+      const isCurrent=proj.id===pid;
+
+      // Text index row
+      const item=document.createElement(isCurrent?'span':'a');
+      item.className='rail-idx-item'+(isCurrent?' current':'');
+      if(!isCurrent) item.href=`?id=${proj.id}`;
+      item.innerHTML=`<span class="rail-idx-brand">${esc(proj.brand)}</span><span class="rail-idx-title">${esc(proj.title)}</span>`;
+      idxEl.appendChild(item);
+
+      // Stacked preview image (right panel)
+      if(previewWrap&&proj.thumbnailUrl&&proj.thumbnailUrl.trim()){
+        const img=document.createElement('img');
+        img.className='rail-preview-img';
+        img.src=proj.thumbnailUrl;
+        img.alt=esc(proj.title);
+        img.loading='lazy';
+        previewWrap.appendChild(img);
+        if(!isCurrent){
+          item.addEventListener('mouseenter',()=>{
+            previewWrap.querySelectorAll('.rail-preview-img').forEach(i=>i.classList.remove('active'));
+            img.classList.add('active');
+            previewWrap.classList.add('has-preview');
+          });
+        }
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>

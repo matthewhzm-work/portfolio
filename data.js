@@ -387,7 +387,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#1a0a12",
       "gridSpan": 7,
-      "thumbnailUrl": "images/lux-in-her-name/thumb.gif",
+      "thumbnailUrl": "/images/lux-in-her-name/thumb.gif",
       "thumbnailType": "gif",
       "description": "<p>A social and influencer campaign shortlisted at Cannes Lions 2024 and awarded across Epica, Gong, London International Awards, Spikes Asia and The One Show.</p>",
       "fullDescription": "<p>LUX tasked us with something culturally resonant — a campaign that spoke to women beyond product benefits. In Her Name put real women's stories at the heart of the work, earning a Cannes shortlist, a Gold at Epica, and recognition across ten international shows.</p>",
@@ -395,37 +395,37 @@ const PORTFOLIO_DATA = {
       "collaterals": [
         {
           "type": "image",
-          "url": "images/lux-in-her-name/collateral-1.webp",
+          "url": "/images/lux-in-her-name/collateral-1.webp",
           "caption": "Credential — 100 Names",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/lux-in-her-name/collateral-2.webp",
+          "url": "/images/lux-in-her-name/collateral-2.webp",
           "caption": "Hijacking — 100 Names",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/lux-in-her-name/collateral-3.webp",
+          "url": "/images/lux-in-her-name/collateral-3.webp",
           "caption": "Illustration — The 100",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/lux-in-her-name/collateral-4.webp",
+          "url": "/images/lux-in-her-name/collateral-4.webp",
           "caption": "Illustration — Profiles",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/lux-in-her-name/collateral-5.webp",
+          "url": "/images/lux-in-her-name/collateral-5.webp",
           "caption": "The Story",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/lux-in-her-name/collateral-6.webp",
+          "url": "/images/lux-in-her-name/collateral-6.webp",
           "caption": "Campaign Execution",
           "orientation": "landscape"
         }
@@ -470,27 +470,27 @@ const PORTFOLIO_DATA = {
           "type": "image-row",
           "images": [
             {
-              "url": "images/lux-in-her-name/collateral-1.webp",
+              "url": "/images/lux-in-her-name/collateral-1.webp",
               "caption": "Credential — 100 Names"
             },
             {
-              "url": "images/lux-in-her-name/collateral-2.webp",
+              "url": "/images/lux-in-her-name/collateral-2.webp",
               "caption": "Hijacking — 100 Names"
             },
             {
-              "url": "images/lux-in-her-name/collateral-3.webp",
+              "url": "/images/lux-in-her-name/collateral-3.webp",
               "caption": "Illustration — The 100"
             },
             {
-              "url": "images/lux-in-her-name/collateral-4.webp",
+              "url": "/images/lux-in-her-name/collateral-4.webp",
               "caption": "Illustration — Profiles"
             },
             {
-              "url": "images/lux-in-her-name/collateral-5.webp",
+              "url": "/images/lux-in-her-name/collateral-5.webp",
               "caption": "The Story"
             },
             {
-              "url": "images/lux-in-her-name/collateral-6.webp",
+              "url": "/images/lux-in-her-name/collateral-6.webp",
               "caption": "Campaign Execution"
             }
           ],
@@ -514,7 +514,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#0a1f44",
       "gridSpan": 5,
-      "thumbnailUrl": "images/hsbc-mind-athletes/thumb.gif",
+      "thumbnailUrl": "/images/hsbc-mind-athletes/thumb.gif",
       "thumbnailType": "gif",
       "description": "<p>A first-of-its-kind golf experience championing inclusivity in sport. Swept the Marketing Excellence Awards across Event, Experiential, Gaming, Innovation and Sponsorship categories.</p>",
       "fullDescription": "HSBC wanted to do something meaningful with their golf sponsorship beyond the usual tournament hospitality. Mind Athletes reframed golf as a sport of mental strength and created a first-of-its-kind experience for athletes with physical disabilities — sweeping five Gold awards at the Marketing Excellence Awards 2025.",
@@ -522,13 +522,13 @@ const PORTFOLIO_DATA = {
       "collaterals": [
         {
           "type": "image",
-          "url": "images/hsbc-mind-athletes/collateral-1.webp",
+          "url": "/images/hsbc-mind-athletes/collateral-1.webp",
           "caption": "Technology supporting material",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/hsbc-mind-athletes/collateral-2.webp",
+          "url": "/images/hsbc-mind-athletes/collateral-2.webp",
           "caption": "Case board",
           "orientation": "landscape"
         }
@@ -544,57 +544,57 @@ const PORTFOLIO_DATA = {
       "quote": "The first-ever sports championship won by brain power alone.",
       "thumbnails": [
         {
-          "url": "images/hsbc-mind-athletes/thumbnail-01.webp",
+          "url": "/images/hsbc-mind-athletes/thumbnail-01.webp",
           "caption": "Athlete in focus",
           "active": true
         },
         {
-          "url": "images/hsbc-mind-athletes/thumbnail-02.webp",
+          "url": "/images/hsbc-mind-athletes/thumbnail-02.webp",
           "caption": "On-ground activation",
           "active": true
         },
         {
-          "url": "images/hsbc-mind-athletes/thumbnail-03.webp",
+          "url": "/images/hsbc-mind-athletes/thumbnail-03.webp",
           "caption": "Headband fitting",
           "active": true
         },
         {
-          "url": "images/hsbc-mind-athletes/thumbnail-04.webp",
+          "url": "/images/hsbc-mind-athletes/thumbnail-04.webp",
           "caption": "Tournament podium",
           "active": true
         },
         {
-          "url": "images/hsbc-mind-athletes/thumbnail-05.webp",
+          "url": "/images/hsbc-mind-athletes/thumbnail-05.webp",
           "caption": "Team celebration",
           "active": true
         },
         {
-          "url": "images/hsbc-mind-athletes/thumbnail-06.webp",
+          "url": "/images/hsbc-mind-athletes/thumbnail-06.webp",
           "caption": "HSBC headband close-up",
           "active": true
         },
         {
-          "url": "images/hsbc-mind-athletes/thumbnail-07.webp",
+          "url": "/images/hsbc-mind-athletes/thumbnail-07.webp",
           "caption": "Champion interview",
           "active": true
         },
         {
-          "url": "images/hsbc-mind-athletes/thumbnail-08.webp",
+          "url": "/images/hsbc-mind-athletes/thumbnail-08.webp",
           "caption": "Athlete in concentration",
           "active": true
         },
         {
-          "url": "images/hsbc-mind-athletes/thumbnail-09.webp",
+          "url": "/images/hsbc-mind-athletes/thumbnail-09.webp",
           "caption": "Mind Athletes branding",
           "active": true
         },
         {
-          "url": "images/hsbc-mind-athletes/thumbnail-10.webp",
+          "url": "/images/hsbc-mind-athletes/thumbnail-10.webp",
           "caption": "Athlete portrait",
           "active": true
         },
         {
-          "url": "images/hsbc-mind-athletes/thumbnail-11.webp",
+          "url": "/images/hsbc-mind-athletes/thumbnail-11.webp",
           "caption": "Champion with trophy",
           "active": false
         }
@@ -629,43 +629,43 @@ const PORTFOLIO_DATA = {
           "type": "image-row",
           "images": [
             {
-              "url": "images/hsbc-mind-athletes/thumbnail-01.webp",
+              "url": "/images/hsbc-mind-athletes/thumbnail-01.webp",
               "caption": "Athlete in focus"
             },
             {
-              "url": "images/hsbc-mind-athletes/thumbnail-02.webp",
+              "url": "/images/hsbc-mind-athletes/thumbnail-02.webp",
               "caption": "On-ground activation"
             },
             {
-              "url": "images/hsbc-mind-athletes/thumbnail-03.webp",
+              "url": "/images/hsbc-mind-athletes/thumbnail-03.webp",
               "caption": "Headband fitting"
             },
             {
-              "url": "images/hsbc-mind-athletes/thumbnail-04.webp",
+              "url": "/images/hsbc-mind-athletes/thumbnail-04.webp",
               "caption": "Tournament podium"
             },
             {
-              "url": "images/hsbc-mind-athletes/thumbnail-05.webp",
+              "url": "/images/hsbc-mind-athletes/thumbnail-05.webp",
               "caption": "Team celebration"
             },
             {
-              "url": "images/hsbc-mind-athletes/thumbnail-06.webp",
+              "url": "/images/hsbc-mind-athletes/thumbnail-06.webp",
               "caption": "HSBC headband close-up"
             },
             {
-              "url": "images/hsbc-mind-athletes/thumbnail-07.webp",
+              "url": "/images/hsbc-mind-athletes/thumbnail-07.webp",
               "caption": "Champion interview"
             },
             {
-              "url": "images/hsbc-mind-athletes/thumbnail-08.webp",
+              "url": "/images/hsbc-mind-athletes/thumbnail-08.webp",
               "caption": "Athlete in concentration"
             },
             {
-              "url": "images/hsbc-mind-athletes/thumbnail-09.webp",
+              "url": "/images/hsbc-mind-athletes/thumbnail-09.webp",
               "caption": "Mind Athletes branding"
             },
             {
-              "url": "images/hsbc-mind-athletes/thumbnail-10.webp",
+              "url": "/images/hsbc-mind-athletes/thumbnail-10.webp",
               "caption": "Athlete portrait"
             }
           ],
@@ -678,11 +678,11 @@ const PORTFOLIO_DATA = {
           "type": "image-row",
           "images": [
             {
-              "url": "images/hsbc-mind-athletes/collateral-1.webp",
+              "url": "/images/hsbc-mind-athletes/collateral-1.webp",
               "caption": "Technology supporting material"
             },
             {
-              "url": "images/hsbc-mind-athletes/collateral-2.webp",
+              "url": "/images/hsbc-mind-athletes/collateral-2.webp",
               "caption": "Case board"
             }
           ],
@@ -706,7 +706,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#0f1a2e",
       "gridSpan": 6,
-      "thumbnailUrl": "images/mha-home-of-the-unexpected/thumb.webp",
+      "thumbnailUrl": "/images/mha-home-of-the-unexpected/thumb.webp",
       "thumbnailType": "image",
       "description": "<p>From pitch to campaign, built on a single provocation: the Ministry of Home Affairs isn't what you think it is.</p>",
       "fullDescription": "When VML was invited to pitch for the Ministry of Home Affairs, I led the creative team from brief to presentation. Home of the Unexpected shaped a platform idea that balanced authority with warmth, finding stories in the people who keep Singapore safe. We won the pitch.",
@@ -714,13 +714,13 @@ const PORTFOLIO_DATA = {
       "collaterals": [
         {
           "type": "image",
-          "url": "images/mha-home-of-the-unexpected/collateral-1.webp",
+          "url": "/images/mha-home-of-the-unexpected/collateral-1.webp",
           "caption": "Print 2",
           "orientation": "portrait"
         },
         {
           "type": "image",
-          "url": "images/mha-home-of-the-unexpected/collateral-2.webp",
+          "url": "/images/mha-home-of-the-unexpected/collateral-2.webp",
           "caption": "Print 3",
           "orientation": "portrait"
         }
@@ -735,15 +735,15 @@ const PORTFOLIO_DATA = {
       "active": true,
       "prints": [
         {
-          "url": "images/mha-home-of-the-unexpected/thumb.webp",
+          "url": "/images/mha-home-of-the-unexpected/thumb.webp",
           "caption": "Home of the Unexpected — Print 1"
         },
         {
-          "url": "images/mha-home-of-the-unexpected/collateral-1.webp",
+          "url": "/images/mha-home-of-the-unexpected/collateral-1.webp",
           "caption": "Home of the Unexpected — Print 2"
         },
         {
-          "url": "images/mha-home-of-the-unexpected/collateral-2.webp",
+          "url": "/images/mha-home-of-the-unexpected/collateral-2.webp",
           "caption": "Home of the Unexpected — Print 3"
         }
       ],
@@ -770,15 +770,15 @@ const PORTFOLIO_DATA = {
           "type": "image-row",
           "images": [
             {
-              "url": "images/mha-home-of-the-unexpected/thumb.webp",
+              "url": "/images/mha-home-of-the-unexpected/thumb.webp",
               "caption": "Home of the Unexpected — Print 1"
             },
             {
-              "url": "images/mha-home-of-the-unexpected/collateral-1.webp",
+              "url": "/images/mha-home-of-the-unexpected/collateral-1.webp",
               "caption": "Home of the Unexpected — Print 2"
             },
             {
-              "url": "images/mha-home-of-the-unexpected/collateral-2.webp",
+              "url": "/images/mha-home-of-the-unexpected/collateral-2.webp",
               "caption": "Home of the Unexpected — Print 3"
             }
           ],
@@ -803,7 +803,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#1a0a1a",
       "gridSpan": 4,
-      "thumbnailUrl": "images/bybit-valentines-day/thumb.gif",
+      "thumbnailUrl": "/images/bybit-valentines-day/thumb.gif",
       "thumbnailType": "gif",
       "description": "<p>On Valentine’s Day, we spoke to all the crypto lovebirds and created mass crazy-in-love hype for trading on Bybit.</p>",
       "fullDescription": "Valentine's Day is a tough brief for a crypto exchange. The work found a genuine insight — that the best thing you can give someone you love is a better future — and turned it into a campaign that was warm, witty, and completely on-brand for Bybit's irreverent personality.",
@@ -811,25 +811,25 @@ const PORTFOLIO_DATA = {
       "collaterals": [
         {
           "type": "gif",
-          "url": "images/bybit-valentines-day/collateral-blog-banners.gif",
+          "url": "/images/bybit-valentines-day/collateral-blog-banners.gif",
           "caption": "Blog banners — 10 markets",
           "orientation": "landscape"
         },
         {
           "type": "gif",
-          "url": "images/bybit-valentines-day/support-247.gif",
+          "url": "/images/bybit-valentines-day/support-247.gif",
           "caption": "24/7 Support",
           "orientation": "landscape"
         },
         {
           "type": "gif",
-          "url": "images/bybit-valentines-day/support-realtime.gif",
+          "url": "/images/bybit-valentines-day/support-realtime.gif",
           "caption": "Real-time trading",
           "orientation": "landscape"
         },
         {
           "type": "gif",
-          "url": "images/bybit-valentines-day/support-reliable.gif",
+          "url": "/images/bybit-valentines-day/support-reliable.gif",
           "caption": "Reliable platform",
           "orientation": "landscape"
         }
@@ -865,15 +865,15 @@ const PORTFOLIO_DATA = {
           "type": "image-row",
           "images": [
             {
-              "url": "images/bybit-valentines-day/support-247.gif",
+              "url": "/images/bybit-valentines-day/support-247.gif",
               "caption": "24/7 Support"
             },
             {
-              "url": "images/bybit-valentines-day/support-realtime.gif",
+              "url": "/images/bybit-valentines-day/support-realtime.gif",
               "caption": "Real-time trading"
             },
             {
-              "url": "images/bybit-valentines-day/support-reliable.gif",
+              "url": "/images/bybit-valentines-day/support-reliable.gif",
               "caption": "Reliable platform"
             }
           ],
@@ -889,7 +889,7 @@ const PORTFOLIO_DATA = {
           "leftType": "image",
           "leftHtml": "",
           "leftLabel": "Supporting Banner",
-          "leftUrl": "images/bybit-valentines-day/collateral-blog-banners.gif",
+          "leftUrl": "/images/bybit-valentines-day/collateral-blog-banners.gif",
           "leftVideoType": "vimeo",
           "leftImages": [],
           "leftLightbox": true,
@@ -917,7 +917,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#111111",
       "gridSpan": 6,
-      "thumbnailUrl": "images/mercedes-print-ads/thumb.webp",
+      "thumbnailUrl": "/images/mercedes-print-ads/thumb.webp",
       "thumbnailType": "image",
       "description": "<p>A selection of my favourite lines from my stint working on Mercedes-Benz.</p>",
       "fullDescription": "The AMG A Class Hatchback was a performance car hiding in everyday clothes. The campaign leaned into that contradiction — the sleeper aesthetic, the everyday silhouette that held something extraordinary underneath. Work that appealed to drivers who know, without having to explain.",
@@ -925,7 +925,7 @@ const PORTFOLIO_DATA = {
       "collaterals": [
         {
           "type": "image",
-          "url": "images/mercedes-print-ads/collateral-1.webp",
+          "url": "/images/mercedes-print-ads/collateral-1.webp",
           "caption": "Mercedes-AMG A 45 S 4MATIC+",
           "orientation": "landscape"
         }
@@ -943,19 +943,19 @@ const PORTFOLIO_DATA = {
           "rightType": "image-viewer",
           "rightImages": [
             {
-              "url": "images/mercedes-print-ads/thumb.webp",
+              "url": "/images/mercedes-print-ads/thumb.webp",
               "caption": ""
             },
             {
-              "url": "images/mercedes-print-ads/print-glc-coupe.webp",
+              "url": "/images/mercedes-print-ads/print-glc-coupe.webp",
               "caption": ""
             },
             {
-              "url": "images/mercedes-print-ads/collateral-1.webp",
+              "url": "/images/mercedes-print-ads/collateral-1.webp",
               "caption": ""
             },
             {
-              "url": "images/mercedes-print-ads/print-glc-suv.webp",
+              "url": "/images/mercedes-print-ads/print-glc-suv.webp",
               "caption": ""
             }
           ],
@@ -985,7 +985,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#1a0a00",
       "gridSpan": 4,
-      "thumbnailUrl": "images/nea-dengue-danger/thumb.gif",
+      "thumbnailUrl": "/images/nea-dengue-danger/thumb.gif",
       "thumbnailType": "gif",
       "description": "<p>A long-overdue reboot of Singapore's school dengue education. Less fear, more engagement — and a lot more memorable for it.</p>",
       "fullDescription": "Dengue Danger had to cut through a famously hard-to-shift public health behaviour. The campaign used urgency without panic, specificity without jargon, and a tone that respected the intelligence of Singaporeans while making the stakes impossible to ignore.",
@@ -1035,7 +1035,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#0a1a1a",
       "gridSpan": 5,
-      "thumbnailUrl": "images/ofnoah-discreet-digital-clinic/thumb.webp",
+      "thumbnailUrl": "/images/ofnoah-discreet-digital-clinic/thumb.webp",
       "thumbnailType": "image",
       "description": "<p>Brand and campaign work for ofnoah — Singapore's discreet digital clinic for men's health, making it easy and stigma-free to get the help you need.</p>",
       "fullDescription": "ofnoah exists because men don't ask for help. The brand and campaign work was built around removing every barrier — the embarrassment, the inconvenience, the fear of judgement — and replacing them with a tone that was direct, warm, and completely judgment-free.",
@@ -1051,14 +1051,14 @@ const PORTFOLIO_DATA = {
           "leftType": "image",
           "leftHtml": "",
           "leftLabel": "Banner",
-          "leftUrl": "images/ofnoah-discreet-digital-clinic/mainboard.gif",
+          "leftUrl": "/images/ofnoah-discreet-digital-clinic/mainboard.gif",
           "leftVideoType": "vimeo",
           "leftImages": [],
           "leftLightbox": true,
           "rightType": "image",
           "rightHtml": "",
           "rightLabel": "Outdoor",
-          "rightUrl": "images/ofnoah-discreet-digital-clinic/outdoor2.webp",
+          "rightUrl": "/images/ofnoah-discreet-digital-clinic/outdoor2.webp",
           "rightVideoType": "vimeo",
           "rightImages": [],
           "rightLightbox": true
@@ -1077,19 +1077,19 @@ const PORTFOLIO_DATA = {
           "type": "image-row",
           "images": [
             {
-              "url": "images/ofnoah-discreet-digital-clinic/square1.webp",
+              "url": "/images/ofnoah-discreet-digital-clinic/square1.webp",
               "caption": ""
             },
             {
-              "url": "images/ofnoah-discreet-digital-clinic/square2.webp",
+              "url": "/images/ofnoah-discreet-digital-clinic/square2.webp",
               "caption": ""
             },
             {
-              "url": "images/ofnoah-discreet-digital-clinic/square3.webp",
+              "url": "/images/ofnoah-discreet-digital-clinic/square3.webp",
               "caption": ""
             },
             {
-              "url": "images/ofnoah-discreet-digital-clinic/square4.webp",
+              "url": "/images/ofnoah-discreet-digital-clinic/square4.webp",
               "caption": ""
             }
           ],
@@ -1103,19 +1103,19 @@ const PORTFOLIO_DATA = {
           "type": "image-row",
           "images": [
             {
-              "url": "images/ofnoah-discreet-digital-clinic/outdoor3.webp",
+              "url": "/images/ofnoah-discreet-digital-clinic/outdoor3.webp",
               "caption": "Outdoor"
             },
             {
-              "url": "images/ofnoah-discreet-digital-clinic/vertical-thumb.webp",
+              "url": "/images/ofnoah-discreet-digital-clinic/vertical-thumb.webp",
               "caption": ""
             },
             {
-              "url": "images/ofnoah-discreet-digital-clinic/vertical1.webp",
+              "url": "/images/ofnoah-discreet-digital-clinic/vertical1.webp",
               "caption": ""
             },
             {
-              "url": "images/ofnoah-discreet-digital-clinic/vertical2.webp",
+              "url": "/images/ofnoah-discreet-digital-clinic/vertical2.webp",
               "caption": ""
             }
           ],
@@ -1140,7 +1140,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#0a1f44",
       "gridSpan": 4,
-      "thumbnailUrl": "images/hsbc-choose-what-you-love/collateral-2.gif",
+      "thumbnailUrl": "/images/hsbc-choose-what-you-love/collateral-2.gif",
       "thumbnailType": "gif",
       "description": "<p>Helping HSBC cardholders find their perfect card — through a personalised music video with 24,000 unique permutations.</p>",
       "fullDescription": "<p>Choose What You Love repositioned HSBC's rewards proposition around what customers genuinely care about — not just cashback categories, but the things that define how they live. The campaign ran across digital, social and in-branch touchpoints.</p>",
@@ -1148,43 +1148,43 @@ const PORTFOLIO_DATA = {
       "collaterals": [
         {
           "type": "gif",
-          "url": "images/hsbc-choose-what-you-love/collateral-1.gif",
+          "url": "/images/hsbc-choose-what-you-love/collateral-1.gif",
           "caption": "Canvas GIF",
           "orientation": "landscape"
         },
         {
           "type": "gif",
-          "url": "images/hsbc-choose-what-you-love/collateral-2.gif",
+          "url": "/images/hsbc-choose-what-you-love/collateral-2.gif",
           "caption": "CC GIF",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/hsbc-choose-what-you-love/collateral-3.webp",
+          "url": "/images/hsbc-choose-what-you-love/collateral-3.webp",
           "caption": "Quiz question 1",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/hsbc-choose-what-you-love/collateral-4.webp",
+          "url": "/images/hsbc-choose-what-you-love/collateral-4.webp",
           "caption": "Quiz question 2",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/hsbc-choose-what-you-love/collateral-5.webp",
+          "url": "/images/hsbc-choose-what-you-love/collateral-5.webp",
           "caption": "Quiz question 3",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/hsbc-choose-what-you-love/collateral-6.webp",
+          "url": "/images/hsbc-choose-what-you-love/collateral-6.webp",
           "caption": "Quiz question 4",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/hsbc-choose-what-you-love/collateral-7.webp",
+          "url": "/images/hsbc-choose-what-you-love/collateral-7.webp",
           "caption": "Quiz question 5",
           "orientation": "landscape"
         }
@@ -1212,23 +1212,23 @@ const PORTFOLIO_DATA = {
           "width": "compact",
           "images": [
             {
-              "url": "images/hsbc-choose-what-you-love/collateral-3.webp",
+              "url": "/images/hsbc-choose-what-you-love/collateral-3.webp",
               "caption": "Quiz question 1"
             },
             {
-              "url": "images/hsbc-choose-what-you-love/collateral-4.webp",
+              "url": "/images/hsbc-choose-what-you-love/collateral-4.webp",
               "caption": "Quiz question 2"
             },
             {
-              "url": "images/hsbc-choose-what-you-love/collateral-5.webp",
+              "url": "/images/hsbc-choose-what-you-love/collateral-5.webp",
               "caption": "Quiz question 3"
             },
             {
-              "url": "images/hsbc-choose-what-you-love/collateral-6.webp",
+              "url": "/images/hsbc-choose-what-you-love/collateral-6.webp",
               "caption": "Quiz question 4"
             },
             {
-              "url": "images/hsbc-choose-what-you-love/collateral-7.webp",
+              "url": "/images/hsbc-choose-what-you-love/collateral-7.webp",
               "caption": "Quiz question 5"
             }
           ],
@@ -1239,7 +1239,7 @@ const PORTFOLIO_DATA = {
           "type": "split",
           "ratio": "40-60",
           "leftType": "text",
-          "leftUrl": "images/hsbc-choose-what-you-love/collateral-1.gif",
+          "leftUrl": "/images/hsbc-choose-what-you-love/collateral-1.gif",
           "leftLabel": "",
           "leftHtml": "<p>Choosing a credit card should be simple. It rarely is — especially when every card from the same bank comes with its own set of perks, promotions, and lifestyle benefits.</p><p>We built an interactive quiz experience to cut through the noise. But we didn't want to just match users to a card. We wanted to make the journey feel as personal as the destination.</p><p><strong>Step 1:</strong> Answer a short quiz</p><p><strong>Step 2:</strong> Receive your personalised music video</p><p><strong>Step 3:</strong> Learn more and sign up for your credit card</p>",
           "leftVideoType": "vimeo",
@@ -1248,7 +1248,7 @@ const PORTFOLIO_DATA = {
           "rightType": "image",
           "rightHtml": "",
           "rightLabel": "User Journey",
-          "rightUrl": "images/hsbc-choose-what-you-love/collateral-1.gif",
+          "rightUrl": "/images/hsbc-choose-what-you-love/collateral-1.gif",
           "rightVideoType": "vimeo",
           "rightImages": [],
           "rightLightbox": true
@@ -1288,7 +1288,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#1a1a1a",
       "gridSpan": 6,
-      "thumbnailUrl": "images/mercedes-benz-eqc/thumb.gif",
+      "thumbnailUrl": "/images/mercedes-benz-eqc/thumb.gif",
       "thumbnailType": "gif",
       "description": "<p>The Mercedes-Benz EQC launch — introducing the brand's first fully electric SUV to Southeast Asia with a campaign built around the thrill of a new kind of drive.</p>",
       "fullDescription": "The EQC was Mercedes-Benz's declaration that electric luxury had arrived. The launch campaign balanced the rational case for electric — range, efficiency, charging — with the emotional pull that makes a Mercedes desirable. A car that didn't ask you to sacrifice anything.",
@@ -1338,7 +1338,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#1a1a1a",
       "gridSpan": 7,
-      "thumbnailUrl": "images/mercedes-me-connect/thumb.gif",
+      "thumbnailUrl": "/images/mercedes-me-connect/thumb.gif",
       "thumbnailType": "gif",
       "description": "<p>A campaign for Mercedes me Connect — the app that puts the full intelligence of your Mercedes-Benz at your fingertips, wherever you are.</p>",
       "fullDescription": "Mercedes me Connect extended the luxury experience beyond the car itself. The campaign showed how the app kept drivers connected to their vehicle — remote monitoring, service scheduling, location sharing — in a way that felt less like utility and more like peace of mind.",
@@ -1402,7 +1402,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#0a1f44",
       "gridSpan": 6,
-      "thumbnailUrl": "images/hsbc-better-is-never-down-to-one-thing/thumb.gif",
+      "thumbnailUrl": "/images/hsbc-better-is-never-down-to-one-thing/thumb.gif",
       "thumbnailType": "gif",
       "description": "<p>A brand platform for HSBC that pushed back against simple definitions of success — celebrating the idea that living better is always more nuanced than it looks.</p>",
       "fullDescription": "<p>Better Is Never Down to One Thing challenged the financial category's habit of reducing life to metrics. The platform gave HSBC a more human voice — one that acknowledged complexity, celebrated multidimensionality, and spoke to people as whole human beings rather than account holders.</p>",
@@ -1456,7 +1456,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#0a1f44",
       "gridSpan": 4,
-      "thumbnailUrl": "images/hsbc-revolution-credit-card/thumb.gif",
+      "thumbnailUrl": "/images/hsbc-revolution-credit-card/thumb.gif",
       "thumbnailType": "gif",
       "description": "A product launch campaign for HSBC's Revolution Credit Card, targeting a younger, digitally-native audience with a bold new rewards proposition.",
       "fullDescription": "The Revolution Credit Card launch needed to cut through in a saturated market. The work spoke directly to how a younger generation actually spends — on experiences, entertainment, and the things that matter to them — rather than defaulting to category clichés.",
@@ -1544,7 +1544,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#1a0a2a",
       "gridSpan": 5,
-      "thumbnailUrl": "images/vivo-v15/thumb.gif",
+      "thumbnailUrl": "/images/vivo-v15/thumb.gif",
       "thumbnailType": "gif",
       "description": "<p>A product launch campaign for the vivo V15 — introducing its pop-up front camera to a generation for whom self-expression and content creation are a way of life.</p>",
       "fullDescription": "The vivo V15 had a genuinely novel feature — a motorised pop-up front camera that appeared only when you needed it. The launch campaign made that mechanism feel iconic, building the product's selfie credentials with an audience for whom the front camera is the most important lens on the phone.",
@@ -1768,7 +1768,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#0a1f44",
       "gridSpan": 4,
-      "thumbnailUrl": "images/hsbc-tap-and-go/thumb.gif",
+      "thumbnailUrl": "/images/hsbc-tap-and-go/thumb.gif",
       "thumbnailType": "gif",
       "description": "<p>HSBC Tap and Go — a product campaign that made contactless payments feel as natural and frictionless as everyday life.</p>",
       "fullDescription": "Tap and Go stripped away the friction from how HSBC talked about contactless payments. Rather than leading with features, the campaign led with moments — the split-second transactions that add up to a life lived at full speed.",
@@ -1856,7 +1856,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#111827",
       "gridSpan": 5,
-      "thumbnailUrl": "images/volkswagen-prints/thumb.webp",
+      "thumbnailUrl": "/images/volkswagen-prints/thumb.webp",
       "thumbnailType": "image",
       "description": "<p>100 ads. 2 weeks. A selection of the ones worth keeping.</p>",
       "fullDescription": "Volkswagen Prints was a lesson in restraint. The campaign trusted the idea over the asset, letting a strong visual concept carry the brand message without defaulting to the usual glamour shots. Work that rewarded the people paying attention.",
@@ -1864,73 +1864,73 @@ const PORTFOLIO_DATA = {
       "collaterals": [
         {
           "type": "image",
-          "url": "images/volkswagen-prints/print-01.webp",
+          "url": "/images/volkswagen-prints/print-01.webp",
           "caption": "Print 01",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/volkswagen-prints/print-02.webp",
+          "url": "/images/volkswagen-prints/print-02.webp",
           "caption": "Print 02",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/volkswagen-prints/print-03.webp",
+          "url": "/images/volkswagen-prints/print-03.webp",
           "caption": "Print 03",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/volkswagen-prints/print-04.webp",
+          "url": "/images/volkswagen-prints/print-04.webp",
           "caption": "Print 04",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/volkswagen-prints/print-05.webp",
+          "url": "/images/volkswagen-prints/print-05.webp",
           "caption": "Print 05",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/volkswagen-prints/print-06.webp",
+          "url": "/images/volkswagen-prints/print-06.webp",
           "caption": "Print 06",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/volkswagen-prints/print-07.webp",
+          "url": "/images/volkswagen-prints/print-07.webp",
           "caption": "Print 07",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/volkswagen-prints/print-08.webp",
+          "url": "/images/volkswagen-prints/print-08.webp",
           "caption": "Print 08",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/volkswagen-prints/print-09.webp",
+          "url": "/images/volkswagen-prints/print-09.webp",
           "caption": "Print 09",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/volkswagen-prints/print-10.webp",
+          "url": "/images/volkswagen-prints/print-10.webp",
           "caption": "Print 10",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/volkswagen-prints/print-11.webp",
+          "url": "/images/volkswagen-prints/print-11.webp",
           "caption": "Print 11",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/volkswagen-prints/print-12.webp",
+          "url": "/images/volkswagen-prints/print-12.webp",
           "caption": "Print 12",
           "orientation": "landscape"
         }
@@ -1955,51 +1955,51 @@ const PORTFOLIO_DATA = {
           "rightVideoType": "vimeo",
           "rightImages": [
             {
-              "url": "images/volkswagen-prints/print-01.webp",
+              "url": "/images/volkswagen-prints/print-01.webp",
               "caption": "Print 01"
             },
             {
-              "url": "images/volkswagen-prints/print-02.webp",
+              "url": "/images/volkswagen-prints/print-02.webp",
               "caption": "Print 02"
             },
             {
-              "url": "images/volkswagen-prints/print-03.webp",
+              "url": "/images/volkswagen-prints/print-03.webp",
               "caption": "Print 03"
             },
             {
-              "url": "images/volkswagen-prints/print-04.webp",
+              "url": "/images/volkswagen-prints/print-04.webp",
               "caption": "Print 04"
             },
             {
-              "url": "images/volkswagen-prints/print-05.webp",
+              "url": "/images/volkswagen-prints/print-05.webp",
               "caption": "Print 05"
             },
             {
-              "url": "images/volkswagen-prints/print-06.webp",
+              "url": "/images/volkswagen-prints/print-06.webp",
               "caption": "Print 06"
             },
             {
-              "url": "images/volkswagen-prints/print-07.webp",
+              "url": "/images/volkswagen-prints/print-07.webp",
               "caption": "Print 07"
             },
             {
-              "url": "images/volkswagen-prints/print-08.webp",
+              "url": "/images/volkswagen-prints/print-08.webp",
               "caption": "Print 08"
             },
             {
-              "url": "images/volkswagen-prints/print-09.webp",
+              "url": "/images/volkswagen-prints/print-09.webp",
               "caption": "Print 09"
             },
             {
-              "url": "images/volkswagen-prints/print-10.webp",
+              "url": "/images/volkswagen-prints/print-10.webp",
               "caption": "Print 10"
             },
             {
-              "url": "images/volkswagen-prints/print-11.webp",
+              "url": "/images/volkswagen-prints/print-11.webp",
               "caption": "Print 11"
             },
             {
-              "url": "images/volkswagen-prints/print-12.webp",
+              "url": "/images/volkswagen-prints/print-12.webp",
               "caption": "Print 12"
             }
           ],
@@ -2022,7 +2022,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#0a1a0a",
       "gridSpan": 4,
-      "thumbnailUrl": "images/nea-good-for-me-good-for-the-environment/thumb.gif",
+      "thumbnailUrl": "/images/nea-good-for-me-good-for-the-environment/thumb.gif",
       "thumbnailType": "gif",
       "description": "An NEA campaign reframing sustainable living as something that benefits both individual Singaporeans and the environment they share.",
       "fullDescription": "Good for Me, Good for the Environment tackled the perception that sustainable choices mean sacrifice. The campaign showed that the best choices for the planet are often the best choices for you — reframing green behaviour as smart behaviour, not moral obligation.",
@@ -2030,19 +2030,19 @@ const PORTFOLIO_DATA = {
       "collaterals": [
         {
           "type": "image",
-          "url": "images/nea-good-for-me-good-for-the-environment/collateral-1.webp",
+          "url": "/images/nea-good-for-me-good-for-the-environment/collateral-1.webp",
           "caption": "Campaign visual",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/nea-good-for-me-good-for-the-environment/collateral-2.webp",
+          "url": "/images/nea-good-for-me-good-for-the-environment/collateral-2.webp",
           "caption": "Key poster",
           "orientation": "portrait"
         },
         {
           "type": "image",
-          "url": "images/nea-good-for-me-good-for-the-environment/collateral-3.webp",
+          "url": "/images/nea-good-for-me-good-for-the-environment/collateral-3.webp",
           "caption": "Social asset",
           "orientation": "square"
         }
@@ -2064,7 +2064,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#0a0a1a",
       "gridSpan": 7,
-      "thumbnailUrl": "images/trifecta-snow-surf-skate/thumb.webp",
+      "thumbnailUrl": "/images/trifecta-snow-surf-skate/thumb.webp",
       "thumbnailType": "image",
       "description": "Content and campaign work for TRIFECTA — a brand that lives at the meeting point of snow, surf and skate culture.",
       "fullDescription": "TRIFECTA isn't just a gear brand — it's a community built around the idea that the best athletes move between disciplines. The content campaign captured that fluidity, showing athletes in their element across all three worlds without ever making it feel like a catalogue.",
@@ -2072,25 +2072,25 @@ const PORTFOLIO_DATA = {
       "collaterals": [
         {
           "type": "image",
-          "url": "images/trifecta-snow-surf-skate/collateral-1.webp",
+          "url": "/images/trifecta-snow-surf-skate/collateral-1.webp",
           "caption": "Snow",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/trifecta-snow-surf-skate/collateral-2.webp",
+          "url": "/images/trifecta-snow-surf-skate/collateral-2.webp",
           "caption": "Surf",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/trifecta-snow-surf-skate/collateral-3.webp",
+          "url": "/images/trifecta-snow-surf-skate/collateral-3.webp",
           "caption": "Skate",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/trifecta-snow-surf-skate/collateral-4.webp",
+          "url": "/images/trifecta-snow-surf-skate/collateral-4.webp",
           "caption": "Brand visual",
           "orientation": "square"
         }
@@ -2112,7 +2112,7 @@ const PORTFOLIO_DATA = {
       ],
       "placeholderColor": "#1a1a1a",
       "gridSpan": 5,
-      "thumbnailUrl": "images/mercedes-me-adapter/thumb.webp",
+      "thumbnailUrl": "/images/mercedes-me-adapter/thumb.webp",
       "thumbnailType": "image",
       "description": "A product launch campaign for the Mercedes me Adapter — bringing intelligent connectivity to Mercedes-Benz drivers across Southeast Asia.",
       "fullDescription": "The Mercedes me Adapter turned any Mercedes into a connected car. The launch campaign needed to make a technical product feel genuinely desirable — translating telematics into the language of modern luxury driving.",
@@ -2120,19 +2120,19 @@ const PORTFOLIO_DATA = {
       "collaterals": [
         {
           "type": "image",
-          "url": "images/mercedes-me-adapter/collateral-1.webp",
+          "url": "/images/mercedes-me-adapter/collateral-1.webp",
           "caption": "Product visual",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/mercedes-me-adapter/collateral-2.webp",
+          "url": "/images/mercedes-me-adapter/collateral-2.webp",
           "caption": "Feature highlight",
           "orientation": "landscape"
         },
         {
           "type": "image",
-          "url": "images/mercedes-me-adapter/collateral-3.webp",
+          "url": "/images/mercedes-me-adapter/collateral-3.webp",
           "caption": "Digital execution",
           "orientation": "square"
         }

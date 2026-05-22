@@ -469,7 +469,7 @@ footer{
 </section>
 
 <footer>
-  <a href="toto.html" class="footer-lucky">Feeling Lucky?</a>
+  <a href="toto/" class="footer-lucky">Feeling Lucky?</a>
   <a id="footer-mid" class="footer-email"></a>
   <span id="footer-year"></span>
 </footer>
@@ -641,7 +641,7 @@ footer{
 
     const card = document.createElement('a');
     card.className = 'project-card reveal';
-    card.href = `work.html?id=${p.id}`;
+    card.href = `work/?id=${p.id}`;
     card.style.transitionDelay = `${(i%4)*0.06}s`;
     card.style.order = String(i); // preserves L→R sequence when cols collapse at breakpoints
     card.style.setProperty('--tilt', (Math.random() < 0.5 ? '-' : '') + '1.5deg');
